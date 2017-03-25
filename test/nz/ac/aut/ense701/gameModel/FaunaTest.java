@@ -1,5 +1,6 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.occupants.Fauna;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

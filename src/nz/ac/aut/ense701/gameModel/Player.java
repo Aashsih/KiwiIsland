@@ -1,5 +1,8 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.enums.Terrain;
+import nz.ac.aut.ense701.gameModel.occupants.Item;
+import nz.ac.aut.ense701.gameModel.occupants.Tool;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
@@ -356,5 +359,9 @@ public class Player
             this.position = newPosition;
             reduceStamina(getStaminaNeededToMove(terrain));
         }
+    }
+    
+    private class Inventory{
+        //inner class inside "Player" - stores Set<Item>, Set<Messages>
     }
 }

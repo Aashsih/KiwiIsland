@@ -1,5 +1,6 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.occupants.Tool;
 import org.junit.Test;
 
 /**

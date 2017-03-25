@@ -1,5 +1,17 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.enums.GameState;
+import nz.ac.aut.ense701.gameModel.handlers_and_listeners.GameEventListener;
+import nz.ac.aut.ense701.gameModel.occupants.Predator;
+import nz.ac.aut.ense701.gameModel.enums.Terrain;
+import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
+import nz.ac.aut.ense701.gameModel.occupants.Occupant;
+import nz.ac.aut.ense701.gameModel.occupants.Item;
+import nz.ac.aut.ense701.gameModel.occupants.Hazard;
+import nz.ac.aut.ense701.gameModel.occupants.Kiwi;
+import nz.ac.aut.ense701.gameModel.occupants.Food;
+import nz.ac.aut.ense701.gameModel.occupants.Tool;
+import nz.ac.aut.ense701.gameModel.occupants.Fauna;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

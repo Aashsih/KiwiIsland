@@ -1,4 +1,4 @@
-package nz.ac.aut.ense701.gameModel;
+package nz.ac.aut.ense701.gameModel.enums;
 
 /**
  * Enumeration class Terrain - represents terrain types on Kiwi Island.

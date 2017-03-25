@@ -4,9 +4,9 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import javax.swing.JOptionPane;
 import nz.ac.aut.ense701.gameModel.Game;
-import nz.ac.aut.ense701.gameModel.GameEventListener;
-import nz.ac.aut.ense701.gameModel.GameState;
-import nz.ac.aut.ense701.gameModel.MoveDirection;
+import nz.ac.aut.ense701.gameModel.handlers_and_listeners.GameEventListener;
+import nz.ac.aut.ense701.gameModel.enums.GameState;
+import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
 
 /*
  * User interface form for Kiwi Island.

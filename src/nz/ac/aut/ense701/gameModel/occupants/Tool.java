@@ -1,4 +1,8 @@
-package nz.ac.aut.ense701.gameModel;
+package nz.ac.aut.ense701.gameModel.occupants;
+
+import nz.ac.aut.ense701.gameModel.Position;
+import nz.ac.aut.ense701.gameModel.enums.Occupants;
+import nz.ac.aut.ense701.gameModel.enums.Tools;
 
 /**
  * This class represents a tool that can be found on the island
@@ -58,7 +62,7 @@ public class Tool extends Item
     public boolean isTrap()
     {
       String name = this.getName();
-      return name.equalsIgnoreCase("Trap");
+      return name.equalsIgnoreCase(Tools.TRAP.toString());
     }
  
     /**
@@ -67,14 +71,14 @@ public class Tool extends Item
      */    
     public boolean isScrewdriver() {
        String name = this.getName();
-      return name.equalsIgnoreCase("Screwdriver"); 
+      return name.equalsIgnoreCase(Tools.SCREW_DRIVER.toString()); 
     }
     
     
     @Override
     public String getStringRepresentation() 
     {
-        return "T";
+        return Occupants.TOOL.toString();
     }
 
 }

@@ -1,5 +1,12 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.enums.GameState;
+import nz.ac.aut.ense701.gameModel.occupants.Predator;
+import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
+import nz.ac.aut.ense701.gameModel.occupants.Food;
+import nz.ac.aut.ense701.gameModel.occupants.Item;
+import nz.ac.aut.ense701.gameModel.occupants.Tool;
+import nz.ac.aut.ense701.gameModel.occupants.Hazard;
 import org.junit.Test;
 
 /**

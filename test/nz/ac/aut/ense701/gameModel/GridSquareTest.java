@@ -1,5 +1,10 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.occupants.Predator;
+import nz.ac.aut.ense701.gameModel.enums.Terrain;
+import nz.ac.aut.ense701.gameModel.occupants.Food;
+import nz.ac.aut.ense701.gameModel.occupants.Occupant;
+import nz.ac.aut.ense701.gameModel.occupants.Tool;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

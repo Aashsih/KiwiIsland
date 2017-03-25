@@ -1,5 +1,8 @@
 
-package nz.ac.aut.ense701.gameModel;
+package nz.ac.aut.ense701.gameModel.occupants;
+
+import nz.ac.aut.ense701.gameModel.Position;
+import nz.ac.aut.ense701.gameModel.enums.Occupants;
 
 /**
  * Kiwi represents a kiwi living on the island
@@ -40,6 +43,6 @@ public class Kiwi  extends Fauna
     @Override
     public String getStringRepresentation() 
     {
-        return "K";
+        return Occupants.KIWI.toString();
     }     
 }

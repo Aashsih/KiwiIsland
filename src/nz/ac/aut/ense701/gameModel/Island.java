@@ -1,5 +1,10 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.occupants.Predator;
+import nz.ac.aut.ense701.gameModel.enums.Terrain;
+import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
+import nz.ac.aut.ense701.gameModel.occupants.Occupant;
+
 /**
  * A class to represent an island in the world on which the game is played.
  * @author AS

@@ -6,7 +6,7 @@
  * @version 1.0 - created
  */
 
-package nz.ac.aut.ense701.gameModel;
+package nz.ac.aut.ense701.gameModel.handlers_and_listeners;
 
 public interface GameEventListener 
 {

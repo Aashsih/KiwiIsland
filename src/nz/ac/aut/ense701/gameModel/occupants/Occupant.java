@@ -1,4 +1,6 @@
-package nz.ac.aut.ense701.gameModel;
+package nz.ac.aut.ense701.gameModel.occupants;
+
+import nz.ac.aut.ense701.gameModel.Position;
 
 /**
  * Abstract base class for occupants that inhabit Kiwi Island.

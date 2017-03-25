@@ -1,5 +1,8 @@
 
-package nz.ac.aut.ense701.gameModel;
+package nz.ac.aut.ense701.gameModel.occupants;
+
+import nz.ac.aut.ense701.gameModel.Position;
+import nz.ac.aut.ense701.gameModel.enums.Occupants;
 
 /**
  * This class represents a hazard that can be found on the island
@@ -56,7 +59,7 @@ public class Hazard extends Occupant {
     
     @Override
     public String getStringRepresentation() {
-        return "H";
+        return Occupants.HAZARD.toString();
     }   
 
 

@@ -1,5 +1,8 @@
 
-package nz.ac.aut.ense701.gameModel;
+package nz.ac.aut.ense701.gameModel.occupants;
+
+import nz.ac.aut.ense701.gameModel.Position;
+import nz.ac.aut.ense701.gameModel.enums.Occupants;
 
 
 /**
@@ -30,6 +33,6 @@ public class Fauna extends Occupant
     @Override
     public String getStringRepresentation() 
     {
-          return "F";
+          return Occupants.FAUNA.toString();
     }    
 }
