@@ -1,5 +1,8 @@
-This file describes the text in the data file for the Kiwi Island game
-=======================================================================
+This file describes the text in the three data files for the Kiwi Island game
+==============================================================================
+
+1. IslandData.txt
+==================
 
 The files contains the following data items in the order listed
 
@@ -22,3 +25,33 @@ Occupant type [String]:
 "K": Kiwi: name [string], description [string], position row [int], position column [int], 
 "H": Hazard: name [string], description [string], position row [int], position column [int], impact [double],
 
+2. QuizData.txt
+================
+Question And Answer Description:
+"Q:" - Question
+"O:" - Option
+"A:" - Correct Option
+
+The file contains the following data items in the order listed:
+
+int Number of quiz questions
+
+Question Details:
+Q: question [String]
+O: option1 [String]
+O: option2 [String]
+O: option3 [String]
+O: option4 [String]
+A: correctAnswer [int]
+
+3. QuizData.txt
+================
+Mesage Description:
+"M:" - Message
+
+The file contains the following data items in the order listed:
+
+int Number of Messages
+
+Message Details:
+M: message [String]

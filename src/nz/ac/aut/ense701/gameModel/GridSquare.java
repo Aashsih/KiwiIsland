@@ -5,6 +5,7 @@ import nz.ac.aut.ense701.gameModel.occupants.Occupant;
 import java.security.InvalidParameterException;
 import java.util.HashSet;
 import java.util.Set;
+import nz.ac.aut.ense701.gameModel.occupants.Hazard;
 
 /**
  * Class to represent a grid square on the island.
@@ -187,6 +188,14 @@ public class GridSquare
         boolean enoughRoom       = occupants.size() < MAX_OCCUPANTS;
         if ( validNewOccupant && enoughRoom ) 
         {
+            for(Occupant anOccupant : occupants)
+            {
+                if(anOccupant instanceof Hazard)
+                //if Hazard is already occupying that space, then no other occupant should be added here
+                {
+                    return false;
+                }
+            }
             success = occupants.add(occupant);
         }
         return success;

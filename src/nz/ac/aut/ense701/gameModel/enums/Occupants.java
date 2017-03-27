@@ -18,7 +18,8 @@ public enum Occupants {
     HAZARD("H"),
     KIWI("K"),
     PREDATOR("P"), 
-    TOOL("T");
+    TOOL("T"),
+    BAIT("B");
     
     private static Map<String, Occupants> representationToOccupant = new HashMap<String, Occupants>();
 

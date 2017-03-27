@@ -23,6 +23,28 @@ public class Position
      * e.g., in the player's backpack.
      */
     public static final Position NOT_ON_ISLAND = new Position();
+    
+    /**
+     * Checks if the (row,column) pair passed as a parameter belong on the island passed as a parameter
+     * @param island, island on which the (row,column) should belong
+     * @param row, row number
+     * @param column, column number
+     * @return true, if the (row, column) pair belongs on the island
+     *         false, otherwise. 
+     */
+    public static boolean isValidPosition(Island island, int row, int column)
+    {
+        if ( island == null )
+        {
+            throw new IllegalArgumentException(
+                    "Island parameter cannot be null");
+        }
+        if ( ((row < 0) || (row >= island.getNumRows())) || (column < 0) || (column >= island.getNumRows()))
+        {
+            return false;
+        }
+        return true;
+    }
             
     /**
      * Constructs a position that is not on the island (e.g., player's backpack).
@@ -48,16 +70,11 @@ public class Position
             throw new IllegalArgumentException(
                     "Island parameter cannot be null");
         }
-        if ( (row < 0) || (row >= island.getNumRows()) )
+        if(!isValidPosition(island, row, column))
         {
             throw new IllegalArgumentException(
-                    "Invalid row for position (" + row + ")");
-        }
-        if ( (column < 0) || (column >= island.getNumRows()) )
-        {
-            throw new IllegalArgumentException(
-                    "Invalid column for position (" + column + ")");
-        }
+                        "Invalid (row,column) for position (" + row + "," + column + ")");
+        }    
         // parameters are valid
         this.island = island;
         this.row    = row;

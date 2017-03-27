@@ -7,6 +7,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
+import nz.ac.aut.ense701.gameModel.occupants.Fauna;
+import nz.ac.aut.ense701.gameModel.occupants.Kiwi;
 
 /**
  * Player represents the player in the KiwiIsland game.
@@ -24,6 +27,7 @@ public class Player
     private double    stamina;
     private boolean   alive;
     private Set<Item> backpack;
+    private List<String> messages;
     private final double    maxBackpackWeight;
     private final double    maxBackpackSize;   
     
@@ -361,7 +365,4 @@ public class Player
         }
     }
     
-    private class Inventory{
-        //inner class inside "Player" - stores Set<Item>, Set<Messages>
-    }
 }

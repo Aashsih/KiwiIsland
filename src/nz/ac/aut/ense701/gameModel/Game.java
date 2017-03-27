@@ -1,7 +1,6 @@
 package nz.ac.aut.ense701.gameModel;
 
 import nz.ac.aut.ense701.gameModel.enums.GameState;
-import nz.ac.aut.ense701.gameModel.handlers_and_listeners.GameEventListener;
 import nz.ac.aut.ense701.gameModel.occupants.Predator;
 import nz.ac.aut.ense701.gameModel.enums.Terrain;
 import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
@@ -19,6 +18,9 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.Set;
+import nz.ac.aut.ense701.gameModel.enums.Occupants;
+import nz.ac.aut.ense701.gameModel.handlers.KiwiHandler;
+import nz.ac.aut.ense701.gameModel.occupants.Bait;
 
 /**
  * This is the class that knows the Kiwi Island game rules and state
@@ -463,6 +465,20 @@ public class Game
             // use successful: everybody has to know that
             notifyGameEventListeners();
         }
+        else if ( item instanceof Bait && player.hasItem((Bait) item) )
+        //Player uses Bait to attract kiwis
+        {
+            Bait bait = (Bait) item;
+            // attract kiwi - it should return a string with a message for the user
+            String result = kiwiHandler.attractKiwis(this.player.getPosition());
+            //Set message for player returned by attract kiwi on the UI
+            this.setPlayerMessage(result);
+            // player has consumed the food: remove from inventory
+            player.drop(bait);
+            // use successful: everybody has to know that
+            notifyGameEventListeners();
+            
+        }
         else if (item instanceof Tool)
         {
             Tool tool = (Tool) item;
@@ -736,7 +752,8 @@ public class Game
             int numRows    = input.nextInt();
             int numColumns = input.nextInt();
             island = new Island(numRows, numColumns);
-
+            kiwiHandler = new KiwiHandler(island);
+            
             // read and setup the terrain
             setUpTerrain(input);
 
@@ -815,35 +832,42 @@ public class Game
             Position occPos = new Position(island, occRow, occCol);
             Occupant occupant    = null;
 
-            if ( occType.equals("T") )
+            if ( occType.equals(Occupants.TOOL.toString()))
             {
                 double weight = input.nextDouble();
                 double size   = input.nextDouble();
                 occupant = new Tool(occPos, occName, occDesc, weight, size);
             }
-            else if ( occType.equals("E") )
+            else if ( occType.equals(Occupants.BAIT.toString()) )
+            {
+                double weight = input.nextDouble();
+                double size   = input.nextDouble();
+                occupant = new Bait(occPos, occName, occDesc, weight, size);
+            }
+            else if ( occType.equals(Occupants.FOOD.toString()) )
             {
                 double weight = input.nextDouble();
                 double size   = input.nextDouble();
                 double energy = input.nextDouble();
                 occupant = new Food(occPos, occName, occDesc, weight, size, energy);
             }
-            else if ( occType.equals("H") )
+            else if ( occType.equals(Occupants.HAZARD.toString()) )
             {
                 double impact = input.nextDouble();
                 occupant = new Hazard(occPos, occName, occDesc,impact);
             }
-            else if ( occType.equals("K") )
+            else if ( occType.equals(Occupants.KIWI.toString()) )
             {
                 occupant = new Kiwi(occPos, occName, occDesc);
+                kiwiHandler.addFauna((Kiwi) occupant);
                 totalKiwis++;
             }
-            else if ( occType.equals("P") )
+            else if ( occType.equals(Occupants.PREDATOR.toString()) )
             {
                 occupant = new Predator(occPos, occName, occDesc);
                 totalPredators++;
             }
-            else if ( occType.equals("F") )
+            else if ( occType.equals(Occupants.FAUNA.toString()) )
             {
                 occupant = new Fauna(occPos, occName, occDesc);
             }
@@ -853,6 +877,7 @@ public class Game
 
 
     private Island island;
+    private KiwiHandler kiwiHandler;
     private Player player;
     private GameState state;
     private int kiwiCount;
@@ -866,9 +891,5 @@ public class Game
     private String winMessage = "";
     private String loseMessage  = "";
     private String playerMessage  = "";   
-
-    
-
-
 
 }

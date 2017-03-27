@@ -69,7 +69,8 @@ public class Tool extends Item
     * Check if this tool is a screwdriver
     * @return true if screwdriver
      */    
-    public boolean isScrewdriver() {
+    public boolean isScrewdriver() 
+    {
        String name = this.getName();
       return name.equalsIgnoreCase(Tools.SCREW_DRIVER.toString()); 
     }
