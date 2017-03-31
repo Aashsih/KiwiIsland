@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Set;
 import nz.ac.aut.ense701.gameModel.Island;
 import nz.ac.aut.ense701.gameModel.Position;
-import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
 import nz.ac.aut.ense701.gameModel.occupants.Fauna;
 import nz.ac.aut.ense701.gameModel.occupants.Kiwi;
 import nz.ac.aut.ense701.gameModel.occupants.Occupant;
@@ -53,7 +52,7 @@ public class KiwiHandler extends MovableFaunaHandler{
         }
         this.playerPosition = playerPosition;
         String resultMessage = null;
-        Set<Kiwi> nearbyKiwis = getKiwisInAttractRadius();
+        List<Kiwi> nearbyKiwis = getKiwisInAttractRadius();
         if(nearbyKiwis == null || nearbyKiwis.isEmpty())
         {
             resultMessage = NO_NEARBY_KIWIS;
@@ -85,14 +84,14 @@ public class KiwiHandler extends MovableFaunaHandler{
      * @param playerPosition, the current position of the player
      * @return list of Kiwi that are within the ATTRACT_RADIUS
      */
-    private Set<Kiwi> getKiwisInAttractRadius()
+    private List<Kiwi> getKiwisInAttractRadius()
     {
         //use the Postion.isPostionValid method to iteratre through all the possible blocks on the island around a radius = ATTRACT_RADIUS
         if(playerPosition == null)
         {
             return null;
         }
-        Set<Kiwi> nearbyKiwis = new HashSet<Kiwi>();
+        List<Kiwi> nearbyKiwis = new ArrayList<Kiwi>();
         int currentXPosiion = playerPosition.getRow();
         int currentYPosiion = playerPosition.getColumn();
         for(int i = currentXPosiion - ATTRACT_RADIUS; i <= currentXPosiion + ATTRACT_RADIUS; i++)

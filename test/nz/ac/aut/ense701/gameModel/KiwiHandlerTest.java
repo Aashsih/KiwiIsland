@@ -43,6 +43,11 @@ public class KiwiHandlerTest extends junit.framework.TestCase{
         kiwiHandler = new KiwiHandler(island);
     }
     
+    /**
+     * Tears down the test fixture.
+     *
+     * Called after every test case method.
+     */
     @Override
     protected void tearDown()
     {
@@ -66,8 +71,17 @@ public class KiwiHandlerTest extends junit.framework.TestCase{
     }
     
     @Test
-    public void testAtrractKiwisNoNearbyKiwis()
+    public void testAtrractKiwisNoKiwisOnIsland()
     {
+        String result = kiwiHandler.attractKiwis(new Position(island, 5,5));
+        assertEquals("No nearby kiwis.", result);
+    }
+    
+    @Test
+    public void testAtrractKiwisOutsideAttractRadius()
+    {
+        Position position = new Position(island, 2, 2); 
+        island.addOccupant(position, new Kiwi(position,"Kiwi", "Test Kiwi"));
         String result = kiwiHandler.attractKiwis(new Position(island, 5,5));
         assertEquals("No nearby kiwis.", result);
     }
