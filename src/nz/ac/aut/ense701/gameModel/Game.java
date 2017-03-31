@@ -859,7 +859,6 @@ public class Game
             else if ( occType.equals(Occupants.KIWI.toString()) )
             {
                 occupant = new Kiwi(occPos, occName, occDesc);
-                kiwiHandler.addFauna((Kiwi) occupant);
                 totalKiwis++;
             }
             else if ( occType.equals(Occupants.PREDATOR.toString()) )
@@ -871,7 +870,10 @@ public class Game
             {
                 occupant = new Fauna(occPos, occName, occDesc);
             }
-            if ( occupant != null ) island.addOccupant(occPos, occupant);
+            if ( occupant != null ) 
+            {
+                island.addOccupant(occPos, occupant);
+            }
         }
     }    
 

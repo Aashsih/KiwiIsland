@@ -34,7 +34,7 @@ public class Bait extends Item
     /**
      * Set the bait to used 
      */
-    public void setBroken()
+    public void setUsed()
     {
         used = true;
     }
@@ -43,7 +43,7 @@ public class Bait extends Item
      * Is bait used
      * @return true if used
      */
-    public boolean isBroken()
+    public boolean isUsed()
     {
         return this.used;
     }

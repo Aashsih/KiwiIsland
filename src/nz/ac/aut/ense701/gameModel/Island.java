@@ -3,6 +3,7 @@ package nz.ac.aut.ense701.gameModel;
 import nz.ac.aut.ense701.gameModel.occupants.Predator;
 import nz.ac.aut.ense701.gameModel.enums.Terrain;
 import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
+import nz.ac.aut.ense701.gameModel.occupants.Hazard;
 import nz.ac.aut.ense701.gameModel.occupants.Occupant;
 
 /**
@@ -16,6 +17,7 @@ public class Island
     private final int numColumns;
     private GridSquare[][] islandGrid;
     private Position previousPlayerPos;
+    //Occupants that can move around or change in nm5
 
    
     /**
@@ -231,6 +233,28 @@ public class Island
         return success;
     }    
 
+    /**
+     * This method is used to check whether an occupant can be moved 
+     * to another Position both specified in the parameter
+     * 
+     * @param occupant, the occupant that needs to be moved
+     * @param position, position to which the occupant needs to be moved
+     * @return false, if the destination position has a hazard, or is already at maximum capacity
+     *         true, otherwise
+     */
+    public boolean isOccupantMoveToPositionPossible(Occupant occupant, Position position)
+    {
+        if(occupant == null)
+        {
+            throw new IllegalArgumentException("The parameter \"occupant\" cannot be null");
+        }
+        else if(position == null)
+        {
+            throw new IllegalArgumentException("The parameter \"position\" cannot be null");
+        }
+        return islandGrid[position.getRow()][position.getColumn()].canOccupantBeAdded(occupant);
+    }
+    
     
     /**
      * Attempts to remove an occupant from a specified position on the island.

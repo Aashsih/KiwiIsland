@@ -6,7 +6,9 @@
 package nz.ac.aut.ense701.gameModel.handlers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import nz.ac.aut.ense701.gameModel.Island;
 import nz.ac.aut.ense701.gameModel.Position;
 import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
@@ -23,7 +25,8 @@ import nz.ac.aut.ense701.gameModel.occupants.Occupant;
 public class KiwiHandler extends MovableFaunaHandler{
     //Raidus indicating the number of blocks around the user in which the Attract works when a Bait is used
     private static final int ATTRACT_RADIUS = 2;
-    private static final String BAIT_COULD_NOT_ATTRACT_KIWIS = "The bait could not attract any nearby kiwis.";
+    private static final String NO_NEARBY_KIWIS = "No nearby kiwis.";
+    private static final String NO_MOVABLE_KIWIS = "The kiwis around you could not move.";
     private static final String BAIT_COULD_ATTRACT_KIWIS = "The Bait worked!! Few kiwi have moved closer to your position";
 
     private Position playerPosition;
@@ -50,14 +53,14 @@ public class KiwiHandler extends MovableFaunaHandler{
         }
         this.playerPosition = playerPosition;
         String resultMessage = null;
-        List<Kiwi> nearbyKiwis = getKiwisInAttractRadius();
+        Set<Kiwi> nearbyKiwis = getKiwisInAttractRadius();
         if(nearbyKiwis == null || nearbyKiwis.isEmpty())
         {
-            resultMessage = BAIT_COULD_NOT_ATTRACT_KIWIS;
+            resultMessage = NO_NEARBY_KIWIS;
         }
         else
         {
-            List<Kiwi> movedKiwis = new ArrayList<Kiwi>();
+            Set<Kiwi> movedKiwis = new HashSet<Kiwi>();
             for(Kiwi kiwi : nearbyKiwis)
             {
                 if(moveFauna(kiwi, getPositionToMoveKiwi(kiwi)))
@@ -71,7 +74,7 @@ public class KiwiHandler extends MovableFaunaHandler{
             }
             else
             {
-                resultMessage = BAIT_COULD_NOT_ATTRACT_KIWIS;
+                resultMessage = NO_MOVABLE_KIWIS;
             }
         }
         return resultMessage;
@@ -82,14 +85,14 @@ public class KiwiHandler extends MovableFaunaHandler{
      * @param playerPosition, the current position of the player
      * @return list of Kiwi that are within the ATTRACT_RADIUS
      */
-    private List<Kiwi> getKiwisInAttractRadius()
+    private Set<Kiwi> getKiwisInAttractRadius()
     {
         //use the Postion.isPostionValid method to iteratre through all the possible blocks on the island around a radius = ATTRACT_RADIUS
         if(playerPosition == null)
         {
             return null;
         }
-        List<Kiwi> nearbyKiwis = new ArrayList<Kiwi>();
+        Set<Kiwi> nearbyKiwis = new HashSet<Kiwi>();
         int currentXPosiion = playerPosition.getRow();
         int currentYPosiion = playerPosition.getColumn();
         for(int i = currentXPosiion - ATTRACT_RADIUS; i <= currentXPosiion + ATTRACT_RADIUS; i++)
@@ -116,7 +119,6 @@ public class KiwiHandler extends MovableFaunaHandler{
     
     /**
      * This method is used to find a new position for the kiwi to move.
-     * This method does not check if the move to the new position is possible.
      * 
      * @param kiwi, kiwi whose new position needs to be calculated
      * @return the position to which the kiwi should be moved
@@ -127,28 +129,55 @@ public class KiwiHandler extends MovableFaunaHandler{
         {
             return null;
         }
+        Position position = null;
         if(kiwi.getPosition().getColumn() < playerPosition.getColumn())
+        //If kiwi is to the left of the player
         {
-            return new Position(island, kiwi.getPosition().getRow(), kiwi.getPosition().getColumn() + 1);
+            if(island.isOccupantMoveToPositionPossible(kiwi, position = new Position(island, kiwi.getPosition().getRow(), kiwi.getPosition().getColumn() + 1)))
+            //if kiwi can move to the right
+            {
+                return position;
+            }
         }
         else if(kiwi.getPosition().getColumn() > playerPosition.getColumn())
+        //kiwi is to the right of the player
         {
-            return new Position(island, kiwi.getPosition().getRow(), kiwi.getPosition().getColumn() - 1);
+            if(island.isOccupantMoveToPositionPossible(kiwi, position = new Position(island, kiwi.getPosition().getRow(), kiwi.getPosition().getColumn() - 1)))
+            //if kiwi can move to the left
+            {
+                return position;
+            }
         }
-        else
+        return findAlternatePosition(kiwi);
+    }
+
+    /**
+     * 
+     * @param kiwi, the kiwi for whom a new position is to be found
+     * @return a possible position where the kiwi could be moved.
+     *         null, otherwise 
+     */
+    private Position findAlternatePosition(Kiwi kiwi)
+    {
+        if(kiwi == null || playerPosition == null)
         {
-            if(kiwi.getPosition().getRow() < playerPosition.getRow())
-            {
-                return new Position(island, kiwi.getPosition().getRow() + 1, kiwi.getPosition().getColumn());
-            }
-            else if(kiwi.getPosition().getRow() > playerPosition.getRow())
-            {
-                return new Position(island, kiwi.getPosition().getRow() - 1, kiwi.getPosition().getColumn());
-            }
+            return null;
+        }
+        if(kiwi.getPosition().getRow() < playerPosition.getRow())
+        //if kiwi is above the player
+        {
+            //return a postion that is in a row one below the current kiwi position
+            return new Position(island, kiwi.getPosition().getRow() + 1, kiwi.getPosition().getColumn());
+        }
+        else if(kiwi.getPosition().getRow() > playerPosition.getRow())
+        //if kiwi is below the player
+        {
+            //return a position that is in a row one above the current kiwi position
+            return new Position(island, kiwi.getPosition().getRow() - 1, kiwi.getPosition().getColumn());
         }
         return null;
     }
-
+    
     /**
      * This method is used to change the position of the fauna passed in the parameter
      * to the position passed in the parameter
@@ -164,8 +193,13 @@ public class KiwiHandler extends MovableFaunaHandler{
         {
             return false;
         }
-        island.removeOccupant(fauna.getPosition(), fauna);
-        return island.addOccupant(position, fauna);
+        if(island.isOccupantMoveToPositionPossible(fauna, position))
+        {
+            island.removeOccupant(fauna.getPosition(), fauna);
+            return island.addOccupant(position, fauna);
+        }
+        return false;
     }
+
     
 }

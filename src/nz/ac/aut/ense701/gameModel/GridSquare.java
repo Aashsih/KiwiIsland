@@ -6,6 +6,7 @@ import java.security.InvalidParameterException;
 import java.util.HashSet;
 import java.util.Set;
 import nz.ac.aut.ense701.gameModel.occupants.Hazard;
+import nz.ac.aut.ense701.gameModel.occupants.Kiwi;
 
 /**
  * Class to represent a grid square on the island.
@@ -184,18 +185,8 @@ public class GridSquare
     public boolean addOccupant(Occupant occupant) 
     {
         boolean success = false;
-        boolean validNewOccupant = occupant != null;
-        boolean enoughRoom       = occupants.size() < MAX_OCCUPANTS;
-        if ( validNewOccupant && enoughRoom ) 
+        if(canOccupantBeAdded(occupant))
         {
-            for(Occupant anOccupant : occupants)
-            {
-                if(anOccupant instanceof Hazard)
-                //if Hazard is already occupying that space, then no other occupant should be added here
-                {
-                    return false;
-                }
-            }
             success = occupants.add(occupant);
         }
         return success;
@@ -220,4 +211,49 @@ public class GridSquare
         return success;
     }
     
+    /**
+     * 
+     * @return true, is number of occupants on the GridSquare are less
+     *               than the allowed number
+     *         false, otherwise 
+     */
+    public boolean hasRoom()
+    {
+        return occupants.size() >= MAX_OCCUPANTS;
+    }
+    
+    /**
+     * Checks if an Occupant passes as a parameter can be added to the current list of 
+     * 
+     * @param occupantToBeAdded, Occupant to be added 
+     * @return true, if occupant can be added to the current list of occupants
+     *         false, otherwise.
+     */
+    public boolean canOccupantBeAdded(Occupant occupantToBeAdded)
+    {
+        if(occupantToBeAdded == null)
+        {
+            throw new IllegalArgumentException("The occupant parameters cannot be null");
+        }
+        boolean validNewOccupant = occupantToBeAdded != null;
+        boolean enoughRoom       = occupants.size() < MAX_OCCUPANTS;
+        if ( validNewOccupant && enoughRoom ) 
+        {
+            for(Occupant existingOccupant : occupants)
+            {
+                if(existingOccupant instanceof Hazard)
+                //if Hazard is already occupying that space, then no other occupant should be added here
+                {
+                    return false;
+                }
+                else if(existingOccupant instanceof Kiwi && occupantToBeAdded instanceof Kiwi)
+                //if a kiwi already exists on the block
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 }
