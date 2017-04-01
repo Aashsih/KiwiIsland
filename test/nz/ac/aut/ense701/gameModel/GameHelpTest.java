@@ -73,8 +73,18 @@ public class GameHelpTest extends junit.framework.TestCase
     }
     
     @Test
-    public void testGetGameHelpInfo()
+    public void testGetGameHelpInfoMatchesTextInFile()
     {
-        
+        try 
+        {
+            String testData = "TestData\nSome more test data\n And some more test data";
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Help.txt"));
+            bufferedWriter.write(testData);
+            bufferedWriter.close();
+            String result = GameHelp.getGameHelpInfo();
+            assertEquals(testData + "\n", result);
+        } catch (IOException ex) {
+            Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
