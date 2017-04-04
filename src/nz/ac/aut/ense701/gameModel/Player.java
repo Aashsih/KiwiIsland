@@ -1,5 +1,6 @@
 package nz.ac.aut.ense701.gameModel;
 
+import java.util.ArrayList;
 import nz.ac.aut.ense701.gameModel.enums.Terrain;
 import nz.ac.aut.ense701.gameModel.occupants.Item;
 import nz.ac.aut.ense701.gameModel.occupants.Tool;
@@ -51,6 +52,7 @@ public class Player
        this.maxBackpackSize = maxBackpackSize;
        this.alive = true;
        this.backpack = new HashSet<Item>();
+       this.messages = new ArrayList<String>();
     }   
     
     /*****************************************************************************************************
@@ -244,9 +246,20 @@ public class Player
      * 
      * @return the items in the player's backpack
      */
-    public Collection<Item> getInventory()
+    public Collection<Object> getInventory()
     {
-        return Collections.unmodifiableCollection(backpack);
+        List<Object> backpackItems = new ArrayList<Object>();
+    
+       for(Item b : backpack)
+       {
+           backpackItems.add(b);
+       }
+       if(messages.size() > 0)
+       {
+           backpackItems.add("Messages");
+       }
+
+        return Collections.unmodifiableCollection(backpackItems);
     }
     
     /*************************************************************************************************************
@@ -365,4 +378,13 @@ public class Player
         }
     }
     
+    public Collection<String> getPlayerMessages()
+    {
+        return Collections.unmodifiableCollection(messages);
+    }
+    
+    public void addMessage(String message)
+    {
+        messages.add(message);
+    }
 }

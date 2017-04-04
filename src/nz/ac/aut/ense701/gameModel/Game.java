@@ -14,10 +14,14 @@ import nz.ac.aut.ense701.gameModel.occupants.Fauna;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import nz.ac.aut.ense701.gameModel.enums.Occupants;
 import nz.ac.aut.ense701.gameModel.handlers.KiwiHandler;
 import nz.ac.aut.ense701.gameModel.occupants.Bait;
@@ -50,6 +54,8 @@ public class Game
         eventListeners = new HashSet<GameEventListener>();
 
         createNewGame();
+        //reads and all the facts of the game stored in the file
+        DOCMessages.getFacts();
     }
     
     
@@ -276,6 +282,16 @@ public class Game
         return island;
     }
     
+    public Collection<String> getPlayerMessages()
+    {
+        return player.getPlayerMessages();
+        
+    }
+    
+    public void addFact(String fact)
+    {
+        player.addMessage(fact);
+    }
     /**
      * Draws the island grid to standard output.
      */
@@ -424,6 +440,12 @@ public class Game
      */
     public boolean dropItem(Object what)
     {
+        //if condition to check if player tries to drop the messages, the software doesn't crash
+        //nor does it allow the player to drop the messages.
+        if(what.toString().equals("Messages"))
+        {
+            return false;
+        }
         boolean success = player.drop((Item)what);
         if ( success )
         {
@@ -485,6 +507,7 @@ public class Game
             if (tool.isTrap()&& !tool.isBroken())
             {
                  success = trapPredator(); 
+                 displayDialogueBox();
             }
             else if(tool.isScrewdriver())// Use screwdriver (to fix trap)
             {
@@ -495,8 +518,21 @@ public class Game
                     }
             }
         }
+        else if (item.toString().equalsIgnoreCase("Messages"))
+        {
+            Collection<String> list = player.getPlayerMessages();
+            JOptionPane.showMessageDialog(null,list, "Collected Facts" + count, JOptionPane.PLAIN_MESSAGE);
+        }
         updateGameState();
         return success;
+    }
+    
+    public void displayDialogueBox()
+    {
+        count++;
+        String message =  DOCMessages.getFact();
+        JOptionPane.showMessageDialog(null,message, "Fact #" + count, JOptionPane.PLAIN_MESSAGE);
+        player.addMessage(message);
     }
     
     /**
@@ -511,6 +547,7 @@ public class Game
                 if (!kiwi.counted()) {
                     kiwi.count();
                     kiwiCount++;
+                    displayDialogueBox();
                 }
             }
         }
@@ -875,8 +912,8 @@ public class Game
                 island.addOccupant(occPos, occupant);
             }
         }
-    }    
-
+    } 
+ 
 
     private Island island;
     private KiwiHandler kiwiHandler;
@@ -893,5 +930,7 @@ public class Game
     private String winMessage = "";
     private String loseMessage  = "";
     private String playerMessage  = "";   
+    
+    private int count = 0;
 
 }
