@@ -49,7 +49,7 @@ public class BaitTest extends junit.framework.TestCase{
     @Test
     public void testIsUsed()
     {
-        assertFalse("Shuold not be used", bait.isUsed());
+        assertFalse("Should not be used", bait.isUsed());
         bait.setUsed();
         assertTrue("Shuold be used", bait.isUsed());
     }
