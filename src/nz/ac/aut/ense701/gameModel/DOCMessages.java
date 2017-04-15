@@ -9,9 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.Random;
 
 /**
  *
@@ -30,17 +28,7 @@ public class DOCMessages {
      */
     private static void readFile()
     {
-        factsQueue = new PriorityQueue<String> ();
-        
-//        factsQueue =  new PriorityQueue<String>(100, new Comparator<String>() {
-//            @Override
-//            public int compare(String o1, String o2) {
-//                Random random = new Random();
-//                return random.nextInt(100);
-//            }
-//        });
-       // factsBuffer = new StringBuffer();
-         
+        factsQueue = new PriorityQueue<String> ();      
 
         try{
             BufferedReader factsBufferedReader = new BufferedReader(new FileReader(FILE_LOCATION));
@@ -56,14 +44,14 @@ public class DOCMessages {
             {
 
             } catch (IOException ex) {
-            //Logger.getLogger(DOCMessages.class.getName()).log(Level.SEVERE, null, ex);
+
             }  
         }
 
     
     /**
-     * This method gets the string representation of the facts stored in file
-     * specified in the file location.
+     * This method reads the file and gets the string representation of the 
+     * facts stored in file specified in the file location.
      * 
      * @return string representation of the facts used to spread DOC awareness 
      */
@@ -75,7 +63,11 @@ public class DOCMessages {
         return factsQueue;
 
     }
-    
+    /**
+     * This method returns one fact from the priority queue at a time
+     * 
+     * @return one fact from the entire queue
+    */
     public static String getFact()
     {
         return factsQueue.poll();

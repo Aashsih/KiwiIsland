@@ -377,7 +377,13 @@ public class Player
             reduceStamina(getStaminaNeededToMove(terrain));
         }
     }
-    
+     
+    /**
+     * This method converts all the messages stored in the messages list into a
+     * string and returns it
+     * 
+     * @return string representation of all the facts separated by newline
+     */
     public String getPlayerMessages()
     {
         String allMessages = "";
@@ -389,6 +395,11 @@ public class Player
         return allMessages;
     }
     
+     /**
+     * This method is used by the game class to add a fact to the messages list
+     * 
+     * @param message 
+     */
     public void addMessage(String message)
     {
         messages.add(message);
