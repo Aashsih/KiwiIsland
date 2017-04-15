@@ -172,5 +172,23 @@ public class PositionTest extends junit.framework.TestCase
         assertEquals(newPosition.getRow(), 1);
         assertEquals(newPosition.getColumn(), 1);
     }
+    
+    @Test
+    public void testIsValidPositionNullisland() {
+        try 
+        {
+            Position.isValidPosition(null, 1, 1);
+            fail("No exception thrown when direction null.");
+        }
+        catch (IllegalArgumentException expected) 
+        {
+            assertTrue("Not expected exception message", expected.getMessage().contains("Island parameter cannot be null"));
+        } 
+    }
+    
+    @Test
+    public void testIsValidPositionInvalidRow() {
+        assertFalse(Position.isValidPosition(island, -1 , 1));
+    }
 
 }
