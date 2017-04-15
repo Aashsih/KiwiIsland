@@ -600,6 +600,7 @@ public class KiwiCountUI
             if(item.toString().equalsIgnoreCase("Messages"))
             {
                 btnUse.setEnabled(true);
+                btnDrop.setEnabled(false);
             }
         }
     }//GEN-LAST:event_listInventoryValueChanged
