@@ -11,6 +11,7 @@ import nz.ac.aut.ense701.gameModel.GameEventListener;
 import nz.ac.aut.ense701.gameModel.GameHelp;
 import nz.ac.aut.ense701.gameModel.enums.GameState;
 import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
+import nz.ac.aut.ense701.gui.GridSquarePanel;
 
 /*
  * User interface form for Kiwi Island.
