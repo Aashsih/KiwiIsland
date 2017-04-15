@@ -26,6 +26,11 @@ public class GameHelp
     private static final String ENCODING = "UTF-8";
     private static StringBuffer gameHelpStringBuffer;
 
+    /**
+     * Reads the Help File in text mode and stores it in the String Buffer for later retrieval
+     * 
+     * @throws IOException 
+     */
     private static void readGameHelpTextFromFile() throws IOException
     {
        gameHelpStringBuffer = new StringBuffer();
