@@ -44,7 +44,7 @@ public class GameTest extends junit.framework.TestCase
         player         = game.getPlayer();
         island = game.getIsland();
     }
-
+    
     /**
      * Tears down the test fixture.
      *
@@ -433,6 +433,13 @@ public class GameTest extends junit.framework.TestCase
         assertEquals("Wrong count", game.getKiwiCount(), 1);
     }
 
+    @Test
+    public void testGetPlayerMessages()
+    {
+        game.addFact("test fact 1");
+        assertEquals("test fact 1\n", game.getPlayerMessages());
+        
+    }
 /**
  * Private helper methods
  */
