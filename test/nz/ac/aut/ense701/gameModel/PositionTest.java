@@ -82,7 +82,7 @@ public class PositionTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException expected) 
         {
-            assertTrue("Not expected exception message", expected.getMessage().contains("Invalid row"));
+            assertTrue("Not expected exception message", expected.getMessage().contains("Invalid (row"));
         }
         
     }
@@ -96,7 +96,7 @@ public class PositionTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException expected) 
         {
-            assertTrue("Not expected exception message", expected.getMessage().contains("Invalid row"));
+            assertTrue("Not expected exception message", expected.getMessage().contains("Invalid (row"));
         }
         
     } 
@@ -110,7 +110,7 @@ public class PositionTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException expected) 
         {
-            assertTrue("Not expected exception message", expected.getMessage().contains("Invalid column"));
+            assertTrue("Not expected exception message", expected.getMessage().contains("Invalid (row,column"));
         }
         
     }
@@ -124,7 +124,7 @@ public class PositionTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException expected) 
         {
-            assertTrue("Not expected exception message", expected.getMessage().contains("Invalid column"));
+            assertTrue("Not expected exception message", expected.getMessage().contains("Invalid (row,column"));
         }
         
     }
@@ -174,7 +174,7 @@ public class PositionTest extends junit.framework.TestCase
     }
     
     @Test
-    public void testIsValidPositionNullisland() {
+    public void testIsValidPositionNullIsland() {
         try 
         {
             Position.isValidPosition(null, 1, 1);
@@ -189,6 +189,13 @@ public class PositionTest extends junit.framework.TestCase
     @Test
     public void testIsValidPositionInvalidRow() {
         assertFalse(Position.isValidPosition(island, -1 , 1));
+        assertFalse(Position.isValidPosition(island, 100 , 1));
+    }
+    
+    @Test
+    public void testIsValidPositionInvalidColumn() {
+        assertFalse(Position.isValidPosition(island, 1 , -1));
+        assertFalse(Position.isValidPosition(island, 1 , 100));
     }
 
 }

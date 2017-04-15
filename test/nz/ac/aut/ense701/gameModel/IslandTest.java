@@ -93,6 +93,12 @@ public class IslandTest extends junit.framework.TestCase
     }
 
     @Test
+    public void testAddOccupantTwoKiwisOnGridSquare() {
+        assertTrue( testIsland.addOccupant(onIsland, new Kiwi(onIsland , "", "")));
+        assertFalse( testIsland.addOccupant(onIsland, new Kiwi(onIsland , "", "")));      
+    }
+    
+    @Test
     public void testRemoveOccupantOnIslandValidOccupant() {
         assertTrue(testIsland.addOccupant(onIsland, cat));
         assertTrue( testIsland.hasOccupant(onIsland, cat));
@@ -147,5 +153,29 @@ public class IslandTest extends junit.framework.TestCase
         assertEquals(testIsland.getPredator(onIsland), cat);
     }
 
-
+    @Test
+    public void testIsOccupantMoveToPositionPossibleNullOccupant() {
+        try 
+        {
+            testIsland.isOccupantMoveToPositionPossible(null, onIsland);
+            fail("No exception thrown when direction null.");
+        }
+        catch (IllegalArgumentException expected) 
+        {
+            assertTrue("Not expected exception message", expected.getMessage().contains("The parameter \"occupant\" cannot be null"));
+        } 
+    }
+    
+    @Test
+    public void testIsOccupantMoveToPositionPossibleNullPosition() {
+        try 
+        {
+            testIsland.isOccupantMoveToPositionPossible(new Kiwi(onIsland, "", ""), null);
+            fail("No exception thrown when direction null.");
+        }
+        catch (IllegalArgumentException expected) 
+        {
+            assertTrue("Not expected exception message", expected.getMessage().contains("The parameter \"position\" cannot be null"));
+        } 
+    }
 }
