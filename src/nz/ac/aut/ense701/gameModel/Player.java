@@ -378,9 +378,15 @@ public class Player
         }
     }
     
-    public Collection<String> getPlayerMessages()
+    public String getPlayerMessages()
     {
-        return Collections.unmodifiableCollection(messages);
+        String allMessages = "";
+        
+        for(String s : messages)
+        {
+            allMessages += s + "\n";
+        }
+        return allMessages;
     }
     
     public void addMessage(String message)

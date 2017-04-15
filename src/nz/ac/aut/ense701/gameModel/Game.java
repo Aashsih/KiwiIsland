@@ -282,7 +282,7 @@ public class Game
         return island;
     }
     
-    public Collection<String> getPlayerMessages()
+    public String getPlayerMessages()
     {
         return player.getPlayerMessages();
         
@@ -520,8 +520,8 @@ public class Game
         }
         else if (item.toString().equalsIgnoreCase("Messages"))
         {
-            Collection<String> list = player.getPlayerMessages();
-            JOptionPane.showMessageDialog(null,list, "Collected Facts" + count, JOptionPane.PLAIN_MESSAGE);
+            String list = player.getPlayerMessages();
+            JOptionPane.showMessageDialog(null,list, "Collected Facts" , JOptionPane.PLAIN_MESSAGE);
         }
         updateGameState();
         return success;

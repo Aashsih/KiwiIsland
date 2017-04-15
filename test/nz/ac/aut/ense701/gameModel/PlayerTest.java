@@ -1,9 +1,11 @@
 package nz.ac.aut.ense701.gameModel;
 
+import java.util.ArrayList;
 import nz.ac.aut.ense701.gameModel.enums.Terrain;
 import nz.ac.aut.ense701.gameModel.occupants.Food;
 import nz.ac.aut.ense701.gameModel.occupants.Tool;
 import java.util.Collection;
+import java.util.List;
 import org.junit.Test;
 
 /**
@@ -18,6 +20,7 @@ public class PlayerTest extends junit.framework.TestCase
    Position playerPosition;
    Island island;
    Food sandwich;
+   
      /**
      * Default constructor for test class PlayerTest
      */
@@ -36,7 +39,8 @@ public class PlayerTest extends junit.framework.TestCase
         island = new Island(5,5);
         playerPosition = new Position(island, 0,0);
         player = new Player(playerPosition,"Lisa Simpson",25.0, 15.0, 20.0);
-        sandwich = new Food(playerPosition, "sandwich", "A tasty cheese sandwich", 1.0, 2.0, 1.5);        
+        sandwich = new Food(playerPosition, "sandwich", "A tasty cheese sandwich", 1.0, 2.0, 1.5);     
+       
     }
 
     /**
@@ -238,9 +242,13 @@ public class PlayerTest extends junit.framework.TestCase
         player.collect(sandwich);
         Tool trap = new Tool(playerPosition, "Trap", "A predator trap", 1.0, 1.0);
         player.collect(trap);
+        player.addMessage("test");
+       
         Collection inventory = player.getInventory();
         assertTrue(inventory.contains(trap));
         assertTrue(inventory.contains(sandwich));
+        assertTrue(inventory.contains("Messages"));
+        
     }
     
     @Test
@@ -319,5 +327,11 @@ public class PlayerTest extends junit.framework.TestCase
         player.moveToPosition(newPosition, Terrain.SCRUB);
         assertEquals(playerPosition, player.getPosition());
         assertEquals(2.0, player.getStaminaLevel(), 0.01);
+    }
+    @Test
+    public void testGetPlayerMessages()
+    {
+        player.addMessage("test 1");
+        assertEquals("test 1\n", player.getPlayerMessages());
     }
 }
