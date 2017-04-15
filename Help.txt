@@ -1,9 +1,51 @@
 Game Help
+---------------
+- About the Game:
+The objective of the game is to increase the player’s awareness of the challenges
+ that the Department of conservation faces and to promote their conservation message. 
+The game places the player on an island named “Kiwi-Island” that allows him/her to explore
+ an island filled with “kiwis” and “predators”. The player navigates through different
+ terrains on the island such as “Sand”, “Forest”, “Wetland”, “Scrub” and “Water” dodging
+ “Hazards”, carrying a backpack filled with items that he/she picks during this adventure
+ to count kiwis and in-turn learn about their habitation, lifecycle and food. They also trap
+ predators along the way and learn about how the predators affect the kiwi population. All this
+ exploring tires the player and forces him/her to collect food items to regain stamina and
+ continue their adventure!
 
-How to win?
+- How do I win the game?
+Accomplishing any of the following while alive will allow you to win the game:
+1. Count all the kiwis along with capturing 80% of the total predators on the Kiwi-island.
+2. Capture all the predators.
 
+- When will I lose?
+You will lose if you run out of stamina before completing the tasks required to win the game.
+The island has different hazards at different places, if you step on a hazard that turns out
+ to be fatal, you lose the game instantly.
 
-When will I lose?
+- How do I regain my stamina?
+While navigating through the island you will find various food items labelled as “E”. You can pick
+ them up and use them to regain your stamina.
+Note: Don’t over stack food items in the backpack as they will increase you backpack weight which
+ will reduce your stamina more with every step you take.
 
-About the Game:
-The Kiwi-Island game allows the user to explore an island filled with kiwis and predators. The user can use tools like screw
+- How do I trap predators?
+While navigating through the island you will find tools that you can pick up. Among the different
+ tools, “trap” is one of the tools you can pick up. Once you have obtained a trap, you simply use
+ it whenever you land on a spot that has a predator on it.
+
+- How do I know I have landed on a spot with a Predator on it?
+While you move around on the island the different spots around you will keep displaying letters on
+ them. The letter “P” is used to denote predators which can be used to identify where they are.
+- How do I count kiwis?
+While moving around on the island, you will land on spots that have the letter “K” displayed on it.
+ The letter “K” denotes that there is a kiwi on that spot and you can click on the “Count” button
+ at the bottom right corner to count a kiwi.
+
+- What do the different letters on the island represent?
+    Fauna "F"
+    Food "E"
+    Hazard "H"
+    Kiwi "K"
+    Predator "P"
+    TOOL "T"
+    BAIT "B" 
