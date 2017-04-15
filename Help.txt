@@ -37,16 +37,27 @@ While navigating through the island you will find tools that you can pick up. Am
 While moving around on the island, you will land on spots that have the letter “K” displayed on it.
  The letter “K” denotes that there is a kiwi on that spot and you can click on the “Count” button
  at the bottom right corner to count a kiwi.
-
-- What is Bait used for?
- Bait represents the food that kiwis eat. You can pick up bait from the island and store it in your
-  backpack. You can then use bait whenever you want to attract kiwis in a 2 block radius towards you.
  
 - What is my backpack for?
- While exploring the island you will find different items like a "trap", "screwdriver", "food",  "bait" etc.
-  These items can be picked up and collected in your backpack and used when appropriate. Although you can
-  add a lot of items in your backpack there is a limit to what your shoulders and the bag can bare, so keep
-  and eye on the "Backpack Size" which tells you how much space you have already occupied.
+While exploring the island you will find different items like a "trap", "screwdriver", "food",  "bait" etc.
+ These items can be picked up and collected in your backpack and used when appropriate. Although you can
+ add a lot of items in your backpack there is a limit to what your shoulders and the bag can bare, so keep
+ and eye on the "Backpack Size" which tells you how much space you have already occupied.
+
+- What is Bait used for?
+Bait represents the food that kiwis eat. You can pick up bait from the island and store it in your
+ backpack. You can then use bait whenever you want to attract kiwis in a 2 block radius towards you.
+ The game will notify you if the bait that you used had any effect or not. If there are no kiwis around
+ you in a 2 block radius or the only place they can move to has a "Hazard", the bait wont work so be wise!
+
+- What happens when I land on a Hazard?
+Different "Hazard" have different effects. Some are fatal - meaning the player loses, whereas others
+ cause serious reduction in stamina and also break the trap if you are carrying any. 
+
+- How do I fix a broken trap?
+A screwdriver can be used to fix a trap. Screwdriver is one of the tools in the game and so you can collect it
+ if you land on a "Tool" (represented by letter "T") that is a screwdriver on the island.
+ 
 
 - What do the different letters on the island represent?
     Fauna "F"
@@ -58,5 +69,5 @@ While moving around on the island, you will land on spots that have the letter �
     BAIT "B" 
 
 - Other Tips
- You can hover your cursor over the items in your inventory or the objects in the "Objects" panel
-  to get a description of the item.
+You can hover your cursor over the items in your inventory or the objects in the "Objects" panel
+ to get a description of the item.
