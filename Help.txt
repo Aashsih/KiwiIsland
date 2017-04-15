@@ -7,7 +7,7 @@ The game places the player on an island named “Kiwi-Island” that allows him/
  an island filled with “kiwis” and “predators”. The player navigates through different
  terrains on the island such as “Sand”, “Forest”, “Wetland”, “Scrub” and “Water” dodging
  “Hazards”, carrying a backpack filled with items that he/she picks during this adventure
- to count kiwis and in-turn learn about their habitation, lifecycle and food. They also trap
+ to count kiwis and in-turn learn about their habitation, life cycle and food. They also trap
  predators along the way and learn about how the predators affect the kiwi population. All this
  exploring tires the player and forces him/her to collect food items to regain stamina and
  continue their adventure!
@@ -23,7 +23,7 @@ The island has different hazards at different places, if you step on a hazard th
  to be fatal, you lose the game instantly.
 
 - How do I regain my stamina?
-While navigating through the island you will find various food items labelled as “E”. You can pick
+While navigating through the island you will find various food items labeled as “E”. You can pick
  them up and use them to regain your stamina.
 Note: Don’t over stack food items in the backpack as they will increase you backpack weight which
  will reduce your stamina more with every step you take.
