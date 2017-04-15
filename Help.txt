@@ -6,4 +6,4 @@ How to win?
 When will I lose?
 
 About the Game:
-The Kiwi-Island game 
+The Kiwi-Island game allows the user to explore an island filled with kiwis and predators. The user can use tools like screw

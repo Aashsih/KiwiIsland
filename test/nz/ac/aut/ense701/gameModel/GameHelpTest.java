@@ -7,12 +7,14 @@ package nz.ac.aut.ense701.gameModel;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 /**
@@ -38,18 +40,11 @@ public class GameHelpTest extends junit.framework.TestCase
     @Override
     protected void setUp()
     {
-       gameHelpStringBuffer = new StringBuffer();
-       BufferedReader gameHelpBufferedReader = null;
-       try 
-        {
-            gameHelpBufferedReader = new BufferedReader(new FileReader("Help.txt"));
-            for(String line; (line = gameHelpBufferedReader.readLine()) != null; gameHelpStringBuffer.append(line + "\n"));
-            gameHelpBufferedReader.close();
-        } catch (FileNotFoundException ex) 
-        {
-       
+        try {
+            gameHelpStringBuffer = new StringBuffer();
+            gameHelpStringBuffer.append(FileUtils.readFileToString(new File("Help.txt"), "UTF-8"));
         } catch (IOException ex) {
-            
+            Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -61,13 +56,9 @@ public class GameHelpTest extends junit.framework.TestCase
     @Override
     protected void tearDown()
     {
-        try 
-        {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Help.txt"));
-            bufferedWriter.write(gameHelpStringBuffer.toString());
-            bufferedWriter.close();
-        } catch (IOException ex) 
-        {
+        try { 
+            FileUtils.writeStringToFile(new File("Help.txt"), gameHelpStringBuffer.toString() , "UTF-8");
+        } catch (IOException ex) {
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -78,11 +69,9 @@ public class GameHelpTest extends junit.framework.TestCase
         try 
         {
             String testData = "TestData\nSome more test data\n And some more test data";
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Help.txt"));
-            bufferedWriter.write(testData);
-            bufferedWriter.close();
+            FileUtils.writeStringToFile(new File("Help.txt"), testData , "UTF-8");
             String result = GameHelp.getGameHelpInfo();
-            assertEquals(testData + "\n", result);
+            assertEquals(testData, result);
         } catch (IOException ex) {
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }

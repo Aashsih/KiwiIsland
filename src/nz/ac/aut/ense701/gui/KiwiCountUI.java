@@ -2,6 +2,9 @@ package nz.ac.aut.ense701.gui;
 
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import nz.ac.aut.ense701.gameModel.Game;
 import nz.ac.aut.ense701.gameModel.GameEventListener;
@@ -606,8 +609,12 @@ public class KiwiCountUI
     }//GEN-LAST:event_btnCountActionPerformed
 
     private void jMenuHelpItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHelpItemActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, GameHelp.getGameHelpInfo(), "Help", JOptionPane.PLAIN_MESSAGE);
+        try {
+            // TODO add your handling code here:
+            JOptionPane.showMessageDialog(this, GameHelp.getGameHelpInfo(), "Help", JOptionPane.PLAIN_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "--No Help Content Found--", "Error", JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_jMenuHelpItemActionPerformed
     
     /**

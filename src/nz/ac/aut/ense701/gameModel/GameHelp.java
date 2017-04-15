@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -22,23 +23,13 @@ public class GameHelp
 {
     //Mostly contains static methods - Used in KiwiCountUI
     private static final String FILE_LOCATION = "Help.txt";
+    private static final String ENCODING = "UTF-8";
     private static StringBuffer gameHelpStringBuffer;
 
-    private static void readGameHelpTextFromFile()
+    private static void readGameHelpTextFromFile() throws IOException
     {
        gameHelpStringBuffer = new StringBuffer();
-       BufferedReader gameHelpBufferedReader = null;
-       try 
-        {
-            gameHelpBufferedReader = new BufferedReader(new FileReader(FILE_LOCATION));
-            for(String line; (line = gameHelpBufferedReader.readLine()) != null; gameHelpStringBuffer.append(line + "\n"));
-            gameHelpBufferedReader.close();
-        } catch (FileNotFoundException ex) 
-        {
-       
-        } catch (IOException ex) {
-            
-        } 
+       gameHelpStringBuffer.append(FileUtils.readFileToString(new File(FILE_LOCATION), ENCODING));
     }
     
     /**
@@ -47,7 +38,7 @@ public class GameHelp
      * 
      * @return string representation of the Help for KiwiIsland Game
      */
-    public static String getGameHelpInfo()
+    public static String getGameHelpInfo() throws IOException
     {
         if(gameHelpStringBuffer == null){
             readGameHelpTextFromFile();
