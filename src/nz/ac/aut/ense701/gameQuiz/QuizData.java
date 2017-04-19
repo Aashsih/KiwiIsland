@@ -21,7 +21,7 @@ import org.apache.commons.io.FileUtils;
  * @author aashi
  */
 public class QuizData {
-    private static final String FILE_QUIZ_DATA = "QuizData.txt";
+    private static final String FILE_QUIZ_DATA = "QuizData.json";
     private static final String ENCODING = "UTF-8";
     
     private String message;

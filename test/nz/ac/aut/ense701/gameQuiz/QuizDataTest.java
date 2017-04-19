@@ -40,7 +40,7 @@ public class QuizDataTest extends junit.framework.TestCase
     {
         try {
             quizDataStringBuffer = new StringBuffer();
-            quizDataStringBuffer.append(FileUtils.readFileToString(new File("QuizData.txt"), "UTF-8"));
+            quizDataStringBuffer.append(FileUtils.readFileToString(new File("QuizData.json"), "UTF-8"));
         } catch (IOException ex) {
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -55,7 +55,7 @@ public class QuizDataTest extends junit.framework.TestCase
     protected void tearDown()
     {
         try { 
-            FileUtils.writeStringToFile(new File("QuizData.txt"), quizDataStringBuffer.toString() , "UTF-8");
+            FileUtils.writeStringToFile(new File("QuizData.json"), quizDataStringBuffer.toString() , "UTF-8");
         } catch (IOException ex) {
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,7 +75,7 @@ public class QuizDataTest extends junit.framework.TestCase
 "	},\n" +
 "	\"answer\":\"1\"\n" +
 "}\n]";
-            FileUtils.writeStringToFile(new File("QuizData.txt"), testData , "UTF-8");
+            FileUtils.writeStringToFile(new File("QuizData.json"), testData , "UTF-8");
             List<QuizData> quizData = QuizData.getQuizDataFromFile();
             assertEquals("Test Message 1", quizData.get(0).getMessage());
             assertEquals("Test Question 1", quizData.get(0).getQuestion().getQuestion());
