@@ -9,8 +9,10 @@
 },
 {
 	"message":"Test Message 2",
-	"question":"Test Question 2",
-	"options":["option 1", "option 2", "option 3", "option 4"]
+	"question":{
+		"question":"Test Question 2",
+		"options":["option 1", "option 2", "option 3", "option 4"]	
+	},
 	"answer":"2"
 }
 ]
