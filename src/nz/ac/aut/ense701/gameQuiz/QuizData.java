@@ -31,4 +31,8 @@ public class QuizData {
         return (ArrayList<QuizData>) new Gson().fromJson( FileUtils.readFileToString(new File(FILE_QUIZ_DATA), ENCODING), targetClassType);
     }
     
+    public static void main(String[] args){
+        
+    }
+    
 }
