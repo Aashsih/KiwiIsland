@@ -647,7 +647,7 @@ public class Game
             }
         }
         // notify listeners about changes
-            notifyGameEventListeners();
+        notifyGameEventListeners();
     }
     
        

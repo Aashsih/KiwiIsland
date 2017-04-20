@@ -23,7 +23,7 @@ import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
 public class DOCMessages {
    
     //stores the static file name that will be read to access facts
-    private static final String FILE_LOCATION = "DOCFacts.txt";
+    @Deprecated private static final String FILE_LOCATION = "DOCFacts.txt";
    
     private static Stack<String> messages;
     @Deprecated private static PriorityQueue<String> factsQueue ;

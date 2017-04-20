@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
 
@@ -29,12 +30,13 @@ public class QuizFileReader {
      * @return List<QuizData>
      * @throws IOException 
      */
+    @SuppressWarnings("unchecked")
     public static final List<QuizData> getQuizDataFromFile() throws IOException
     {
         if(quizData == null){
             Type targetClassType = new TypeToken<ArrayList<QuizData>>() {}.getType();
-            quizData = (ArrayList<QuizData>) new Gson().fromJson( FileUtils.readFileToString(new File(FILE_QUIZ_DATA), ENCODING), targetClassType);
+            quizData = (List<QuizData>) new Gson().fromJson( FileUtils.readFileToString(new File(FILE_QUIZ_DATA), ENCODING), targetClassType);
         }
-        return quizData;
+        return Collections.unmodifiableList(quizData);
     }
 }
