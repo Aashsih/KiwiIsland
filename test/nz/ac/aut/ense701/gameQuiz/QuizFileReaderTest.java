@@ -15,19 +15,20 @@ import nz.ac.aut.ense701.gameModel.GameHelp;
 import nz.ac.aut.ense701.gameModel.GameHelpTest;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
+import static junit.framework.TestCase.assertEquals;
 
 /**
  *
  * @author aashi
  */
-public class QuizDataTest extends junit.framework.TestCase 
+public class QuizFileReaderTest extends junit.framework.TestCase 
 {
     private StringBuffer quizDataStringBuffer;
 
     /**
      * Default constructor for the class QuizDataTest
      */
-    public QuizDataTest() {
+    public QuizFileReaderTest() {
     }
     
     /**
@@ -66,17 +67,9 @@ public class QuizDataTest extends junit.framework.TestCase
     {
         try 
         {
-            String testData = "[\n" +
-"{\n" +
-"	\"message\":\"Test Message 1\",\n" +
-"	\"question\":{\n" +
-"		\"question\":\"Test Question 1\",\n" +
-"		\"options\":[\"option 1\", \"option 2\", \"option 3\", \"option 4\"]	\n" +
-"	},\n" +
-"	\"answer\":\"1\"\n" +
-"}\n]";
+            String testData = getMockQuizData();
             FileUtils.writeStringToFile(new File("QuizData.json"), testData , "UTF-8");
-            List<QuizData> quizData = QuizData.getQuizDataFromFile();
+            List<QuizData> quizData = QuizFileReader.getQuizDataFromFile();
             assertEquals("Test Message 1", quizData.get(0).getMessage());
             assertEquals("Test Question 1", quizData.get(0).getQuestion().getQuestion());
             assertEquals("option 1", quizData.get(0).getQuestion().getOptions().get(0));
@@ -88,5 +81,15 @@ public class QuizDataTest extends junit.framework.TestCase
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    private String getMockQuizData(){
+        return "[\n" +
+"{\n" +
+"	\"message\":\"Test Message 1\",\n" +
+"	\"question\":{\n" +
+"		\"question\":\"Test Question 1\",\n" +
+"		\"options\":[\"option 1\", \"option 2\", \"option 3\", \"option 4\"]	\n" +
+"	},\n" +
+"	\"answer\":\"1\"\n" +
+"}\n]";
+    }
 }

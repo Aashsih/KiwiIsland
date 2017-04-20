@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import nz.ac.aut.ense701.gameModel.enums.Occupants;
 import nz.ac.aut.ense701.gameModel.handlers.KiwiHandler;
@@ -52,10 +54,8 @@ public class Game
     public Game() 
     {   
         eventListeners = new HashSet<GameEventListener>();
-
         createNewGame();
-        //reads and all the facts of the game stored in the file
-        DOCMessages.getFacts();
+        
     }
     
     
@@ -529,10 +529,14 @@ public class Game
     
     public void displayDialogueBox()
     {
-        count++;
-        String message =  DOCMessages.getFact();
-        JOptionPane.showMessageDialog(null,message, "Fact #" + count, JOptionPane.PLAIN_MESSAGE);
-        player.addMessage(message);
+        try {
+            count++;
+            String message =  DOCMessages.getFact();
+            JOptionPane.showMessageDialog(null,message, "Fact #" + count, JOptionPane.PLAIN_MESSAGE);
+            player.addMessage(message);
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
