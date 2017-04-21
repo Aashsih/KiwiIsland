@@ -7,6 +7,7 @@ package nz.ac.aut.ense701.gameQuiz;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,13 +38,24 @@ public class QuizFileReaderTest extends junit.framework.TestCase
      * Called before every test case method.
      */
     @Override
-    protected void setUp()
+    protected void setUp() throws IllegalAccessException
     {
         try {
             quizDataStringBuffer = new StringBuffer();
             quizDataStringBuffer.append(FileUtils.readFileToString(new File("QuizData.json"), "UTF-8"));
+            //Set Data to null to reset variables and make them read from the file again
+            Field quizDataField = QuizFileReader.class.getDeclaredField("quizData");
+            quizDataField.setAccessible(true);
+            quizDataField.set(null, null);
+            Field messageToQuizDataField = QuizFileReader.class.getDeclaredField("messageToQuizData");
+            messageToQuizDataField.setAccessible(true);
+            messageToQuizDataField.set(null, null);
         } catch (IOException ex) {
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchFieldException ex) {
+            Logger.getLogger(QuizFileReaderTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(QuizFileReaderTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -69,7 +81,7 @@ public class QuizFileReaderTest extends junit.framework.TestCase
         {
             String testData = getMockQuizData();
             FileUtils.writeStringToFile(new File("QuizData.json"), testData , "UTF-8");
-            List<QuizData> quizData = QuizFileReader.getQuizDataFromFile();
+            List<QuizData> quizData = QuizFileReader.getQuizData();
             assertEquals("Test Message 1", quizData.get(0).getMessage());
             assertEquals("Test Question 1", quizData.get(0).getQuestion().getQuestion());
             assertEquals("option 1", quizData.get(0).getQuestion().getOptions().get(0));
@@ -91,5 +103,25 @@ public class QuizFileReaderTest extends junit.framework.TestCase
 "	},\n" +
 "	\"answer\":\"1\"\n" +
 "}\n]";
+    }
+    
+    @Test
+    public void testGetQuizDataForMessage(){
+        String testData = getMockQuizData();
+        try {
+            FileUtils.writeStringToFile(new File("QuizData.json"), testData , "UTF-8");
+            QuizFileReader.getQuizData();
+            QuizData quizData = QuizFileReader.getQuizDataForMessage("Test Message 1");
+            assertEquals("Test Message 1", quizData.getMessage());
+            assertEquals("Test Question 1", quizData.getQuestion().getQuestion());
+            assertEquals("option 1", quizData.getQuestion().getOptions().get(0));
+            assertEquals("option 2", quizData.getQuestion().getOptions().get(1));
+            assertEquals("option 3", quizData.getQuestion().getOptions().get(2));
+            assertEquals("option 4", quizData.getQuestion().getOptions().get(3));
+            assertEquals(1, quizData.getAnswer());
+        } catch (IOException ex) {
+            Logger.getLogger(QuizFileReaderTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
     }
 }
