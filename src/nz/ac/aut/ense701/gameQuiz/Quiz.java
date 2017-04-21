@@ -5,11 +5,13 @@
  */
 package nz.ac.aut.ense701.gameQuiz;
 
+import java.util.Map;
+
 /**
  *
  * @author aashi
  */
 public class Quiz {
-    //Map<Question, Answers>
+    private Map<Question, Integer> questionToAnswers;
     
 }

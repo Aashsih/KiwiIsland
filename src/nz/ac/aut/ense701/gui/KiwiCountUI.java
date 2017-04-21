@@ -1,10 +1,13 @@
 package nz.ac.aut.ense701.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -15,6 +18,7 @@ import nz.ac.aut.ense701.gameModel.GameHelp;
 import nz.ac.aut.ense701.gameModel.enums.GameState;
 import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
 import nz.ac.aut.ense701.gui.GridSquarePanel;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /*
  * User interface form for Kiwi Island.
@@ -59,8 +63,18 @@ public class KiwiCountUI
                     game.getLoseMessage(), "Game over!",
                     JOptionPane.INFORMATION_MESSAGE);
             pnlGame.removeAll();
-            //pnlGame.add(new QuizPanel());
-            //pnlGame = null;
+            pnlGame.setLayout(new BorderLayout());
+            QuizPanel quizPanel = new QuizPanel();
+            ArrayList<String> test = new ArrayList<String>();
+            test.add("opiton1");
+            test.add("opiton2");
+            test.add("opiton3");
+            quizPanel.addRadioButtons(test);
+            JScrollPane scrollPane = new JScrollPane(quizPanel);
+            pnlGame.add(scrollPane, BorderLayout.CENTER);
+            pnlGame.validate();
+            pnlGame.repaint();
+            System.out.println(pnlGame.getComponentCount());
             //game.createNewGame();
         }
         else if ( game.getState() == GameState.WON )
@@ -78,6 +92,7 @@ public class KiwiCountUI
                     game.getPlayerMessage(), "Important Information",
                     JOptionPane.INFORMATION_MESSAGE);   
         }
+        
     }
     
      private void setAsGameListener()
