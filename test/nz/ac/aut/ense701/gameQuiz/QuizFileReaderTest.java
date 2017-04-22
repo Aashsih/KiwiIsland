@@ -93,17 +93,6 @@ public class QuizFileReaderTest extends junit.framework.TestCase
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private String getMockQuizData(){
-        return "[\n" +
-"{\n" +
-"	\"message\":\"Test Message 1\",\n" +
-"	\"question\":{\n" +
-"		\"question\":\"Test Question 1\",\n" +
-"		\"options\":[\"option 1\", \"option 2\", \"option 3\", \"option 4\"]	\n" +
-"	},\n" +
-"	\"answer\":\"1\"\n" +
-"}\n]";
-    }
     
     @Test
     public void testGetQuizDataForMessage(){
@@ -123,5 +112,17 @@ public class QuizFileReaderTest extends junit.framework.TestCase
             Logger.getLogger(QuizFileReaderTest.class.getName()).log(Level.SEVERE, null, ex);
         }
                 
+    }
+    
+    private String getMockQuizData(){
+        return "[\n" +
+"{\n" +
+"	\"message\":\"Test Message 1\",\n" +
+"	\"question\":{\n" +
+"		\"question\":\"Test Question 1\",\n" +
+"		\"options\":[\"option 1\", \"option 2\", \"option 3\", \"option 4\"]	\n" +
+"	},\n" +
+"	\"answer\":\"1\"\n" +
+"}\n]";
     }
 }

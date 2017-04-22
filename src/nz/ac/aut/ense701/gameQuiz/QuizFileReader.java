@@ -29,21 +29,14 @@ public class QuizFileReader {
     private static Map<String, QuizData> messageToQuizData;
     
     /**
-     * Reads the File "QuizData.txt" and returns a List<QuizData>
-     * @return List<QuizData>
+     * Reads the File "QuizData.txt" if not read already and returns a List<QuizData>
+     * @return List<QuizData> list of all the Data required for a quiz
      * @throws IOException 
      */
     @SuppressWarnings("unchecked")
     public static final List<QuizData> getQuizData() throws IOException
     {
-        if(quizData == null){
-            Type targetClassType = new TypeToken<ArrayList<QuizData>>() {}.getType();
-            quizData = (List<QuizData>) new Gson().fromJson( FileUtils.readFileToString(new File(FILE_QUIZ_DATA), ENCODING), targetClassType);
-            messageToQuizData = new HashMap<String, QuizData>();
-            for(QuizData aQuizQuestion : quizData){
-                messageToQuizData.put(aQuizQuestion.getMessage(), aQuizQuestion);
-            }
-        }
+        readQuizDataFromFile();
         return Collections.unmodifiableList(quizData);
     }
     
@@ -52,10 +45,25 @@ public class QuizFileReader {
      * @param message contains the message for which the QuizData is required
      * @return QuizData corresponding to the message passed as a parameter
      */
-    public static final QuizData getQuizDataForMessage(String message){
+    public static final QuizData getQuizDataForMessage(String message) throws IOException{
         if(messageToQuizData == null){
-            return null;
+            readQuizDataFromFile();
         }
         return messageToQuizData.get(message);
+    }
+    
+    /**
+     * Reads the File "QuizData.txt" if not read already and stores the data in quizData and messageToQuizData
+     * @throws IOException 
+     */
+    private static void readQuizDataFromFile() throws IOException{
+        if(quizData == null){
+            Type targetClassType = new TypeToken<ArrayList<QuizData>>() {}.getType();
+            quizData = (List<QuizData>) new Gson().fromJson( FileUtils.readFileToString(new File(FILE_QUIZ_DATA), ENCODING), targetClassType);
+            messageToQuizData = new HashMap<String, QuizData>();
+            for(QuizData aQuizQuestion : quizData){
+                messageToQuizData.put(aQuizQuestion.getMessage(), aQuizQuestion);
+            }
+        }
     }
 }
