@@ -102,7 +102,7 @@ public class KiwiCountUI
     public void startQuiz() throws IOException{
         pnlGame.removeAll();
         pnlGame.setLayout(new BorderLayout());
-        quizPanel = new QuizPanel(new Quiz(this.game.getPlayerMessages()));
+        quizPanel = new QuizPanel(this, new Quiz(this.game.getPlayerMessages()));
         JScrollPane scrollPane = new JScrollPane(quizPanel);
         pnlGame.add(scrollPane, BorderLayout.CENTER);
         pnlGame.validate();
@@ -110,10 +110,16 @@ public class KiwiCountUI
     }
     
     /**
-     * Calls the 
+     * Removes all the components in the pnlGame and starts a new game.
+     * @return the current game being played in the KiwiCountUI
      */
-    private void getNextQuestion(){
-        
+    public void createNewGame(){
+        pnlGame.removeAll();
+        game.createNewGame();
+        setAsGameListener();
+        initComponents();
+        initIslandGrid();
+        update();
     }
     
      private void setAsGameListener()
@@ -169,6 +175,7 @@ public class KiwiCountUI
         btnMoveEast.setEnabled( game.isPlayerMovePossible(MoveDirection.EAST));
         btnMoveSouth.setEnabled(game.isPlayerMovePossible(MoveDirection.SOUTH));
         btnMoveWest.setEnabled( game.isPlayerMovePossible(MoveDirection.WEST));
+        
     }
     
     /** This method is called from within the constructor to

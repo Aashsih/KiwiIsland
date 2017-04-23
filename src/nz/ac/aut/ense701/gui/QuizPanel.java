@@ -23,10 +23,11 @@ public class QuizPanel extends javax.swing.JPanel {
     /**
      * Creates new form QuizPanel
      */
-    public QuizPanel(Quiz quiz) {
-        if(quiz == null){
-            throw new IllegalArgumentException("The Argument of typp Quiz, cannot be null");
+    public QuizPanel(KiwiCountUI parentFrame, Quiz quiz) {
+        if(quiz == null || parentFrame == null){
+            throw new IllegalArgumentException("The Arguments supplied cannot be null");
         }
+        this.parentFrame = parentFrame;
         this.quiz = quiz;
         initComponents();
         this.txtPaneQuestion.setEditable(false);
@@ -39,8 +40,14 @@ public class QuizPanel extends javax.swing.JPanel {
      * @param question 
      */
     private void prepareQuizPanelForAQuestion(Question question){
-        txtPaneQuestion.setText(question.getQuestion());
-        addRadioButtons(question.getOptions());
+        if(question == null){
+            //finish quiz and start new game
+            this.parentFrame.createNewGame();
+        }
+        else{
+            txtPaneQuestion.setText(question.getQuestion());
+            addRadioButtons(question.getOptions());
+        }
     }
     
     /**
@@ -156,4 +163,5 @@ public class QuizPanel extends javax.swing.JPanel {
     private javax.swing.JTextPane txtPaneQuestion;
     // End of variables declaration//GEN-END:variables
     private Quiz quiz;
+    private KiwiCountUI parentFrame;
 }
