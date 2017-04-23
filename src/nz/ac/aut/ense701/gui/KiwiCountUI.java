@@ -17,6 +17,7 @@ import nz.ac.aut.ense701.gameModel.GameEventListener;
 import nz.ac.aut.ense701.gameModel.GameHelp;
 import nz.ac.aut.ense701.gameModel.enums.GameState;
 import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
+import nz.ac.aut.ense701.gameQuiz.Quiz;
 import nz.ac.aut.ense701.gui.GridSquarePanel;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
@@ -62,20 +63,16 @@ public class KiwiCountUI
                     this, 
                     game.getLoseMessage(), "Game over!",
                     JOptionPane.INFORMATION_MESSAGE);
-            pnlGame.removeAll();
-            pnlGame.setLayout(new BorderLayout());
-            QuizPanel quizPanel = new QuizPanel();
-            ArrayList<String> test = new ArrayList<String>();
-            test.add("opiton1");
-            test.add("opiton2");
-            test.add("opiton3");
-            quizPanel.addRadioButtons(test);
-            JScrollPane scrollPane = new JScrollPane(quizPanel);
-            pnlGame.add(scrollPane, BorderLayout.CENTER);
-            pnlGame.validate();
-            pnlGame.repaint();
-            System.out.println(pnlGame.getComponentCount());
-            //game.createNewGame();
+            try {
+                if(game.getPlayerMessages().size() > 0){
+                    startQuiz();
+                }
+                else{
+                    game.createNewGame();        
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if ( game.getState() == GameState.WON )
         {
@@ -83,7 +80,11 @@ public class KiwiCountUI
                     this, 
                     game.getWinMessage(), "Well Done!",
                     JOptionPane.INFORMATION_MESSAGE);
-            game.createNewGame();
+            try {
+                startQuiz();
+            } catch (IOException ex) {
+                Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if (game.messageForPlayer())
         {
@@ -92,6 +93,26 @@ public class KiwiCountUI
                     game.getPlayerMessage(), "Important Information",
                     JOptionPane.INFORMATION_MESSAGE);   
         }
+        
+    }
+    
+    /**
+     * Initializes the Quiz game flow by adding the QuizPanel to the pnlGame
+     */
+    public void startQuiz() throws IOException{
+        pnlGame.removeAll();
+        pnlGame.setLayout(new BorderLayout());
+        quizPanel = new QuizPanel(new Quiz(this.game.getPlayerMessages()));
+        JScrollPane scrollPane = new JScrollPane(quizPanel);
+        pnlGame.add(scrollPane, BorderLayout.CENTER);
+        pnlGame.validate();
+        pnlGame.repaint();
+    }
+    
+    /**
+     * Calls the 
+     */
+    private void getNextQuestion(){
         
     }
     
@@ -694,5 +715,6 @@ public class KiwiCountUI
     // End of variables declaration//GEN-END:variables
 
     private Game game;
+    private QuizPanel quizPanel;
     
 }

@@ -11,6 +11,8 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import nz.ac.aut.ense701.gameQuiz.Question;
+import nz.ac.aut.ense701.gameQuiz.Quiz;
 
 /**
  *
@@ -21,16 +23,31 @@ public class QuizPanel extends javax.swing.JPanel {
     /**
      * Creates new form QuizPanel
      */
-    public QuizPanel() {
+    public QuizPanel(Quiz quiz) {
+        if(quiz == null){
+            throw new IllegalArgumentException("The Argument of typp Quiz, cannot be null");
+        }
+        this.quiz = quiz;
         initComponents();
-        this.jTextPane1.setEditable(false);
+        this.txtPaneQuestion.setEditable(false);
+        this.prepareQuizPanelForAQuestion(quiz.getNextQuestion());
+    }
+    
+    /**
+     * Prepares the QuizPanel by adding the question to the txtPaneQuestion
+     * and creating radio-buttons for the different option dynamically
+     * @param question 
+     */
+    private void prepareQuizPanelForAQuestion(Question question){
+        txtPaneQuestion.setText(question.getQuestion());
+        addRadioButtons(question.getOptions());
     }
     
     /**
      * Dynamically adds JRadioButtons to the QuizPanel
      * @param options 
      */
-    public void addRadioButtons(List<String> options){
+    private void addRadioButtons(List<String> options){
         java.awt.GridBagConstraints gridBagConstraints;
         radioButtonGroup = new ButtonGroup();
         int currentRowCount = ((GridBagLayout)(jPanel2.getLayout())).getLayoutDimensions().length;
@@ -64,8 +81,10 @@ public class QuizPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        txtPaneQuestion = new javax.swing.JTextPane();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnNext = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(540, 592));
         setLayout(new java.awt.BorderLayout(20, 0));
@@ -83,7 +102,7 @@ public class QuizPanel extends javax.swing.JPanel {
         gridBagConstraints.weightx = 1.0;
         jPanel2.add(jLabel1, gridBagConstraints);
 
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(txtPaneQuestion);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -107,15 +126,34 @@ public class QuizPanel extends javax.swing.JPanel {
         jPanel2.add(jLabel2, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
+
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNext);
+
+        add(jPanel1, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        prepareQuizPanelForAQuestion(quiz.getNextQuestion());
+    }//GEN-LAST:event_btnNextActionPerformed
 
     private ButtonGroup radioButtonGroup;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNext;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane txtPaneQuestion;
     // End of variables declaration//GEN-END:variables
+    private Quiz quiz;
 }
