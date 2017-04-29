@@ -15,6 +15,7 @@ public class Question {
     private String question;
     private List<String> options;
 
+    //Getters
     public String getQuestion() {
         return question;
     }
@@ -22,6 +23,5 @@ public class Question {
     public List<String> getOptions() {
         return options;
     }
-    
     
 }

@@ -1,17 +1,25 @@
 package nz.ac.aut.ense701.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import nz.ac.aut.ense701.gameModel.Game;
 import nz.ac.aut.ense701.gameModel.GameEventListener;
 import nz.ac.aut.ense701.gameModel.GameHelp;
 import nz.ac.aut.ense701.gameModel.enums.GameState;
 import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
+import nz.ac.aut.ense701.gameQuiz.Quiz;
 import nz.ac.aut.ense701.gui.GridSquarePanel;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /*
  * User interface form for Kiwi Island.
@@ -55,7 +63,16 @@ public class KiwiCountUI
                     this, 
                     game.getLoseMessage(), "Game over!",
                     JOptionPane.INFORMATION_MESSAGE);
-            game.createNewGame();
+            try {
+                if(game.getPlayerMessages().size() > 0){
+                    startQuiz();
+                }
+                else{
+                    game.createNewGame();        
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if ( game.getState() == GameState.WON )
         {
@@ -63,7 +80,11 @@ public class KiwiCountUI
                     this, 
                     game.getWinMessage(), "Well Done!",
                     JOptionPane.INFORMATION_MESSAGE);
-            game.createNewGame();
+            try {
+                startQuiz();
+            } catch (IOException ex) {
+                Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if (game.messageForPlayer())
         {
@@ -72,6 +93,33 @@ public class KiwiCountUI
                     game.getPlayerMessage(), "Important Information",
                     JOptionPane.INFORMATION_MESSAGE);   
         }
+        
+    }
+    
+    /**
+     * Initializes the Quiz game flow by adding the QuizPanel to the pnlGame
+     */
+    public void startQuiz() throws IOException{
+        pnlGame.removeAll();
+        pnlGame.setLayout(new BorderLayout());
+        quizPanel = new QuizPanel(this, new Quiz(this.game.getPlayerMessages()));
+        JScrollPane scrollPane = new JScrollPane(quizPanel);
+        pnlGame.add(scrollPane, BorderLayout.CENTER);
+        pnlGame.validate();
+        pnlGame.repaint();
+    }
+    
+    /**
+     * Removes all the components in the pnlGame and starts a new game.
+     * @return the current game being played in the KiwiCountUI
+     */
+    public void createNewGame(){
+        pnlGame.removeAll();
+        game.createNewGame();
+        setAsGameListener();
+        initComponents();
+        initIslandGrid();
+        update();
     }
     
      private void setAsGameListener()
@@ -85,7 +133,7 @@ public class KiwiCountUI
     private void update()
     {
         // update the grid square panels
-        Component[] components = pnlIsland.getComponents();
+        Component[] components = pnlGame.getComponents();
         for ( Component c : components )
         {
             // all components in the panel are GridSquarePanels,
@@ -127,6 +175,7 @@ public class KiwiCountUI
         btnMoveEast.setEnabled( game.isPlayerMovePossible(MoveDirection.EAST));
         btnMoveSouth.setEnabled(game.isPlayerMovePossible(MoveDirection.SOUTH));
         btnMoveWest.setEnabled( game.isPlayerMovePossible(MoveDirection.WEST));
+        
     }
     
     /** This method is called from within the constructor to
@@ -140,7 +189,7 @@ public class KiwiCountUI
         java.awt.GridBagConstraints gridBagConstraints;
 
         javax.swing.JPanel pnlContent = new javax.swing.JPanel();
-        pnlIsland = new javax.swing.JPanel();
+        pnlGame = new javax.swing.JPanel();
         pnlControls = new javax.swing.JPanel();
         javax.swing.JPanel pnlPlayer = new javax.swing.JPanel();
         javax.swing.JPanel pnlPlayerData = new javax.swing.JPanel();
@@ -181,18 +230,18 @@ public class KiwiCountUI
         pnlContent.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         pnlContent.setLayout(new java.awt.BorderLayout(10, 0));
 
-        javax.swing.GroupLayout pnlIslandLayout = new javax.swing.GroupLayout(pnlIsland);
-        pnlIsland.setLayout(pnlIslandLayout);
-        pnlIslandLayout.setHorizontalGroup(
-            pnlIslandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlGameLayout = new javax.swing.GroupLayout(pnlGame);
+        pnlGame.setLayout(pnlGameLayout);
+        pnlGameLayout.setHorizontalGroup(
+            pnlGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 540, Short.MAX_VALUE)
         );
-        pnlIslandLayout.setVerticalGroup(
-            pnlIslandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlGameLayout.setVerticalGroup(
+            pnlGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 592, Short.MAX_VALUE)
         );
 
-        pnlContent.add(pnlIsland, java.awt.BorderLayout.CENTER);
+        pnlContent.add(pnlGame, java.awt.BorderLayout.CENTER);
 
         pnlControls.setLayout(new java.awt.GridBagLayout());
 
@@ -613,7 +662,12 @@ public class KiwiCountUI
     private void jMenuHelpItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHelpItemActionPerformed
         try {
             // TODO add your handling code here:
-            JOptionPane.showMessageDialog(this, GameHelp.getGameHelpInfo(), "Help", JOptionPane.PLAIN_MESSAGE);
+            JTextArea helpLabel = new JTextArea(25, 50);
+            helpLabel.setText(GameHelp.getGameHelpInfo());
+            JScrollPane scrollpane = new JScrollPane(helpLabel);
+            JOptionPane.showMessageDialog(this, scrollpane);
+            
+            //JOptionPane.showMessageDialog(this, GameHelp.getGameHelpInfo(), "Help", JOptionPane.PLAIN_MESSAGE);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "--No Help Content Found--", "Error", JOptionPane.PLAIN_MESSAGE);
         }
@@ -628,7 +682,7 @@ public class KiwiCountUI
         int rows    = game.getNumRows();
         int columns = game.getNumColumns();
         // set up the layout manager for the island grid panel
-        pnlIsland.setLayout(new GridLayout(rows, columns));
+        pnlGame.setLayout(new GridLayout(rows, columns));
         // create all the grid square panels and add them to the panel
         // the layout manager of the panel takes care of assigning them to the
         // the right position
@@ -636,7 +690,7 @@ public class KiwiCountUI
         {
             for ( int col = 0 ; col < columns ; col++ )
             {
-                pnlIsland.add(new GridSquarePanel(game, row, col));
+                pnlGame.add(new GridSquarePanel(game, row, col));
             }
         }
     }
@@ -658,7 +712,7 @@ public class KiwiCountUI
     private javax.swing.JList listInventory;
     private javax.swing.JList listObjects;
     private javax.swing.JPanel pnlControls;
-    private javax.swing.JPanel pnlIsland;
+    private javax.swing.JPanel pnlGame;
     private javax.swing.JProgressBar progBackpackSize;
     private javax.swing.JProgressBar progBackpackWeight;
     private javax.swing.JProgressBar progPlayerStamina;
@@ -668,4 +722,6 @@ public class KiwiCountUI
     // End of variables declaration//GEN-END:variables
 
     private Game game;
+    private QuizPanel quizPanel;
+    
 }

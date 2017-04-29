@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -19,16 +21,24 @@ import org.apache.commons.io.FileUtils;
  * @author aashi
  */
 public class QuizData {
-    private static final String FILE_QUIZ_DATA = "../QuizData";
-    private static final String ENCODING = "UTF-8";
-    
+        
     private String message;
     private Question question;
     private int answer;
     
-    public static final List<QuizData> getQuizDataFromFile() throws IOException{
-        Type targetClassType = new TypeToken<ArrayList<QuizData>>() {}.getType();
-        return (ArrayList<QuizData>) new Gson().fromJson( FileUtils.readFileToString(new File(FILE_QUIZ_DATA), ENCODING), targetClassType);
+    
+    //Getters
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public int getAnswer() {
+        return answer;
     }
     
 }

@@ -384,15 +384,16 @@ public class Player
      * 
      * @return string representation of all the facts separated by newline
      */
-    public String getPlayerMessages()
+    public List<String> getPlayerMessages()
     {
-        String allMessages = "";
-        
-        for(String s : messages)
-        {
-            allMessages += s + "\n";
-        }
-        return allMessages;
+        return messages;
+//        String allMessages = "";
+//        
+//        for(String s : messages)
+//        {
+//            allMessages += s + "\n";
+//        }
+//        return allMessages;
     }
     
      /**
