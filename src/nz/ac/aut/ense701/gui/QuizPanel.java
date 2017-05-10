@@ -7,9 +7,7 @@ package nz.ac.aut.ense701.gui;
 
 import java.awt.GridBagLayout;
 import java.util.List;
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import nz.ac.aut.ense701.gameQuiz.Question;
 import nz.ac.aut.ense701.gameQuiz.Quiz;
@@ -148,6 +146,8 @@ public class QuizPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        
+        quiz.correctAnswer();
         prepareQuizPanelForAQuestion(quiz.getNextQuestion());
     }//GEN-LAST:event_btnNextActionPerformed
 

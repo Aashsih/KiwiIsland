@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -19,6 +20,7 @@ import java.util.Stack;
 public class Quiz {
     private Map<Question, Integer> questionToAnswer;
     private Stack<Question> questionStack;
+    private int answerOfQuestion;
     
     /**
      * Constructs an object of type Quiz by preparing a map of question to answers based on the messages
@@ -34,7 +36,7 @@ public class Quiz {
         }
         prepareQuiz(playerMessages);
     }
-    
+
     /**
      * Gets the next question from the questionStack for the Quiz
      * @return next question in the Quiz
@@ -44,6 +46,8 @@ public class Quiz {
             return null;
         }
         else{
+     
+            answerOfQuestion = questionToAnswer.get(questionStack.peek());
             return questionStack.pop();
         }
     }
@@ -62,13 +66,17 @@ public class Quiz {
         if(questionToAnswer.containsKey(question)){
             int correctAnswer = questionToAnswer.get(question).intValue();
             if(proposedAnswer == correctAnswer){
+                System.out.println("true");
                 return true;
+               
             }
             else{
+                System.out.println("false");
                 return false;
             }
         }
         else{
+            System.out.println("wrong");
             return false;
         }
     }
@@ -88,8 +96,17 @@ public class Quiz {
             QuizData quizData = QuizFileReader.getQuizDataForMessage(message);
             questionToAnswer.put(quizData.getQuestion(), quizData.getAnswer());
             questionStack.push(quizData.getQuestion());
-        }
+            //correct answer here
+            System.out.println(quizData.getAnswer());
+        }      
     }
-    
-    
+    /**
+     * Displays a dialogue box to show the correct answer of the current question
+     */
+    public void correctAnswer(){
+
+        JOptionPane.showMessageDialog(null,this.answerOfQuestion,"Correct Option", 
+                JOptionPane.PLAIN_MESSAGE);
+        
+    }
 }
