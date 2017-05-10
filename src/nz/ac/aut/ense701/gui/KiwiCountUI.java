@@ -1,8 +1,11 @@
 package nz.ac.aut.ense701.gui;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -30,7 +33,7 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 public class KiwiCountUI 
     extends javax.swing.JFrame 
-    implements GameEventListener
+    implements GameEventListener, KeyListener
 {
 
     /**
@@ -44,6 +47,7 @@ public class KiwiCountUI
         setAsGameListener();
         initComponents();
         initIslandGrid();
+        addKeyListener(this);
         update();
     }
     
@@ -119,12 +123,13 @@ public class KiwiCountUI
         setAsGameListener();
         initComponents();
         initIslandGrid();
+      //  addKeyListener(this);
         update();
     }
     
      private void setAsGameListener()
     {
-       game.addGameEventListener(this); 
+       game.addGameEventListener(this);
     }
      
     /**
@@ -164,7 +169,7 @@ public class KiwiCountUI
         btnDrop.setEnabled(false);
         
         // update list of visible objects
-        listObjects.setListData(game.getOccupantsPlayerPosition());
+        listObjects.setListData(game.getOccupantsPlayerPosition()); 
         listObjects.clearSelection();
         listObjects.setToolTipText(null);
         btnCollect.setEnabled(false);
@@ -176,6 +181,8 @@ public class KiwiCountUI
         btnMoveSouth.setEnabled(game.isPlayerMovePossible(MoveDirection.SOUTH));
         btnMoveWest.setEnabled( game.isPlayerMovePossible(MoveDirection.WEST));
         
+        //giving focus to the kiwiCount UI frame
+        requestFocus();
     }
     
     /** This method is called from within the constructor to
@@ -723,5 +730,55 @@ public class KiwiCountUI
 
     private Game game;
     private QuizPanel quizPanel;
-    
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+       
+        int key = e.getKeyCode();
+        
+        switch(key)
+        {
+            case KeyEvent.VK_UP:
+                game.playerMove(MoveDirection.NORTH);
+                break;
+            case KeyEvent.VK_DOWN:
+                game.playerMove(MoveDirection.SOUTH);
+                break;
+            case KeyEvent.VK_LEFT:
+                game.playerMove(MoveDirection.WEST);
+                break;
+            case KeyEvent.VK_RIGHT:
+                game.playerMove(MoveDirection.EAST);
+                break;
+        }
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        
+        int key = e.getKeyCode();
+        
+        switch(key)
+        {
+            case KeyEvent.VK_UP:
+                game.playerMove(MoveDirection.NORTH);
+                break;
+            case KeyEvent.VK_DOWN:
+                game.playerMove(MoveDirection.SOUTH);
+                break;
+            case KeyEvent.VK_LEFT:
+                game.playerMove(MoveDirection.WEST);
+                break;
+            case KeyEvent.VK_RIGHT:
+                game.playerMove(MoveDirection.EAST);
+                break;
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

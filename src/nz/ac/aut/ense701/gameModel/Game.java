@@ -1,5 +1,8 @@
 package nz.ac.aut.ense701.gameModel;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import nz.ac.aut.ense701.gameModel.enums.GameState;
 import nz.ac.aut.ense701.gameModel.occupants.Predator;
 import nz.ac.aut.ense701.gameModel.enums.Terrain;
@@ -55,7 +58,6 @@ public class Game
     {   
         eventListeners = new HashSet<GameEventListener>();
         createNewGame();
-        
     }
     
     
@@ -76,6 +78,7 @@ public class Game
         loseMessage = "";
         playerMessage = "";
         notifyGameEventListeners();
+        
     }
 
     /***********************************************************************************************************************
