@@ -1,6 +1,7 @@
 package nz.ac.aut.ense701.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import nz.ac.aut.ense701.gameModel.Game;
@@ -100,12 +102,12 @@ public class KiwiCountUI
      * Initializes the Quiz game flow by adding the QuizPanel to the pnlGame
      */
     public void startQuiz() throws IOException{
-        pnlGame.removeAll();
+        removeAllComponentsFromJPanel(pnlGame);
         pnlGame.setLayout(new BorderLayout());
         quizPanel = new QuizPanel(this, new Quiz(this.game.getPlayerMessages()));
         JScrollPane scrollPane = new JScrollPane(quizPanel);
         pnlGame.add(scrollPane, BorderLayout.CENTER);
-        pnlGame.validate();
+        pnlGame.revalidate();
         pnlGame.repaint();
     }
     
@@ -114,12 +116,20 @@ public class KiwiCountUI
      * @return the current game being played in the KiwiCountUI
      */
     public void createNewGame(){
-        pnlGame.removeAll();
+        removeAllComponentsFromJPanel(pnlGame);
         game.createNewGame();
-        setAsGameListener();
-        initComponents();
         initIslandGrid();
         update();
+        pnlGame.revalidate();
+        pnlGame.repaint();
+    }
+    
+    private void removeAllComponentsFromJPanel(JPanel panel){
+        for(Component aComponent : panel.getComponents()){
+            panel.remove(aComponent);
+        }
+        panel.revalidate();
+        panel.repaint();
     }
     
      private void setAsGameListener()
