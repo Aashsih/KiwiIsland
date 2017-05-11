@@ -19,6 +19,7 @@ import java.util.Stack;
 public class Quiz {
     private Map<Question, Integer> questionToAnswer;
     private Stack<Question> questionStack;
+    private int answerOfQuestion;
     
     /**
      * Constructs an object of type Quiz by preparing a map of question to answers based on the messages
@@ -34,7 +35,7 @@ public class Quiz {
         }
         prepareQuiz(playerMessages);
     }
-    
+
     /**
      * Gets the next question from the questionStack for the Quiz
      * @return next question in the Quiz
@@ -44,6 +45,8 @@ public class Quiz {
             return null;
         }
         else{
+     
+            answerOfQuestion = questionToAnswer.get(questionStack.peek());
             return questionStack.pop();
         }
     }
@@ -57,20 +60,15 @@ public class Quiz {
      */
     public boolean isAnswerCorrect(Question question, int proposedAnswer){
         if(question == null || proposedAnswer <= 0){
-            throw new IllegalArgumentException("The parameters passed are invalid");
+            return false;
         }
         if(questionToAnswer.containsKey(question)){
             int correctAnswer = questionToAnswer.get(question).intValue();
             if(proposedAnswer == correctAnswer){
                 return true;
             }
-            else{
-                return false;
-            }
         }
-        else{
-            return false;
-        }
+        return false;
     }
     
     /**
@@ -88,8 +86,14 @@ public class Quiz {
             QuizData quizData = QuizFileReader.getQuizDataForMessage(message);
             questionToAnswer.put(quizData.getQuestion(), quizData.getAnswer());
             questionStack.push(quizData.getQuestion());
-        }
+        }      
     }
-    
-    
+    /**
+     * Displays a dialogue box to show the correct answer of the current question
+     */
+    public int correctAnswer(){
+
+        return this.answerOfQuestion;
+        
+    }
 }

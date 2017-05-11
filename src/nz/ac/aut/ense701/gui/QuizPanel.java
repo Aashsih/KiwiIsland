@@ -6,10 +6,10 @@
 package nz.ac.aut.ense701.gui;
 
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 import java.util.List;
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import nz.ac.aut.ense701.gameQuiz.Question;
 import nz.ac.aut.ense701.gameQuiz.Quiz;
@@ -19,7 +19,9 @@ import nz.ac.aut.ense701.gameQuiz.Quiz;
  * @author aashi
  */
 public class QuizPanel extends javax.swing.JPanel {
-
+    
+    private List<JRadioButton> optionList;
+    private Question question;
     /**
      * Creates new form QuizPanel
      */
@@ -31,7 +33,8 @@ public class QuizPanel extends javax.swing.JPanel {
         this.quiz = quiz;
         initComponents();
         this.txtPaneQuestion.setEditable(false);
-        this.prepareQuizPanelForAQuestion(quiz.getNextQuestion());
+        question = quiz.getNextQuestion();
+        this.prepareQuizPanelForAQuestion(question);
     }
     
     /**
@@ -55,6 +58,8 @@ public class QuizPanel extends javax.swing.JPanel {
      * @param options 
      */
     private void addRadioButtons(List<String> options){
+        
+        optionList = new ArrayList<JRadioButton>();
         java.awt.GridBagConstraints gridBagConstraints;
         radioButtonGroup = new ButtonGroup();
         int currentRowCount = ((GridBagLayout)(jPanel2.getLayout())).getLayoutDimensions().length;
@@ -71,6 +76,7 @@ public class QuizPanel extends javax.swing.JPanel {
                 gridBagConstraints.weightx = 1.0;
                 jPanel2.add(radioButton, gridBagConstraints);
                 radioButtonGroup.add(radioButton);
+                optionList.add(radioButton);
             }
         }
         this.repaint();
@@ -148,9 +154,38 @@ public class QuizPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        
+        int selectedAnswer = getSelectedRadioButton();  
+        displayResult(quiz.isAnswerCorrect(question, selectedAnswer), quiz.correctAnswer()-1);
         prepareQuizPanelForAQuestion(quiz.getNextQuestion());
     }//GEN-LAST:event_btnNextActionPerformed
 
+    /**
+     * 
+     * @param result
+     * @param selected 
+     */
+    private void displayResult(boolean result, int selected){
+        
+        if(result){
+            JOptionPane.showMessageDialog(parentFrame, "Correct Answer!", "Result", JOptionPane.PLAIN_MESSAGE);
+        }
+        else{
+            String answer = question.getOptions().get(selected);
+            JOptionPane.showMessageDialog(parentFrame, "Correct Answer is : \n"+answer, "Result", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+    private int getSelectedRadioButton(){
+        
+        for(int i = 0 ; i < optionList.size(); i++){
+            
+            if (optionList.get(i).isSelected()){
+                
+                return i+1;
+            } 
+        }
+        return -1;
+    }
     private ButtonGroup radioButtonGroup;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
