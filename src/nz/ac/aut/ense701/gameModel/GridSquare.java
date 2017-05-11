@@ -233,7 +233,7 @@ public class GridSquare
     {
         if(occupantToBeAdded == null)
         {
-            throw new IllegalArgumentException("The occupant parameters cannot be null");
+            return false;
         }
         boolean validNewOccupant = occupantToBeAdded != null;
         boolean enoughRoom       = occupants.size() < MAX_OCCUPANTS;

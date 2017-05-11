@@ -52,6 +52,10 @@ public class DOCMessages {
         }
     }
     
+    public static void resetDocMessages(){
+        messages = null;
+    }
+    
     /**
      * This method reads the file specified in file location and stores it into
      * the factsBuffer
