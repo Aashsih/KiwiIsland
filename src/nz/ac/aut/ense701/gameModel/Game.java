@@ -67,6 +67,7 @@ public class Game
      */
     public void createNewGame()
     {
+        count = 0;
         totalPredators = 0;
         totalKiwis = 0;
         predatorsTrapped = 0;

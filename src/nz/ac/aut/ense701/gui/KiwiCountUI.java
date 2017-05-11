@@ -17,12 +17,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import nz.ac.aut.ense701.gameModel.DOCMessages;
 import nz.ac.aut.ense701.gameModel.Game;
 import nz.ac.aut.ense701.gameModel.GameEventListener;
 import nz.ac.aut.ense701.gameModel.GameHelp;
 import nz.ac.aut.ense701.gameModel.enums.GameState;
 import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
 import nz.ac.aut.ense701.gameQuiz.Quiz;
+import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
 import nz.ac.aut.ense701.gui.GridSquarePanel;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
@@ -121,12 +123,18 @@ public class KiwiCountUI
      */
     public void createNewGame(){
         removeAllComponentsFromJPanel(pnlGame);
+        resetQuiz();
         game.createNewGame();
         initIslandGrid();
       //  addKeyListener(this);
         update();
         pnlGame.revalidate();
         pnlGame.repaint();
+    }
+    
+    private void resetQuiz(){
+        QuizFileReader.resetDataReadFromFile();
+        DOCMessages.resetDocMessages();
     }
     
     private void removeAllComponentsFromJPanel(JPanel panel){

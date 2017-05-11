@@ -53,6 +53,14 @@ public class QuizFileReader {
     }
     
     /**
+     * resets the data that has been read from the file
+     */
+    public static void resetDataReadFromFile(){
+        quizData = null;
+        messageToQuizData = null;
+    }
+    
+    /**
      * Reads the File "QuizData.txt" if not read already and stores the data in quizData and messageToQuizData
      * @throws IOException 
      */
