@@ -109,6 +109,7 @@ public class KiwiCountUI
      */
     public void startQuiz() throws IOException{
         removeAllComponentsFromJPanel(pnlGame);
+        disablePanelControl();
         pnlGame.setLayout(new BorderLayout());
         quizPanel = new QuizPanel(this, new Quiz(this.game.getPlayerMessages()));
         JScrollPane scrollPane = new JScrollPane(quizPanel);
@@ -126,10 +127,21 @@ public class KiwiCountUI
         resetQuiz();
         game.createNewGame();
         initIslandGrid();
-      //  addKeyListener(this);
         update();
         pnlGame.revalidate();
         pnlGame.repaint();
+    }
+    
+    private void disablePanelControl(){
+        btnCount.setEnabled(false);
+        btnDrop.setEnabled(false);
+        btnMoveEast.setEnabled(false);
+        btnMoveNorth.setEnabled(false);
+        btnMoveSouth.setEnabled(false);
+        btnMoveWest.setEnabled(false);
+        btnUse.setEnabled(false);
+        listInventory.setListData(new Object[1]);
+        listObjects.setListData(new Object[1]);
     }
     
     private void resetQuiz(){
