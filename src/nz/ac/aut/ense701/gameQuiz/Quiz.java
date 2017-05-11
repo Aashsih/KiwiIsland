@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
-import javax.swing.JOptionPane;
 
 
 /**
@@ -61,24 +60,15 @@ public class Quiz {
      */
     public boolean isAnswerCorrect(Question question, int proposedAnswer){
         if(question == null || proposedAnswer <= 0){
-            throw new IllegalArgumentException("The parameters passed are invalid");
+            return false;
         }
         if(questionToAnswer.containsKey(question)){
             int correctAnswer = questionToAnswer.get(question).intValue();
             if(proposedAnswer == correctAnswer){
-                System.out.println("true");
                 return true;
-               
-            }
-            else{
-                System.out.println("false");
-                return false;
             }
         }
-        else{
-            System.out.println("wrong");
-            return false;
-        }
+        return false;
     }
     
     /**
@@ -96,17 +86,14 @@ public class Quiz {
             QuizData quizData = QuizFileReader.getQuizDataForMessage(message);
             questionToAnswer.put(quizData.getQuestion(), quizData.getAnswer());
             questionStack.push(quizData.getQuestion());
-            //correct answer here
-            System.out.println(quizData.getAnswer());
         }      
     }
     /**
      * Displays a dialogue box to show the correct answer of the current question
      */
-    public void correctAnswer(){
+    public int correctAnswer(){
 
-        JOptionPane.showMessageDialog(null,this.answerOfQuestion,"Correct Option", 
-                JOptionPane.PLAIN_MESSAGE);
+        return this.answerOfQuestion;
         
     }
 }
