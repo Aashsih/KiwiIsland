@@ -923,6 +923,10 @@ public class Game
             }
         }
     } 
+    
+    public int getCurrentKiwiPopulationOnIsland(){
+        return this.island.getCurrentKiwiPopulationOnIsland();
+    }
  
 
     private Island island;
@@ -944,3 +948,8 @@ public class Game
     private int count = 0;
 
 }
+
+
+
+
+

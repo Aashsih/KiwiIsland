@@ -21,6 +21,7 @@ public class GameTest extends junit.framework.TestCase
     Player     player;
     Position   playerPosition;
     Island island ;
+   
     
     /**
      * Default constructor for test class GameTest
@@ -432,6 +433,8 @@ public class GameTest extends junit.framework.TestCase
         game.countKiwi();
         assertEquals("Wrong count", game.getKiwiCount(), 1);
     }
+    
+    
 
     @Test
     public void testGetPlayerMessages()
