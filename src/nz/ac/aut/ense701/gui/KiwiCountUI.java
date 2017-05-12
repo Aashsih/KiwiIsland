@@ -190,6 +190,7 @@ public class KiwiCountUI
         //Update Kiwi and Predator information
         txtKiwisCounted.setText(Integer.toString(game.getKiwiCount()) );
         txtPredatorsLeft.setText(Integer.toString(game.getPredatorsRemaining()));
+        txtKiwiPopulation.setText(Integer.toString(game.getCurrentKiwiPopulationOnIsland()));
         
         // update inventory list
         listInventory.setListData(game.getPlayerInventory());
@@ -230,6 +231,7 @@ public class KiwiCountUI
         pnlControls = new javax.swing.JPanel();
         javax.swing.JPanel pnlPlayer = new javax.swing.JPanel();
         javax.swing.JPanel pnlPlayerData = new javax.swing.JPanel();
+        lblKiwiPopulation = new javax.swing.JLabel();
         javax.swing.JLabel lblPlayerName = new javax.swing.JLabel();
         txtPlayerName = new javax.swing.JLabel();
         javax.swing.JLabel lblPlayerStamina = new javax.swing.JLabel();
@@ -242,6 +244,7 @@ public class KiwiCountUI
         lblKiwisCounted = new javax.swing.JLabel();
         txtKiwisCounted = new javax.swing.JLabel();
         txtPredatorsLeft = new javax.swing.JLabel();
+        txtKiwiPopulation = new javax.swing.JLabel();
         javax.swing.JPanel pnlMovement = new javax.swing.JPanel();
         btnMoveNorth = new javax.swing.JButton();
         btnMoveSouth = new javax.swing.JButton();
@@ -271,7 +274,7 @@ public class KiwiCountUI
         pnlGame.setLayout(pnlGameLayout);
         pnlGameLayout.setHorizontalGroup(
             pnlGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 540, Short.MAX_VALUE)
+            .addGap(0, 524, Short.MAX_VALUE)
         );
         pnlGameLayout.setVerticalGroup(
             pnlGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,6 +290,13 @@ public class KiwiCountUI
 
         pnlPlayerData.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         pnlPlayerData.setLayout(new java.awt.GridBagLayout());
+
+        lblKiwiPopulation.setText("Kiwi Population: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        pnlPlayerData.add(lblKiwiPopulation, gridBagConstraints);
 
         lblPlayerName.setText("Name:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -386,6 +396,13 @@ public class KiwiCountUI
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(txtPredatorsLeft, gridBagConstraints);
+
+        txtKiwiPopulation.setText("0");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        pnlPlayerData.add(txtKiwiPopulation, gridBagConstraints);
 
         pnlPlayer.add(pnlPlayerData, java.awt.BorderLayout.WEST);
 
@@ -744,6 +761,7 @@ public class KiwiCountUI
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuHelpItem;
+    private javax.swing.JLabel lblKiwiPopulation;
     private javax.swing.JLabel lblKiwisCounted;
     private javax.swing.JLabel lblPredators;
     private javax.swing.JList listInventory;
@@ -753,6 +771,7 @@ public class KiwiCountUI
     private javax.swing.JProgressBar progBackpackSize;
     private javax.swing.JProgressBar progBackpackWeight;
     private javax.swing.JProgressBar progPlayerStamina;
+    private javax.swing.JLabel txtKiwiPopulation;
     private javax.swing.JLabel txtKiwisCounted;
     private javax.swing.JLabel txtPlayerName;
     private javax.swing.JLabel txtPredatorsLeft;

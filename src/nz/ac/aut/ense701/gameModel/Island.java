@@ -4,6 +4,7 @@ import nz.ac.aut.ense701.gameModel.occupants.Predator;
 import nz.ac.aut.ense701.gameModel.enums.Terrain;
 import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
 import nz.ac.aut.ense701.gameModel.occupants.Hazard;
+import nz.ac.aut.ense701.gameModel.occupants.Kiwi;
 import nz.ac.aut.ense701.gameModel.occupants.Occupant;
 
 /**
@@ -397,5 +398,29 @@ public class Island
         }
         return result;
     }
+    
+    /**
+     * Go through the whole island, grid by grid and check if the occupant on each grid is a kiwi.
+     * One each square is iterated and there is a kiwi found, increment the kiwi population count. 
+     * @return current kiwi population 
+     */
+    
+    
+    public int getCurrentKiwiPopulationOnIsland(){
+	int numberOfKiwisOnIsland = 0;
+	for(int i = 0; i < this.islandGrid.length; i++){
+		for(int j = 0; j < this.islandGrid[i].length; j++){
+			Occupant[] gridSquareOccupants = this.islandGrid[i][j].getOccupants();
+			for(Occupant anOccupant : gridSquareOccupants){
+				if(anOccupant instanceof Kiwi){
+					numberOfKiwisOnIsland++;
+				}
+			}
+		}
+	}
+	return numberOfKiwisOnIsland;
+    }
+
+    
 
 }
