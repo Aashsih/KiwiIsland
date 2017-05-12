@@ -216,6 +216,29 @@ public class KiwiCountUI
         requestFocus();
     }
     
+    
+    /**
+     * Creates and initialises the island grid.
+     */
+    private void initIslandGrid()
+    {
+        // Add the grid
+        int rows    = game.getNumRows();
+        int columns = game.getNumColumns();
+        // set up the layout manager for the island grid panel
+        pnlGame.setLayout(new GridLayout(rows, columns));
+        // create all the grid square panels and add them to the panel
+        // the layout manager of the panel takes care of assigning them to the
+        // the right position
+        for ( int row = 0 ; row < rows ; row++ )
+        {
+            for ( int col = 0 ; col < columns ; col++ )
+            {
+                pnlGame.add(new GridSquarePanel(game, row, col));
+            }
+        }
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -727,27 +750,39 @@ public class KiwiCountUI
         }
     }//GEN-LAST:event_jMenuHelpItemActionPerformed
     
-    /**
-     * Creates and initialises the island grid.
-     */
-    private void initIslandGrid()
-    {
-        // Add the grid
-        int rows    = game.getNumRows();
-        int columns = game.getNumColumns();
-        // set up the layout manager for the island grid panel
-        pnlGame.setLayout(new GridLayout(rows, columns));
-        // create all the grid square panels and add them to the panel
-        // the layout manager of the panel takes care of assigning them to the
-        // the right position
-        for ( int row = 0 ; row < rows ; row++ )
-        {
-            for ( int col = 0 ; col < columns ; col++ )
-            {
-                pnlGame.add(new GridSquarePanel(game, row, col));
-            }
-        }
+    @Override
+    public void keyTyped(KeyEvent e) {
+       
     }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        
+        int key = e.getKeyCode();
+        
+        switch(key)
+        {
+            case KeyEvent.VK_UP:
+                game.playerMove(MoveDirection.NORTH);
+                break;
+            case KeyEvent.VK_DOWN:
+                game.playerMove(MoveDirection.SOUTH);
+                break;
+            case KeyEvent.VK_LEFT:
+                game.playerMove(MoveDirection.WEST);
+                break;
+            case KeyEvent.VK_RIGHT:
+                game.playerMove(MoveDirection.EAST);
+                break;
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+       
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCollect;
@@ -779,55 +814,4 @@ public class KiwiCountUI
 
     private Game game;
     private QuizPanel quizPanel;
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-       
-        int key = e.getKeyCode();
-        
-        switch(key)
-        {
-            case KeyEvent.VK_UP:
-                game.playerMove(MoveDirection.NORTH);
-                break;
-            case KeyEvent.VK_DOWN:
-                game.playerMove(MoveDirection.SOUTH);
-                break;
-            case KeyEvent.VK_LEFT:
-                game.playerMove(MoveDirection.WEST);
-                break;
-            case KeyEvent.VK_RIGHT:
-                game.playerMove(MoveDirection.EAST);
-                break;
-        }
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        
-        int key = e.getKeyCode();
-        
-        switch(key)
-        {
-            case KeyEvent.VK_UP:
-                game.playerMove(MoveDirection.NORTH);
-                break;
-            case KeyEvent.VK_DOWN:
-                game.playerMove(MoveDirection.SOUTH);
-                break;
-            case KeyEvent.VK_LEFT:
-                game.playerMove(MoveDirection.WEST);
-                break;
-            case KeyEvent.VK_RIGHT:
-                game.playerMove(MoveDirection.EAST);
-                break;
-        }
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
