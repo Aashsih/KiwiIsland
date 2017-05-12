@@ -7,7 +7,6 @@ package nz.ac.aut.ense701.gameModel.handlers;
 
 import nz.ac.aut.ense701.gameModel.Island;
 import nz.ac.aut.ense701.gameModel.Position;
-import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
 import nz.ac.aut.ense701.gameModel.occupants.Fauna;
 
 /**

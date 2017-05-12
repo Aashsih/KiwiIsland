@@ -9,8 +9,6 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
-import nz.ac.aut.ense701.gameModel.occupants.Fauna;
-import nz.ac.aut.ense701.gameModel.occupants.Kiwi;
 
 /**
  * Player represents the player in the KiwiIsland game.

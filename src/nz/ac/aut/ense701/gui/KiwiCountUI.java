@@ -1,18 +1,13 @@
 package nz.ac.aut.ense701.gui;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -25,8 +20,6 @@ import nz.ac.aut.ense701.gameModel.enums.GameState;
 import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
 import nz.ac.aut.ense701.gameQuiz.Quiz;
 import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
-import nz.ac.aut.ense701.gui.GridSquarePanel;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /*
  * User interface form for Kiwi Island.

@@ -1,8 +1,5 @@
 package nz.ac.aut.ense701.gameModel;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import nz.ac.aut.ense701.gameModel.enums.GameState;
 import nz.ac.aut.ense701.gameModel.occupants.Predator;
 import nz.ac.aut.ense701.gameModel.enums.Terrain;
@@ -17,8 +14,6 @@ import nz.ac.aut.ense701.gameModel.occupants.Fauna;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;

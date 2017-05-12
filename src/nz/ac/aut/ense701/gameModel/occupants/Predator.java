@@ -2,7 +2,6 @@ package nz.ac.aut.ense701.gameModel.occupants;
 
 import nz.ac.aut.ense701.gameModel.Position;
 import nz.ac.aut.ense701.gameModel.enums.Occupants;
-import nz.ac.aut.ense701.gameModel.occupants.Fauna;
 
 /**
  * Predator represents a predator on the island.
