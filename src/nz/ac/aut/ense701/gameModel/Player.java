@@ -28,6 +28,7 @@ public class Player
     private List<String> messages;
     private final double    maxBackpackWeight;
     private final double    maxBackpackSize;   
+    private int numberOfSteps; 
     
     /**
      * Constructs a new player object.
@@ -402,4 +403,15 @@ public class Player
     {
         messages.add(message);
     }
+    
+     // A method used to increment the number of steps taken by the user
+    //returns the number of steps and is called in the Game class to be used 
+    public int incrementSteps(){
+        return ++numberOfSteps;
+    }
+    //The getters and setters for the incrementSteps method 
+    public int getNumberOfSteps() {
+        return numberOfSteps;
+    }
+
 }
