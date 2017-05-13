@@ -1,9 +1,6 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gameModel.enums.GameState;
 import nz.ac.aut.ense701.gameModel.occupants.Predator;
-import nz.ac.aut.ense701.gameModel.enums.Terrain;
-import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
 import nz.ac.aut.ense701.gameModel.occupants.Occupant;
 import nz.ac.aut.ense701.gameModel.occupants.Item;
 import nz.ac.aut.ense701.gameModel.occupants.Hazard;
@@ -22,7 +19,6 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import nz.ac.aut.ense701.gameModel.enums.Occupants;
 import nz.ac.aut.ense701.gameModel.handlers.KiwiHandler;
 import nz.ac.aut.ense701.gameModel.occupants.Bait;
 

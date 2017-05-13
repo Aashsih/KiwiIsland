@@ -1,7 +1,6 @@
 package nz.ac.aut.ense701.gameModel;
 
 import nz.ac.aut.ense701.gameModel.occupants.Predator;
-import nz.ac.aut.ense701.gameModel.enums.Terrain;
 import nz.ac.aut.ense701.gameModel.occupants.Kiwi;
 import org.junit.Test;
 

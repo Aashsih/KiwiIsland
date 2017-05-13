@@ -16,8 +16,8 @@ import nz.ac.aut.ense701.gameModel.DOCMessages;
 import nz.ac.aut.ense701.gameModel.Game;
 import nz.ac.aut.ense701.gameModel.GameEventListener;
 import nz.ac.aut.ense701.gameModel.GameHelp;
-import nz.ac.aut.ense701.gameModel.enums.GameState;
-import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
+import nz.ac.aut.ense701.gameModel.GameState;
+import nz.ac.aut.ense701.gameModel.MoveDirection;
 import nz.ac.aut.ense701.gameQuiz.Quiz;
 import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
 

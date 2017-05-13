@@ -1,7 +1,5 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
-
 /**
  * Represents the location of any item/grid square/player in the game.
  * Positions must always be valid for the particular game.
