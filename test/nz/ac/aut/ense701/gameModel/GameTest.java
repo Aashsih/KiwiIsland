@@ -441,10 +441,61 @@ public class GameTest extends junit.framework.TestCase
         assertEquals("Test Message 1", game.getPlayerMessages().get(0));
         
     }
-/**
- * Private helper methods
- */
     
+    /**
+     * Makes the player take ten steps without counting a kiwi
+     * and asserts that the kiwi population on the island is not
+     * changed
+     */
+    @Test
+    public void testChangeKiwiPopulationNoChangeIfKiwiHasNotBeenCounted(){
+        int currentKiwiPopulation = island.getCurrentKiwiPopulationOnIsland();
+        for(int i = 0; i < 10; i++){
+            game.getPlayer().incrementSteps();
+        }
+        assertEquals(0, game.changeKiwiPopulation());
+        assertEquals(currentKiwiPopulation, island.getCurrentKiwiPopulationOnIsland());
+        
+    }
+    
+    /**
+     * Makes the player take ten steps (given the user has counted a kiwi)
+     * and asserts that the kiwi population on the island is reduced by one
+     */
+    @Test
+    public void testChangeKiwiPopulationIncreaseKiwiPopukationByOne(){
+        player.moveToPosition(new Position(island, 0, 7), Terrain.SCRUB);
+        game.countKiwi();
+        int currentKiwiPopulation = island.getCurrentKiwiPopulationOnIsland();
+        for(int i = 0; i < 10; i++){
+            game.getPlayer().incrementSteps();
+        }
+        assertEquals(-1, game.changeKiwiPopulation());
+        assertEquals(--currentKiwiPopulation, island.getCurrentKiwiPopulationOnIsland());
+        
+    }
+    
+    /**
+     * Makes the player take twelve steps (given the user has counted a kiwi)
+     * and asserts that the kiwi population on the island is increased by one
+     */
+    @Test
+    public void testChangeKiwiPopulationDecreaseKiwiPopukationByOne(){
+        player.moveToPosition(new Position(island, 0, 7), Terrain.SCRUB);
+        game.countKiwi();
+        int currentKiwiPopulation = island.getCurrentKiwiPopulationOnIsland();
+        for(int i = 0; i < 12; i++){
+            game.getPlayer().incrementSteps();
+        }
+        assertEquals(1, game.changeKiwiPopulation());
+        assertEquals(++currentKiwiPopulation, island.getCurrentKiwiPopulationOnIsland());
+        
+    }
+    
+    
+    /**
+     * Private helper methods
+     */
     private boolean trapAllPredators()
     {
         //Firstly player needs a trap

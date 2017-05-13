@@ -538,8 +538,10 @@ public class Game
         try {
             count++;
             String message =  DOCMessages.getFact();
-            JOptionPane.showMessageDialog(null,message, "Fact #" + count, JOptionPane.PLAIN_MESSAGE);
-            player.addMessage(message);
+            if(message != null){
+                JOptionPane.showMessageDialog(null,message, "Fact #" + count, JOptionPane.PLAIN_MESSAGE);
+                player.addMessage(message);   
+            }
         } catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -933,13 +935,17 @@ public class Game
         return this.island.getCurrentKiwiPopulationOnIsland();
     }
  
- /**
-    * This method is used to change the population of the kiwi on the island
-    * It would take in the the size of the kiwi that has been counted and would be placed in a list
-    * The size of the list is then used to either increase or decrease the number of kiwi on the island
-    * When the user counts a kiwi and takes 10 consecutive steps t
-    */
-    public void changeKiwiPopulation(){
+    /**
+     * This method is used to change the population of the kiwis on the island.
+     * The population is not varied if no kiwis have been counted
+     * The population is reduced by 1 for every 10 steps the user takes (given the user has counted a kiwi)
+     * The population is increase by 1 for every 12 steps the user takes (give the user has counted a kiwi)
+     * @return 0, if no kiwis have been counted or no kiwis were added
+     *         1, if kiwi is added to the island
+     *        -1, if kiwi is removed from the island
+     */
+    public int changeKiwiPopulation(){
+        int result = 0;
         List<Position> availablePositionsToAddKiwi = new ArrayList<Position>();
         //Checks to see if the user has counted any kiwis
         if (activeKiwisCounted.size() > 0)
@@ -953,12 +959,12 @@ public class Game
                //A kiwi is removed as an occupant and the population of kiwi decrements by 1
                lastUpdatedKiwisPosition = kiwiToRemove.getPosition();
                island.removeOccupant(kiwiToRemove.getPosition(), kiwiToRemove);
+               result = -1;
             }
             else if(player.getNumberOfSteps()%12 == 0)
             {
                //When the user takes 12 consecutive steps and has not counted a new kiwi
                //A kiwi is added as an occupant and the population of kiwi on the island increments by 1
-                
                 for(int i = 0; i < island.getNumRows(); i++){
                     for(int j = 0; j < island.getNumColumns(); j++){
                         Position positionToPlaceKiwi = new Position(island, i, j);
@@ -968,10 +974,14 @@ public class Game
                         }
                     } 
                 }
-                Position positionToaddKiwi = availablePositionsToAddKiwi.get((new Random()).nextInt(availablePositionsToAddKiwi.size()));
-                island.addOccupant(positionToaddKiwi, new Kiwi( positionToaddKiwi, kiwiToRemove.getName(), kiwiToRemove.getDescription()));
+                if(availablePositionsToAddKiwi.size() > 0){
+                    Position positionToaddKiwi = availablePositionsToAddKiwi.get((new Random()).nextInt(availablePositionsToAddKiwi.size()));
+                    island.addOccupant(positionToaddKiwi, new Kiwi( positionToaddKiwi, kiwiToRemove.getName(), kiwiToRemove.getDescription()));
+                    result = 1;
+                }
             }
-        }	
+        }
+        return result;
     }
     private Island island;
     private KiwiHandler kiwiHandler;
