@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.logging.Level;
@@ -59,7 +60,7 @@ public class Game
      */
     public void createNewGame()
     {
-        countedKiwiList = new ArrayList<Kiwi>();
+        activeKiwisCounted = new ArrayList<Kiwi>();
         count = 0;
         totalPredators = 0;
         totalKiwis = 0;
@@ -555,6 +556,7 @@ public class Game
                 if (!kiwi.counted()) {
                     kiwi.count();
                     kiwiCount++;
+                    activeKiwisCounted.add(kiwi);
                     displayDialogueBox();
                 }
             }
@@ -937,37 +939,36 @@ public class Game
     * When the user counts a kiwi and takes 10 consecutive steps t
     */
     public void changeKiwiPopulation(){
+        List<Position> availablePositionsToAddKiwi = new ArrayList<Position>();
         //Checks to see if the user has counted any kiwis
-        if (countedKiwiList.size() > 0)
+        if (activeKiwisCounted.size() > 0)
         {       
             //This is the kiwi that was added last to the list of kiwi counted
-            Kiwi kiwiToRemove = countedKiwiList.get(countedKiwiList.size() - 1);
+            Kiwi kiwiToRemove = activeKiwisCounted.get(activeKiwisCounted.size() - 1);
 
             if(player.getNumberOfSteps()%10 == 0)
             {
                //When the user takes 10 consecutive steps and has not counted a new kiwi
                //A kiwi is removed as an occupant and the population of kiwi decrements by 1
+               lastUpdatedKiwisPosition = kiwiToRemove.getPosition();
                island.removeOccupant(kiwiToRemove.getPosition(), kiwiToRemove);
-
             }
             else if(player.getNumberOfSteps()%12 == 0)
             {
                //When the user takes 12 consecutive steps and has not counted a new kiwi
                //A kiwi is added as an occupant and the population of kiwi on the island increments by 1
-
+                
                 for(int i = 0; i < island.getNumRows(); i++){
                     for(int j = 0; j < island.getNumColumns(); j++){
                         Position positionToPlaceKiwi = new Position(island, i, j);
                         //This checks the availability of the Grid Square for a kiwi to occupy a square 
-                        boolean kiwiAdded = island.addOccupant(positionToPlaceKiwi, new Kiwi(positionToPlaceKiwi, kiwiToRemove.getName(), kiwiToRemove.getDescription()));
-                        //A kiwi has been added to the Grid Square
-                        if(kiwiAdded){
-                            //If a kiwi has been added then it should exit the for loop        
-                            return;
-
-                        }   
+                        if(island.isOccupantMoveToPositionPossible(new Kiwi(positionToPlaceKiwi, kiwiToRemove.getName(), kiwiToRemove.getDescription()), positionToPlaceKiwi)){
+                            availablePositionsToAddKiwi.add(positionToPlaceKiwi);
+                        }
                     } 
                 }
+                Position positionToaddKiwi = availablePositionsToAddKiwi.get((new Random()).nextInt(availablePositionsToAddKiwi.size()));
+                island.addOccupant(positionToaddKiwi, new Kiwi( positionToaddKiwi, kiwiToRemove.getName(), kiwiToRemove.getDescription()));
             }
         }	
     }
@@ -980,8 +981,8 @@ public class Game
     private int totalKiwis;
     private int predatorsTrapped;
     private Set<GameEventListener> eventListeners;
-    private List<Kiwi> countedKiwiList;
-    
+    private List<Kiwi> activeKiwisCounted;
+    private Position lastUpdatedKiwisPosition;
     private final double MIN_REQUIRED_CATCH = 0.8;
         
     private String winMessage = "";

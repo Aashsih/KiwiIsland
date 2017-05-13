@@ -57,6 +57,10 @@ public class KiwiCountUI
     {
         update();
         
+        //Check if kiwi population has changed
+        if(game.getState() == GameState.KIWI_POPULATION_CHANGED){
+            //Start a thread to change the colour of the GridSquare where the kiwi population changed
+        }
         // check for "game over" or "game won"
         if ( game.getState() == GameState.LOST )
         {

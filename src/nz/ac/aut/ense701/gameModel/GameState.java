@@ -8,6 +8,6 @@ package nz.ac.aut.ense701.gameModel;
  */
 public enum GameState
 {
-    PLAYING, WON, LOST;
+    PLAYING, WON, LOST, KIWI_POPULATION_CHANGED;
 
 }
