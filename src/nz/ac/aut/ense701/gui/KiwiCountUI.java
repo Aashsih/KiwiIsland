@@ -225,7 +225,7 @@ public class KiwiCountUI
         
         int[] playerValues = game.getPlayerValues();
         
-        if (playerValues[Game.STAMINA_INDEX] > 
+        if (playerValues[Game.STAMINA_INDEX] >= 
                 (Game.LOW_STAMINA_LIMIT*playerValues[Game.MAXSTAMINA_INDEX])){
             //makes the progress bar green
             progPlayerStamina.setForeground(Color.GREEN);
