@@ -41,6 +41,7 @@ public class Game
     public static final int WEIGHT_INDEX = 3;
     public static final int MAXSIZE_INDEX = 4;
     public static final int SIZE_INDEX = 5;
+    public static final double LOW_STAMINA_LIMIT = 0.2;
     
     /**
      * A new instance of Kiwi island that reads data from "IslandData.txt".

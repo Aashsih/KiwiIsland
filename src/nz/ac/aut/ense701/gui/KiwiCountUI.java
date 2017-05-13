@@ -1,6 +1,7 @@
 package nz.ac.aut.ense701.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
@@ -171,6 +172,8 @@ public class KiwiCountUI
             gsp.update();
         }
         
+        updateStaminaProgressBar();
+        
         // update player information
         int[] playerValues = game.getPlayerValues();
         txtPlayerName.setText(game.getPlayerName());
@@ -210,6 +213,33 @@ public class KiwiCountUI
         requestFocus();
     }
     
+    /*
+    *this method should change the color of the stamina bar 
+    *If the stamina level is above 20% of the maximum stamina level, then the bar would be green 
+    *the green bar would indicate that the stamina level is a safe zone.
+    *If the stamina level is below 20% of the maximum stamina level, then the bar would turn red
+    *The red bar would indicate that the stamina level is low to the user
+    */
+   
+    public void updateStaminaProgressBar(){
+        
+        int[] playerValues = game.getPlayerValues();
+        
+        if (playerValues[Game.STAMINA_INDEX] > 
+                (Game.LOW_STAMINA_LIMIT*playerValues[Game.MAXSTAMINA_INDEX])){
+            //makes the progress bar green
+            progPlayerStamina.setForeground(Color.GREEN);
+        }
+        else{
+            //makes the prgress bar red to warn the user
+            progPlayerStamina.setForeground(Color.RED);
+            //work on this
+            while((playerValues[Game.MAXSTAMINA_INDEX]*0.2) <= (playerValues[Game.STAMINA_INDEX])&&(playerValues[Game.STAMINA_INDEX] <= 0.18*playerValues[Game.MAXSTAMINA_INDEX])) {
+                JOptionPane.showMessageDialog(null, "Your stamina level is low. Be careful!!");
+            }
+            
+        }
+    }    
     
     /**
      * Creates and initialises the island grid.
