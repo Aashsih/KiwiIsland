@@ -1,22 +1,29 @@
 Data for Aashish's User story
 
+Message- Kiwis do not fly, their feathers have evolved a unique texture to suit a ground-based lifestyle. 
 1. How far can a kiwi fly?
 a) for 5 days and nights without stopping
 b) only a few metres
 c) it can’t fly at all
 Answer- c
 
-2. the kiwi is the only bird known to have nostrils at the end of its bill?
+
+Message- The kiwi has an extremely unusual beak. Not only does it provide a keen sense of smeel, it also has sensory pits at the tip which allow the kiwi to sense prey moving underground.
+2. The kiwi is the only bird known to have nostrils at the end of its bill?
 a) True
 b) False
 Answer- True
 
+
+Message- How kiwi arrived in New Zealand is not completely clear and hence their predators is not still clear. 
 3. Why can’t kiwi fly?
 a) they are too fat
 b) before predators were introduced to New Zealand, they didn’t need to
 c) they are afraid of heights
 Answer- b
 
+
+Message- One reason New Zealand has so many flightless birds is that, before humans arrived about 1000 years ago, there were no land mammals that preyed on birds. 
 4. What predators hunt kiwis?
 a) Cats, dogs and cobra snakes
 b) Cats, dogs and big birds
@@ -24,6 +31,8 @@ c) Cats, dogs and stoats
 d) Cats, dogs and donkeys
 Answer- c
 
+
+Message- Kiwi are flightless – their Latin species name is Apteryx, which means wingless. They belong to an ancient group of birds that can't fly – the ratites. 
 5. Why can't kiwis fly?
 a) Because their wings are not made for flying
 b) Because theyare very heavy 
@@ -31,6 +40,7 @@ c) Because they have very small wings too small for their weight
 d) Because their wings are not balanced
 Answer- c
 
+Message- A kiwi sleeps standing up. Like many birds, it often turns its head back against its body and tucks it under its wing. 
 6. Where do kiwis like to sleep and rest?
 a) Beside the lake or river
 b) In man-made cages
@@ -38,6 +48,8 @@ c) In burrows under the ground or old logs
 d) In their nest above the branches
 Answer- c
 
+
+Message- In areas where kiwi predators are intensively controlled, kiwi hatching increases to 50 – 60%. In order to sustain populations levels a 20% survival rate is needed, anything over that it grows. So management is making a difference, especially when dog owners keep their dogs under control.
 7. How does a predator know there is a kiwi around?
 a) The kiwis have very strong, musty smell that predators can smell faraway
 b) The kiwis move in large groups so predators easily see them
@@ -45,7 +57,7 @@ c) The kiwis are so big the predators see them immediately
 d) The kiwis are very noisy birds so predators easily hear them
 Answer- a
 
-
+Message- Animal pests, such as hedgehogs, rodents and weasels, may not kill kiwi, but they also cause problems. First, they compete for the same food as kiwi. Second, they are prey for the same animals that attack kiwi, helping to keep the number of predators high.
 8. How do kiwis fight back their attacker?
 a) They will kick, scream and run towards them to bump and knock down their attacker
 b) They will kick, scratch and run away from danger
@@ -53,6 +65,8 @@ c) They will simply fly away from the predator
 d) They will kick, scratch but not run away from them
 Answer- b
 
+
+Message- They have one of the largest egg-to-body weight ratios of any bird. The egg averages 15% of the female's body weight (compared to 2% for the ostrich).
 9. What is the weight of a typical kiwi egg?
 a) 1 pound
 b) 2 pounds
@@ -61,6 +75,8 @@ d) 4 pounds
 e) 3 pound
 Answer- a
 
+
+Message- The most ancient of New Zealand’s birds, the kiwi evolved 70 million years ago from a flightless ancestor from the great southern continent of Gondwana.
 10. What is New Zealand’s national bird?
 a) Kakapo
 b) Koala
@@ -69,6 +85,8 @@ d) Takahe
 e) Kangaroo
 Answer- c
 
+
+Message- Some researchers believe the kiwi has always been a small bird, and that its egg has grown. Others suggest the kiwi was once much larger and, while the bird shrank over time, its egg did not.
 11.The size of a normal kiwi is like a ___.
 a)Chicken
 b) Small elephant
@@ -77,6 +95,8 @@ d) Fingernail
 e) The Kiwi fruit
 Answer- a
 
+
+Message- Brown kiwi are known to eat bracket fungi and frogs. They are also known to capture and eat freshwater crayfish/koura. In captivity, kiwi have fished eels/tuna out of a pond, subdued them with a few whacks, and eaten them.
 12. What do kiwis eat?
 a) Worms, spiders and bats
 b) Worms and spiders but don’t eat bugs
@@ -84,7 +104,7 @@ c) Worms, spiders and other bugs
 d) Worms, spiders and dead leaves
 Answer- c
 
-
+Message- The kiwi is the only bird in the world with external nostrils at the tip of its long beak.
 13. What is the difference between a kiwi’s beak and the beak of a normal bird?
 a) Kiwis have flat beaks compared to the normal birds
 b) Kiwis have two beaks compared to the normal birds
