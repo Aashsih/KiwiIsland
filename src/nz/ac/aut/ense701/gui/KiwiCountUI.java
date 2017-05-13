@@ -229,13 +229,14 @@ public class KiwiCountUI
                 (Game.LOW_STAMINA_LIMIT*playerValues[Game.MAXSTAMINA_INDEX])){
             //makes the progress bar green
             progPlayerStamina.setForeground(Color.GREEN);
+            lowStaminaMessageDisplayed = false;
         }
         else{
             //makes the prgress bar red to warn the user
             progPlayerStamina.setForeground(Color.RED);
-            //work on this
-            while((playerValues[Game.MAXSTAMINA_INDEX]*0.2) <= (playerValues[Game.STAMINA_INDEX])&&(playerValues[Game.STAMINA_INDEX] <= 0.18*playerValues[Game.MAXSTAMINA_INDEX])) {
-                JOptionPane.showMessageDialog(null, "Your stamina level is low. Be careful!!");
+            if(!lowStaminaMessageDisplayed){
+                JOptionPane.showMessageDialog(this, "Your stamina level is low. Be careful!!");
+                lowStaminaMessageDisplayed = true;
             }
             
         }
@@ -840,4 +841,5 @@ public class KiwiCountUI
 
     private Game game;
     private QuizPanel quizPanel;
+    private boolean lowStaminaMessageDisplayed;
 }
