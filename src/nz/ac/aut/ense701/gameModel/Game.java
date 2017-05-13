@@ -11,9 +11,11 @@ import nz.ac.aut.ense701.gameModel.occupants.Fauna;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.logging.Level;
@@ -59,6 +61,7 @@ public class Game
      */
     public void createNewGame()
     {
+        activeKiwisCounted = new ArrayList<Kiwi>();
         count = 0;
         totalPredators = 0;
         totalKiwis = 0;
@@ -71,6 +74,7 @@ public class Game
         loseMessage = "";
         playerMessage = "";
         notifyGameEventListeners();
+        
         
     }
 
@@ -553,6 +557,7 @@ public class Game
                 if (!kiwi.counted()) {
                     kiwi.count();
                     kiwiCount++;
+                    activeKiwisCounted.add(kiwi);
                     displayDialogueBox();
                 }
             }
@@ -582,6 +587,10 @@ public class Game
                     
             // Is there a hazard?
             checkForHazard();
+            
+            //Change kiwi Population
+            player.incrementSteps();
+            changeKiwiPopulation();
 
             updateGameState();            
         }
@@ -924,7 +933,46 @@ public class Game
         return this.island.getCurrentKiwiPopulationOnIsland();
     }
  
+ /**
+    * This method is used to change the population of the kiwi on the island
+    * It would take in the the size of the kiwi that has been counted and would be placed in a list
+    * The size of the list is then used to either increase or decrease the number of kiwi on the island
+    * When the user counts a kiwi and takes 10 consecutive steps t
+    */
+    public void changeKiwiPopulation(){
+        List<Position> availablePositionsToAddKiwi = new ArrayList<Position>();
+        //Checks to see if the user has counted any kiwis
+        if (activeKiwisCounted.size() > 0)
+        {       
+            //This is the kiwi that was added last to the list of kiwi counted
+            Kiwi kiwiToRemove = activeKiwisCounted.get(activeKiwisCounted.size() - 1);
 
+            if(player.getNumberOfSteps()%10 == 0)
+            {
+               //When the user takes 10 consecutive steps and has not counted a new kiwi
+               //A kiwi is removed as an occupant and the population of kiwi decrements by 1
+               lastUpdatedKiwisPosition = kiwiToRemove.getPosition();
+               island.removeOccupant(kiwiToRemove.getPosition(), kiwiToRemove);
+            }
+            else if(player.getNumberOfSteps()%12 == 0)
+            {
+               //When the user takes 12 consecutive steps and has not counted a new kiwi
+               //A kiwi is added as an occupant and the population of kiwi on the island increments by 1
+                
+                for(int i = 0; i < island.getNumRows(); i++){
+                    for(int j = 0; j < island.getNumColumns(); j++){
+                        Position positionToPlaceKiwi = new Position(island, i, j);
+                        //This checks the availability of the Grid Square for a kiwi to occupy a square 
+                        if(island.isOccupantMoveToPositionPossible(new Kiwi(positionToPlaceKiwi, kiwiToRemove.getName(), kiwiToRemove.getDescription()), positionToPlaceKiwi)){
+                            availablePositionsToAddKiwi.add(positionToPlaceKiwi);
+                        }
+                    } 
+                }
+                Position positionToaddKiwi = availablePositionsToAddKiwi.get((new Random()).nextInt(availablePositionsToAddKiwi.size()));
+                island.addOccupant(positionToaddKiwi, new Kiwi( positionToaddKiwi, kiwiToRemove.getName(), kiwiToRemove.getDescription()));
+            }
+        }	
+    }
     private Island island;
     private KiwiHandler kiwiHandler;
     private Player player;
@@ -934,7 +982,8 @@ public class Game
     private int totalKiwis;
     private int predatorsTrapped;
     private Set<GameEventListener> eventListeners;
-    
+    private List<Kiwi> activeKiwisCounted;
+    private Position lastUpdatedKiwisPosition;
     private final double MIN_REQUIRED_CATCH = 0.8;
         
     private String winMessage = "";
