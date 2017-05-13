@@ -2,7 +2,7 @@ Game Help
 ---------------
 - About the Game:
 The objective of the game is to increase the player’s awareness of the challenges
- that the Department of conservation faces and to promote their conservation message. 
+ that the Department of conservation (DOC) faces and to promote their conservation message. 
 The game places the player on an island named “Kiwi-Island” that allows him/her to explore
  an island filled with “kiwis” and “predators”. The player navigates through different
  terrains on the island such as “Sand”, “Forest”, “Wetland”, “Scrub” and “Water” dodging
@@ -11,6 +11,8 @@ The game places the player on an island named “Kiwi-Island” that allows him/
  predators along the way and learn about how the predators affect the kiwi population. All this
  exploring tires the player and forces him/her to collect food items to regain stamina and
  continue their adventure!
+During the game the player collects messages form DOC while counting kiwis or eliminating predators
+which then leads the user to a quiz at the end of the game.
 
 - How do I win the game?
 Accomplishing any of the following while alive will allow you to win the game:
@@ -58,6 +60,9 @@ Different "Hazard" have different effects. Some are fatal - meaning the player l
 A screwdriver can be used to fix a trap. Screwdriver is one of the tools in the game and so you can collect it
  if you land on a "Tool" (represented by letter "T") that is a screwdriver on the island.
  
+- When do I get to the quiz?
+ After the player has collected at the least one message (either by eliminating a predator or counting a kiwi),
+ finished the game (win or lose), then the quiz starts based on the messages collected by the user during the KiwisIsland game.
 
 - What do the different letters on the island represent?
     Fauna "F"

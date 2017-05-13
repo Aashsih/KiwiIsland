@@ -140,7 +140,7 @@ public class QuizPanel extends javax.swing.JPanel {
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 15));
 
         btnNext.setText("Next");
         btnNext.addActionListener(new java.awt.event.ActionListener() {
