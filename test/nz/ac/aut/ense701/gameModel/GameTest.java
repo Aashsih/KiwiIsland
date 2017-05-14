@@ -436,8 +436,8 @@ public class GameTest extends junit.framework.TestCase
     @Test
     public void testGetPlayerMessages()
     {
-        game.addFact("test fact 1");
-        assertEquals("test fact 1\n", game.getPlayerMessages());
+        game.addFact("Test Message 1");
+        assertEquals("Test Message 1", game.getPlayerMessages().get(0));
         
     }
 /**
