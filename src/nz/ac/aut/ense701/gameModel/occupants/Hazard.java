@@ -2,7 +2,7 @@
 package nz.ac.aut.ense701.gameModel.occupants;
 
 import nz.ac.aut.ense701.gameModel.Position;
-import nz.ac.aut.ense701.gameModel.enums.Occupants;
+import nz.ac.aut.ense701.gameModel.Occupants;
 
 /**
  * This class represents a hazard that can be found on the island

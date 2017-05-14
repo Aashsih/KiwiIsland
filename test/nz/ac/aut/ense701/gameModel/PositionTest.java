@@ -1,6 +1,5 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
 import org.junit.Test;
 
 /**

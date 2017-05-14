@@ -1,7 +1,6 @@
 package nz.ac.aut.ense701.gameModel;
 
 import java.util.ArrayList;
-import nz.ac.aut.ense701.gameModel.enums.Terrain;
 import nz.ac.aut.ense701.gameModel.occupants.Item;
 import nz.ac.aut.ense701.gameModel.occupants.Tool;
 import java.util.Collection;
@@ -9,8 +8,6 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
-import nz.ac.aut.ense701.gameModel.occupants.Fauna;
-import nz.ac.aut.ense701.gameModel.occupants.Kiwi;
 
 /**
  * Player represents the player in the KiwiIsland game.
@@ -31,6 +28,7 @@ public class Player
     private List<String> messages;
     private final double    maxBackpackWeight;
     private final double    maxBackpackSize;   
+    private int numberOfSteps; 
     
     /**
      * Constructs a new player object.
@@ -384,15 +382,16 @@ public class Player
      * 
      * @return string representation of all the facts separated by newline
      */
-    public String getPlayerMessages()
+    public List<String> getPlayerMessages()
     {
-        String allMessages = "";
-        
-        for(String s : messages)
-        {
-            allMessages += s + "\n";
-        }
-        return allMessages;
+        return messages;
+//        String allMessages = "";
+//        
+//        for(String s : messages)
+//        {
+//            allMessages += s + "\n";
+//        }
+//        return allMessages;
     }
     
      /**
@@ -404,4 +403,15 @@ public class Player
     {
         messages.add(message);
     }
+    
+     // A method used to increment the number of steps taken by the user
+    //returns the number of steps and is called in the Game class to be used 
+    public int incrementSteps(){
+        return ++numberOfSteps;
+    }
+    //The getters and setters for the incrementSteps method 
+    public int getNumberOfSteps() {
+        return numberOfSteps;
+    }
+
 }
