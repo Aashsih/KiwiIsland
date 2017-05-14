@@ -1,9 +1,6 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gameModel.enums.GameState;
 import nz.ac.aut.ense701.gameModel.occupants.Predator;
-import nz.ac.aut.ense701.gameModel.enums.Terrain;
-import nz.ac.aut.ense701.gameModel.enums.MoveDirection;
 import nz.ac.aut.ense701.gameModel.occupants.Occupant;
 import nz.ac.aut.ense701.gameModel.occupants.Item;
 import nz.ac.aut.ense701.gameModel.occupants.Hazard;
@@ -15,14 +12,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import nz.ac.aut.ense701.gameModel.enums.Occupants;
 import nz.ac.aut.ense701.gameModel.handlers.KiwiHandler;
 import nz.ac.aut.ense701.gameModel.occupants.Bait;
 
@@ -45,6 +43,7 @@ public class Game
     public static final int WEIGHT_INDEX = 3;
     public static final int MAXSIZE_INDEX = 4;
     public static final int SIZE_INDEX = 5;
+    public static final double LOW_STAMINA_LIMIT = 0.2;
     
     /**
      * A new instance of Kiwi island that reads data from "IslandData.txt".
@@ -52,10 +51,7 @@ public class Game
     public Game() 
     {   
         eventListeners = new HashSet<GameEventListener>();
-
         createNewGame();
-        //reads and all the facts of the game stored in the file
-        DOCMessages.getFacts();
     }
     
     
@@ -65,6 +61,8 @@ public class Game
      */
     public void createNewGame()
     {
+        activeKiwisCounted = new ArrayList<Kiwi>();
+        count = 0;
         totalPredators = 0;
         totalKiwis = 0;
         predatorsTrapped = 0;
@@ -76,6 +74,8 @@ public class Game
         loseMessage = "";
         playerMessage = "";
         notifyGameEventListeners();
+        
+        
     }
 
     /***********************************************************************************************************************
@@ -282,7 +282,7 @@ public class Game
         return island;
     }
     
-    public String getPlayerMessages()
+    public List<String> getPlayerMessages()
     {
         return player.getPlayerMessages();
         
@@ -520,8 +520,14 @@ public class Game
         }
         else if (item.toString().equalsIgnoreCase("Messages"))
         {
-            String list = player.getPlayerMessages();
-            JOptionPane.showMessageDialog(null,list, "Collected Facts" , JOptionPane.PLAIN_MESSAGE);
+            List<String> messages = player.getPlayerMessages();
+            String textToDisplay = "";
+            for(int i = 1; i <= messages.size(); i++){
+                textToDisplay += "Message " + i + ":\n" + messages.get(i - 1) + "\n";
+            }
+            
+            //String list = player.getPlayerMessages();
+            JOptionPane.showMessageDialog(null,textToDisplay, "Collected Facts" , JOptionPane.PLAIN_MESSAGE);
         }
         updateGameState();
         return success;
@@ -529,10 +535,16 @@ public class Game
     
     public void displayDialogueBox()
     {
-        count++;
-        String message =  DOCMessages.getFact();
-        JOptionPane.showMessageDialog(null,message, "Fact #" + count, JOptionPane.PLAIN_MESSAGE);
-        player.addMessage(message);
+        try {
+            count++;
+            String message =  DOCMessages.getFact();
+            if(message != null){
+                JOptionPane.showMessageDialog(null,message, "Fact #" + count, JOptionPane.PLAIN_MESSAGE);
+                player.addMessage(message);   
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
@@ -547,6 +559,7 @@ public class Game
                 if (!kiwi.counted()) {
                     kiwi.count();
                     kiwiCount++;
+                    activeKiwisCounted.add(kiwi);
                     displayDialogueBox();
                 }
             }
@@ -576,6 +589,10 @@ public class Game
                     
             // Is there a hazard?
             checkForHazard();
+            
+            //Change kiwi Population
+            player.incrementSteps();
+            changeKiwiPopulation();
 
             updateGameState();            
         }
@@ -643,7 +660,7 @@ public class Game
             }
         }
         // notify listeners about changes
-            notifyGameEventListeners();
+        notifyGameEventListeners();
     }
     
        
@@ -913,8 +930,59 @@ public class Game
             }
         }
     } 
+    
+    public int getCurrentKiwiPopulationOnIsland(){
+        return this.island.getCurrentKiwiPopulationOnIsland();
+    }
  
+    /**
+     * This method is used to change the population of the kiwis on the island.
+     * The population is not varied if no kiwis have been counted
+     * The population is reduced by 1 for every 10 steps the user takes (given the user has counted a kiwi)
+     * The population is increase by 1 for every 12 steps the user takes (give the user has counted a kiwi)
+     * @return 0, if no kiwis have been counted or no kiwis were added
+     *         1, if kiwi is added to the island
+     *        -1, if kiwi is removed from the island
+     */
+    public int changeKiwiPopulation(){
+        int result = 0;
+        List<Position> availablePositionsToAddKiwi = new ArrayList<Position>();
+        //Checks to see if the user has counted any kiwis
+        if (activeKiwisCounted.size() > 0)
+        {       
+            //This is the kiwi that was added last to the list of kiwi counted
+            Kiwi kiwiToRemove = activeKiwisCounted.get(activeKiwisCounted.size() - 1);
 
+            if(player.getNumberOfSteps()%10 == 0)
+            {
+               //When the user takes 10 consecutive steps and has not counted a new kiwi
+               //A kiwi is removed as an occupant and the population of kiwi decrements by 1
+               lastUpdatedKiwisPosition = kiwiToRemove.getPosition();
+               island.removeOccupant(kiwiToRemove.getPosition(), kiwiToRemove);
+               result = -1;
+            }
+            else if(player.getNumberOfSteps()%12 == 0)
+            {
+               //When the user takes 12 consecutive steps and has not counted a new kiwi
+               //A kiwi is added as an occupant and the population of kiwi on the island increments by 1
+                for(int i = 0; i < island.getNumRows(); i++){
+                    for(int j = 0; j < island.getNumColumns(); j++){
+                        Position positionToPlaceKiwi = new Position(island, i, j);
+                        //This checks the availability of the Grid Square for a kiwi to occupy a square 
+                        if(island.isOccupantMoveToPositionPossible(new Kiwi(positionToPlaceKiwi, kiwiToRemove.getName(), kiwiToRemove.getDescription()), positionToPlaceKiwi)){
+                            availablePositionsToAddKiwi.add(positionToPlaceKiwi);
+                        }
+                    } 
+                }
+                if(availablePositionsToAddKiwi.size() > 0){
+                    Position positionToaddKiwi = availablePositionsToAddKiwi.get((new Random()).nextInt(availablePositionsToAddKiwi.size()));
+                    island.addOccupant(positionToaddKiwi, new Kiwi( positionToaddKiwi, kiwiToRemove.getName(), kiwiToRemove.getDescription()));
+                    result = 1;
+                }
+            }
+        }
+        return result;
+    }
     private Island island;
     private KiwiHandler kiwiHandler;
     private Player player;
@@ -924,7 +992,8 @@ public class Game
     private int totalKiwis;
     private int predatorsTrapped;
     private Set<GameEventListener> eventListeners;
-    
+    private List<Kiwi> activeKiwisCounted;
+    private Position lastUpdatedKiwisPosition;
     private final double MIN_REQUIRED_CATCH = 0.8;
         
     private String winMessage = "";
@@ -934,3 +1003,8 @@ public class Game
     private int count = 0;
 
 }
+
+
+
+
+

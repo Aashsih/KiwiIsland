@@ -1,7 +1,6 @@
 package nz.ac.aut.ense701.gameModel;
 
 import java.util.ArrayList;
-import nz.ac.aut.ense701.gameModel.enums.Terrain;
 import nz.ac.aut.ense701.gameModel.occupants.Food;
 import nz.ac.aut.ense701.gameModel.occupants.Tool;
 import java.util.Collection;
@@ -328,10 +327,5 @@ public class PlayerTest extends junit.framework.TestCase
         assertEquals(playerPosition, player.getPosition());
         assertEquals(2.0, player.getStaminaLevel(), 0.01);
     }
-    @Test
-    public void testGetPlayerMessages()
-    {
-        player.addMessage("test 1");
-        assertEquals("test 1\n", player.getPlayerMessages());
-    }
+    
 }

@@ -1,6 +1,5 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gameModel.enums.Terrain;
 import nz.ac.aut.ense701.gameModel.occupants.Occupant;
 import java.security.InvalidParameterException;
 import java.util.HashSet;
@@ -233,7 +232,7 @@ public class GridSquare
     {
         if(occupantToBeAdded == null)
         {
-            throw new IllegalArgumentException("The occupant parameters cannot be null");
+            return false;
         }
         boolean validNewOccupant = occupantToBeAdded != null;
         boolean enoughRoom       = occupants.size() < MAX_OCCUPANTS;

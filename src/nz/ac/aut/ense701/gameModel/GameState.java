@@ -1,5 +1,5 @@
 
-package nz.ac.aut.ense701.gameModel.enums;
+package nz.ac.aut.ense701.gameModel;
 
 /**
  * Enumeration for the current state of the game.
@@ -8,6 +8,6 @@ package nz.ac.aut.ense701.gameModel.enums;
  */
 public enum GameState
 {
-    PLAYING, WON, LOST;
+    PLAYING, WON, LOST, KIWI_POPULATION_CHANGED;
 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nz.ac.aut.ense701.gameModel.enums;
+package nz.ac.aut.ense701.gameModel;
 
 import java.util.HashMap;
 import java.util.Map;
