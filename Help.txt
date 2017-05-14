@@ -16,7 +16,7 @@ which then leads the user to a quiz at the end of the game.
 
 - How do I win the game?
 Accomplishing any of the following while alive will allow you to win the game:
-1. Count all the kiwis along with capturing 80% of the total predators on the Kiwi-island.
+1. Count 10 kiwis along with capturing 80% of the total predators on the Kiwi-island.
 2. Capture all the predators.
 
 - When will I lose?
