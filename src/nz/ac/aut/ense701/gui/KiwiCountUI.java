@@ -111,7 +111,7 @@ public class KiwiCountUI
         pnlGame.setLayout(new BorderLayout());
         quizPanel = new QuizPanel(this, new Quiz(this.game.getPlayerMessages()));
         JScrollPane scrollPane = new JScrollPane(quizPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         pnlGame.add(scrollPane, BorderLayout.CENTER);
         pnlGame.revalidate();
         pnlGame.repaint();
