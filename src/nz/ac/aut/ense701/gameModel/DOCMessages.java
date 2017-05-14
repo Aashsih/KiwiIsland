@@ -34,7 +34,13 @@ public class DOCMessages {
     public static String getFact() throws IOException
     {
         initializeFacts();
-        return messages.pop();
+        
+        if(!messages.isEmpty()){
+            
+            return messages.pop();
+        }
+        return null;
+        
     }
     
     /**
