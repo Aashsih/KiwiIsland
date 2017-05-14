@@ -748,9 +748,9 @@ public class KiwiCountUI
 
     private void listInventoryValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listInventoryValueChanged
         Object item =  listInventory.getSelectedValue();
-        btnDrop.setEnabled(true);
         if ( item != null )
         {
+            btnDrop.setEnabled(true);
             btnUse.setEnabled(game.canUse(item));
             listInventory.setToolTipText(game.getOccupantDescription(item));
             
