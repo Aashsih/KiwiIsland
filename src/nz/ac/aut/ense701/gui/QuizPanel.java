@@ -59,6 +59,15 @@ public class QuizPanel extends javax.swing.JPanel {
      */
     private void addRadioButtons(List<String> options){
         
+        if(optionList != null && !optionList.isEmpty()){
+            
+            for(JRadioButton option : optionList){
+                
+                option.setVisible(false);
+                this.remove(option);
+            }
+        }
+        
         optionList = new ArrayList<JRadioButton>();
         java.awt.GridBagConstraints gridBagConstraints;
         radioButtonGroup = new ButtonGroup();
@@ -79,6 +88,7 @@ public class QuizPanel extends javax.swing.JPanel {
                 optionList.add(radioButton);
             }
         }
+        this.revalidate();
         this.repaint();
     }
     /**
@@ -157,7 +167,7 @@ public class QuizPanel extends javax.swing.JPanel {
         
         int selectedAnswer = getSelectedRadioButton();  
         displayResult(quiz.isAnswerCorrect(question, selectedAnswer), quiz.correctAnswer()-1);
-        prepareQuizPanelForAQuestion(quiz.getNextQuestion());
+        prepareQuizPanelForAQuestion(question = quiz.getNextQuestion());
     }//GEN-LAST:event_btnNextActionPerformed
 
     /**

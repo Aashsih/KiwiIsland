@@ -50,7 +50,7 @@ public class Quiz {
             return questionStack.pop();
         }
     }
-    
+
     /**
      * Checks if the answer passed in the parameter is the correct answer for the question passed in the parameter
      * @param question A Question in the Quiz
