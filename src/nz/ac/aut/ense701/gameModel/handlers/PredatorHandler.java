@@ -86,9 +86,11 @@ public class PredatorHandler extends MovableFaunaHandler{
         Position predatorPosition = predator.getPosition();
         for(int i = predatorPosition.getRow() - PREDATOR_MOVE_RADIUS; i < predatorPosition.getRow() + PREDATOR_MOVE_RADIUS; i++){
             for(int j = predatorPosition.getColumn() - PREDATOR_MOVE_RADIUS; j < predatorPosition.getColumn() + PREDATOR_MOVE_RADIUS; j++){
-                 newPredatorPosition = new Position(island, i, j);
-                 if(moveFauna(predator, newPredatorPosition)){
-                     return newPredatorPosition;
+                 if(Position.isValidPosition(island, i, j)){
+                    newPredatorPosition = new Position(island, i, j);
+                    if(moveFauna(predator, newPredatorPosition)){
+                        return newPredatorPosition;
+                    }
                  }
             }
         }
