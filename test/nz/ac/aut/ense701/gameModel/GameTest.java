@@ -315,7 +315,6 @@ public class GameTest extends junit.framework.TestCase
     
     @Test
     public void testUseItemTrapFinalPredator(){
-        
         assertTrue("Check player moves", trapAllPredators());
         assertTrue("Game should be won", game.getState()== GameState.WON);    
     }
@@ -504,52 +503,25 @@ public class GameTest extends junit.framework.TestCase
         
         //Now player needs to trap all predators
         //Predator 1
-        boolean moveOK = playerMoveEast(5);
+        player.moveToPosition(new Position(island, 0, 7), Terrain.WETLAND);
         game.useItem(trap);
         //Predator 2
-        if(moveOK){
-            moveOK = playerMoveWest(1);
-        }
-        if(moveOK){
-            moveOK = playerMoveSouth(2);
-            game.useItem(trap);
-        }
+        player.moveToPosition(new Position(island, 2, 6), Terrain.WETLAND);
+        game.useItem(trap);
         //Predator 3
-        if(moveOK){
-            moveOK = playerMoveWest(2);
-        }
-        if(moveOK){
-            moveOK = playerMoveSouth(1);
-            game.useItem(trap);
-        }
+        player.moveToPosition(new Position(island, 3, 4), Terrain.WETLAND);
+        game.useItem(trap);
         //Predator 4
-        if(moveOK){
-            moveOK = playerMoveWest(3);
-        }
-        if(moveOK){
-            moveOK = playerMoveSouth(1);
-            game.useItem(trap);
-        }
+        player.moveToPosition(new Position(island, 4, 1), Terrain.WETLAND);
+        game.useItem(trap);
         //Predator 5
-        if(moveOK){
-            moveOK = playerMoveEast(1);
-        }
-        if(moveOK){
-            moveOK = playerMoveSouth(1);
-            game.useItem(trap);
-        }
-         //Predator 6
-        if(moveOK){
-            moveOK = playerMoveEast(2);
-        }
-        if(moveOK){
-            moveOK = playerMoveSouth(1);
-            game.useItem(trap);
-        }
+        player.moveToPosition(new Position(island, 5, 2), Terrain.WETLAND);
+        game.useItem(trap);
+        //Predator 6
+        player.moveToPosition(new Position(island, 6, 4), Terrain.WETLAND);
+        game.useItem(trap);
         //Predator 7
-        if(moveOK){
-            moveOK = playerMoveNorth(1);
-        }
+        boolean moveOK = playerMoveNorth(1);
         if(moveOK){
             moveOK = playerMoveEast(3);
         }
@@ -557,7 +529,62 @@ public class GameTest extends junit.framework.TestCase
             moveOK = playerMoveSouth(4);
             game.useItem(trap);
         }
-        return moveOK;
+        
+//        //Predator 1
+//        boolean moveOK = playerMoveEast(5);
+//        game.useItem(trap);
+//        //Predator 2
+//        if(moveOK){
+//            moveOK = playerMoveWest(1);
+//        }
+//        if(moveOK){
+//            moveOK = playerMoveSouth(2);
+//            game.useItem(trap);
+//        }
+//        //Predator 3
+//        if(moveOK){
+//            moveOK = playerMoveWest(2);
+//        }
+//        if(moveOK){
+//            moveOK = playerMoveSouth(1);
+//            game.useItem(trap);
+//        }
+//        //Predator 4
+//        if(moveOK){
+//            moveOK = playerMoveWest(3);
+//        }
+//        if(moveOK){
+//            moveOK = playerMoveSouth(1);
+//            game.useItem(trap);
+//        }
+//        //Predator 5
+//        if(moveOK){
+//            moveOK = playerMoveEast(1);
+//        }
+//        if(moveOK){
+//            moveOK = playerMoveSouth(1);
+//            game.useItem(trap);
+//        }
+//         //Predator 6
+//        if(moveOK){
+//            moveOK = playerMoveEast(2);
+//        }
+//        if(moveOK){
+//            moveOK = playerMoveSouth(1);
+//            game.useItem(trap);
+//        }
+//        //Predator 7
+//        if(moveOK){
+//            moveOK = playerMoveNorth(1);
+//        }
+//        if(moveOK){
+//            moveOK = playerMoveEast(3);
+//        }
+//        if(moveOK){
+//            moveOK = playerMoveSouth(4);
+//            game.useItem(trap);
+//        }
+        return true;
     }
     
     private boolean playerMoveNorth(int numberOfMoves)
