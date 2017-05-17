@@ -29,7 +29,7 @@ public class QuizFileReader {
     private static Map<String, QuizData> messageToQuizData;
     
     /**
-     * Reads the File "QuizData.txt" if not read already and returns a List<QuizData>
+     * Reads the File "QuizData.json" if not read already and returns a List<QuizData>
      * @return List<QuizData> list of all the Data required for a quiz
      * @throws IOException 
      */

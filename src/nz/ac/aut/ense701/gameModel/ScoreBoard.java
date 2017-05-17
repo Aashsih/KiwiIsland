@@ -26,11 +26,20 @@ public class ScoreBoard {
     
     private static List<Score> scoreBoard;
     
+    /**
+     * Reads the File "PlayerScore.json" if not read already and returns a List<Score>
+     * @return List<Score> list of all the Data required for a quiz
+     * @throws IOException 
+     */
     public static List<Score> getScoreBoard() throws IOException{
         readFromFile();
         return scoreBoard;
     }
     
+    /**
+     * Reads the File "PlayerScore.json" if not read already and stores the data in scoreBoard
+     * @throws IOException 
+     */
     public static void readFromFile() throws IOException{
         if(scoreBoard == null){
             Type targetClassType = new TypeToken<ArrayList<Score>>() {}.getType();
