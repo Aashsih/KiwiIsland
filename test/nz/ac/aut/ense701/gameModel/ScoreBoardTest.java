@@ -11,14 +11,8 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static junit.framework.TestCase.assertEquals;
-import nz.ac.aut.ense701.gameQuiz.QuizData;
-import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
-import nz.ac.aut.ense701.gameQuiz.QuizFileReaderTest;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertEquals;
 
 /**
