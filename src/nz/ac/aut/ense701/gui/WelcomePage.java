@@ -5,6 +5,10 @@
  */
 package nz.ac.aut.ense701.gui;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.ListModel;
 import nz.ac.aut.ense701.gameModel.Game;
 import nz.ac.aut.ense701.gameModel.Score;
@@ -22,13 +27,13 @@ import nz.ac.aut.ense701.gameModel.ScoreBoard;
  * @author aashi
  */
 public class WelcomePage extends javax.swing.JFrame {
-
     /**
      * Creates new form WelcomePage
      */
     public WelcomePage() {
         initComponents();
         initializeScoreBoard();
+        pnlBackground.repaint();
     }
 
     public void startNewGame(){
@@ -50,7 +55,7 @@ public class WelcomePage extends javax.swing.JFrame {
             }
         });
     }
-    
+  
     private void initializeScoreBoard(){
         try {
             List<Score> playerScores = ScoreBoard.getScoreBoard();
@@ -121,11 +126,11 @@ public class WelcomePage extends javax.swing.JFrame {
         pnlBackground.setLayout(pnlBackgroundLayout);
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 366, Short.MAX_VALUE)
+            .addGap(0, 616, Short.MAX_VALUE)
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 273, Short.MAX_VALUE)
+            .addGap(0, 349, Short.MAX_VALUE)
         );
 
         jPanel3.add(pnlBackground, java.awt.BorderLayout.CENTER);
