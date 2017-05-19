@@ -5,11 +5,13 @@
  */
 package nz.ac.aut.ense701.gameModel;
 
+import java.util.Comparator;
+
 /**
  *
  * @author aashi
  */
-public class Score {
+public class Score{
     private String playerName;
     private int score;
 
@@ -29,5 +31,8 @@ public class Score {
         this.score = score;
     }
     
-    
+    @Override
+    public String toString(){
+        return this.getPlayerName() + ":    " + this.getScore();
+    }
 }
