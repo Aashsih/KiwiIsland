@@ -59,18 +59,22 @@ public class WelcomePage extends javax.swing.JFrame {
     private void initializeScoreBoard(){
         try {
             List<Score> playerScores = ScoreBoard.getScoreBoard();
-            Collections.sort(playerScores, new Comparator<Score>(){
-                @Override
-                public int compare(Score o1, Score o2) {
-                    return o2.getScore() - o1.getScore();
+            if(playerScores != null){
+                Collections.sort(playerScores, new Comparator<Score>(){
+                    @Override
+                    public int compare(Score o1, Score o2) {
+                        return o2.getScore() - o1.getScore();
+                    }
+                });
+                DefaultListModel<String> listModel = new DefaultListModel<String>();
+                for(int i = 0; i < playerScores.size(); i++){
+                    listModel.addElement((i + 1) + ". " + playerScores.get(i).toString());
                 }
-            });
-            DefaultListModel<String> listModel = new DefaultListModel<String>();
-            for(int i = 0; i < playerScores.size(); i++){
-                listModel.addElement((i + 1) + ". " + playerScores.get(i).toString());
+                scoreList.setModel(listModel);
             }
-            scoreList.setModel(listModel);
-            
+            else{
+                scoreList.setModel(new DefaultListModel());
+            }
         } catch (IOException ex) {
             Logger.getLogger(WelcomePage.class.getName()).log(Level.SEVERE, null, ex);
         }
