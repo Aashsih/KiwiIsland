@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import nz.ac.aut.ense701.gameModel.handlers.KiwiHandler;
+import nz.ac.aut.ense701.gameModel.handlers.PredatorHandler;
 import nz.ac.aut.ense701.gameModel.occupants.Bait;
 
 /**
@@ -286,6 +287,21 @@ public class Game
     {
         return player.getPlayerMessages();
         
+    }
+    
+    /**
+     * This method is used to get the last updated predator position
+     * @return last updated predator position
+     */
+    public Position getLastUpdatedPredatorPosition(){
+        return lastUpdatedPredatorPosition;
+    }
+    
+    /**
+     * This method is used to set the lastUpdatedPredatorPosition to null
+     */
+    public void removeLastUpdatedPredatorPosition(){
+        this.lastUpdatedPredatorPosition = null;
     }
     
     public void addFact(String fact)
@@ -593,7 +609,7 @@ public class Game
             //Change kiwi Population
             player.incrementSteps();
             changeKiwiPopulation();
-
+            lastUpdatedPredatorPosition = predatorHandler.movePredator(player.getNumberOfSteps());
             updateGameState();            
         }
         return successfulMove;
@@ -807,7 +823,7 @@ public class Game
             int numColumns = input.nextInt();
             island = new Island(numRows, numColumns);
             kiwiHandler = new KiwiHandler(island);
-            
+            predatorHandler = new PredatorHandler(island);
             // read and setup the terrain
             setUpTerrain(input);
 
@@ -985,6 +1001,7 @@ public class Game
     }
     private Island island;
     private KiwiHandler kiwiHandler;
+    private PredatorHandler predatorHandler;
     private Player player;
     private GameState state;
     private int kiwiCount;
@@ -994,6 +1011,7 @@ public class Game
     private Set<GameEventListener> eventListeners;
     private List<Kiwi> activeKiwisCounted;
     private Position lastUpdatedKiwisPosition;
+    private Position lastUpdatedPredatorPosition;
     private final double MIN_REQUIRED_CATCH = 0.8;
         
     private String winMessage = "";

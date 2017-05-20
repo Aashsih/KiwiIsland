@@ -177,28 +177,28 @@ public class KiwiHandler extends MovableFaunaHandler{
         return null;
     }
     
-    /**
-     * This method is used to change the position of the fauna passed in the parameter
-     * to the position passed in the parameter
-     * 
-     * @param fauna, the fauna that needs to be moved
-     * @param position, the position to which the fauna needs to be moved
-     * @return 
-     */
-    @Override
-    protected boolean moveFauna(Fauna fauna, Position position) 
-    {
-        if(playerPosition == null || fauna == null || position == null)
-        {
-            return false;
-        }
-        if(island.isOccupantMoveToPositionPossible(fauna, position))
-        {
-            island.removeOccupant(fauna.getPosition(), fauna);
-            return island.addOccupant(position, fauna);
-        }
-        return false;
-    }
+//    /**
+//     * This method is used to change the position of the fauna passed in the parameter
+//     * to the position passed in the parameter
+//     * 
+//     * @param fauna, the fauna that needs to be moved
+//     * @param position, the position to which the fauna needs to be moved
+//     * @return 
+//     */
+//    @Override
+//    protected boolean moveFauna(Fauna fauna, Position position) 
+//    {
+//        if(fauna == null || position == null)
+//        {
+//            return false;
+//        }
+//        if(island.isOccupantMoveToPositionPossible(fauna, position))
+//        {
+//            island.removeOccupant(fauna.getPosition(), fauna);
+//            return island.addOccupant(position, fauna);
+//        }
+//        return false;
+//    }
 
     
 }

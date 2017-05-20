@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import nz.ac.aut.ense701.gameModel.Game;
+import nz.ac.aut.ense701.gameModel.Position;
 import nz.ac.aut.ense701.gameModel.Terrain;
 
 /*
@@ -73,6 +74,13 @@ public class GridSquarePanel extends javax.swing.JPanel
             lblText.setText("");
             lblText.setBackground(null);
             setBorder(normalBorder);
+        }
+        if(game.getLastUpdatedPredatorPosition() != null){
+            Position lastUpdatedPredatorPosition = game.getLastUpdatedPredatorPosition();
+            if(this.row == lastUpdatedPredatorPosition.getRow() && this.column == lastUpdatedPredatorPosition.getColumn()){
+                lblText.setBackground(Color.ORANGE);
+                game.removeLastUpdatedPredatorPosition();
+            }
         }
     }
     
