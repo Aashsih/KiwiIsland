@@ -331,14 +331,14 @@ public class PlayerTest extends junit.framework.TestCase
     @Test
     public void testInitialScore(){
         
-        assertEquals(player.getPlayerScore(), 100);
+        assertEquals(player.getPlayerScore().getScore(), 100);
     }
     
     @Test
     public void testChangeScore(){
         
         player.changeScore(-50);
-        assertEquals(player.getPlayerScore() , 50);
+        assertEquals(player.getPlayerScore().getScore() , 50);
     }
     
 }
