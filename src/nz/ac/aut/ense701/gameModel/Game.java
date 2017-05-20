@@ -46,8 +46,9 @@ public class Game
     public static final int SIZE_INDEX = 5;
     public static final double LOW_STAMINA_LIMIT = 0.2;
     //Constants of score changes
-    public static final double MOVINGSCORE = -1.0;
-    public static final double CONSERVATIONSCORE = 100.0;
+    public static final int MOVINGSCORE = -1;
+    public static final int CONSERVATIONSCORE = 100;
+    public static final int QUIZSCORE = 50;
     /**
      * A new instance of Kiwi island that reads data from "IslandData.txt".
      */
@@ -614,9 +615,10 @@ public class Game
             player.incrementSteps();
             changeKiwiPopulation();
             lastUpdatedPredatorPosition = predatorHandler.movePredator(player.getNumberOfSteps());
+            player.changeScore(MOVINGSCORE);
             updateGameState();  
             
-            player.changeScore(MOVINGSCORE);
+            
         }
         return successfulMove;
     }
@@ -883,7 +885,7 @@ public class Game
         double playerMaxStamina        = input.nextDouble();
         double playerMaxBackpackWeight = input.nextDouble();
         double playerMaxBackpackSize   = input.nextDouble();
-        double playerStartingScore     = input.nextDouble();
+        int playerStartingScore     = input.nextInt();
         
         Position pos = new Position(island, playerPosRow, playerPosCol);
         player = new Player(pos, playerName, 
@@ -956,6 +958,21 @@ public class Game
     
     public int getCurrentKiwiPopulationOnIsland(){
         return this.island.getCurrentKiwiPopulationOnIsland();
+    }
+    /**
+     * This method gets the player's current score
+     * @return the player's current score
+     */
+    public int getPlayerScore(){
+        
+        return player.getPlayerScore().getScore();
+    }
+    /**
+     * This method adds score when the quiz question has been answered correctly
+     */
+    public void addCorrectAnswerScore(){
+        
+        player.changeScore(QUIZSCORE);
     }
  
     /**

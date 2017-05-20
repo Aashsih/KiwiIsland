@@ -107,7 +107,7 @@ public class GridSquareTest extends junit.framework.TestCase
     
     @Test
     public void testHasPlayerWithPlayer() {
-        Player player = new Player(position,"",25.0, 10.0, 12.0, 100.0);
+        Player player = new Player(position,"",25.0, 10.0, 12.0, 100);
         occupiedSquare.setPlayer(player);
         assertTrue( occupiedSquare.hasPlayer());
     }  

@@ -131,6 +131,11 @@ public class KiwiCountUI
         pnlGame.repaint();
     }
     
+    public void addCorrectAnswerScore(){
+        
+        this.game.addCorrectAnswerScore();
+        txtPlayerScore.setText(Integer.toString(game.getPlayerScore()));
+    }
     private void disablePanelControl(){
         btnCount.setEnabled(false);
         btnDrop.setEnabled(false);
@@ -192,7 +197,7 @@ public class KiwiCountUI
         txtKiwisCounted.setText(Integer.toString(game.getKiwiCount()) );
         txtPredatorsLeft.setText(Integer.toString(game.getPredatorsRemaining()));
         txtKiwiPopulation.setText(Integer.toString(game.getCurrentKiwiPopulationOnIsland()));
-        
+        txtPlayerScore.setText(Integer.toString(game.getPlayerScore()));
         // update inventory list
         listInventory.setListData(game.getPlayerInventory());
         listInventory.clearSelection();
@@ -297,6 +302,8 @@ public class KiwiCountUI
         txtKiwisCounted = new javax.swing.JLabel();
         txtPredatorsLeft = new javax.swing.JLabel();
         txtKiwiPopulation = new javax.swing.JLabel();
+        lblPlayerScore = new javax.swing.JLabel();
+        txtPlayerScore = new javax.swing.JLabel();
         javax.swing.JPanel pnlMovement = new javax.swing.JPanel();
         btnMoveNorth = new javax.swing.JButton();
         btnMoveSouth = new javax.swing.JButton();
@@ -346,7 +353,7 @@ public class KiwiCountUI
         lblKiwiPopulation.setText("Kiwi Population: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(lblKiwiPopulation, gridBagConstraints);
 
@@ -424,37 +431,52 @@ public class KiwiCountUI
         lblPredators.setText("Predators Left:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(lblPredators, gridBagConstraints);
 
         lblKiwisCounted.setText("Kiwis Counted :");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(lblKiwisCounted, gridBagConstraints);
 
         txtKiwisCounted.setText("0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(txtKiwisCounted, gridBagConstraints);
 
         txtPredatorsLeft.setText("P");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(txtPredatorsLeft, gridBagConstraints);
 
         txtKiwiPopulation.setText("0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(txtKiwiPopulation, gridBagConstraints);
+
+        lblPlayerScore.setText("Player Score:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        pnlPlayerData.add(lblPlayerScore, gridBagConstraints);
+
+        txtPlayerScore.setText("S");
+        txtPlayerScore.setToolTipText("");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        pnlPlayerData.add(txtPlayerScore, gridBagConstraints);
 
         pnlPlayer.add(pnlPlayerData, java.awt.BorderLayout.WEST);
 
@@ -829,6 +851,7 @@ public class KiwiCountUI
     private javax.swing.JMenuItem jMenuHelpItem;
     private javax.swing.JLabel lblKiwiPopulation;
     private javax.swing.JLabel lblKiwisCounted;
+    private javax.swing.JLabel lblPlayerScore;
     private javax.swing.JLabel lblPredators;
     private javax.swing.JList listInventory;
     private javax.swing.JList listObjects;
@@ -840,6 +863,7 @@ public class KiwiCountUI
     private javax.swing.JLabel txtKiwiPopulation;
     private javax.swing.JLabel txtKiwisCounted;
     private javax.swing.JLabel txtPlayerName;
+    private javax.swing.JLabel txtPlayerScore;
     private javax.swing.JLabel txtPredatorsLeft;
     // End of variables declaration//GEN-END:variables
 
