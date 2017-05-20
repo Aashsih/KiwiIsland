@@ -877,11 +877,12 @@ public class Game
         double playerMaxStamina        = input.nextDouble();
         double playerMaxBackpackWeight = input.nextDouble();
         double playerMaxBackpackSize   = input.nextDouble();
+        double playerStartingScore     = input.nextDouble();
         
         Position pos = new Position(island, playerPosRow, playerPosCol);
         player = new Player(pos, playerName, 
                 playerMaxStamina, 
-                playerMaxBackpackWeight, playerMaxBackpackSize);
+                playerMaxBackpackWeight, playerMaxBackpackSize, playerStartingScore);
         island.updatePlayerPosition(player);
     }
 

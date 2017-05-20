@@ -28,6 +28,7 @@ public class Player
     private List<String> messages;
     private final double    maxBackpackWeight;
     private final double    maxBackpackSize;   
+    private double playerScore;
     private int numberOfSteps; 
     
     /**
@@ -40,7 +41,7 @@ public class Player
      * @param maxBackpackSize the maximum size items that will fit in the backpack     
      */    
     public Player(Position position, String name, double maxStamina,
-                  double maxBackpackWeight, double maxBackpackSize)
+                  double maxBackpackWeight, double maxBackpackSize, double playerScore)
     {
        this.position          = position;
        this.name              = name;
@@ -48,6 +49,7 @@ public class Player
        this.stamina = maxStamina;
        this.maxBackpackWeight = maxBackpackWeight;
        this.maxBackpackSize = maxBackpackSize;
+       this.playerScore     = playerScore;
        this.alive = true;
        this.backpack = new HashSet<Item>();
        this.messages = new ArrayList<String>();
@@ -385,13 +387,7 @@ public class Player
     public List<String> getPlayerMessages()
     {
         return messages;
-//        String allMessages = "";
-//        
-//        for(String s : messages)
-//        {
-//            allMessages += s + "\n";
-//        }
-//        return allMessages;
+
     }
     
      /**
@@ -412,6 +408,17 @@ public class Player
     //The getters and setters for the incrementSteps method 
     public int getNumberOfSteps() {
         return numberOfSteps;
+    }
+    
+    //Changes the player score
+    public void changeScore(double change){
+        
+        this.playerScore += change;
+    }
+    //Gets current score of the player
+    public double getPlayerScore(){
+        
+        return playerScore;
     }
 
 }
