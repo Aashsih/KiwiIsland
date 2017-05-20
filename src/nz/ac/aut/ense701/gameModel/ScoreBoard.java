@@ -40,10 +40,22 @@ public class ScoreBoard {
      * Reads the File "PlayerScore.json" if not read already and stores the data in scoreBoard
      * @throws IOException 
      */
-    public static void readFromFile() throws IOException{
+    private static void readFromFile() throws IOException{
         if(scoreBoard == null){
             Type targetClassType = new TypeToken<ArrayList<Score>>() {}.getType();
             scoreBoard = (List<Score>) new Gson().fromJson( FileUtils.readFileToString(new File(SCORE_BOARD_FILE_NAME), ENCODING), targetClassType);
         }
+    }
+    
+    /**
+     * Write the List of Score to the PlayerScore.json file
+     */
+    public static void writeScoreToFile(Score playerScore) throws IOException{
+        if(playerScore == null){
+            throw new IllegalArgumentException("The parameter \"playerScore\" cannot be null");
+        }
+        readFromFile();
+        scoreBoard.add(playerScore);
+        FileUtils.writeStringToFile(new File(SCORE_BOARD_FILE_NAME), new Gson().toJson(scoreBoard) , ENCODING);
     }
 }

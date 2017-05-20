@@ -85,7 +85,32 @@ public class ScoreBoardTest extends junit.framework.TestCase{
         }
     }
     
-    
+    @Test
+    public void testWriteScoreToFile(){
+        try {
+            List<Score> scoreBoard = ScoreBoard.getScoreBoard();
+            int currentScoreListSize = scoreBoard.size();
+            Score newScore = new Score("Test Player name", 180);
+            ScoreBoard.writeScoreToFile(newScore);
+            Field scoreBoardField = ScoreBoard.class.getDeclaredField("scoreBoard");
+            scoreBoardField.setAccessible(true);
+            scoreBoardField.set(null, null);
+            scoreBoard = ScoreBoard.getScoreBoard();
+            assertEquals(++currentScoreListSize, scoreBoard.size());
+            assertEquals("Test Player name", scoreBoard.get(scoreBoard.size()-1).getPlayerName());
+            assertEquals(180, scoreBoard.get(scoreBoard.size()-1).getScore());
+        } catch (IOException ex) {
+            Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchFieldException ex) {
+            Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     private String getMockPlayerScoreData(){
         return "[\n" +
