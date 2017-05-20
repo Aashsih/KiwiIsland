@@ -55,7 +55,11 @@ public class ScoreBoard {
             throw new IllegalArgumentException("The parameter \"playerScore\" cannot be null");
         }
         readFromFile();
+        if(scoreBoard == null){
+            scoreBoard = new ArrayList<Score>();
+        }
         scoreBoard.add(playerScore);
         FileUtils.writeStringToFile(new File(SCORE_BOARD_FILE_NAME), new Gson().toJson(scoreBoard) , ENCODING);
+        scoreBoard = null;
     }
 }

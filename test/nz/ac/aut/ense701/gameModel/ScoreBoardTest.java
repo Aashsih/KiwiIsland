@@ -89,12 +89,12 @@ public class ScoreBoardTest extends junit.framework.TestCase{
     public void testWriteScoreToFile(){
         try {
             List<Score> scoreBoard = ScoreBoard.getScoreBoard();
-            int currentScoreListSize = scoreBoard.size();
+            int currentScoreListSize = 0;
+            if(scoreBoard != null){
+                currentScoreListSize = scoreBoard.size();   
+            }
             Score newScore = new Score("Test Player name", 180);
             ScoreBoard.writeScoreToFile(newScore);
-            Field scoreBoardField = ScoreBoard.class.getDeclaredField("scoreBoard");
-            scoreBoardField.setAccessible(true);
-            scoreBoardField.set(null, null);
             scoreBoard = ScoreBoard.getScoreBoard();
             assertEquals(++currentScoreListSize, scoreBoard.size());
             assertEquals("Test Player name", scoreBoard.get(scoreBoard.size()-1).getPlayerName());
@@ -102,10 +102,6 @@ public class ScoreBoardTest extends junit.framework.TestCase{
         } catch (IOException ex) {
             Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalArgumentException ex) {
-            Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchFieldException ex) {
             Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SecurityException ex) {
             Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);

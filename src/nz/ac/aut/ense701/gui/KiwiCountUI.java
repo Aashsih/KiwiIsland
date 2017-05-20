@@ -20,6 +20,7 @@ import nz.ac.aut.ense701.gameModel.GameEventListener;
 import nz.ac.aut.ense701.gameModel.GameHelp;
 import nz.ac.aut.ense701.gameModel.GameState;
 import nz.ac.aut.ense701.gameModel.MoveDirection;
+import nz.ac.aut.ense701.gameModel.ScoreBoard;
 import nz.ac.aut.ense701.gameQuiz.Quiz;
 import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
 
@@ -39,7 +40,7 @@ public class KiwiCountUI
      * Creates a GUI for the KiwiIsland game.
      * @param game the game object to represent with this GUI.
      */
-    public KiwiCountUI(Game game, JFrame parentFrame) 
+    public KiwiCountUI(Game game, WelcomePage parentFrame) 
     {
         assert game != null : "Make sure game object is created before UI";
         assert parentFrame != null : "Make sure parentFrame object is created before UI";
@@ -145,6 +146,12 @@ public class KiwiCountUI
      * Makes the parent Frame visible and disposes itself
      */
     public void disposeKiwiCountUIFrame(){
+        try {
+            ScoreBoard.writeScoreToFile(this.game.getPlayer().getPlayerScore());
+        } catch (IOException ex) {
+            Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        parentFrame.initializeScoreBoard();
         parentFrame.setVisible(true);
         this.dispose();
     }
@@ -899,6 +906,6 @@ public class KiwiCountUI
 
     private Game game;
     private QuizPanel quizPanel;
-    private JFrame parentFrame;
+    private WelcomePage parentFrame;
     private boolean lowStaminaMessageDisplayed;
 }

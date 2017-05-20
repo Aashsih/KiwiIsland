@@ -36,6 +36,9 @@ public class WelcomePage extends javax.swing.JFrame {
         pnlBackground.repaint();
     }
 
+    /**
+     * Starts the KiwiIsland game
+     */
     public void startNewGame(){
         // create the game object
         final Game game = new Game();
@@ -56,7 +59,10 @@ public class WelcomePage extends javax.swing.JFrame {
         });
     }
   
-    private void initializeScoreBoard(){
+    /**
+     * Initializes the JList with player score
+     */
+    public void initializeScoreBoard(){
         try {
             List<Score> playerScores = ScoreBoard.getScoreBoard();
             if(playerScores != null){
