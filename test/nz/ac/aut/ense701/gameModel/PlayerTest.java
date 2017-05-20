@@ -37,7 +37,7 @@ public class PlayerTest extends junit.framework.TestCase
     {
         island = new Island(5,5);
         playerPosition = new Position(island, 0,0);
-        player = new Player(playerPosition,"Lisa Simpson",25.0, 15.0, 20.0);
+        player = new Player(playerPosition,"Lisa Simpson",25.0, 15.0, 20.0, 100);
         sandwich = new Food(playerPosition, "sandwich", "A tasty cheese sandwich", 1.0, 2.0, 1.5);     
        
     }
@@ -326,6 +326,19 @@ public class PlayerTest extends junit.framework.TestCase
         player.moveToPosition(newPosition, Terrain.SCRUB);
         assertEquals(playerPosition, player.getPosition());
         assertEquals(2.0, player.getStaminaLevel(), 0.01);
+    }
+    
+    @Test
+    public void testInitialScore(){
+        
+        assertEquals(player.getPlayerScore().getScore(), 100);
+    }
+    
+    @Test
+    public void testChangeScore(){
+        
+        player.changeScore(-50);
+        assertEquals(player.getPlayerScore().getScore() , 50);
     }
     
 }

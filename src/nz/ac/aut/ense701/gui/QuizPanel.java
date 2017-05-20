@@ -45,7 +45,7 @@ public class QuizPanel extends javax.swing.JPanel {
     private void prepareQuizPanelForAQuestion(Question question){
         if(question == null){
             //finish quiz and start new game
-            this.parentFrame.createNewGame();
+            this.parentFrame.disposeKiwiCountUIFrame();
         }
         else{
             txtPaneQuestion.setText(question.getQuestion());
@@ -171,6 +171,7 @@ public class QuizPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNextActionPerformed
 
     /**
+     * This method is used to display a dialog box to display the result of the quiz
      * 
      * @param result
      * @param selected 
@@ -178,7 +179,9 @@ public class QuizPanel extends javax.swing.JPanel {
     private void displayResult(boolean result, int selected){
         
         if(result){
+            parentFrame.addCorrectAnswerScore();
             JOptionPane.showMessageDialog(parentFrame, "Correct Answer!", "Result", JOptionPane.PLAIN_MESSAGE);
+            
         }
         else{
             String answer = question.getOptions().get(selected);
