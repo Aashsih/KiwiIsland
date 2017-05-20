@@ -28,7 +28,8 @@ public class Player
     private List<String> messages;
     private final double    maxBackpackWeight;
     private final double    maxBackpackSize;   
-    private int numberOfSteps; 
+    private int playerScore;
+    private int numberOfSteps;
     
     /**
      * Constructs a new player object.
@@ -38,9 +39,10 @@ public class Player
      * @param maxStamina the maximum stamina level of the player
      * @param maxBackpackWeight the most weight that can be in a backpack
      * @param maxBackpackSize the maximum size items that will fit in the backpack     
+     * @param playerScore the current score of the player
      */    
     public Player(Position position, String name, double maxStamina,
-                  double maxBackpackWeight, double maxBackpackSize)
+                  double maxBackpackWeight, double maxBackpackSize, int playerScore)
     {
        this.position          = position;
        this.name              = name;
@@ -48,6 +50,7 @@ public class Player
        this.stamina = maxStamina;
        this.maxBackpackWeight = maxBackpackWeight;
        this.maxBackpackSize = maxBackpackSize;
+       this.playerScore     = playerScore;
        this.alive = true;
        this.backpack = new HashSet<Item>();
        this.messages = new ArrayList<String>();
@@ -385,13 +388,7 @@ public class Player
     public List<String> getPlayerMessages()
     {
         return messages;
-//        String allMessages = "";
-//        
-//        for(String s : messages)
-//        {
-//            allMessages += s + "\n";
-//        }
-//        return allMessages;
+
     }
     
      /**
@@ -413,5 +410,16 @@ public class Player
     public int getNumberOfSteps() {
         return numberOfSteps;
     }
-
+    
+    //Changes the player score and sets the score in Score class
+    public void changeScore(int change){
+        
+        this.playerScore += change;
+       
+    }
+    //Gets the current score of the player
+    public Score getPlayerScore(){
+        
+       return new Score(name, playerScore);
+    }
 }
