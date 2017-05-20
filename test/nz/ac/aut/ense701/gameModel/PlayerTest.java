@@ -328,4 +328,17 @@ public class PlayerTest extends junit.framework.TestCase
         assertEquals(2.0, player.getStaminaLevel(), 0.01);
     }
     
+    @Test
+    public void testInitialScore(){
+        
+        assertEquals(player.getPlayerScore(), 100.0);
+    }
+    
+    @Test
+    public void testChangeScore(){
+        
+        player.changeScore(-50.0);
+        assertEquals(player.getPlayerScore() , 50.0);
+    }
+    
 }
