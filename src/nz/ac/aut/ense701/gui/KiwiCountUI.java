@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -38,9 +39,11 @@ public class KiwiCountUI
      * Creates a GUI for the KiwiIsland game.
      * @param game the game object to represent with this GUI.
      */
-    public KiwiCountUI(Game game) 
+    public KiwiCountUI(Game game, JFrame parentFrame) 
     {
         assert game != null : "Make sure game object is created before UI";
+        assert parentFrame != null : "Make sure parentFrame object is created before UI";
+        this.parentFrame = parentFrame;
         this.game = game;
         setAsGameListener();
         initComponents();
@@ -74,7 +77,8 @@ public class KiwiCountUI
                     startQuiz();
                 }
                 else{
-                    game.createNewGame();        
+                    disposeKiwiCountUIFrame();
+                    //game.createNewGame();        
                 }
             } catch (IOException ex) {
                 Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,7 +125,7 @@ public class KiwiCountUI
      * Removes all the components in the pnlGame and starts a new game.
      * @return the current game being played in the KiwiCountUI
      */
-    public void createNewGame(){
+    private void createNewGame(){
         removeAllComponentsFromJPanel(pnlGame);
         resetQuiz();
         game.createNewGame();
@@ -136,6 +140,18 @@ public class KiwiCountUI
         this.game.addCorrectAnswerScore();
         txtPlayerScore.setText(Integer.toString(game.getPlayerScore()));
     }
+
+    /**
+     * Makes the parent Frame visible and disposes itself
+     */
+    public void disposeKiwiCountUIFrame(){
+        parentFrame.setVisible(true);
+        this.dispose();
+    }
+    
+    /**
+     * This method is used to disable the components of the Control Panel
+     */
     private void disablePanelControl(){
         btnCount.setEnabled(false);
         btnDrop.setEnabled(false);
@@ -320,7 +336,8 @@ public class KiwiCountUI
         btnCollect = new javax.swing.JButton();
         btnCount = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        optionsMenu = new javax.swing.JMenu();
+        jMenuRestartItem = new javax.swing.JMenuItem();
         jMenuHelpItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -709,7 +726,15 @@ public class KiwiCountUI
 
         getContentPane().add(pnlContent, java.awt.BorderLayout.CENTER);
 
-        jMenu2.setText("Help");
+        optionsMenu.setText("Options");
+
+        jMenuRestartItem.setText("Restart");
+        jMenuRestartItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuRestartItemActionPerformed(evt);
+            }
+        });
+        optionsMenu.add(jMenuRestartItem);
 
         jMenuHelpItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
         jMenuHelpItem.setText("Help");
@@ -718,9 +743,9 @@ public class KiwiCountUI
                 jMenuHelpItemActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuHelpItem);
+        optionsMenu.add(jMenuHelpItem);
 
-        jMenuBar2.add(jMenu2);
+        jMenuBar2.add(optionsMenu);
 
         setJMenuBar(jMenuBar2);
 
@@ -802,6 +827,10 @@ public class KiwiCountUI
             JOptionPane.showMessageDialog(this, "--No Help Content Found--", "Error", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_jMenuHelpItemActionPerformed
+
+    private void jMenuRestartItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRestartItemActionPerformed
+        this.createNewGame();
+    }//GEN-LAST:event_jMenuRestartItemActionPerformed
     
     @Override
     public void keyTyped(KeyEvent e) {
@@ -846,15 +875,16 @@ public class KiwiCountUI
     private javax.swing.JButton btnMoveSouth;
     private javax.swing.JButton btnMoveWest;
     private javax.swing.JButton btnUse;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuHelpItem;
+    private javax.swing.JMenuItem jMenuRestartItem;
     private javax.swing.JLabel lblKiwiPopulation;
     private javax.swing.JLabel lblKiwisCounted;
     private javax.swing.JLabel lblPlayerScore;
     private javax.swing.JLabel lblPredators;
     private javax.swing.JList listInventory;
     private javax.swing.JList listObjects;
+    private javax.swing.JMenu optionsMenu;
     private javax.swing.JPanel pnlControls;
     private javax.swing.JPanel pnlGame;
     private javax.swing.JProgressBar progBackpackSize;
@@ -869,5 +899,6 @@ public class KiwiCountUI
 
     private Game game;
     private QuizPanel quizPanel;
+    private JFrame parentFrame;
     private boolean lowStaminaMessageDisplayed;
 }

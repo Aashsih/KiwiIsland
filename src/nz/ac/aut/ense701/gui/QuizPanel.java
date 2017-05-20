@@ -45,7 +45,7 @@ public class QuizPanel extends javax.swing.JPanel {
     private void prepareQuizPanelForAQuestion(Question question){
         if(question == null){
             //finish quiz and start new game
-            this.parentFrame.createNewGame();
+            this.parentFrame.disposeKiwiCountUIFrame();
         }
         else{
             txtPaneQuestion.setText(question.getQuestion());
