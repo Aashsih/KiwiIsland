@@ -45,7 +45,9 @@ public class Game
     public static final int MAXSIZE_INDEX = 4;
     public static final int SIZE_INDEX = 5;
     public static final double LOW_STAMINA_LIMIT = 0.2;
-    
+    //Constants of score changes
+    public static final double MOVINGSCORE = -1.0;
+    public static final double CONSERVATIONSCORE = 100.0;
     /**
      * A new instance of Kiwi island that reads data from "IslandData.txt".
      */
@@ -561,6 +563,8 @@ public class Game
         } catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        player.changeScore(CONSERVATIONSCORE);
     }
     
     /**
@@ -610,7 +614,9 @@ public class Game
             player.incrementSteps();
             changeKiwiPopulation();
             lastUpdatedPredatorPosition = predatorHandler.movePredator(player.getNumberOfSteps());
-            updateGameState();            
+            updateGameState();  
+            
+            player.changeScore(MOVINGSCORE);
         }
         return successfulMove;
     }

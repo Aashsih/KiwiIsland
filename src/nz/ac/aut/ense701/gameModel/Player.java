@@ -30,6 +30,7 @@ public class Player
     private final double    maxBackpackSize;   
     private double playerScore;
     private int numberOfSteps; 
+    private Score score;
     
     /**
      * Constructs a new player object.
@@ -39,6 +40,7 @@ public class Player
      * @param maxStamina the maximum stamina level of the player
      * @param maxBackpackWeight the most weight that can be in a backpack
      * @param maxBackpackSize the maximum size items that will fit in the backpack     
+     * @param playerScore the current score of the player
      */    
     public Player(Position position, String name, double maxStamina,
                   double maxBackpackWeight, double maxBackpackSize, double playerScore)
@@ -53,6 +55,9 @@ public class Player
        this.alive = true;
        this.backpack = new HashSet<Item>();
        this.messages = new ArrayList<String>();
+       score = new Score();
+       score.setPlayerName(name);
+       score.setScore((int)playerScore);
     }   
     
     /*****************************************************************************************************
@@ -410,15 +415,15 @@ public class Player
         return numberOfSteps;
     }
     
-    //Changes the player score
+    //Changes the player score and sets the score in Score class
     public void changeScore(double change){
         
         this.playerScore += change;
+        score.setScore((int)playerScore);
     }
-    //Gets current score of the player
+    //Gets the current score of the player
     public double getPlayerScore(){
         
-        return playerScore;
+       return (double) score.getScore();
     }
-
 }
