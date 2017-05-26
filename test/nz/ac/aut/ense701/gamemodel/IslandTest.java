@@ -194,29 +194,26 @@ public class IslandTest extends junit.framework.TestCase
     {
        Position p1 = new Position(testIsland, 1,3);
        Position p2 = new Position(testIsland, 2,4);
-       Position p3 = new Position(testIsland, 5,5);
        Position p4 = new Position(testIsland, 4,3);
-       Position p5 = new Position(testIsland, 1,4);
+       Position p3 = new Position(testIsland, 1,4);
        
         
         Kiwi kiwi = new Kiwi(p1, "bob", "a beautiful kiwi");
         Kiwi kiwi1 = new Kiwi(p2, "amy", "a nto beautiful kiwi");
-        Kiwi kiwi2 = new Kiwi(p3, "jess", "a very beautiful kiwi");
         Kiwi kiwi3 = new Kiwi(p4, "kim", "a very very beautiful kiwi");
-        Kiwi kiwi4 = new Kiwi(p5, "sam", "a very very very beautiful kiwi");
+        Kiwi kiwi4 = new Kiwi(p3, "sam", "a very very very beautiful kiwi");
         
         
         
         testIsland = new Island(10,10);
         testIsland.addOccupant(p1, kiwi);
         testIsland.addOccupant(p2, kiwi1);
-        testIsland.addOccupant(p3, kiwi2);
         testIsland.addOccupant(p4, kiwi3);
-        testIsland.addOccupant(p5, kiwi4);
+        testIsland.addOccupant(p3, kiwi4);
         
         
         testIsland.getCurrentKiwiPopulationOnIsland();
-        assertEquals(5, testIsland.getCurrentKiwiPopulationOnIsland()); 
+        assertEquals(4, testIsland.getCurrentKiwiPopulationOnIsland()); 
     }
 
 

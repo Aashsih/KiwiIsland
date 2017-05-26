@@ -32,7 +32,7 @@ public class ScoreBoard {
      */
     public static List<Score> getScoreBoard() throws IOException{
         readFromFile();
-        return Collections.unmodifiableList(scoreBoard);
+        return scoreBoard;
     }
     
     /**

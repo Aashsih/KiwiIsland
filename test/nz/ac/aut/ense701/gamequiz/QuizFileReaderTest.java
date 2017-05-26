@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nz.ac.aut.ense701.game_quiz;
+package nz.ac.aut.ense701.gamequiz;
 
 import nz.ac.aut.ense701.gamequiz.QuizFileReader;
 import nz.ac.aut.ense701.gamequiz.QuizData;
