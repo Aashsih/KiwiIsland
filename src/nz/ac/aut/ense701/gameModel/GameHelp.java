@@ -36,6 +36,7 @@ public class GameHelp
      * as read from the text file specified at the FILE_LOCATION
      * 
      * @return string representation of the Help for KiwiIsland Game
+     * @throws java.io.IOException
      */
     public static String getGameHelpInfo() throws IOException
     {

@@ -225,8 +225,10 @@ public class Island
         }
         if ( success ) // Can fail if square already full or occupant already there
         { 
-            //update the occupants address
-            occupant.setPosition(position);
+            if(occupant != null){
+                //update the occupants address
+                occupant.setPosition(position);   
+            }
         }
         return success;
     }    
@@ -268,7 +270,7 @@ public class Island
             GridSquare gridSquare = getGridSquare(position);
             success = gridSquare.removeOccupant(occupant);
         }
-        if ( success )
+        if ( success && occupant != null )
         {
             //update the occupants address to the "not on island position"
             occupant.setPosition(Position.NOT_ON_ISLAND);
@@ -331,14 +333,14 @@ public class Island
                 for ( int i = cellOccupant.length() ; i < CELL_SIZE ; i++ ) {
                     cellOccupant.append(" ");
                 }
-                rowOccupant.append(cellOccupant + "|");
+                rowOccupant.append(cellOccupant).append("|");
                 
                 // create string with terrain
                 StringBuilder cellTerrain = new StringBuilder();
                 for ( int i = 0 ; i < CELL_SIZE ; i++ ) {
                     cellTerrain.append(g.getTerrainStringRepresentation());
                 }
-                rowTerrain.append(cellTerrain + "|");
+                rowTerrain.append(cellTerrain).append("|");
             }
             System.out.println(horizontalLine);
             System.out.println(rowOccupant);
@@ -408,16 +410,16 @@ public class Island
     
     public int getCurrentKiwiPopulationOnIsland(){
 	int numberOfKiwisOnIsland = 0;
-	for(int i = 0; i < this.islandGrid.length; i++){
-		for(int j = 0; j < this.islandGrid[i].length; j++){
-			Occupant[] gridSquareOccupants = this.islandGrid[i][j].getOccupants();
-			for(Occupant anOccupant : gridSquareOccupants){
-				if(anOccupant instanceof Kiwi){
-					numberOfKiwisOnIsland++;
-				}
-			}
-		}
-	}
+        for (GridSquare[] landGrid : this.islandGrid) {
+            for (GridSquare landGrid1 : landGrid) {
+                Occupant[] gridSquareOccupants = landGrid1.getOccupants();
+                for(Occupant anOccupant : gridSquareOccupants){
+                    if(anOccupant instanceof Kiwi){
+                        numberOfKiwisOnIsland++;
+                    }
+                }
+            }
+        }
 	return numberOfKiwisOnIsland;
     }
 

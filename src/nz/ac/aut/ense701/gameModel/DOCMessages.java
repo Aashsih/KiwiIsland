@@ -18,10 +18,15 @@ public class DOCMessages {
    
     private static Stack<String> messages;
     
+    private DOCMessages(){
+        
+    }
+    
     /**
      * This method returns one fact from the priority queue at a time
      * 
      * @return one fact from the entire queue
+     * @throws java.io.IOException
     */
     public static String getFact() throws IOException
     {

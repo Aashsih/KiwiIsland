@@ -22,7 +22,7 @@ public class GridSquare
     private boolean visible;
     private boolean explored;
     private Player  player;
-    private Set<Occupant> occupants;
+    private final Set<Occupant> occupants;
   
     /**
      * Creates a new GridSquare instance.
@@ -234,17 +234,18 @@ public class GridSquare
         {
             return false;
         }
-        boolean validNewOccupant = occupantToBeAdded != null;
+        
         boolean enoughRoom       = occupants.size() < MAX_OCCUPANTS;
-        if ( validNewOccupant && enoughRoom ) 
+        if ( !enoughRoom ) 
         {
+        } else {
             for(Occupant existingOccupant : occupants)
             {
                 if(existingOccupant instanceof Hazard || 
                         (existingOccupant instanceof Kiwi && occupantToBeAdded instanceof Kiwi))
-                //if Hazard is already occupying that space, then no other occupant should be added here
-                //OR
-                //if a kiwi already exists on the block
+                    //if Hazard is already occupying that space, then no other occupant should be added here
+                    //OR
+                    //if a kiwi already exists on the block
                 {
                     return false;
                 }

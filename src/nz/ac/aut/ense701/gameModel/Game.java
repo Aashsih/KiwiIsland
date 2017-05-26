@@ -46,9 +46,9 @@ public class Game
     public static final int SIZE_INDEX = 5;
     public static final double LOW_STAMINA_LIMIT = 0.2;
     //Constants of score changes
-    public static final int MOVINGSCORE = -1;
-    public static final int CONSERVATIONSCORE = 100;
-    public static final int QUIZSCORE = 50;
+    public static final int MOVING_SCORE = -1;
+    public static final int CONSERVATION_SCORE = 100;
+    public static final int QUIZ_SCORE = 50;
     
     private Island island;
     private KiwiHandler kiwiHandler;
@@ -59,7 +59,7 @@ public class Game
     private int totalPredators;
     private int totalKiwis;
     private int predatorsTrapped;
-    private Set<GameEventListener> eventListeners;
+    private final Set<GameEventListener> eventListeners;
     private List<Kiwi> activeKiwisCounted;
     private Position lastUpdatedKiwisPosition;
     private Position lastUpdatedPredatorPosition;
@@ -82,7 +82,7 @@ public class Game
      * Starts a new game.
      * At this stage data is being read from a text file
      */
-    public void createNewGame()
+    public final void createNewGame()
     {
         activeKiwisCounted = new ArrayList<Kiwi>();
         count = 0;
@@ -349,7 +349,9 @@ public class Game
         if(result)
         {
             Item item = (Item) itemToCollect;
-            result = item.isOkToCarry();
+            if(item != null){
+                result = item.isOkToCarry();
+            }
         }
         return result;
     }
@@ -365,7 +367,9 @@ public class Game
         if(result)
         {
             Kiwi kiwi = (Kiwi) itemToCount;
-            result = !kiwi.counted();
+            if(kiwi != null){
+                result = !kiwi.counted();   
+            }
         }
         return result;
     }
@@ -460,7 +464,7 @@ public class Game
         if(success)
         {
             // player has picked up an item: remove from grid square
-            island.removeOccupant(player.getPosition(), (Item)item);
+            island.removeOccupant(player.getPosition(), (Occupant)item);
             
             
             // everybody has to know about the change
@@ -514,7 +518,7 @@ public class Game
     public boolean useItem(Object item)
     {  
         boolean success = false;
-        if ( item instanceof Food && player.hasItem((Food) item) )
+        if ( item instanceof Food && player.hasItem((Item) item) )
         //Player east food to increase stamina
         {
             Food food = (Food) item;
@@ -525,7 +529,7 @@ public class Game
             // use successful: everybody has to know that
             notifyGameEventListeners();
         }
-        else if ( item instanceof Bait && player.hasItem((Bait) item) )
+        else if ( item instanceof Bait && player.hasItem((Item) item) )
         //Player uses Bait to attract kiwis
         {
             Bait bait = (Bait) item;
@@ -561,7 +565,7 @@ public class Game
             List<String> messages = player.getPlayerMessages();
             StringBuilder textToDisplay = new StringBuilder();
             for(int i = 1; i <= messages.size(); i++){
-                textToDisplay.append("Message " + i + ":\n" + messages.get(i - 1) + "\n");
+                textToDisplay.append("Message ").append(i).append(":\n").append(messages.get(i - 1)).append("\n");
             }
             
             //String list = player.getPlayerMessages();
@@ -584,7 +588,7 @@ public class Game
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        player.changeScore(CONSERVATIONSCORE);
+        player.changeScore(CONSERVATION_SCORE);
     }
     
     /**
@@ -634,7 +638,7 @@ public class Game
             player.incrementSteps();
             changeKiwiPopulation();
             lastUpdatedPredatorPosition = predatorHandler.movePredator(player.getNumberOfSteps());
-            player.changeScore(MOVINGSCORE);
+            player.changeScore(MOVING_SCORE);
             updateGameState();  
             
             
@@ -998,7 +1002,7 @@ public class Game
      */
     public void addCorrectAnswerScore(){
         
-        player.changeScore(QUIZSCORE);
+        player.changeScore(QUIZ_SCORE);
     }
  
     /**

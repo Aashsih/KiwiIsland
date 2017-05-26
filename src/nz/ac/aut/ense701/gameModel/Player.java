@@ -24,8 +24,8 @@ public class Player
     private final double    maxStamina;
     private double    stamina;
     private boolean   alive;
-    private Set<Item> backpack;
-    private List<String> messages;
+    private final Set<Item> backpack;
+    private final List<String> messages;
     private final double    maxBackpackWeight;
     private final double    maxBackpackSize;   
     private int playerScore;
@@ -362,7 +362,7 @@ public class Player
     /**
      * Moves the player over terrain to a new position.
      * 
-     * @param position the new position of the player
+     * @param newPosition the new position of the player
      * @param terrain the terrain to move over
      */
     public void moveToPosition(Position newPosition, Terrain terrain)
@@ -387,7 +387,7 @@ public class Player
      */
     public List<String> getPlayerMessages()
     {
-        return messages;
+        return Collections.unmodifiableList(messages);
 
     }
     
@@ -404,7 +404,8 @@ public class Player
      // A method used to increment the number of steps taken by the user
     //returns the number of steps and is called in the Game class to be used 
     public int incrementSteps(){
-        return ++numberOfSteps;
+        ++numberOfSteps;
+        return numberOfSteps;
     }
     //The getters and setters for the incrementSteps method 
     public int getNumberOfSteps() {
