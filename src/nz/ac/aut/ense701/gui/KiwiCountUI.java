@@ -808,7 +808,7 @@ public class KiwiCountUI
             btnUse.setEnabled(game.canUse(item));
             listInventory.setToolTipText(game.getOccupantDescription(item));
             
-            if(item.toString().equalsIgnoreCase("Messages"))
+            if("Messages".equalsIgnoreCase(item.toString()))
             {
                 btnUse.setEnabled(true);
                 btnDrop.setEnabled(false);
@@ -832,6 +832,7 @@ public class KiwiCountUI
             //JOptionPane.showMessageDialog(this, GameHelp.getGameHelpInfo(), "Help", JOptionPane.PLAIN_MESSAGE);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "--No Help Content Found--", "Error", JOptionPane.PLAIN_MESSAGE);
+            Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuHelpItemActionPerformed
 
