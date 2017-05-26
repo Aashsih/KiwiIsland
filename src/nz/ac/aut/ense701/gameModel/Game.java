@@ -349,9 +349,7 @@ public class Game
         if(result)
         {
             Item item = (Item) itemToCollect;
-            if(item != null){
-                result = item.isOkToCarry();
-            }
+            result = item.isOkToCarry();            
         }
         return result;
     }
