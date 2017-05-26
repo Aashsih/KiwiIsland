@@ -11,8 +11,8 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
-import nz.ac.aut.ense701.game_quiz.Question;
-import nz.ac.aut.ense701.game_quiz.Quiz;
+import nz.ac.aut.ense701.gamequiz.Question;
+import nz.ac.aut.ense701.gamequiz.Quiz;
 
 /**
  *

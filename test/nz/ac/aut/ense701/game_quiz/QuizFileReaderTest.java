@@ -5,8 +5,8 @@
  */
 package nz.ac.aut.ense701.game_quiz;
 
-import nz.ac.aut.ense701.game_quiz.QuizFileReader;
-import nz.ac.aut.ense701.game_quiz.QuizData;
+import nz.ac.aut.ense701.gamequiz.QuizFileReader;
+import nz.ac.aut.ense701.gamequiz.QuizData;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static junit.framework.TestCase.assertEquals;
-import nz.ac.aut.ense701.game_model.GameHelp;
-import nz.ac.aut.ense701.game_model.GameHelpTest;
+import nz.ac.aut.ense701.gamemodel.GameHelp;
+import nz.ac.aut.ense701.gamemodel.GameHelpTest;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
