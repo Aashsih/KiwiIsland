@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import nz.ac.aut.ense701.gameModel.Game;
-import nz.ac.aut.ense701.gameModel.Score;
-import nz.ac.aut.ense701.gameModel.ScoreBoard;
+import nz.ac.aut.ense701.game_model.Game;
+import nz.ac.aut.ense701.game_model.Score;
+import nz.ac.aut.ense701.game_model.ScoreBoard;
 
 /**
  *

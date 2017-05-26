@@ -13,15 +13,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import nz.ac.aut.ense701.gameModel.DOCMessages;
-import nz.ac.aut.ense701.gameModel.Game;
-import nz.ac.aut.ense701.gameModel.GameEventListener;
-import nz.ac.aut.ense701.gameModel.GameHelp;
-import nz.ac.aut.ense701.gameModel.GameState;
-import nz.ac.aut.ense701.gameModel.MoveDirection;
-import nz.ac.aut.ense701.gameModel.ScoreBoard;
-import nz.ac.aut.ense701.gameQuiz.Quiz;
-import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
+import nz.ac.aut.ense701.game_model.DOCMessages;
+import nz.ac.aut.ense701.game_model.Game;
+import nz.ac.aut.ense701.game_model.GameEventListener;
+import nz.ac.aut.ense701.game_model.GameHelp;
+import nz.ac.aut.ense701.game_model.GameState;
+import nz.ac.aut.ense701.game_model.MoveDirection;
+import nz.ac.aut.ense701.game_model.ScoreBoard;
+import nz.ac.aut.ense701.game_quiz.Quiz;
+import nz.ac.aut.ense701.game_quiz.QuizFileReader;
 
 /*
  * User interface form for Kiwi Island.

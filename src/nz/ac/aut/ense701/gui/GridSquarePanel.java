@@ -3,9 +3,9 @@ package nz.ac.aut.ense701.gui;
 import java.awt.Color;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import nz.ac.aut.ense701.gameModel.Game;
-import nz.ac.aut.ense701.gameModel.Position;
-import nz.ac.aut.ense701.gameModel.Terrain;
+import nz.ac.aut.ense701.game_model.Game;
+import nz.ac.aut.ense701.game_model.Position;
+import nz.ac.aut.ense701.game_model.Terrain;
 
 /*
  * Panel for representing a single GridSquare of the island on the GUI.
