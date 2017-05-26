@@ -656,7 +656,7 @@ public class Game
      */
     private void updateGameState()
     {
-        String message = null;
+        String message;
         if ( !player.isAlive() )
         {
             state = GameState.LOST;
