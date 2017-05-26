@@ -1,5 +1,6 @@
 package nz.ac.aut.ense701.gameModel;
 
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import nz.ac.aut.ense701.gameModel.occupants.Predator;
 import nz.ac.aut.ense701.gameModel.occupants.Occupant;
 import nz.ac.aut.ense701.gameModel.occupants.Item;
@@ -461,7 +462,7 @@ public class Game
     {
         //if condition to check if player tries to drop the messages, the software doesn't crash
         //nor does it allow the player to drop the messages.
-        if(what.toString().equals("Messages"))
+        if("Messages".equals(what.toString()))
         {
             return false;
         }
@@ -537,12 +538,12 @@ public class Game
                     }
             }
         }
-        else if (item.toString().equalsIgnoreCase("Messages"))
+        else if ("Messages".equalsIgnoreCase(item.toString()))
         {
             List<String> messages = player.getPlayerMessages();
-            String textToDisplay = "";
+            StringBuilder textToDisplay = new StringBuilder();
             for(int i = 1; i <= messages.size(); i++){
-                textToDisplay += "Message " + i + ":\n" + messages.get(i - 1) + "\n";
+                textToDisplay.append("Message " + i + ":\n" + messages.get(i - 1) + "\n");
             }
             
             //String list = player.getPlayerMessages();
@@ -655,7 +656,7 @@ public class Game
      */
     private void updateGameState()
     {
-         String message = "";
+        String message = null;
         if ( !player.isAlive() )
         {
             state = GameState.LOST;
@@ -819,9 +820,10 @@ public class Game
      */
     private void initialiseIslandFromFile(String fileName) 
     {
+        Scanner input = null;
         try
         {
-            Scanner input = new Scanner(new File(fileName));
+            input = new Scanner(new File(fileName));
             // make sure decimal numbers are read in the form "123.23"
             input.useLocale(Locale.US);
             input.useDelimiter("\\s*,\\s*");
@@ -841,15 +843,21 @@ public class Game
             // read and setup the occupants
             setUpOccupants(input);
 
-            input.close();
         }
         catch(FileNotFoundException e)
         {
             System.err.println("Unable to find data file '" + fileName + "'");
+            LOGGER.info(e.getMessage());
         }
         catch(IOException e)
         {
             System.err.println("Problem encountered processing file.");
+            LOGGER.info(e.getMessage());
+        }
+        finally{
+            if(input != null){
+                input.close();
+            }
         }
     }
 
@@ -988,7 +996,7 @@ public class Game
         int result = 0;
         List<Position> availablePositionsToAddKiwi = new ArrayList<Position>();
         //Checks to see if the user has counted any kiwis
-        if (activeKiwisCounted.size() > 0)
+        if (!activeKiwisCounted.isEmpty())
         {       
             //This is the kiwi that was added last to the list of kiwi counted
             Kiwi kiwiToRemove = activeKiwisCounted.get(activeKiwisCounted.size() - 1);
@@ -1014,7 +1022,7 @@ public class Game
                         }
                     } 
                 }
-                if(availablePositionsToAddKiwi.size() > 0){
+                if(!availablePositionsToAddKiwi.isEmpty()){
                     Position positionToaddKiwi = availablePositionsToAddKiwi.get((new Random()).nextInt(availablePositionsToAddKiwi.size()));
                     island.addOccupant(positionToaddKiwi, new Kiwi( positionToaddKiwi, kiwiToRemove.getName(), kiwiToRemove.getDescription()));
                     result = 1;

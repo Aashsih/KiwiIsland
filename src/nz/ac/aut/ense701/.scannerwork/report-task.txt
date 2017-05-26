@@ -1,5 +1,5 @@
 projectKey=JavaProject
 serverUrl=http://localhost:9000
 dashboardUrl=http://localhost:9000/dashboard/index/JavaProject
-ceTaskId=AVxDTfOM9SjFzZxYlqHg
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AVxDTfOM9SjFzZxYlqHg
+ceTaskId=AVxDWicW9SjFzZxYlqHh
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVxDWicW9SjFzZxYlqHh
