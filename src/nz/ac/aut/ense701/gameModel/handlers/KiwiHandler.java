@@ -40,7 +40,7 @@ public class KiwiHandler extends MovableFaunaHandler{
     /**
      * This method is called when the player uses a bait to attract kiwis close to him/her.
      * 
-     * @param playerPostion, stores the current position of the player
+     * @param playerPosition stores the current position of the player
      * @return 
      */
     public String attractKiwis(Position playerPosition){
@@ -131,8 +131,10 @@ public class KiwiHandler extends MovableFaunaHandler{
         if(kiwi.getPosition().getColumn() < playerPosition.getColumn())
         //If kiwi is to the left of the player
         {
-            if(island.isOccupantMoveToPositionPossible(kiwi, position = new Position(island, kiwi.getPosition().getRow(), kiwi.getPosition().getColumn() + 1)))
-            //if kiwi can move to the right
+            position = new Position(island, kiwi.getPosition().getRow(), kiwi.getPosition().getColumn() + 1);
+            if(!island.isOccupantMoveToPositionPossible(kiwi, position))
+            {
+            } else //if kiwi can move to the right
             {
                 return position;
             }
@@ -140,8 +142,10 @@ public class KiwiHandler extends MovableFaunaHandler{
         else if(kiwi.getPosition().getColumn() > playerPosition.getColumn())
         //kiwi is to the right of the player
         {
-            if(island.isOccupantMoveToPositionPossible(kiwi, position = new Position(island, kiwi.getPosition().getRow(), kiwi.getPosition().getColumn() - 1)))
-            //if kiwi can move to the left
+            position = new Position(island, kiwi.getPosition().getRow(), kiwi.getPosition().getColumn() - 1);
+            if(!island.isOccupantMoveToPositionPossible(kiwi, position))
+                        {
+            } else //if kiwi can move to the left
             {
                 return position;
             }

@@ -30,6 +30,7 @@ import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
  * @version July 2011
  */
 
+@SuppressWarnings("serial")
 public class KiwiCountUI 
     extends javax.swing.JFrame 
     implements GameEventListener, KeyListener
@@ -42,6 +43,7 @@ public class KiwiCountUI
     /**
      * Creates a GUI for the KiwiIsland game.
      * @param game the game object to represent with this GUI.
+     * @param parentFrame
      */
     public KiwiCountUI(Game game, WelcomePage parentFrame) 
     {
@@ -112,6 +114,7 @@ public class KiwiCountUI
     
     /**
      * Initializes the Quiz game flow by adding the QuizPanel to the pnlGame
+     * @throws java.io.IOException
      */
     public void startQuiz() throws IOException{
         removeAllComponentsFromJPanel(pnlGame);
@@ -162,6 +165,7 @@ public class KiwiCountUI
     /**
      * This method is used to disable the components of the Control Panel
      */
+    @SuppressWarnings("unchecked")
     private void disablePanelControl(){
         btnCount.setEnabled(false);
         btnDrop.setEnabled(false);
@@ -195,6 +199,7 @@ public class KiwiCountUI
     /**
      * Updates the state of the UI based on the state of the game.
      */
+    @SuppressWarnings("unchecked")
     private void update()
     {
         // update the grid square panels

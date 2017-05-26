@@ -5,6 +5,7 @@
  */
 package nz.ac.aut.ense701.gameQuiz;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class Question {
     }
 
     public List<String> getOptions() {
-        return options;
+        return Collections.unmodifiableList(options);
     }
     
 }

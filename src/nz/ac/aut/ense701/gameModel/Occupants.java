@@ -12,6 +12,7 @@ import java.util.Map;
  *
  * @author aashi
  */
+@SuppressWarnings("AccessingNonPublicFieldOfAnotherObject")
 public enum Occupants {
     FAUNA("F"),
     FOOD("E"),
@@ -21,11 +22,13 @@ public enum Occupants {
     TOOL("T"),
     BAIT("B");
     
-    private static Map<String, Occupants> representationToOccupant = new HashMap<String, Occupants>();
+    private static final Map<String, Occupants> representationToOccupant = new HashMap<String, Occupants>();
 
     static {
         for(Occupants occupant : Occupants.values()){
-            representationToOccupant.put(occupant.representation,occupant);
+            @SuppressWarnings("AccessingNonPublicFieldOfAnotherObject")
+            Occupants put;
+            put = representationToOccupant.put(occupant.representation,occupant);
         }
     }
 

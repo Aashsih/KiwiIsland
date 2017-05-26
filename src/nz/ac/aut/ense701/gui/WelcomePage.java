@@ -20,6 +20,7 @@ import nz.ac.aut.ense701.gameModel.ScoreBoard;
  *
  * @author aashi
  */
+@SuppressWarnings("serial")
 public class WelcomePage extends javax.swing.JFrame {
     /**
      * Creates new form WelcomePage
@@ -74,7 +75,7 @@ public class WelcomePage extends javax.swing.JFrame {
                 scoreList.setModel(listModel);
             }
             else{
-                scoreList.setModel(new DefaultListModel());
+                scoreList.setModel(new DefaultListModel<String>());
             }
         } catch (IOException ex) {
             Logger.getLogger(WelcomePage.class.getName()).log(Level.SEVERE, null, ex);

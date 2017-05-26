@@ -12,15 +12,17 @@ import java.util.Map;
  *
  * @author aashi
  */
+@SuppressWarnings("AccessingNonPublicFieldOfAnotherObject")
 public enum Tools {
     SCREW_DRIVER("Screwdriver"), 
     TRAP("Trap");
     
-    private static Map<String, Tools> representationToTool = new HashMap<String, Tools>();
+    private static final Map<String, Tools> representationToTool = new HashMap<String, Tools>();
 
     static {
         for(Tools tool : Tools.values()){
-            representationToTool.put(tool.representation,tool);
+            Tools put;
+            put = representationToTool.put(tool.representation,tool);
         }
     }
 

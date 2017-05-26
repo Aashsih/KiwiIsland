@@ -37,7 +37,7 @@ public class Position
             throw new IllegalArgumentException(
                     "Island parameter cannot be null");
         }
-        if ( ((row < 0) || (row >= island.getNumRows())) || (column < 0) || (column >= island.getNumRows()))
+        if ( ((row < 0) || (row >= island.getNumRows())) || (column < 0) || (column >= island.getNumColumns()))
         {
             return false;
         }

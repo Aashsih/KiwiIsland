@@ -29,8 +29,8 @@ public class QuizFileReader {
     private static Map<String, QuizData> messageToQuizData;
     
     /**
-     * Reads the File "QuizData.json" if not read already and returns a List<QuizData>
-     * @return List<QuizData> list of all the Data required for a quiz
+     * Reads the File "QuizData.json" if not read already and returns a List of QuizData
+     * @return List of QuizData list of all the Data required for a quiz
      * @throws IOException 
      */
     @SuppressWarnings("unchecked")
@@ -44,6 +44,7 @@ public class QuizFileReader {
      * Returns the QuizData corresponding to the message passed in the parameter
      * @param message contains the message for which the QuizData is required
      * @return QuizData corresponding to the message passed as a parameter
+     * @throws java.io.IOException
      */
     public static final QuizData getQuizDataForMessage(String message) throws IOException{
         if(messageToQuizData == null){
@@ -64,6 +65,7 @@ public class QuizFileReader {
      * Reads the File "QuizData.txt" if not read already and stores the data in quizData and messageToQuizData
      * @throws IOException 
      */
+    @SuppressWarnings("unchecked")
     private static void readQuizDataFromFile() throws IOException{
         if(quizData == null){
             Type targetClassType = new TypeToken<ArrayList<QuizData>>() {}.getType();

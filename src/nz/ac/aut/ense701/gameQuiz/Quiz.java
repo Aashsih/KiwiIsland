@@ -63,7 +63,7 @@ public class Quiz {
             return false;
         }
         if(questionToAnswer.containsKey(question)){
-            int correctAnswer = questionToAnswer.get(question).intValue();
+            int correctAnswer = questionToAnswer.get(question);
             if(proposedAnswer == correctAnswer){
                 return true;
             }
@@ -90,6 +90,7 @@ public class Quiz {
     }
     /**
      * Displays a dialogue box to show the correct answer of the current question
+     * @return answer to the question as an integer
      */
     public int correctAnswer(){
 

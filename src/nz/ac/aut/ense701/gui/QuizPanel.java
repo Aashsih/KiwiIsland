@@ -18,6 +18,7 @@ import nz.ac.aut.ense701.gameQuiz.Quiz;
  *
  * @author aashi
  */
+@SuppressWarnings("serial")
 public class QuizPanel extends javax.swing.JPanel {
     
     private Quiz quiz;

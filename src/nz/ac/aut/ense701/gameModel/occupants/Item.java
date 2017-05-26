@@ -15,14 +15,16 @@ public  abstract class Item extends Occupant
      * author: aashish
      * There are no checks on the "set" methods
      */
-    private double weight;
-    private double size;
+    private final double weight;
+    private final double size;
 
     /**
      * Construct an item with known attributes.
      * @param pos the position of the item
      * @param name the name of the item
      * @param description a longer description of the item
+     * @param weight
+     * @param size
      */
     public Item(Position pos, String name, String description, double weight, double size) 
     {

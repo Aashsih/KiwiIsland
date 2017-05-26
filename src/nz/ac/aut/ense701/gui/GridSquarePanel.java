@@ -14,6 +14,7 @@ import nz.ac.aut.ense701.gameModel.Terrain;
  * @version 1.0 - created
  */
 
+@SuppressWarnings("serial")
 public class GridSquarePanel extends javax.swing.JPanel 
 {
     private static final Border NORMAL_BORDER = new LineBorder(Color.BLACK, 1);
