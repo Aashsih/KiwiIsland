@@ -18,7 +18,7 @@ public class GameHelp
     //Mostly contains static methods - Used in KiwiCountUI
     private static final String FILE_LOCATION = "Help.txt";
     private static final String ENCODING = "UTF-8";
-    private static StringBuffer gameHelpStringBuffer;
+    private static StringBuilder gameHelpStringBuffer;
 
     /**
      * Reads the Help File in text mode and stores it in the String Buffer for later retrieval
@@ -27,7 +27,7 @@ public class GameHelp
      */
     private static void readGameHelpTextFromFile() throws IOException
     {
-       gameHelpStringBuffer = new StringBuffer();
+       gameHelpStringBuffer = new StringBuilder();
        gameHelpStringBuffer.append(FileUtils.readFileToString(new File(FILE_LOCATION), ENCODING));
     }
     
