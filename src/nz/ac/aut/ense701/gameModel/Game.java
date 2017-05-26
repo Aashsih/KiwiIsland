@@ -1,6 +1,5 @@
 package nz.ac.aut.ense701.gameModel;
 
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import nz.ac.aut.ense701.gameModel.occupants.Predator;
 import nz.ac.aut.ense701.gameModel.occupants.Occupant;
 import nz.ac.aut.ense701.gameModel.occupants.Item;
@@ -25,6 +24,7 @@ import javax.swing.JOptionPane;
 import nz.ac.aut.ense701.gameModel.handlers.KiwiHandler;
 import nz.ac.aut.ense701.gameModel.handlers.PredatorHandler;
 import nz.ac.aut.ense701.gameModel.occupants.Bait;
+import nz.ac.aut.ense701.gui.KiwiCountUI;
 
 /**
  * This is the class that knows the Kiwi Island game rules and state
@@ -847,12 +847,12 @@ public class Game
         catch(FileNotFoundException e)
         {
             System.err.println("Unable to find data file '" + fileName + "'");
-            LOGGER.info(e.getMessage());
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, e);
         }
         catch(IOException e)
         {
             System.err.println("Problem encountered processing file.");
-            LOGGER.info(e.getMessage());
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, e);
         }
         finally{
             if(input != null){
