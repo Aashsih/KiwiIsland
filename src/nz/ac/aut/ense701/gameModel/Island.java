@@ -309,36 +309,36 @@ public class Island
         final int CELL_SIZE = 4;
         
         // create the horizontal line as a string
-        String horizontalLine = "-";
+        StringBuilder horizontalLine = new StringBuilder("-");
         for ( int col = 0; col < this.numColumns; col++ ) {
             for ( int i = 0 ; i < CELL_SIZE ; i++ ) {
-                horizontalLine += "-";
+                horizontalLine.append("-");
             }            
-            horizontalLine += "-";
+            horizontalLine.append("-");
         }
         
         // print the content
         for ( int row = 0; row < this.numRows; row++ ) 
         { 
-            String rowOccupant = "|";
-            String rowTerrain  = "|";
+            StringBuilder rowOccupant = new StringBuilder("|");
+            StringBuilder rowTerrain  = new StringBuilder("|");
             for ( int col = 0; col < this.numColumns; col++ ) 
             {
                 GridSquare g = islandGrid[row][col];
                 // create string with occupants
-                String cellOccupant = g.hasPlayer() ? "@" : " ";
-                cellOccupant += g.getOccupantStringRepresentation();
+                StringBuilder cellOccupant = new StringBuilder(g.hasPlayer() ? "@" : " ");
+                cellOccupant.append(g.getOccupantStringRepresentation());
                 for ( int i = cellOccupant.length() ; i < CELL_SIZE ; i++ ) {
-                    cellOccupant += " ";
+                    cellOccupant.append(" ");
                 }
-                rowOccupant += cellOccupant + "|";
+                rowOccupant.append(cellOccupant + "|");
                 
                 // create string with terrain
-                String cellTerrain = "";
+                StringBuilder cellTerrain = new StringBuilder();
                 for ( int i = 0 ; i < CELL_SIZE ; i++ ) {
-                    cellTerrain += g.getTerrainStringRepresentation();
+                    cellTerrain.append(g.getTerrainStringRepresentation());
                 }
-                rowTerrain += cellTerrain + "|";
+                rowTerrain.append(cellTerrain + "|");
             }
             System.out.println(horizontalLine);
             System.out.println(rowOccupant);
@@ -392,6 +392,9 @@ public class Island
         if ( position.isOnIsland() )
         {
             result = islandGrid[position.getRow()][position.getColumn()];
+        }
+        if(result == null){
+            throw new NullPointerException("No Such Position on GridSquare");
         }
         return result;
     }
