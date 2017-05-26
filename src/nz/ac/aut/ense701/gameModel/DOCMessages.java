@@ -5,11 +5,7 @@
  */
 package nz.ac.aut.ense701.gameModel;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.PriorityQueue;
 import java.util.Stack;
 import nz.ac.aut.ense701.gameQuiz.QuizData;
 import nz.ac.aut.ense701.gameQuiz.QuizFileReader;

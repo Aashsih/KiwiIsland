@@ -5,10 +5,6 @@
  */
 package nz.ac.aut.ense701.gui;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,8 +12,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.ListModel;
 import nz.ac.aut.ense701.gameModel.Game;
 import nz.ac.aut.ense701.gameModel.Score;
 import nz.ac.aut.ense701.gameModel.ScoreBoard;

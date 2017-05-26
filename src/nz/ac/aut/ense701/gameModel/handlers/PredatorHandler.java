@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Random;
 import nz.ac.aut.ense701.gameModel.Island;
 import nz.ac.aut.ense701.gameModel.Position;
-import nz.ac.aut.ense701.gameModel.occupants.Fauna;
 import nz.ac.aut.ense701.gameModel.occupants.Predator;
 
 /**

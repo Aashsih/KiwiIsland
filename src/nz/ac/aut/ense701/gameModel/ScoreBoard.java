@@ -11,9 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import nz.ac.aut.ense701.gameQuiz.QuizData;
 import org.apache.commons.io.FileUtils;
 
 /**

@@ -24,7 +24,6 @@ import javax.swing.JOptionPane;
 import nz.ac.aut.ense701.gameModel.handlers.KiwiHandler;
 import nz.ac.aut.ense701.gameModel.handlers.PredatorHandler;
 import nz.ac.aut.ense701.gameModel.occupants.Bait;
-import nz.ac.aut.ense701.gui.KiwiCountUI;
 
 /**
  * This is the class that knows the Kiwi Island game rules and state
