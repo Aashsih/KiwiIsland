@@ -226,7 +226,7 @@ public class Player
      */
     public Tool getTrap()
     {
-        Tool tool = null;
+        Tool tool;
         Tool trap = null;
         for ( Item item : backpack ) 
         {
@@ -255,7 +255,7 @@ public class Player
        {
            backpackItems.add(b);
        }
-       if(messages.size() > 0)
+       if(!messages.isEmpty())
        {
            backpackItems.add("Messages");
        }
