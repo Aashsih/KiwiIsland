@@ -20,11 +20,7 @@ import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
  */
 public class DOCMessages {
    
-    //stores the static file name that will be read to access facts
-    @Deprecated private static final String FILE_LOCATION = "DOCFacts.txt";
-   
     private static Stack<String> messages;
-    @Deprecated private static PriorityQueue<String> factsQueue ;
     
     /**
      * This method returns one fact from the priority queue at a time
@@ -61,48 +57,4 @@ public class DOCMessages {
     public static void resetDocMessages(){
         messages = null;
     }
-    
-    /**
-     * This method reads the file specified in file location and stores it into
-     * the factsBuffer
-     */
-    @Deprecated
-    private static void readFile()
-    {
-        factsQueue = new PriorityQueue<String> ();      
-
-        try{
-            BufferedReader factsBufferedReader = new BufferedReader(new FileReader(FILE_LOCATION));
-            String line;
-            while((line = factsBufferedReader.readLine())!= null)
-            {
-
-                factsQueue.add(line);
-            }
-            factsBufferedReader.close();
-        }
-        catch(FileNotFoundException e)
-        {
-
-        } catch (IOException ex) {
-
-        }  
-    }
-
-    
-    /**
-     * This method reads the file and gets the string representation of the 
-     * facts stored in file specified in the file location.
-     * 
-     * @return string representation of the facts used to spread DOC awareness 
-     */
-    @Deprecated
-    private static PriorityQueue<String> getFacts()
-    { 
-        readFile();
-              
-        return factsQueue;
-
-    }
-    
 }
