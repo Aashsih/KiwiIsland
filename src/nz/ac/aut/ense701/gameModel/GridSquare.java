@@ -240,16 +240,15 @@ public class GridSquare
         {
             for(Occupant existingOccupant : occupants)
             {
-                if(existingOccupant instanceof Hazard)
+                if(existingOccupant instanceof Hazard || 
+                        (existingOccupant instanceof Kiwi && occupantToBeAdded instanceof Kiwi))
                 //if Hazard is already occupying that space, then no other occupant should be added here
-                {
-                    return false;
-                }
-                else if(existingOccupant instanceof Kiwi && occupantToBeAdded instanceof Kiwi)
+                //OR
                 //if a kiwi already exists on the block
                 {
                     return false;
                 }
+                
             }
             return true;
         }
