@@ -367,9 +367,7 @@ public class Game
         if(result)
         {
             Kiwi kiwi = (Kiwi) itemToCount;
-            if(kiwi != null){
-                result = !kiwi.counted();   
-            }
+            result = !kiwi.counted();   
         }
         return result;
     }
