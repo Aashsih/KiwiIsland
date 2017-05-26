@@ -56,7 +56,8 @@ public class WelcomePage extends javax.swing.JFrame {
     /**
      * Initializes the JList with player score
      */
-    public void initializeScoreBoard(){
+    @SuppressWarnings("unchecked")
+    public final void initializeScoreBoard(){
         try {
             List<Score> playerScores = ScoreBoard.getScoreBoard();
             if(playerScores != null){
@@ -179,6 +180,7 @@ public class WelcomePage extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new WelcomePage().setVisible(true);
             }

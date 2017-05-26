@@ -91,5 +91,4 @@ public abstract class Occupant
      */
     public abstract String getStringRepresentation();
 
-
 }

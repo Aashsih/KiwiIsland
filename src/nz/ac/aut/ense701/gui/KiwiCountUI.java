@@ -34,6 +34,10 @@ public class KiwiCountUI
     extends javax.swing.JFrame 
     implements GameEventListener, KeyListener
 {
+    private final Game game;
+    private QuizPanel quizPanel;
+    private final WelcomePage parentFrame;
+    private boolean lowStaminaMessageDisplayed;
 
     /**
      * Creates a GUI for the KiwiIsland game.
@@ -904,8 +908,4 @@ public class KiwiCountUI
     private javax.swing.JLabel txtPredatorsLeft;
     // End of variables declaration//GEN-END:variables
 
-    private Game game;
-    private QuizPanel quizPanel;
-    private WelcomePage parentFrame;
-    private boolean lowStaminaMessageDisplayed;
 }

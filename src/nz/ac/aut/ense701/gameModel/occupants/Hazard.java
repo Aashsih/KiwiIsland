@@ -60,8 +60,5 @@ public class Hazard extends Occupant {
     @Override
     public String getStringRepresentation() {
         return Occupants.HAZARD.toString();
-    }   
-
-
-    
+    }
 }

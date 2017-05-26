@@ -49,6 +49,25 @@ public class Game
     public static final int MOVINGSCORE = -1;
     public static final int CONSERVATIONSCORE = 100;
     public static final int QUIZSCORE = 50;
+    
+    private Island island;
+    private KiwiHandler kiwiHandler;
+    private PredatorHandler predatorHandler;
+    private Player player;
+    private GameState state;
+    private int kiwiCount;
+    private int totalPredators;
+    private int totalKiwis;
+    private int predatorsTrapped;
+    private Set<GameEventListener> eventListeners;
+    private List<Kiwi> activeKiwisCounted;
+    private Position lastUpdatedKiwisPosition;
+    private Position lastUpdatedPredatorPosition;
+    private final double MIN_REQUIRED_CATCH = 0.8;
+    private String winMessage = "";
+    private String loseMessage  = "";
+    private String playerMessage  = "";   
+    private int count = 0;
     /**
      * A new instance of Kiwi island that reads data from "IslandData.txt".
      */
@@ -1030,27 +1049,6 @@ public class Game
         }
         return result;
     }
-    private Island island;
-    private KiwiHandler kiwiHandler;
-    private PredatorHandler predatorHandler;
-    private Player player;
-    private GameState state;
-    private int kiwiCount;
-    private int totalPredators;
-    private int totalKiwis;
-    private int predatorsTrapped;
-    private Set<GameEventListener> eventListeners;
-    private List<Kiwi> activeKiwisCounted;
-    private Position lastUpdatedKiwisPosition;
-    private Position lastUpdatedPredatorPosition;
-    private final double MIN_REQUIRED_CATCH = 0.8;
-        
-    private String winMessage = "";
-    private String loseMessage  = "";
-    private String playerMessage  = "";   
-    
-    private int count = 0;
-
 }
 
 

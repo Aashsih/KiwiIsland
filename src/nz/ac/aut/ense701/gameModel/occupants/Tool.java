@@ -81,5 +81,4 @@ public class Tool extends Item
     {
         return Occupants.TOOL.toString();
     }
-
 }

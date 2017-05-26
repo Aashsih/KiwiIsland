@@ -23,9 +23,6 @@ public class Predator extends Fauna
     {
         super(pos, name, description);
     } 
- 
-    
-
 
     @Override
     public String getStringRepresentation() 

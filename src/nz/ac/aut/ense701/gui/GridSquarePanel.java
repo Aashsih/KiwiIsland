@@ -16,6 +16,12 @@ import nz.ac.aut.ense701.gameModel.Terrain;
 
 public class GridSquarePanel extends javax.swing.JPanel 
 {
+    private static final Border NORMAL_BORDER = new LineBorder(Color.BLACK, 1);
+    private static final Border ACTIVE_BORDER = new LineBorder(Color.RED, 3);
+    
+    private final Game game;
+    private final int row, column;
+    
     /** 
      * Creates new GridSquarePanel.
      * @param game the game to represent
@@ -67,13 +73,13 @@ public class GridSquarePanel extends javax.swing.JPanel
             lblText.setBackground(color);
             // set border colour according to 
             // whether the player is in the grid square or not
-            setBorder(game.hasPlayer(row,column) ? activeBorder : normalBorder);
+            setBorder(game.hasPlayer(row,column) ? ACTIVE_BORDER : NORMAL_BORDER);
         }
         else
         {
             lblText.setText("");
             lblText.setBackground(null);
-            setBorder(normalBorder);
+            setBorder(NORMAL_BORDER);
         }
         if(game.getLastUpdatedPredatorPosition() != null){
             Position lastUpdatedPredatorPosition = game.getLastUpdatedPredatorPosition();
@@ -108,9 +114,4 @@ public class GridSquarePanel extends javax.swing.JPanel
     private javax.swing.JLabel lblText;
     // End of variables declaration//GEN-END:variables
     
-    private Game game;
-    private int row, column;
-    
-    private static final Border normalBorder = new LineBorder(Color.BLACK, 1);
-    private static final Border activeBorder = new LineBorder(Color.RED, 3);
 }
