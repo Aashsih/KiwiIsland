@@ -51,7 +51,7 @@ public class KiwiHandler extends MovableFaunaHandler{
                     "Player position cannot be null");
         }
         this.playerPosition = playerPosition;
-        String resultMessage = null;
+        String resultMessage;
         List<Kiwi> nearbyKiwis = getKiwisInAttractRadius();
         if(nearbyKiwis == null || nearbyKiwis.isEmpty())
         {
@@ -67,7 +67,7 @@ public class KiwiHandler extends MovableFaunaHandler{
                     movedKiwis.add(kiwi);
                 }    
             }
-            if(movedKiwis.size() > 0)
+            if(!movedKiwis.isEmpty())
             {
                 resultMessage = BAIT_COULD_ATTRACT_KIWIS;
             }
@@ -128,7 +128,7 @@ public class KiwiHandler extends MovableFaunaHandler{
         {
             return null;
         }
-        Position position = null;
+        Position position;
         if(kiwi.getPosition().getColumn() < playerPosition.getColumn())
         //If kiwi is to the left of the player
         {
