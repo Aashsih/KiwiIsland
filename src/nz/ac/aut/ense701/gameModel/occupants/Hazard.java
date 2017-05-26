@@ -54,7 +54,7 @@ public class Hazard extends Occupant {
     public boolean isBreakTrap() 
     {
         String name = this.getName();
-        return name.equalsIgnoreCase("Broken trap");
+        return "Broken trap".equalsIgnoreCase(name);
     }
     
     @Override
