@@ -52,7 +52,7 @@ public class PredatorHandler extends MovableFaunaHandler{
                     }
                 }
             }
-            if(predatorList.size() > 0){
+            if(!predatorList.isEmpty()){
                 Predator predatorToMove = predatorList.get((new Random()).nextInt(predatorList.size()));
                 newPredatorPosiion = movePredatorToAvailablePosition(predatorToMove);
                 if(newPredatorPosiion == null){
@@ -82,7 +82,7 @@ public class PredatorHandler extends MovableFaunaHandler{
             throw new IllegalArgumentException(
                         "Predator passed as a paramter cannot be null");
         }
-        Position newPredatorPosition = null;
+        Position newPredatorPosition;
         Position predatorPosition = predator.getPosition();
         for(int i = predatorPosition.getRow() - PREDATOR_MOVE_RADIUS; i < predatorPosition.getRow() + PREDATOR_MOVE_RADIUS; i++){
             for(int j = predatorPosition.getColumn() - PREDATOR_MOVE_RADIUS; j < predatorPosition.getColumn() + PREDATOR_MOVE_RADIUS; j++){
