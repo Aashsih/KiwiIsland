@@ -90,12 +90,12 @@ public class GridSquare
      */
     public String getOccupantStringRepresentation()
     {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for(Occupant occupant : occupants)
         {
-            result += occupant.getStringRepresentation();
+            result.append(occupant.getStringRepresentation());
         }
-        return result;
+        return result.toString();
     } 
     
     /**
