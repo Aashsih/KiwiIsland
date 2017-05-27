@@ -1,8 +1,8 @@
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodeloccupants.Predator;
-import nz.ac.aut.ense701.gamemodeloccupants.Kiwi;
-import nz.ac.aut.ense701.gamemodeloccupants.Occupant;
+import nz.ac.aut.ense701.gamemodel.occupants.Predator;
+import nz.ac.aut.ense701.gamemodel.occupants.Kiwi;
+import nz.ac.aut.ense701.gamemodel.occupants.Occupant;
 
 /**
  * A class to represent an island in the world on which the game is played.

@@ -3,7 +3,7 @@ package nz.ac.aut.ense701.gamemodel;
 
 import nz.ac.aut.ense701.gamemodel.Position;
 import nz.ac.aut.ense701.gamemodel.Island;
-import nz.ac.aut.ense701.gamemodeloccupants.Predator;
+import nz.ac.aut.ense701.gamemodel.occupants.Predator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

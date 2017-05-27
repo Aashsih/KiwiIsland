@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nz.ac.aut.ense701.gamemodelhandlers;
+package nz.ac.aut.ense701.gamemodel.handlers;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Set;
 import nz.ac.aut.ense701.gamemodel.Island;
 import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodeloccupants.Kiwi;
-import nz.ac.aut.ense701.gamemodeloccupants.Occupant;
+import nz.ac.aut.ense701.gamemodel.occupants.Kiwi;
+import nz.ac.aut.ense701.gamemodel.occupants.Occupant;
 
 /**
  * This class stores all the kiwi currently present on the island and is 

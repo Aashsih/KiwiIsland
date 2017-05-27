@@ -7,9 +7,9 @@ package nz.ac.aut.ense701.gamemodel;
 
 import nz.ac.aut.ense701.gamemodel.Position;
 import nz.ac.aut.ense701.gamemodel.Island;
-import nz.ac.aut.ense701.gamemodelhandlers.KiwiHandler;
-import nz.ac.aut.ense701.gamemodelhandlers.PredatorHandler;
-import nz.ac.aut.ense701.gamemodeloccupants.Predator;
+import nz.ac.aut.ense701.gamemodel.handlers.KiwiHandler;
+import nz.ac.aut.ense701.gamemodel.handlers.PredatorHandler;
+import nz.ac.aut.ense701.gamemodel.occupants.Predator;
 import org.junit.Test;
 
 /**

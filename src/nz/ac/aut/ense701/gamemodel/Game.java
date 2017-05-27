@@ -1,13 +1,13 @@
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodeloccupants.Predator;
-import nz.ac.aut.ense701.gamemodeloccupants.Occupant;
-import nz.ac.aut.ense701.gamemodeloccupants.Item;
-import nz.ac.aut.ense701.gamemodeloccupants.Hazard;
-import nz.ac.aut.ense701.gamemodeloccupants.Kiwi;
-import nz.ac.aut.ense701.gamemodeloccupants.Food;
-import nz.ac.aut.ense701.gamemodeloccupants.Tool;
-import nz.ac.aut.ense701.gamemodeloccupants.Fauna;
+import nz.ac.aut.ense701.gamemodel.occupants.Predator;
+import nz.ac.aut.ense701.gamemodel.occupants.Occupant;
+import nz.ac.aut.ense701.gamemodel.occupants.Item;
+import nz.ac.aut.ense701.gamemodel.occupants.Hazard;
+import nz.ac.aut.ense701.gamemodel.occupants.Kiwi;
+import nz.ac.aut.ense701.gamemodel.occupants.Food;
+import nz.ac.aut.ense701.gamemodel.occupants.Tool;
+import nz.ac.aut.ense701.gamemodel.occupants.Fauna;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,9 +21,9 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import nz.ac.aut.ense701.gamemodelhandlers.KiwiHandler;
-import nz.ac.aut.ense701.gamemodelhandlers.PredatorHandler;
-import nz.ac.aut.ense701.gamemodeloccupants.Bait;
+import nz.ac.aut.ense701.gamemodel.handlers.KiwiHandler;
+import nz.ac.aut.ense701.gamemodel.handlers.PredatorHandler;
+import nz.ac.aut.ense701.gamemodel.occupants.Bait;
 
 /**
  * This is the class that knows the Kiwi Island game rules and state

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nz.ac.aut.ense701.gamemodelhandlers;
+package nz.ac.aut.ense701.gamemodel.handlers;
 
 import nz.ac.aut.ense701.gamemodel.Island;
 import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodeloccupants.Fauna;
+import nz.ac.aut.ense701.gamemodel.occupants.Fauna;
 
 /**
  * This class should be extended if any Occupant of type Fauna needs to be made movable on the island
