@@ -80,7 +80,7 @@ public class GridSquare
      */
     public boolean hasPlayer()
     {
-        return (this.player != null);
+        return this.player != null;
     }
      
     /**

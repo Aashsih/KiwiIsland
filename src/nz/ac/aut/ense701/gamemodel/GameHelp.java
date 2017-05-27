@@ -19,6 +19,9 @@ public class GameHelp
     private static final String FILE_LOCATION = "Help.txt";
     private static final String ENCODING = "UTF-8";
     private static StringBuilder gameHelpStringBuffer;
+    
+    private GameHelp(){
+    }
 
     /**
      * Reads the Help File in text mode and stores it in the String Buffer for later retrieval

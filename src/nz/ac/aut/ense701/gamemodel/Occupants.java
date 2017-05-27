@@ -23,7 +23,7 @@ public enum Occupants {
     BAIT("B");
     
     private static final Map<String, Occupants> representationToOccupant = new HashMap<String, Occupants>();
-
+    
     static {
         for(Occupants occupant : Occupants.values()){
             representationToOccupant.put(occupant.representation,occupant);
@@ -32,13 +32,14 @@ public enum Occupants {
     
     private String representation;
     
+    private Occupants(String representation){
+        this.representation = representation;
+    }    
+    
     public static Occupants getOccupant(String representation){
         return representationToOccupant.get(representation);
     }
 
-    private Occupants(String representation){
-        this.representation = representation;
-    }
 
     @Override
     public String toString(){

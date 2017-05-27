@@ -22,7 +22,10 @@ public class ScoreBoard {
     private static final String SCORE_BOARD_FILE_NAME = "PlayerScore.json";
     private static final String ENCODING = "UTF-8";
     
-    private static List<Score> scoreBoard;
+    private static List<Score> scoreList;
+    
+    private ScoreBoard(){
+    }
     
     /**
      * Reads the File "PlayerScore.json" if not read already and returns a List of Score
@@ -31,7 +34,7 @@ public class ScoreBoard {
      */
     public static List<Score> getScoreBoard() throws IOException{
         readFromFile();
-        return scoreBoard;
+        return scoreList;
     }
     
     /**
@@ -40,9 +43,9 @@ public class ScoreBoard {
      */
     @SuppressWarnings("unchecked")
     private static void readFromFile() throws IOException{
-        if(scoreBoard == null){
+        if(scoreList == null){
             Type targetClassType = new TypeToken<ArrayList<Score>>() {}.getType();
-            scoreBoard = (List<Score>) new Gson().fromJson( FileUtils.readFileToString(new File(SCORE_BOARD_FILE_NAME), ENCODING), targetClassType);
+            scoreList = (List<Score>) new Gson().fromJson( FileUtils.readFileToString(new File(SCORE_BOARD_FILE_NAME), ENCODING), targetClassType);
         }
     }
     
@@ -56,11 +59,11 @@ public class ScoreBoard {
             throw new IllegalArgumentException("The parameter \"playerScore\" cannot be null");
         }
         readFromFile();
-        if(scoreBoard == null){
-            scoreBoard = new ArrayList<Score>();
+        if(scoreList == null){
+            scoreList = new ArrayList<Score>();
         }
-        scoreBoard.add(playerScore);
-        FileUtils.writeStringToFile(new File(SCORE_BOARD_FILE_NAME), new Gson().toJson(scoreBoard) , ENCODING);
-        scoreBoard = null;
+        scoreList.add(playerScore);
+        FileUtils.writeStringToFile(new File(SCORE_BOARD_FILE_NAME), new Gson().toJson(scoreList) , ENCODING);
+        scoreList = null;
     }
 }

@@ -25,15 +25,16 @@ public enum Tools {
         }
     }
 
-    public static Tools getTool(String representation){
-        return representationToTool.get(representation);
-    }
-
     private String representation;
 
     private Tools(String representation){
         this.representation = representation;
     }
+
+    public static Tools getTool(String representation){
+        return representationToTool.get(representation);
+    }
+
 
     @Override
     public String toString(){

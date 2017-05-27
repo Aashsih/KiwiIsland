@@ -307,12 +307,12 @@ public class Island
      */
     public void draw() 
     {
-        final int CELL_SIZE = 4;
+        final int cellSize = 4;
         
         // create the horizontal line as a string
         StringBuilder horizontalLine = new StringBuilder("-");
         for ( int col = 0; col < this.numColumns; col++ ) {
-            for ( int i = 0 ; i < CELL_SIZE ; i++ ) {
+            for ( int i = 0 ; i < cellSize ; i++ ) {
                 horizontalLine.append("-");
             }            
             horizontalLine.append("-");
@@ -329,14 +329,14 @@ public class Island
                 // create string with occupants
                 StringBuilder cellOccupant = new StringBuilder(g.hasPlayer() ? "@" : " ");
                 cellOccupant.append(g.getOccupantStringRepresentation());
-                for ( int i = cellOccupant.length() ; i < CELL_SIZE ; i++ ) {
+                for ( int i = cellOccupant.length() ; i < cellSize ; i++ ) {
                     cellOccupant.append(" ");
                 }
                 rowOccupant.append(cellOccupant).append("|");
                 
                 // create string with terrain
                 StringBuilder cellTerrain = new StringBuilder();
-                for ( int i = 0 ; i < CELL_SIZE ; i++ ) {
+                for ( int i = 0 ; i < cellSize ; i++ ) {
                     cellTerrain.append(g.getTerrainStringRepresentation());
                 }
                 rowTerrain.append(cellTerrain).append("|");

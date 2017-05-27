@@ -12,11 +12,11 @@ package nz.ac.aut.ense701.gamemodel;
  */
 public class Score{
     private String playerName;
-    private int score;
+    private int playerScore;
 
     public Score(String playerName, int score) {
         this.playerName = playerName;
-        this.score = score;
+        this.playerScore = score;
     }
 
     public String getPlayerName() {
@@ -28,11 +28,11 @@ public class Score{
     }
 
     public int getScore() {
-        return score;
+        return playerScore;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setScore(int playerScore) {
+        this.playerScore = playerScore;
     }
     
     @Override

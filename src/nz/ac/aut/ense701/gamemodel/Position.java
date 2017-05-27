@@ -23,28 +23,6 @@ public class Position
     public static final Position NOT_ON_ISLAND = new Position();
     
     /**
-     * Checks if the (row,column) pair passed as a parameter belong on the island passed as a parameter
-     * @param island, island on which the (row,column) should belong
-     * @param row, row number
-     * @param column, column number
-     * @return true, if the (row, column) pair belongs on the island
-     *         false, otherwise. 
-     */
-    public static boolean isValidPosition(Island island, int row, int column)
-    {
-        if ( island == null )
-        {
-            throw new IllegalArgumentException(
-                    "Island parameter cannot be null");
-        }
-        if ( ((row < 0) || (row >= island.getNumRows())) || (column < 0) || (column >= island.getNumColumns()))
-        {
-            return false;
-        }
-        return true;
-    }
-            
-    /**
      * Constructs a position that is not on the island (e.g., player's backpack).
      */
     private Position()
@@ -78,7 +56,29 @@ public class Position
         this.row    = row;
         this.column = column;
     }
-
+    
+    /**
+     * Checks if the (row,column) pair passed as a parameter belong on the island passed as a parameter
+     * @param island, island on which the (row,column) should belong
+     * @param row, row number
+     * @param column, column number
+     * @return true, if the (row, column) pair belongs on the island
+     *         false, otherwise. 
+     */
+    public static boolean isValidPosition(Island island, int row, int column)
+    {
+        if ( island == null )
+        {
+            throw new IllegalArgumentException(
+                    "Island parameter cannot be null");
+        }
+        if ( ((row < 0) || (row >= island.getNumRows())) || (column < 0) || (column >= island.getNumColumns()))
+        {
+            return false;
+        }
+        return true;
+    }
+    
     
     /**
      * Row part of position
@@ -119,7 +119,7 @@ public class Position
      */
     public boolean isOnIsland()
     {
-        return (this.island != null);
+        return this.island != null;
     } 
 
 

@@ -131,7 +131,7 @@ public class Player
      */
     public boolean hasStaminaToMove(Terrain terrain)
     {
-        return (this.stamina >= getStaminaNeededToMove(terrain));
+        return this.stamina >= getStaminaNeededToMove(terrain);
     }
     
         
@@ -321,17 +321,17 @@ public class Player
         if ( item != null && item.isOkToCarry() )
         {
             double  addedSize   = getCurrentBackpackSize() + item.getSize();
-            boolean enoughRoom  = (addedSize <= this.maxBackpackSize);
+            boolean enoughRoom  = addedSize <= this.maxBackpackSize;
             double  addedWeight = getCurrentBackpackWeight() + item.getWeight();
             //Will weight fit in backpack?
-            boolean notTooHeavy = (addedWeight <= this.maxBackpackWeight);
+            boolean notTooHeavy = addedWeight <= this.maxBackpackWeight;
             //Player can only carry one trap at a time.
             //Is this an addtional trap?
             boolean additionalTrap = false;
             if(item instanceof Tool)
             {
                 Tool tool = (Tool) item;
-                additionalTrap = (tool.isTrap() && this.hasTrap());
+                additionalTrap = tool.isTrap() && this.hasTrap();
             }       
                    
             if ( enoughRoom && notTooHeavy && !additionalTrap)
