@@ -52,7 +52,7 @@ public class KiwiHandler extends MovableFaunaHandler{
         this.playerPosition = playerPosition;
         String resultMessage;
         List<Kiwi> nearbyKiwis = getKiwisInAttractRadius();
-        if(nearbyKiwis == null || nearbyKiwis.isEmpty())
+        if(nearbyKiwis.isEmpty())
         {
             resultMessage = NO_NEARBY_KIWIS;
         }
@@ -88,7 +88,7 @@ public class KiwiHandler extends MovableFaunaHandler{
         //use the Postion.isPostionValid method to iteratre through all the possible blocks on the island around a radius = ATTRACT_RADIUS
         if(playerPosition == null)
         {
-            return null;
+            return new ArrayList<Kiwi>();
         }
         List<Kiwi> nearbyKiwis = new ArrayList<Kiwi>();
         int currentXPosiion = playerPosition.getRow();
@@ -132,9 +132,8 @@ public class KiwiHandler extends MovableFaunaHandler{
         //If kiwi is to the left of the player
         {
             position = new Position(island, kiwi.getPosition().getRow(), kiwi.getPosition().getColumn() + 1);
-            if(!island.isOccupantMoveToPositionPossible(kiwi, position))
-            {
-            } else //if kiwi can move to the right
+            if(island.isOccupantMoveToPositionPossible(kiwi, position))
+            //if kiwi can move to the right
             {
                 return position;
             }
@@ -143,9 +142,8 @@ public class KiwiHandler extends MovableFaunaHandler{
         //kiwi is to the right of the player
         {
             position = new Position(island, kiwi.getPosition().getRow(), kiwi.getPosition().getColumn() - 1);
-            if(!island.isOccupantMoveToPositionPossible(kiwi, position))
-                        {
-            } else //if kiwi can move to the left
+            if(island.isOccupantMoveToPositionPossible(kiwi, position))
+                //if kiwi can move to the left
             {
                 return position;
             }
