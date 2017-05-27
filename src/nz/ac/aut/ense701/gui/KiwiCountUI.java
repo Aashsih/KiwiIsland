@@ -9,20 +9,19 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import nz.ac.aut.ense701.gameModel.DOCMessages;
-import nz.ac.aut.ense701.gameModel.Game;
-import nz.ac.aut.ense701.gameModel.GameEventListener;
-import nz.ac.aut.ense701.gameModel.GameHelp;
-import nz.ac.aut.ense701.gameModel.GameState;
-import nz.ac.aut.ense701.gameModel.MoveDirection;
-import nz.ac.aut.ense701.gameModel.ScoreBoard;
-import nz.ac.aut.ense701.gameQuiz.Quiz;
-import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
+import nz.ac.aut.ense701.gamemodel.DOCMessages;
+import nz.ac.aut.ense701.gamemodel.Game;
+import nz.ac.aut.ense701.gamemodel.GameEventListener;
+import nz.ac.aut.ense701.gamemodel.GameHelp;
+import nz.ac.aut.ense701.gamemodel.GameState;
+import nz.ac.aut.ense701.gamemodel.MoveDirection;
+import nz.ac.aut.ense701.gamemodel.ScoreBoard;
+import nz.ac.aut.ense701.gamequiz.Quiz;
+import nz.ac.aut.ense701.gamequiz.QuizFileReader;
 
 /*
  * User interface form for Kiwi Island.
@@ -31,14 +30,19 @@ import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
  * @version July 2011
  */
 
+@SuppressWarnings("serial")
 public class KiwiCountUI 
     extends javax.swing.JFrame 
     implements GameEventListener, KeyListener
 {
+    private final Game game;
+    private final WelcomePage parentFrame;
+    private boolean lowStaminaMessageDisplayed;
 
     /**
      * Creates a GUI for the KiwiIsland game.
      * @param game the game object to represent with this GUI.
+     * @param parentFrame
      */
     public KiwiCountUI(Game game, WelcomePage parentFrame) 
     {
@@ -79,7 +83,6 @@ public class KiwiCountUI
                 }
                 else{
                     disposeKiwiCountUIFrame();
-                    //game.createNewGame();        
                 }
             } catch (IOException ex) {
                 Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,12 +112,13 @@ public class KiwiCountUI
     
     /**
      * Initializes the Quiz game flow by adding the QuizPanel to the pnlGame
+     * @throws java.io.IOException
      */
     public void startQuiz() throws IOException{
         removeAllComponentsFromJPanel(pnlGame);
         disablePanelControl();
         pnlGame.setLayout(new BorderLayout());
-        quizPanel = new QuizPanel(this, new Quiz(this.game.getPlayerMessages()));
+        QuizPanel quizPanel = new QuizPanel(this, new Quiz(this.game.getPlayerMessages()));
         JScrollPane scrollPane = new JScrollPane(quizPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         pnlGame.add(scrollPane, BorderLayout.CENTER);
@@ -159,6 +163,7 @@ public class KiwiCountUI
     /**
      * This method is used to disable the components of the Control Panel
      */
+    @SuppressWarnings("unchecked")
     private void disablePanelControl(){
         btnCount.setEnabled(false);
         btnDrop.setEnabled(false);
@@ -192,6 +197,7 @@ public class KiwiCountUI
     /**
      * Updates the state of the UI based on the state of the game.
      */
+    @SuppressWarnings("unchecked")
     private void update()
     {
         // update the grid square panels
@@ -808,7 +814,7 @@ public class KiwiCountUI
             btnUse.setEnabled(game.canUse(item));
             listInventory.setToolTipText(game.getOccupantDescription(item));
             
-            if(item.toString().equalsIgnoreCase("Messages"))
+            if("Messages".equalsIgnoreCase(item.toString()))
             {
                 btnUse.setEnabled(true);
                 btnDrop.setEnabled(false);
@@ -823,15 +829,13 @@ public class KiwiCountUI
 
     private void jMenuHelpItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHelpItemActionPerformed
         try {
-            // TODO add your handling code here:
             JTextArea helpLabel = new JTextArea(25, 50);
             helpLabel.setText(GameHelp.getGameHelpInfo());
             JScrollPane scrollpane = new JScrollPane(helpLabel);
             JOptionPane.showMessageDialog(this, scrollpane);
-            
-            //JOptionPane.showMessageDialog(this, GameHelp.getGameHelpInfo(), "Help", JOptionPane.PLAIN_MESSAGE);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "--No Help Content Found--", "Error", JOptionPane.PLAIN_MESSAGE);
+            Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuHelpItemActionPerformed
 
@@ -904,8 +908,4 @@ public class KiwiCountUI
     private javax.swing.JLabel txtPredatorsLeft;
     // End of variables declaration//GEN-END:variables
 
-    private Game game;
-    private QuizPanel quizPanel;
-    private WelcomePage parentFrame;
-    private boolean lowStaminaMessageDisplayed;
 }

@@ -3,9 +3,9 @@ package nz.ac.aut.ense701.gui;
 import java.awt.Color;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import nz.ac.aut.ense701.gameModel.Game;
-import nz.ac.aut.ense701.gameModel.Position;
-import nz.ac.aut.ense701.gameModel.Terrain;
+import nz.ac.aut.ense701.gamemodel.Game;
+import nz.ac.aut.ense701.gamemodel.Position;
+import nz.ac.aut.ense701.gamemodel.Terrain;
 
 /*
  * Panel for representing a single GridSquare of the island on the GUI.
@@ -14,8 +14,15 @@ import nz.ac.aut.ense701.gameModel.Terrain;
  * @version 1.0 - created
  */
 
+@SuppressWarnings("serial")
 public class GridSquarePanel extends javax.swing.JPanel 
 {
+    private static final Border NORMAL_BORDER = new LineBorder(Color.BLACK, 1);
+    private static final Border ACTIVE_BORDER = new LineBorder(Color.RED, 3);
+    
+    private final Game game;
+    private final int row;
+    private final int column;
     /** 
      * Creates new GridSquarePanel.
      * @param game the game to represent
@@ -44,12 +51,18 @@ public class GridSquarePanel extends javax.swing.JPanel
         
         switch ( terrain )
         {
-            case SAND     : color = Color.YELLOW; break;
-            case FOREST   : color = Color.GREEN;  break;
-            case WETLAND : color = Color.BLUE; break;
-            case SCRUB : color = Color.DARK_GRAY;   break;
-            case WATER    : color = Color.CYAN;   break;
-            default  : color = Color.LIGHT_GRAY; break;
+            case SAND : color = Color.YELLOW; 
+                            break;
+            case FOREST : color = Color.GREEN;
+                            break;
+            case WETLAND : color = Color.BLUE;
+                            break;
+            case SCRUB : color = Color.DARK_GRAY;   
+                            break;
+            case WATER : color = Color.CYAN;  
+                            break;
+            default  : color = Color.LIGHT_GRAY;
+                            break;
         }
         
         if ( squareExplored || squareVisible )
@@ -67,13 +80,13 @@ public class GridSquarePanel extends javax.swing.JPanel
             lblText.setBackground(color);
             // set border colour according to 
             // whether the player is in the grid square or not
-            setBorder(game.hasPlayer(row,column) ? activeBorder : normalBorder);
+            setBorder(game.hasPlayer(row,column) ? ACTIVE_BORDER : NORMAL_BORDER);
         }
         else
         {
             lblText.setText("");
             lblText.setBackground(null);
-            setBorder(normalBorder);
+            setBorder(NORMAL_BORDER);
         }
         if(game.getLastUpdatedPredatorPosition() != null){
             Position lastUpdatedPredatorPosition = game.getLastUpdatedPredatorPosition();
@@ -108,9 +121,4 @@ public class GridSquarePanel extends javax.swing.JPanel
     private javax.swing.JLabel lblText;
     // End of variables declaration//GEN-END:variables
     
-    private Game game;
-    private int row, column;
-    
-    private static final Border normalBorder = new LineBorder(Color.BLACK, 1);
-    private static final Border activeBorder = new LineBorder(Color.RED, 3);
 }

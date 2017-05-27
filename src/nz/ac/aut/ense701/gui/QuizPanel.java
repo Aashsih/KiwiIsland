@@ -11,19 +11,24 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
-import nz.ac.aut.ense701.gameQuiz.Question;
-import nz.ac.aut.ense701.gameQuiz.Quiz;
+import nz.ac.aut.ense701.gamequiz.Question;
+import nz.ac.aut.ense701.gamequiz.Quiz;
 
 /**
  *
  * @author aashi
  */
+@SuppressWarnings("serial")
 public class QuizPanel extends javax.swing.JPanel {
     
+    private Quiz quiz;
+    private KiwiCountUI parentFrame;
     private List<JRadioButton> optionList;
     private Question question;
     /**
      * Creates new form QuizPanel
+     * @param parentFrame
+     * @param quiz
      */
     public QuizPanel(KiwiCountUI parentFrame, Quiz quiz) {
         if(quiz == null || parentFrame == null){
@@ -67,18 +72,19 @@ public class QuizPanel extends javax.swing.JPanel {
                 this.remove(option);
             }
         }
-        
-        optionList = new ArrayList<JRadioButton>();
+        ButtonGroup radioButtonGroup;
+        optionList = new ArrayList<>();
         java.awt.GridBagConstraints gridBagConstraints;
         radioButtonGroup = new ButtonGroup();
         int currentRowCount = ((GridBagLayout)(jPanel2.getLayout())).getLayoutDimensions().length;
         if(jPanel2.getLayout() instanceof GridBagLayout){
             for(String option : options){
+                currentRowCount++;
                 JRadioButton radioButton = new JRadioButton(option);
                 radioButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 0;
-                gridBagConstraints.gridy =  ++currentRowCount;
+                gridBagConstraints.gridy =  currentRowCount;
                 gridBagConstraints.ipadx = 20;
                 gridBagConstraints.ipady = 20;
                 gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -167,7 +173,8 @@ public class QuizPanel extends javax.swing.JPanel {
         
         int selectedAnswer = getSelectedRadioButton();  
         displayResult(quiz.isAnswerCorrect(question, selectedAnswer), quiz.correctAnswer()-1);
-        prepareQuizPanelForAQuestion(question = quiz.getNextQuestion());
+        question = quiz.getNextQuestion();
+        prepareQuizPanelForAQuestion(question);
     }//GEN-LAST:event_btnNextActionPerformed
 
     /**
@@ -199,8 +206,7 @@ public class QuizPanel extends javax.swing.JPanel {
         }
         return -1;
     }
-    private ButtonGroup radioButtonGroup;
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNext;
     private javax.swing.JLabel jLabel1;
@@ -210,6 +216,5 @@ public class QuizPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane txtPaneQuestion;
     // End of variables declaration//GEN-END:variables
-    private Quiz quiz;
-    private KiwiCountUI parentFrame;
+    
 }

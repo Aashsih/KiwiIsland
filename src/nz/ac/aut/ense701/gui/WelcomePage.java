@@ -5,27 +5,21 @@
  */
 package nz.ac.aut.ense701.gui;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.ListModel;
-import nz.ac.aut.ense701.gameModel.Game;
-import nz.ac.aut.ense701.gameModel.Score;
-import nz.ac.aut.ense701.gameModel.ScoreBoard;
+import nz.ac.aut.ense701.gamemodel.Game;
+import nz.ac.aut.ense701.gamemodel.Score;
+import nz.ac.aut.ense701.gamemodel.ScoreBoard;
 
 /**
  *
  * @author aashi
  */
+@SuppressWarnings("serial")
 public class WelcomePage extends javax.swing.JFrame {
     /**
      * Creates new form WelcomePage
@@ -46,40 +40,31 @@ public class WelcomePage extends javax.swing.JFrame {
         final KiwiCountUI  gui  = new KiwiCountUI(game, this); 
         
         // make the GUI visible
-        java.awt.EventQueue.invokeLater(new Runnable() 
-        {
-            @Override
-            public void run() 
-            {
-                gui.setVisible(true);
-                gui.setFocusable(true);
-                gui.requestFocus();
-                WelcomePage.this.setVisible(false);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            gui.setVisible(true);
+            gui.setFocusable(true);
+            gui.requestFocus();
+            WelcomePage.this.setVisible(false);
         });
     }
   
     /**
      * Initializes the JList with player score
      */
-    public void initializeScoreBoard(){
+    @SuppressWarnings("unchecked")
+    public final void initializeScoreBoard(){
         try {
             List<Score> playerScores = ScoreBoard.getScoreBoard();
             if(playerScores != null){
-                Collections.sort(playerScores, new Comparator<Score>(){
-                    @Override
-                    public int compare(Score o1, Score o2) {
-                        return o2.getScore() - o1.getScore();
-                    }
-                });
-                DefaultListModel<String> listModel = new DefaultListModel<String>();
+                Collections.sort(playerScores, (Score o1, Score o2) -> o2.getScore() - o1.getScore());
+                DefaultListModel<String> listModel = new DefaultListModel<>();
                 for(int i = 0; i < playerScores.size(); i++){
                     listModel.addElement((i + 1) + ". " + playerScores.get(i).toString());
                 }
                 scoreList.setModel(listModel);
             }
             else{
-                scoreList.setModel(new DefaultListModel());
+                scoreList.setModel(new DefaultListModel<>());
             }
         } catch (IOException ex) {
             Logger.getLogger(WelcomePage.class.getName()).log(Level.SEVERE, null, ex);
@@ -172,23 +157,15 @@ public class WelcomePage extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WelcomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WelcomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WelcomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(WelcomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WelcomePage().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> new WelcomePage().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
