@@ -6,7 +6,8 @@
 package nz.ac.aut.ense701.gamemodel;
 
 import java.io.IOException;
-import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
 import nz.ac.aut.ense701.gamequiz.QuizData;
 import nz.ac.aut.ense701.gamequiz.QuizFileReader;
 
@@ -16,7 +17,7 @@ import nz.ac.aut.ense701.gamequiz.QuizFileReader;
  */
 public class DOCMessages {
    
-    private static Stack<String> messages;
+    private static Queue<String> messages;
     
     private DOCMessages(){
         
@@ -33,8 +34,7 @@ public class DOCMessages {
         initializeFacts();
         
         if(!messages.isEmpty()){
-            
-            return messages.pop();
+            return messages.remove();
         }
         return null;
         
@@ -47,10 +47,10 @@ public class DOCMessages {
     private static void initializeFacts() throws IOException
     {
         if(messages == null){
-            messages = new Stack<>();
+            messages = new LinkedList<>();
             for(QuizData aQuizData : QuizFileReader.getQuizData())
             {
-                messages.push(aQuizData.getMessage());
+                messages.add(aQuizData.getMessage());
             }
         }
     }

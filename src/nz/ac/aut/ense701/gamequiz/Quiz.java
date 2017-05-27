@@ -7,8 +7,10 @@ package nz.ac.aut.ense701.gamequiz;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Stack;
 
 
@@ -18,7 +20,7 @@ import java.util.Stack;
  */
 public class Quiz {
     private Map<Question, Integer> questionToAnswer;
-    private Stack<Question> questionStack;
+    private Queue<Question> questionQueue;
     private int answerOfQuestion;
     
     /**
@@ -41,13 +43,13 @@ public class Quiz {
      * @return next question in the Quiz
      */
     public Question getNextQuestion(){
-        if(questionStack == null || questionStack.isEmpty()){
+        if(questionQueue == null || questionQueue.isEmpty()){
             return null;
         }
         else{
      
-            answerOfQuestion = questionToAnswer.get(questionStack.peek());
-            return questionStack.pop();
+            answerOfQuestion = questionToAnswer.get(questionQueue.peek());
+            return questionQueue.remove();
         }
     }
 
@@ -81,11 +83,11 @@ public class Quiz {
      */
     private void prepareQuiz(List<String> playerMessages) throws IOException{
         questionToAnswer = new HashMap<>();
-        questionStack = new Stack<>();
+        questionQueue = new LinkedList<>();
         for(String message : playerMessages){
             QuizData quizData = QuizFileReader.getQuizDataForMessage(message);
             questionToAnswer.put(quizData.getQuestion(), quizData.getAnswer());
-            questionStack.push(quizData.getQuestion());
+            questionQueue.add(quizData.getQuestion());
         }      
     }
     /**
