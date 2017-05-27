@@ -26,17 +26,15 @@ public enum Occupants {
 
     static {
         for(Occupants occupant : Occupants.values()){
-            @SuppressWarnings("AccessingNonPublicFieldOfAnotherObject")
-            Occupants put;
-            put = representationToOccupant.put(occupant.representation,occupant);
+            representationToOccupant.put(occupant.representation,occupant);
         }
     }
-
+    
+    private String representation;
+    
     public static Occupants getOccupant(String representation){
         return representationToOccupant.get(representation);
     }
-
-    private String representation;
 
     private Occupants(String representation){
         this.representation = representation;

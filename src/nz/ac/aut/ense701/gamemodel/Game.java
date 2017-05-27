@@ -37,6 +37,9 @@ import nz.ac.aut.ense701.gamemodel.occupants.Bait;
 
 public class Game
 {
+    private static final int NUMBER_OF_CONSECUTIVE_MOVES_TO_REMOVE_KIWI = 10;
+    private static final int NUMBER_OF_CONSECUTIVE_MOVES_TO_ADD_KIWI = 12;
+    private static final double MIN_REQUIRED_CATCH = 0.8;
     //Constants shared with UI to provide player data
     public static final int STAMINA_INDEX = 0;
     public static final int MAXSTAMINA_INDEX = 1;
@@ -50,6 +53,7 @@ public class Game
     public static final int CONSERVATION_SCORE = 100;
     public static final int QUIZ_SCORE = 50;
     
+    
     private Island island;
     private KiwiHandler kiwiHandler;
     private PredatorHandler predatorHandler;
@@ -61,9 +65,7 @@ public class Game
     private int predatorsTrapped;
     private final Set<GameEventListener> eventListeners;
     private List<Kiwi> activeKiwisCounted;
-    private Position lastUpdatedKiwisPosition;
     private Position lastUpdatedPredatorPosition;
-    private final double MIN_REQUIRED_CATCH = 0.8;
     private String winMessage = "";
     private String loseMessage  = "";
     private String playerMessage  = "";   
@@ -377,29 +379,26 @@ public class Game
     public boolean canUse(Object itemToUse)
     {
         boolean result = (itemToUse != null)&&(itemToUse instanceof Item);
-        if(result)
+        if(result && itemToUse instanceof Tool)
         {
             //Food can always be used (though may be wasted)
             // so no need to change result
-
-            if(itemToUse instanceof Tool)
+            Tool tool = (Tool)itemToUse;
+            //Traps can only be used if there is a predator to catch
+            if(tool.isTrap())
             {
-                Tool tool = (Tool)itemToUse;
-                //Traps can only be used if there is a predator to catch
-                if(tool.isTrap())
-                {
-                    result = island.hasPredator(player.getPosition());
-                }
-                //Screwdriver can only be used if player has a broken trap
-                else if (tool.isScrewdriver() && player.hasTrap())
-                {
-                    result = player.getTrap().isBroken();
-                }
-                else
-                {
-                    result = false;
-                }
-            }            
+                result = island.hasPredator(player.getPosition());
+            }
+            //Screwdriver can only be used if player has a broken trap
+            else if (tool.isScrewdriver() && player.hasTrap())
+            {
+                result = player.getTrap().isBroken();
+            }
+            else
+            {
+                result = false;
+            }
+                        
         }
         return result;
     }
@@ -547,13 +546,10 @@ public class Game
                  success = trapPredator(); 
                  displayDialogueBox();
             }
-            else if(tool.isScrewdriver())// Use screwdriver (to fix trap)
+            else if(tool.isScrewdriver() && player.hasTrap())// Use screwdriver (to fix trap)
             {
-                if(player.hasTrap())
-                    {
-                        Tool trap = player.getTrap();
-                        trap.fix();
-                    }
+                Tool trap = player.getTrap();
+                trap.fix();
             }
         }
         else if ("Messages".equalsIgnoreCase(item.toString()))
@@ -563,8 +559,6 @@ public class Game
             for(int i = 1; i <= messages.size(); i++){
                 textToDisplay.append("Message ").append(i).append(":\n").append(messages.get(i - 1)).append("\n");
             }
-            
-            //String list = player.getPlayerMessages();
             JOptionPane.showMessageDialog(null,textToDisplay, "Collected Facts" , JOptionPane.PLAIN_MESSAGE);
         }
         updateGameState();
@@ -693,14 +687,11 @@ public class Game
             message = "You win! You have done an excellent job and trapped all the predators.";
             this.setWinMessage(message);
         }
-        else if(kiwiCount == totalKiwis)
+        else if(kiwiCount == totalKiwis && (predatorsTrapped >= totalPredators * MIN_REQUIRED_CATCH))
         {
-            if(predatorsTrapped >= totalPredators * MIN_REQUIRED_CATCH)
-            {
-                state = GameState.WON;
-                message = "You win! You have counted all the kiwi and trapped at least 80% of the predators.";
-                this.setWinMessage(message);
-            }
+            state = GameState.WON;
+            message = "You win! You have counted all the kiwi and trapped at least 80% of the predators.";
+            this.setWinMessage(message);
         }
         // notify listeners about changes
         notifyGameEventListeners();
@@ -740,8 +731,8 @@ public class Game
      */
     private boolean playerCanMove() 
     {
-        return ( isPlayerMovePossible(MoveDirection.NORTH)|| isPlayerMovePossible(MoveDirection.SOUTH)
-                || isPlayerMovePossible(MoveDirection.EAST) || isPlayerMovePossible(MoveDirection.WEST));
+        return isPlayerMovePossible(MoveDirection.NORTH)|| isPlayerMovePossible(MoveDirection.SOUTH)
+                || isPlayerMovePossible(MoveDirection.EAST) || isPlayerMovePossible(MoveDirection.WEST);
 
     }
         
@@ -864,12 +855,12 @@ public class Game
         }
         catch(FileNotFoundException e)
         {
-            System.err.println("Unable to find data file '" + fileName + "'");
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, "Unable to find data file '" + fileName + "'");
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, e);
         }
         catch(IOException e)
         {
-            System.err.println("Problem encountered processing file.");
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, "Problem encountered processing file.");
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, e);
         }
         finally{
@@ -1012,42 +1003,52 @@ public class Game
      */
     public int changeKiwiPopulation(){
         int result = 0;
-        List<Position> availablePositionsToAddKiwi = new ArrayList<Position>();
         //Checks to see if the user has counted any kiwis
         if (!activeKiwisCounted.isEmpty())
         {       
             //This is the kiwi that was added last to the list of kiwi counted
             Kiwi kiwiToRemove = activeKiwisCounted.get(activeKiwisCounted.size() - 1);
-
-            if(player.getNumberOfSteps()%10 == 0)
+            if(player.getNumberOfSteps()%NUMBER_OF_CONSECUTIVE_MOVES_TO_REMOVE_KIWI == 0)
             {
                //When the user takes 10 consecutive steps and has not counted a new kiwi
                //A kiwi is removed as an occupant and the population of kiwi decrements by 1
-               lastUpdatedKiwisPosition = kiwiToRemove.getPosition();
                island.removeOccupant(kiwiToRemove.getPosition(), kiwiToRemove);
                result = -1;
             }
-            else if(player.getNumberOfSteps()%12 == 0)
+            else if(player.getNumberOfSteps()%NUMBER_OF_CONSECUTIVE_MOVES_TO_ADD_KIWI == 0)
             {
-               //When the user takes 12 consecutive steps and has not counted a new kiwi
-               //A kiwi is added as an occupant and the population of kiwi on the island increments by 1
-                for(int i = 0; i < island.getNumRows(); i++){
-                    for(int j = 0; j < island.getNumColumns(); j++){
-                        Position positionToPlaceKiwi = new Position(island, i, j);
-                        //This checks the availability of the Grid Square for a kiwi to occupy a square 
-                        if(island.isOccupantMoveToPositionPossible(new Kiwi(positionToPlaceKiwi, kiwiToRemove.getName(), kiwiToRemove.getDescription()), positionToPlaceKiwi)){
-                            availablePositionsToAddKiwi.add(positionToPlaceKiwi);
-                        }
-                    } 
-                }
-                if(!availablePositionsToAddKiwi.isEmpty()){
-                    Position positionToaddKiwi = availablePositionsToAddKiwi.get((new Random()).nextInt(availablePositionsToAddKiwi.size()));
-                    island.addOccupant(positionToaddKiwi, new Kiwi( positionToaddKiwi, kiwiToRemove.getName(), kiwiToRemove.getDescription()));
-                    result = 1;
-                }
+               result = addKiwiToIslandAtARandomPosition(kiwiToRemove.getName(), kiwiToRemove.getDescription());     
             }
         }
         return result;
+    }
+    
+    /**
+     * Adds a kiwi to the island at a random position
+     * @param kiwiName Name of the Kiwi
+     * @param kiwiDescription Description of the Kiwi
+     * @return 1 if the kiwi is added to the island
+     *         0 otherwise 
+     */
+    private int addKiwiToIslandAtARandomPosition(String kiwiName, String kiwiDescription){
+        //When the user takes 12 consecutive steps and has not counted a new kiwi
+        //A kiwi is added as an occupant and the population of kiwi on the island increments by 1
+        List<Position> availablePositionsToAddKiwi = new ArrayList<Position>();
+        for(int i = 0; i < island.getNumRows(); i++){
+            for(int j = 0; j < island.getNumColumns(); j++){
+                Position positionToPlaceKiwi = new Position(island, i, j);
+                //This checks the availability of the Grid Square for a kiwi to occupy a square 
+                if(island.isOccupantMoveToPositionPossible(new Kiwi(positionToPlaceKiwi, kiwiName, kiwiDescription), positionToPlaceKiwi)){
+                    availablePositionsToAddKiwi.add(positionToPlaceKiwi);
+                }
+            } 
+        }
+        if(!availablePositionsToAddKiwi.isEmpty()){
+            Position positionToaddKiwi = availablePositionsToAddKiwi.get((new Random()).nextInt(availablePositionsToAddKiwi.size()));
+            island.addOccupant(positionToaddKiwi, new Kiwi( positionToaddKiwi, kiwiName, kiwiDescription));
+            return 1;
+        }
+        return 0;
     }
 }
 

@@ -21,8 +21,7 @@ public enum Tools {
 
     static {
         for(Tools tool : Tools.values()){
-            Tools put;
-            put = representationToTool.put(tool.representation,tool);
+            representationToTool.put(tool.representation,tool);
         }
     }
 

@@ -236,9 +236,8 @@ public class GridSquare
         }
         
         boolean enoughRoom       = occupants.size() < MAX_OCCUPANTS;
-        if ( !enoughRoom ) 
+        if ( enoughRoom ) 
         {
-        } else {
             for(Occupant existingOccupant : occupants)
             {
                 if(existingOccupant instanceof Hazard || 
