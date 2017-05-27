@@ -73,7 +73,7 @@ public class QuizPanel extends javax.swing.JPanel {
             }
         }
         
-        optionList = new ArrayList<JRadioButton>();
+        optionList = new ArrayList<>();
         java.awt.GridBagConstraints gridBagConstraints;
         radioButtonGroup = new ButtonGroup();
         int currentRowCount = ((GridBagLayout)(jPanel2.getLayout())).getLayoutDimensions().length;

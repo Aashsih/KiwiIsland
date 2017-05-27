@@ -58,7 +58,7 @@ public class KiwiHandler extends MovableFaunaHandler{
         }
         else
         {
-            Set<Kiwi> movedKiwis = new HashSet<Kiwi>();
+            Set<Kiwi> movedKiwis = new HashSet<>();
             for(Kiwi kiwi : nearbyKiwis)
             {
                 if(moveFauna(kiwi, getPositionToMoveKiwi(kiwi)))
@@ -88,9 +88,9 @@ public class KiwiHandler extends MovableFaunaHandler{
         //use the Postion.isPostionValid method to iteratre through all the possible blocks on the island around a radius = ATTRACT_RADIUS
         if(playerPosition == null)
         {
-            return new ArrayList<Kiwi>();
+            return new ArrayList<>();
         }
-        List<Kiwi> nearbyKiwis = new ArrayList<Kiwi>();
+        List<Kiwi> nearbyKiwis = new ArrayList<>();
         int currentXPosiion = playerPosition.getRow();
         int currentYPosiion = playerPosition.getColumn();
         for(int i = currentXPosiion - ATTRACT_RADIUS; i <= currentXPosiion + ATTRACT_RADIUS; i++)

@@ -33,7 +33,7 @@ public class GridSquare
         this.terrain   = terrain;
         this.explored  = false;
         this.visible   = false;
-        this.occupants = new HashSet<Occupant>(); 
+        this.occupants = new HashSet<>(); 
         this.player    = null;        
     }
     
@@ -91,10 +91,9 @@ public class GridSquare
     public String getOccupantStringRepresentation()
     {
         StringBuilder result = new StringBuilder();
-        for(Occupant occupant : occupants)
-        {
+        occupants.stream().forEach((occupant) -> {
             result.append(occupant.getStringRepresentation());
-        }
+        });
         return result.toString();
     } 
     
@@ -238,18 +237,12 @@ public class GridSquare
         boolean enoughRoom       = occupants.size() < MAX_OCCUPANTS;
         if ( enoughRoom ) 
         {
-            for(Occupant existingOccupant : occupants)
-            {
-                if(existingOccupant instanceof Hazard || 
-                        (existingOccupant instanceof Kiwi && occupantToBeAdded instanceof Kiwi))
-                    //if Hazard is already occupying that space, then no other occupant should be added here
-                    //OR
-                    //if a kiwi already exists on the block
-                {
-                    return false;
-                }
-                
-            }
+            if (!occupants.stream().noneMatch((existingOccupant) -> (existingOccupant instanceof Hazard || 
+                    (existingOccupant instanceof Kiwi && occupantToBeAdded instanceof Kiwi)))) {
+                return false;
+            } //if Hazard is already occupying that space, then no other occupant should be added here
+            //OR
+            //if a kiwi already exists on the block
             return true;
         }
         return false;

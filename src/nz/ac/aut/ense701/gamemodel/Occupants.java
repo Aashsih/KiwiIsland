@@ -22,7 +22,7 @@ public enum Occupants {
     TOOL("T"),
     BAIT("B");
     
-    private static final Map<String, Occupants> representationToOccupant = new HashMap<String, Occupants>();
+    private static final Map<String, Occupants> representationToOccupant = new HashMap<>();
     
     static {
         for(Occupants occupant : Occupants.values()){

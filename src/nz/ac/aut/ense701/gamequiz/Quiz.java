@@ -80,8 +80,8 @@ public class Quiz {
      * @throws IOException 
      */
     private void prepareQuiz(List<String> playerMessages) throws IOException{
-        questionToAnswer = new HashMap<Question, Integer>();
-        questionStack = new Stack<Question>();
+        questionToAnswer = new HashMap<>();
+        questionStack = new Stack<>();
         for(String message : playerMessages){
             QuizData quizData = QuizFileReader.getQuizDataForMessage(message);
             questionToAnswer.put(quizData.getQuestion(), quizData.getAnswer());

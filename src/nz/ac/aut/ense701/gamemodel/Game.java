@@ -75,7 +75,7 @@ public class Game
      */
     public Game() 
     {   
-        eventListeners = new HashSet<GameEventListener>();
+        eventListeners = new HashSet<>();
         createNewGame();
     }
     
@@ -86,7 +86,7 @@ public class Game
      */
     public final void createNewGame()
     {
-        activeKiwisCounted = new ArrayList<Kiwi>();
+        activeKiwisCounted = new ArrayList<>();
         count = 0;
         totalPredators = 0;
         totalKiwis = 0;
@@ -813,10 +813,9 @@ public class Game
      */
     private void notifyGameEventListeners()
     {
-        for ( GameEventListener listener : eventListeners ) 
-        {
+        eventListeners.stream().forEach((listener) -> {
             listener.gameStateChanged();
-        }
+        });
     }
 
     
@@ -829,10 +828,8 @@ public class Game
      */
     private void initialiseIslandFromFile(String fileName) 
     {
-        Scanner input = null;
         try
-        {
-            input = new Scanner(new File(fileName));
+        (Scanner input = new Scanner(new File(fileName))) {
             // make sure decimal numbers are read in the form "123.23"
             input.useLocale(Locale.US);
             input.useDelimiter("\\s*,\\s*");
@@ -857,16 +854,6 @@ public class Game
         {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, "Unable to find data file '" + fileName + "'");
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, e);
-        }
-        catch(IOException e)
-        {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, "Problem encountered processing file.");
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, e);
-        }
-        finally{
-            if(input != null){
-                input.close();
-            }
         }
     }
 
@@ -1033,7 +1020,7 @@ public class Game
     private int addKiwiToIslandAtARandomPosition(String kiwiName, String kiwiDescription){
         //When the user takes 12 consecutive steps and has not counted a new kiwi
         //A kiwi is added as an occupant and the population of kiwi on the island increments by 1
-        List<Position> availablePositionsToAddKiwi = new ArrayList<Position>();
+        List<Position> availablePositionsToAddKiwi = new ArrayList<>();
         for(int i = 0; i < island.getNumRows(); i++){
             for(int j = 0; j < island.getNumColumns(); j++){
                 Position positionToPlaceKiwi = new Position(island, i, j);

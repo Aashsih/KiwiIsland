@@ -17,7 +17,7 @@ public enum Tools {
     SCREW_DRIVER("Screwdriver"), 
     TRAP("Trap");
     
-    private static final Map<String, Tools> representationToTool = new HashMap<String, Tools>();
+    private static final Map<String, Tools> representationToTool = new HashMap<>();
 
     static {
         for(Tools tool : Tools.values()){

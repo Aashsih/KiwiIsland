@@ -42,7 +42,7 @@ public class PredatorHandler extends MovableFaunaHandler{
         }
         Position newPredatorPosiion = null;
         if(numberOfSteps % 10 == 0){
-            List<Predator> predatorList = new ArrayList<Predator>();
+            List<Predator> predatorList = new ArrayList<>();
             for(int i = 0; i < island.getNumRows(); i++){
                 for(int j = 0; j < island.getNumColumns(); j++){
                     Position aPosition = new Position(island, i, j);

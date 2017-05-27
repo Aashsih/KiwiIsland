@@ -18,13 +18,8 @@ public class Main
     public static void main(String[] args) 
     {
         final WelcomePage welcomePage = new WelcomePage();
-        java.awt.EventQueue.invokeLater(new Runnable() 
-        {
-            @Override
-            public void run() 
-            {
-                welcomePage.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            welcomePage.setVisible(true);
         });
         
     }

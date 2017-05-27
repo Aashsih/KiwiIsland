@@ -52,8 +52,8 @@ public class Player
        this.maxBackpackSize = maxBackpackSize;
        this.playerScore     = playerScore;
        this.alive = true;
-       this.backpack = new HashSet<Item>();
-       this.messages = new ArrayList<String>();
+       this.backpack = new HashSet<>();
+       this.messages = new ArrayList<>();
     }   
     
     /*****************************************************************************************************

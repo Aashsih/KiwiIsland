@@ -47,7 +47,7 @@ public class DOCMessages {
     private static void initializeFacts() throws IOException
     {
         if(messages == null){
-            messages = new Stack<String>();
+            messages = new Stack<>();
             for(QuizData aQuizData : QuizFileReader.getQuizData())
             {
                 messages.push(aQuizData.getMessage());

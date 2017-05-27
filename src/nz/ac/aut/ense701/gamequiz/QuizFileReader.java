@@ -70,7 +70,7 @@ public class QuizFileReader {
         if(quizData == null){
             Type targetClassType = new TypeToken<ArrayList<QuizData>>() {}.getType();
             quizData = (List<QuizData>) new Gson().fromJson( FileUtils.readFileToString(new File(FILE_QUIZ_DATA), ENCODING), targetClassType);
-            messageToQuizData = new HashMap<String, QuizData>();
+            messageToQuizData = new HashMap<>();
             for(QuizData aQuizQuestion : quizData){
                 messageToQuizData.put(aQuizQuestion.getMessage(), aQuizQuestion);
             }
