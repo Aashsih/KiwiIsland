@@ -16,7 +16,6 @@ import nz.ac.aut.ense701.gamemodel.occupants.Fauna;
  */
 public abstract class MovableFaunaHandler
 {
-    //protected Set<Fauna> faunaList;
     protected Island island;
     
     /**
@@ -32,7 +31,7 @@ public abstract class MovableFaunaHandler
                     "Island parameter cannot be null");
         }
         this.island = island;
-        //faunaList = new HashSet<Fauna>();
+        
     }
     
     /**
