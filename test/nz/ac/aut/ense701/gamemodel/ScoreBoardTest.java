@@ -45,7 +45,7 @@ public class ScoreBoardTest extends junit.framework.TestCase{
             playerScoreStringBuffer = new StringBuffer();
             playerScoreStringBuffer.append(FileUtils.readFileToString(new File(SCORE_BOARD_FILE_NAME), ENCODING));
             //Set Data to null to reset variables and make them read from the file again
-            Field scoreBoardField = ScoreBoard.class.getDeclaredField("scoreBoard");
+            Field scoreBoardField = ScoreBoard.class.getDeclaredField("scoreList");
             scoreBoardField.setAccessible(true);
             scoreBoardField.set(null, null);
         } catch (IOException ex) {
@@ -114,7 +114,7 @@ public class ScoreBoardTest extends junit.framework.TestCase{
         return "[\n" +
 "{\n" +
 "	\"playerName\":\"Test Player 1\",\n" +
-"	\"score\":150\n" +
+"	\"playerScore\":150\n" +
 "}\n" +
 "]";
     }
