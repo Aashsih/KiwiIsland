@@ -80,6 +80,9 @@
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="pnlGame">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        BufferedImage image = null;&#xa;        try{&#xa;            image = ImageIO.read(new File(&quot;src\\nz\\ac\\aut\\ense701\\images\\islandImage.png&quot;));&#xa;        }catch(IOException e){&#xa;            e.printStackTrace();&#xa;        }&#xa;&#xa;        super.paintComponent(g);&#xa;        g.drawImage(image, 0, 0, null);&#xa;    }&#xa;&#xa;}"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="Center"/>

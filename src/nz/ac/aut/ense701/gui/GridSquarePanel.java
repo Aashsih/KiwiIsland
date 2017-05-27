@@ -77,7 +77,7 @@ public class GridSquarePanel extends javax.swing.JPanel
                                   Math.min(255, color.getGreen() + 128), 
                                   Math.min(255, color.getBlue()  + 128));
             }
-            lblText.setBackground(color);
+           // lblText.setBackground(color);
             // set border colour according to 
             // whether the player is in the grid square or not
             setBorder(game.hasPlayer(row,column) ? ACTIVE_BORDER : NORMAL_BORDER);
@@ -85,7 +85,7 @@ public class GridSquarePanel extends javax.swing.JPanel
         else
         {
             lblText.setText("");
-            lblText.setBackground(null);
+          //  lblText.setBackground(null);
             setBorder(NORMAL_BORDER);
         }
         if(game.getLastUpdatedPredatorPosition() != null){
@@ -95,6 +95,8 @@ public class GridSquarePanel extends javax.swing.JPanel
                 game.removeLastUpdatedPredatorPosition();
             }
         }
+        
+        lblText.setOpaque(false);
     }
     
     /** This method is called from within the constructor to
@@ -114,7 +116,7 @@ public class GridSquarePanel extends javax.swing.JPanel
         lblText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblText.setText("content");
-        lblText.setOpaque(true);
+        lblText.setOpaque(false);
         add(lblText, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables

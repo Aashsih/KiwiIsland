@@ -3,12 +3,16 @@ package nz.ac.aut.ense701.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -297,7 +301,8 @@ public class KiwiCountUI
         {
             for ( int col = 0 ; col < columns ; col++ )
             {
-                pnlGame.add(new GridSquarePanel(game, row, col));
+                GridSquarePanel gridPanel = new GridSquarePanel(game, row, col);
+                pnlGame.add(gridPanel);
             }
         }
     }
@@ -313,7 +318,22 @@ public class KiwiCountUI
         java.awt.GridBagConstraints gridBagConstraints;
 
         javax.swing.JPanel pnlContent = new javax.swing.JPanel();
-        pnlGame = new javax.swing.JPanel();
+        pnlGame = new javax.swing.JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                BufferedImage image = null;
+                try{
+                    image = ImageIO.read(new File("src\\nz\\ac\\aut\\ense701\\images\\islandImage.png"));
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+
+                super.paintComponent(g);
+                g.drawImage(image, 0, 0, null);
+            }
+
+        };
         pnlControls = new javax.swing.JPanel();
         javax.swing.JPanel pnlPlayer = new javax.swing.JPanel();
         javax.swing.JPanel pnlPlayerData = new javax.swing.JPanel();
