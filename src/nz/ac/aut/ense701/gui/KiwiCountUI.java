@@ -302,7 +302,6 @@ public class KiwiCountUI
         {
             for ( int col = 0 ; col < columns ; col++ )
             {
-                
                 GridSquarePanel gridPanel = new GridSquarePanel(game, row, col);
                 pnlGame.add(gridPanel);
             }
@@ -323,16 +322,15 @@ public class KiwiCountUI
         pnlGame = new javax.swing.JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
-
-                BufferedImage image = null;
+                super.paintComponent(g);
+                BufferedImage image;
                 try{
                     image = ImageIO.read(new File("src\\nz\\ac\\aut\\ense701\\images\\islandImage.png"));
+                    Image scaledImage = image.getScaledInstance(pnlGame.getWidth(), pnlGame.getHeight(), Image.SCALE_SMOOTH);
+                    g.drawImage(scaledImage, 0, 0, null);
                 }catch(IOException e){
-                    e.printStackTrace();
+                    Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, e);
                 }
-                Image scaledImage = image.getScaledInstance(pnlGame.getWidth(), pnlGame.getHeight(), Image.SCALE_SMOOTH);
-                super.paintComponent(g);
-                g.drawImage(scaledImage, 0, 0, null);
             }
 
         };
