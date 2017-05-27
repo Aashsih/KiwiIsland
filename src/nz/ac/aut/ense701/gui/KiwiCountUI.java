@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -301,6 +302,7 @@ public class KiwiCountUI
         {
             for ( int col = 0 ; col < columns ; col++ )
             {
+                
                 GridSquarePanel gridPanel = new GridSquarePanel(game, row, col);
                 pnlGame.add(gridPanel);
             }
@@ -328,9 +330,9 @@ public class KiwiCountUI
                 }catch(IOException e){
                     e.printStackTrace();
                 }
-
+                Image scaledImage = image.getScaledInstance(pnlGame.getWidth(), pnlGame.getHeight(), Image.SCALE_SMOOTH);
                 super.paintComponent(g);
-                g.drawImage(image, 0, 0, null);
+                g.drawImage(scaledImage, 0, 0, null);
             }
 
         };
