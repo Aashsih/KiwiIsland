@@ -1,15 +1,15 @@
 
-package nz.ac.aut.ense701.game_model.occupants;
+package nz.ac.aut.ense701.gamemodeloccupants;
 
-import nz.ac.aut.ense701.game_model.Position;
-import nz.ac.aut.ense701.game_model.Occupants;
+import nz.ac.aut.ense701.gamemodel.Position;
+import nz.ac.aut.ense701.gamemodel.Occupants;
 
 /**
  * Kiwi represents a kiwi living on the island
  * @author AS
  * @version July 2011
  */
-public class Kiwi  extends Fauna
+public class Kiwi extends Fauna
 {
     private boolean counted;
     /**

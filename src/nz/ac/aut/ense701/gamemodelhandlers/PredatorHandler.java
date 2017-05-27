@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nz.ac.aut.ense701.game_model.handlers;
+package nz.ac.aut.ense701.gamemodelhandlers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import nz.ac.aut.ense701.game_model.Island;
-import nz.ac.aut.ense701.game_model.Position;
-import nz.ac.aut.ense701.game_model.occupants.Predator;
+import nz.ac.aut.ense701.gamemodel.Island;
+import nz.ac.aut.ense701.gamemodel.Position;
+import nz.ac.aut.ense701.gamemodeloccupants.Predator;
 
 /**
  * This class stores all the predators currently present on the island and is 

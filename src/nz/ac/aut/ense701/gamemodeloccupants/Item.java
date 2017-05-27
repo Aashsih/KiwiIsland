@@ -1,6 +1,6 @@
-package nz.ac.aut.ense701.game_model.occupants;
+package nz.ac.aut.ense701.gamemodeloccupants;
 
-import nz.ac.aut.ense701.game_model.Position;
+import nz.ac.aut.ense701.gamemodel.Position;
 
 
 /**

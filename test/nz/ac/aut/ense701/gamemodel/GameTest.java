@@ -7,11 +7,11 @@ import nz.ac.aut.ense701.gamemodel.Island;
 import nz.ac.aut.ense701.gamemodel.Terrain;
 import nz.ac.aut.ense701.gamemodel.Player;
 import nz.ac.aut.ense701.gamemodel.MoveDirection;
-import nz.ac.aut.ense701.gamemodel.occupants.Predator;
-import nz.ac.aut.ense701.gamemodel.occupants.Food;
-import nz.ac.aut.ense701.gamemodel.occupants.Item;
-import nz.ac.aut.ense701.gamemodel.occupants.Tool;
-import nz.ac.aut.ense701.gamemodel.occupants.Hazard;
+import nz.ac.aut.ense701.gamemodeloccupants.Predator;
+import nz.ac.aut.ense701.gamemodeloccupants.Food;
+import nz.ac.aut.ense701.gamemodeloccupants.Item;
+import nz.ac.aut.ense701.gamemodeloccupants.Tool;
+import nz.ac.aut.ense701.gamemodeloccupants.Hazard;
 import org.junit.Test;
 
 /**

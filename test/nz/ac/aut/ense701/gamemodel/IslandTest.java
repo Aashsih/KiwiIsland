@@ -5,8 +5,8 @@ import nz.ac.aut.ense701.gamemodel.Position;
 import nz.ac.aut.ense701.gamemodel.Island;
 import nz.ac.aut.ense701.gamemodel.Terrain;
 import nz.ac.aut.ense701.gamemodel.Player;
-import nz.ac.aut.ense701.gamemodel.occupants.Predator;
-import nz.ac.aut.ense701.gamemodel.occupants.Kiwi;
+import nz.ac.aut.ense701.gamemodeloccupants.Predator;
+import nz.ac.aut.ense701.gamemodeloccupants.Kiwi;
 import org.junit.Test;
 
 /**

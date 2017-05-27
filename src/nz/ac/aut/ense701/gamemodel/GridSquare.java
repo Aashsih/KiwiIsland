@@ -1,11 +1,11 @@
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.occupants.Occupant;
+import nz.ac.aut.ense701.gamemodeloccupants.Occupant;
 import java.security.InvalidParameterException;
 import java.util.HashSet;
 import java.util.Set;
-import nz.ac.aut.ense701.gamemodel.occupants.Hazard;
-import nz.ac.aut.ense701.gamemodel.occupants.Kiwi;
+import nz.ac.aut.ense701.gamemodeloccupants.Hazard;
+import nz.ac.aut.ense701.gamemodeloccupants.Kiwi;
 
 /**
  * Class to represent a grid square on the island.

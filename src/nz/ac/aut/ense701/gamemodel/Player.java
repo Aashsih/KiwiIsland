@@ -1,8 +1,8 @@
 package nz.ac.aut.ense701.gamemodel;
 
 import java.util.ArrayList;
-import nz.ac.aut.ense701.gamemodel.occupants.Item;
-import nz.ac.aut.ense701.gamemodel.occupants.Tool;
+import nz.ac.aut.ense701.gamemodeloccupants.Item;
+import nz.ac.aut.ense701.gamemodeloccupants.Tool;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;

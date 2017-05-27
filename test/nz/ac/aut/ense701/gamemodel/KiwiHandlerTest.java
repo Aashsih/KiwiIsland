@@ -9,10 +9,10 @@ import nz.ac.aut.ense701.gamemodel.Position;
 import nz.ac.aut.ense701.gamemodel.Island;
 import java.util.ArrayList;
 import java.util.List;
-import nz.ac.aut.ense701.gamemodel.handlers.KiwiHandler;
-import nz.ac.aut.ense701.gamemodel.occupants.Fauna;
-import nz.ac.aut.ense701.gamemodel.occupants.Hazard;
-import nz.ac.aut.ense701.gamemodel.occupants.Kiwi;
+import nz.ac.aut.ense701.gamemodelhandlers.KiwiHandler;
+import nz.ac.aut.ense701.gamemodeloccupants.Fauna;
+import nz.ac.aut.ense701.gamemodeloccupants.Hazard;
+import nz.ac.aut.ense701.gamemodeloccupants.Kiwi;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 

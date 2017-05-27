@@ -2,7 +2,7 @@ package nz.ac.aut.ense701.gamemodel;
 
 import nz.ac.aut.ense701.gamemodel.Position;
 import nz.ac.aut.ense701.gamemodel.Island;
-import nz.ac.aut.ense701.gamemodel.occupants.Kiwi;
+import nz.ac.aut.ense701.gamemodeloccupants.Kiwi;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

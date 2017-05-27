@@ -7,7 +7,7 @@ package nz.ac.aut.ense701.gamemodel;
 
 import nz.ac.aut.ense701.gamemodel.Position;
 import nz.ac.aut.ense701.gamemodel.Island;
-import nz.ac.aut.ense701.gamemodel.occupants.Bait;
+import nz.ac.aut.ense701.gamemodeloccupants.Bait;
 import org.junit.Test;
 
 /**
