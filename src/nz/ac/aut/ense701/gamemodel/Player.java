@@ -249,7 +249,7 @@ public class Player
      */
     public Collection<Object> getInventory()
     {
-        List<Object> backpackItems = new ArrayList<Object>();
+        List<Object> backpackItems = new ArrayList<>();
     
        for(Item b : backpack)
        {

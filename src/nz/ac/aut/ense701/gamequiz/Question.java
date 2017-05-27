@@ -13,12 +13,12 @@ import java.util.List;
  * @author aashi
  */
 public class Question {
-    private String question;
+    private String aQuestion;
     private List<String> options;
 
     //Getters
     public String getQuestion() {
-        return question;
+        return aQuestion;
     }
 
     public List<String> getOptions() {

@@ -13,9 +13,10 @@ import nz.ac.aut.ense701.gamemodel.Occupants;
 
 public class Hazard extends Occupant {
     
+    private static final double FATAL_IMPACT = 1.0;
+    
     private final double impact;
-    private final double FATAL_IMPACT = 1.0;
-
+    
     /**
      * Create a hazard on the island
      * @param position where hazard is.

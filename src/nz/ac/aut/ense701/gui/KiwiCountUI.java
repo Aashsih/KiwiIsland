@@ -36,7 +36,6 @@ public class KiwiCountUI
     implements GameEventListener, KeyListener
 {
     private final Game game;
-    private QuizPanel quizPanel;
     private final WelcomePage parentFrame;
     private boolean lowStaminaMessageDisplayed;
 
@@ -84,7 +83,6 @@ public class KiwiCountUI
                 }
                 else{
                     disposeKiwiCountUIFrame();
-                    //game.createNewGame();        
                 }
             } catch (IOException ex) {
                 Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -120,7 +118,7 @@ public class KiwiCountUI
         removeAllComponentsFromJPanel(pnlGame);
         disablePanelControl();
         pnlGame.setLayout(new BorderLayout());
-        quizPanel = new QuizPanel(this, new Quiz(this.game.getPlayerMessages()));
+        QuizPanel quizPanel = new QuizPanel(this, new Quiz(this.game.getPlayerMessages()));
         JScrollPane scrollPane = new JScrollPane(quizPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         pnlGame.add(scrollPane, BorderLayout.CENTER);
@@ -831,13 +829,10 @@ public class KiwiCountUI
 
     private void jMenuHelpItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHelpItemActionPerformed
         try {
-            // TODO add your handling code here:
             JTextArea helpLabel = new JTextArea(25, 50);
             helpLabel.setText(GameHelp.getGameHelpInfo());
             JScrollPane scrollpane = new JScrollPane(helpLabel);
             JOptionPane.showMessageDialog(this, scrollpane);
-            
-            //JOptionPane.showMessageDialog(this, GameHelp.getGameHelpInfo(), "Help", JOptionPane.PLAIN_MESSAGE);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "--No Help Content Found--", "Error", JOptionPane.PLAIN_MESSAGE);
             Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);

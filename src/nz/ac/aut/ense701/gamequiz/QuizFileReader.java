@@ -28,6 +28,10 @@ public class QuizFileReader {
     private static List<QuizData> quizData;
     private static Map<String, QuizData> messageToQuizData;
     
+    private QuizFileReader(){
+        
+    }
+    
     /**
      * Reads the File "QuizData.json" if not read already and returns a List of QuizData
      * @return List of QuizData list of all the Data required for a quiz

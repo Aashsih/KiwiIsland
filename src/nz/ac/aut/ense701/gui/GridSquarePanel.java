@@ -21,8 +21,8 @@ public class GridSquarePanel extends javax.swing.JPanel
     private static final Border ACTIVE_BORDER = new LineBorder(Color.RED, 3);
     
     private final Game game;
-    private final int row, column;
-    
+    private final int row;
+    private final int column;
     /** 
      * Creates new GridSquarePanel.
      * @param game the game to represent
@@ -51,12 +51,18 @@ public class GridSquarePanel extends javax.swing.JPanel
         
         switch ( terrain )
         {
-            case SAND     : color = Color.YELLOW; break;
-            case FOREST   : color = Color.GREEN;  break;
-            case WETLAND : color = Color.BLUE; break;
-            case SCRUB : color = Color.DARK_GRAY;   break;
-            case WATER    : color = Color.CYAN;   break;
-            default  : color = Color.LIGHT_GRAY; break;
+            case SAND : color = Color.YELLOW; 
+                            break;
+            case FOREST : color = Color.GREEN;
+                            break;
+            case WETLAND : color = Color.BLUE;
+                            break;
+            case SCRUB : color = Color.DARK_GRAY;   
+                            break;
+            case WATER : color = Color.CYAN;  
+                            break;
+            default  : color = Color.LIGHT_GRAY;
+                            break;
         }
         
         if ( squareExplored || squareVisible )

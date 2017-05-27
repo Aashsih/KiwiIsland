@@ -91,7 +91,7 @@ public class GridSquare
     public String getOccupantStringRepresentation()
     {
         StringBuilder result = new StringBuilder();
-        occupants.stream().forEach((occupant) -> {
+        occupants.stream().forEach(occupant -> {
             result.append(occupant.getStringRepresentation());
         });
         return result.toString();
@@ -237,8 +237,8 @@ public class GridSquare
         boolean enoughRoom       = occupants.size() < MAX_OCCUPANTS;
         if ( enoughRoom ) 
         {
-            if (!occupants.stream().noneMatch((existingOccupant) -> (existingOccupant instanceof Hazard || 
-                    (existingOccupant instanceof Kiwi && occupantToBeAdded instanceof Kiwi)))) {
+            if (!occupants.stream().noneMatch(existingOccupant -> existingOccupant instanceof Hazard || 
+                    existingOccupant instanceof Kiwi && occupantToBeAdded instanceof Kiwi)) {
                 return false;
             } //if Hazard is already occupying that space, then no other occupant should be added here
             //OR

@@ -813,7 +813,7 @@ public class Game
      */
     private void notifyGameEventListeners()
     {
-        eventListeners.stream().forEach((listener) -> {
+        eventListeners.stream().forEach(listener -> {
             listener.gameStateChanged();
         });
     }

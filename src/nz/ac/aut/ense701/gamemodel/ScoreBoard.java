@@ -60,7 +60,7 @@ public class ScoreBoard {
         }
         readFromFile();
         if(scoreList == null){
-            scoreList = new ArrayList<Score>();
+            scoreList = new ArrayList<>();
         }
         scoreList.add(playerScore);
         FileUtils.writeStringToFile(new File(SCORE_BOARD_FILE_NAME), new Gson().toJson(scoreList) , ENCODING);

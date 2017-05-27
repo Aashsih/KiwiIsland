@@ -72,7 +72,7 @@ public class QuizPanel extends javax.swing.JPanel {
                 this.remove(option);
             }
         }
-        
+        ButtonGroup radioButtonGroup;
         optionList = new ArrayList<>();
         java.awt.GridBagConstraints gridBagConstraints;
         radioButtonGroup = new ButtonGroup();
@@ -206,8 +206,7 @@ public class QuizPanel extends javax.swing.JPanel {
         }
         return -1;
     }
-    private ButtonGroup radioButtonGroup;
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNext;
     private javax.swing.JLabel jLabel1;
