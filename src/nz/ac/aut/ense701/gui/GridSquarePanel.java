@@ -43,7 +43,6 @@ public class GridSquarePanel extends javax.swing.JPanel
     public void update()
     {
         // get the GridSquare object from the world
-        Terrain terrain   = game.getTerrain(row, column);
         boolean squareVisible = game.isVisible(row, column);
         boolean squareExplored = game.isExplored(row, column);
         lblText.setOpaque(false);
