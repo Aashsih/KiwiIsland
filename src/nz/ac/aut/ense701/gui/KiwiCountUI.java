@@ -325,7 +325,7 @@ public class KiwiCountUI
                 super.paintComponent(g);
                 BufferedImage image;
                 try{
-                    image = ImageIO.read(new File("src\\nz\\ac\\aut\\ense701\\images\\islandImage.png"));
+                    image = ImageIO.read(new File("src\\nz\\ac\\aut\\ense701\\images\\finalIslandMap.png"));
                     Image scaledImage = image.getScaledInstance(pnlGame.getWidth(), pnlGame.getHeight(), Image.SCALE_SMOOTH);
                     g.drawImage(scaledImage, 0, 0, null);
                 }catch(IOException e){
