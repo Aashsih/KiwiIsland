@@ -40,8 +40,11 @@ public class KiwiCountUI
     extends javax.swing.JFrame 
     implements GameEventListener, KeyListener
 {
+    private static final String ISLAND_MAP_FILE_NAME = "src\\nz\\ac\\aut\\ense701\\images\\finalIslandMap.png";
+    
     private final Game game;
     private final WelcomePage parentFrame;
+    private BufferedImage image;
     private boolean lowStaminaMessageDisplayed;
 
     /**
@@ -60,6 +63,7 @@ public class KiwiCountUI
         initIslandGrid();
         addKeyListener(this);
         update();
+        loadIslandMap();
     }
     
     /**
@@ -71,10 +75,6 @@ public class KiwiCountUI
     {
         update();
         
-        //Check if kiwi population has changed
-        if(game.getState() == GameState.KIWI_POPULATION_CHANGED){
-            //Start a thread to change the colour of the GridSquare where the kiwi population changed
-        }
         // check for "game over" or "game won"
         if ( game.getState() == GameState.LOST )
         {
@@ -308,6 +308,17 @@ public class KiwiCountUI
         }
     }
     
+    /**
+     * Reads the Image file for the island 
+     */
+    private void loadIslandMap(){
+        try{
+            image = ImageIO.read(new File(ISLAND_MAP_FILE_NAME));
+        }catch(IOException e){
+            Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -320,16 +331,27 @@ public class KiwiCountUI
 
         javax.swing.JPanel pnlContent = new javax.swing.JPanel();
         pnlGame = new javax.swing.JPanel(){
+            private Integer pnlWidth;
+            private Integer pnlHeight;
+            private Image scaledImage;
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                BufferedImage image;
-                try{
-                    image = ImageIO.read(new File("src\\nz\\ac\\aut\\ense701\\images\\finalIslandMap.png"));
-                    Image scaledImage = image.getScaledInstance(pnlGame.getWidth(), pnlGame.getHeight(), Image.SCALE_SMOOTH);
+                if(pnlWidth == null || pnlHeight == null){
+                    pnlWidth = pnlGame.getWidth();
+                    pnlHeight = pnlGame.getHeight();
+                }
+                if(image != null){
+                    if((pnlGame.getWidth() != pnlWidth || pnlGame.getHeight() != pnlHeight)){
+                        pnlWidth = pnlGame.getWidth();
+                        pnlHeight = pnlGame.getHeight();
+                        scaledImage = image.getScaledInstance(pnlGame.getWidth(), pnlGame.getHeight(), Image.SCALE_SMOOTH);
+                        //g.drawImage(, 0, 0, null);
+                    }
+                    if(scaledImage == null){
+                        scaledImage = image;
+                    }
                     g.drawImage(scaledImage, 0, 0, null);
-                }catch(IOException e){
-                    Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, e);
                 }
             }
 
