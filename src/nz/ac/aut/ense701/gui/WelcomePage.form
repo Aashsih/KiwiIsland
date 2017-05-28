@@ -106,8 +106,11 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="pnlBackground">
+              <Properties>
+                <Property name="requestFocusEnabled" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel()"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    private Integer pnlWidth;&#xa;    private Integer pnlHeight;&#xa;    private transient Image scaledImage;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        super.paintComponent(g);&#xa;        if(pnlWidth == null || pnlHeight == null){&#xa;            pnlWidth = pnlBackground.getWidth();&#xa;            pnlHeight = pnlBackground.getHeight();&#xa;        }&#xa;        if(image != null){&#xa;            if(pnlBackground.getWidth() != pnlWidth || pnlBackground.getHeight() != pnlHeight){&#xa;                pnlWidth = pnlBackground.getWidth();&#xa;                pnlHeight = pnlBackground.getHeight();&#xa;                scaledImage = image.getScaledInstance(pnlBackground.getWidth(), pnlBackground.getHeight(), Image.SCALE_SMOOTH);&#xa;            }&#xa;            if(scaledImage == null){&#xa;                scaledImage = image.getScaledInstance(pnlBackground.getWidth(), pnlBackground.getHeight(), Image.SCALE_SMOOTH);&#xa;            }&#xa;            g.drawImage(scaledImage, 0, 0, null);&#xa;        }&#xa;    }&#xa;&#xa;}"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

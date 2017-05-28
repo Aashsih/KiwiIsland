@@ -5,11 +5,16 @@
  */
 package nz.ac.aut.ense701.gui;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import nz.ac.aut.ense701.gamemodel.Game;
 import nz.ac.aut.ense701.gamemodel.Score;
@@ -21,6 +26,9 @@ import nz.ac.aut.ense701.gamemodel.ScoreBoard;
  */
 @SuppressWarnings("serial")
 public class WelcomePage extends javax.swing.JFrame {
+    private static final String WELCOME_PAGE_IMAGE_FILE_NAME = "src\\nz\\ac\\aut\\ense701\\images\\welcomeImage.png";
+    private transient BufferedImage image;
+    
     /**
      * Creates new form WelcomePage
      */
@@ -28,6 +36,7 @@ public class WelcomePage extends javax.swing.JFrame {
         initComponents();
         initializeScoreBoard();
         pnlBackground.repaint();
+        loadIslandMap();
     }
 
     /**
@@ -86,7 +95,31 @@ public class WelcomePage extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         pnlButtons = new javax.swing.JPanel();
         btnNewGame = new javax.swing.JButton();
-        pnlBackground = new javax.swing.JPanel();
+        pnlBackground = new javax.swing.JPanel(){
+            private Integer pnlWidth;
+            private Integer pnlHeight;
+            private transient Image scaledImage;
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if(pnlWidth == null || pnlHeight == null){
+                    pnlWidth = pnlBackground.getWidth();
+                    pnlHeight = pnlBackground.getHeight();
+                }
+                if(image != null){
+                    if(pnlBackground.getWidth() != pnlWidth || pnlBackground.getHeight() != pnlHeight){
+                        pnlWidth = pnlBackground.getWidth();
+                        pnlHeight = pnlBackground.getHeight();
+                        scaledImage = image.getScaledInstance(pnlBackground.getWidth(), pnlBackground.getHeight(), Image.SCALE_SMOOTH);
+                    }
+                    if(scaledImage == null){
+                        scaledImage = image.getScaledInstance(pnlBackground.getWidth(), pnlBackground.getHeight(), Image.SCALE_SMOOTH);
+                    }
+                    g.drawImage(scaledImage, 0, 0, null);
+                }
+            }
+
+        };
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(235, 500));
@@ -116,6 +149,8 @@ public class WelcomePage extends javax.swing.JFrame {
         pnlButtons.add(btnNewGame, java.awt.BorderLayout.WEST);
 
         jPanel3.add(pnlButtons, java.awt.BorderLayout.PAGE_END);
+
+        pnlBackground.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
         pnlBackground.setLayout(pnlBackgroundLayout);
@@ -166,6 +201,17 @@ public class WelcomePage extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new WelcomePage().setVisible(true));
+    }
+    
+    /**
+     * Reads the Image file for the island 
+     */
+    private void loadIslandMap(){
+        try{
+            image = ImageIO.read(new File(WELCOME_PAGE_IMAGE_FILE_NAME));
+        }catch(IOException e){
+            Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
