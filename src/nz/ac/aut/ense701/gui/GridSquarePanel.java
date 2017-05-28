@@ -5,7 +5,6 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import nz.ac.aut.ense701.gamemodel.Game;
 import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Terrain;
 
 /*
  * Panel for representing a single GridSquare of the island on the GUI.
@@ -43,41 +42,16 @@ public class GridSquarePanel extends javax.swing.JPanel
     public void update()
     {
         // get the GridSquare object from the world
-        Terrain terrain   = game.getTerrain(row, column);
         boolean squareVisible = game.isVisible(row, column);
         boolean squareExplored = game.isExplored(row, column);
-        
-        Color      color;
-        
-        switch ( terrain )
-        {
-            case SAND : color = Color.YELLOW; 
-                            break;
-            case FOREST : color = Color.GREEN;
-                            break;
-            case WETLAND : color = Color.BLUE;
-                            break;
-            case SCRUB : color = Color.DARK_GRAY;   
-                            break;
-            case WATER : color = Color.CYAN;  
-                            break;
-            default  : color = Color.LIGHT_GRAY;
-                            break;
-        }
+        lblText.setOpaque(false);
+        lblText.setBackground(null);
         
         if ( squareExplored || squareVisible )
         {
             // Set the text of the JLabel according to the occupant
             lblText.setText(game.getOccupantStringRepresentation(row,column));
-            // Set the colour. 
-            if ( squareVisible && !squareExplored ) 
-            {
-                // When explored the colour is brighter
-                color = new Color(Math.min(255, color.getRed()   + 128), 
-                                  Math.min(255, color.getGreen() + 128), 
-                                  Math.min(255, color.getBlue()  + 128));
-            }
-            lblText.setBackground(color);
+            
             // set border colour according to 
             // whether the player is in the grid square or not
             setBorder(game.hasPlayer(row,column) ? ACTIVE_BORDER : NORMAL_BORDER);
@@ -85,12 +59,12 @@ public class GridSquarePanel extends javax.swing.JPanel
         else
         {
             lblText.setText("");
-            lblText.setBackground(null);
             setBorder(NORMAL_BORDER);
         }
         if(game.getLastUpdatedPredatorPosition() != null){
             Position lastUpdatedPredatorPosition = game.getLastUpdatedPredatorPosition();
             if(this.row == lastUpdatedPredatorPosition.getRow() && this.column == lastUpdatedPredatorPosition.getColumn()){
+                lblText.setOpaque(true);
                 lblText.setBackground(Color.ORANGE);
                 game.removeLastUpdatedPredatorPosition();
             }
@@ -109,12 +83,12 @@ public class GridSquarePanel extends javax.swing.JPanel
         lblText = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setOpaque(false);
         setLayout(new java.awt.BorderLayout());
 
         lblText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblText.setText("content");
-        lblText.setOpaque(true);
         add(lblText, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables

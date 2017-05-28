@@ -91,9 +91,9 @@ public class GridSquare
     public String getOccupantStringRepresentation()
     {
         StringBuilder result = new StringBuilder();
-        occupants.stream().forEach(occupant -> {
-            result.append(occupant.getStringRepresentation());
-        });
+        occupants.stream().forEach(occupant ->
+            result.append(occupant.getStringRepresentation())
+        );
         return result.toString();
     } 
     

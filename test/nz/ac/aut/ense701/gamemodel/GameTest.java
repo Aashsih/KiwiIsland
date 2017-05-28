@@ -421,6 +421,8 @@ public class GameTest extends junit.framework.TestCase
     
     @Test
     public void testPlayerMoveNotEnoughStamina(){
+        
+        player.moveToPosition(new Position(island, 3, 7), Terrain.WETLAND);
         // Reduce player's stamina to less than is needed for the most challenging move
         //Most challenging move is WEST as Terrain is water
         player.reduceStamina(97.0);

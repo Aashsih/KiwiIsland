@@ -3,12 +3,17 @@ package nz.ac.aut.ense701.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -35,8 +40,11 @@ public class KiwiCountUI
     extends javax.swing.JFrame 
     implements GameEventListener, KeyListener
 {
+    private static final String ISLAND_MAP_FILE_NAME = "src\\nz\\ac\\aut\\ense701\\images\\finalIslandMap.png";
+    
     private final Game game;
     private final WelcomePage parentFrame;
+    private transient BufferedImage image;
     private boolean lowStaminaMessageDisplayed;
 
     /**
@@ -55,6 +63,7 @@ public class KiwiCountUI
         initIslandGrid();
         addKeyListener(this);
         update();
+        loadIslandMap();
     }
     
     /**
@@ -66,10 +75,6 @@ public class KiwiCountUI
     {
         update();
         
-        //Check if kiwi population has changed
-        if(game.getState() == GameState.KIWI_POPULATION_CHANGED){
-            //Start a thread to change the colour of the GridSquare where the kiwi population changed
-        }
         // check for "game over" or "game won"
         if ( game.getState() == GameState.LOST )
         {
@@ -297,8 +302,20 @@ public class KiwiCountUI
         {
             for ( int col = 0 ; col < columns ; col++ )
             {
-                pnlGame.add(new GridSquarePanel(game, row, col));
+                GridSquarePanel gridPanel = new GridSquarePanel(game, row, col);
+                pnlGame.add(gridPanel);
             }
+        }
+    }
+    
+    /**
+     * Reads the Image file for the island 
+     */
+    private void loadIslandMap(){
+        try{
+            image = ImageIO.read(new File(ISLAND_MAP_FILE_NAME));
+        }catch(IOException e){
+            Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, e);
         }
     }
     
@@ -313,7 +330,31 @@ public class KiwiCountUI
         java.awt.GridBagConstraints gridBagConstraints;
 
         javax.swing.JPanel pnlContent = new javax.swing.JPanel();
-        pnlGame = new javax.swing.JPanel();
+        pnlGame = new javax.swing.JPanel(){
+            private Integer pnlWidth;
+            private Integer pnlHeight;
+            private transient Image scaledImage;
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if(pnlWidth == null || pnlHeight == null){
+                    pnlWidth = pnlGame.getWidth();
+                    pnlHeight = pnlGame.getHeight();
+                }
+                if(image != null){
+                    if(pnlGame.getWidth() != pnlWidth || pnlGame.getHeight() != pnlHeight){
+                        pnlWidth = pnlGame.getWidth();
+                        pnlHeight = pnlGame.getHeight();
+                        scaledImage = image.getScaledInstance(pnlGame.getWidth(), pnlGame.getHeight(), Image.SCALE_SMOOTH);
+                    }
+                    if(scaledImage == null){
+                        scaledImage = image;
+                    }
+                    g.drawImage(scaledImage, 0, 0, null);
+                }
+            }
+
+        };
         pnlControls = new javax.swing.JPanel();
         javax.swing.JPanel pnlPlayer = new javax.swing.JPanel();
         javax.swing.JPanel pnlPlayerData = new javax.swing.JPanel();
