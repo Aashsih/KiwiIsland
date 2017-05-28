@@ -5,7 +5,6 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import nz.ac.aut.ense701.gamemodel.Game;
 import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Terrain;
 
 /*
  * Panel for representing a single GridSquare of the island on the GUI.

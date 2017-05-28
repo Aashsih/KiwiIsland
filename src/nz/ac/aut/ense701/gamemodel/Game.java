@@ -813,9 +813,9 @@ public class Game
      */
     private void notifyGameEventListeners()
     {
-        eventListeners.stream().forEach(listener -> {
-            listener.gameStateChanged();
-        });
+        eventListeners.stream().forEach(listener -> 
+            listener.gameStateChanged()
+        );
     }
 
     

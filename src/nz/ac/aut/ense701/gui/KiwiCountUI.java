@@ -44,7 +44,7 @@ public class KiwiCountUI
     
     private final Game game;
     private final WelcomePage parentFrame;
-    private BufferedImage image;
+    private transient BufferedImage image;
     private boolean lowStaminaMessageDisplayed;
 
     /**
@@ -333,7 +333,7 @@ public class KiwiCountUI
         pnlGame = new javax.swing.JPanel(){
             private Integer pnlWidth;
             private Integer pnlHeight;
-            private Image scaledImage;
+            private transient Image scaledImage;
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -342,11 +342,10 @@ public class KiwiCountUI
                     pnlHeight = pnlGame.getHeight();
                 }
                 if(image != null){
-                    if((pnlGame.getWidth() != pnlWidth || pnlGame.getHeight() != pnlHeight)){
+                    if(pnlGame.getWidth() != pnlWidth || pnlGame.getHeight() != pnlHeight){
                         pnlWidth = pnlGame.getWidth();
                         pnlHeight = pnlGame.getHeight();
                         scaledImage = image.getScaledInstance(pnlGame.getWidth(), pnlGame.getHeight(), Image.SCALE_SMOOTH);
-                        //g.drawImage(, 0, 0, null);
                     }
                     if(scaledImage == null){
                         scaledImage = image;
