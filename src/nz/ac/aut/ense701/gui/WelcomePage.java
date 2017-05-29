@@ -51,7 +51,7 @@ public class WelcomePage extends javax.swing.JFrame {
      */
     public void startNewGame(){
         // create the game object
-        final Game game = new Game();
+        final Game game = new Game(playerName);
         // create the GUI for the game
         final KiwiCountUI  gui  = new KiwiCountUI(game, this); 
         

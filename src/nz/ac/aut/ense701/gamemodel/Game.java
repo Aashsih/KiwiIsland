@@ -79,6 +79,15 @@ public class Game
         createNewGame();
     }
     
+    /**
+     * A new instance of Kiwi island that reads data from "IslandData.txt".
+     * Takes a player name for the player
+     * @param playerName 
+     */
+    public Game(String playerName){
+        this();
+        this.player.setPlayerName(playerName);
+    }
     
     /**
      * Starts a new game.
