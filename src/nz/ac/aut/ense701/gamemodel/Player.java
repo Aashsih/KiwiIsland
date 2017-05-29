@@ -20,7 +20,7 @@ public class Player
     public static final double MOVE_STAMINA = 1.0;
     
     private Position  position;
-    private final String    name;
+    private String    name;
     private final double    maxStamina;
     private double    stamina;
     private boolean   alive;
@@ -87,6 +87,12 @@ public class Player
         return this.alive;
     }   
  
+    public void setPlayerName(String playerName){
+        if(!(playerName == null || playerName.isEmpty())){
+            this.name = playerName;
+        }
+    }
+    
     /**
      * Get the maximum stamina for the player.
      * @return maximum stamina
