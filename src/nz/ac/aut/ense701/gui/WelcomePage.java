@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import nz.ac.aut.ense701.gamemodel.Game;
 import nz.ac.aut.ense701.gamemodel.Score;
 import nz.ac.aut.ense701.gamemodel.ScoreBoard;
+import nz.ac.aut.ense701.gamemodel.StringUtil;
 
 /**
  *
@@ -99,7 +100,7 @@ public class WelcomePage extends javax.swing.JFrame {
         do{
             int result = JOptionPane.showConfirmDialog(this, inputs, "Please enter your player name", JOptionPane.PLAIN_MESSAGE);
             if (result == JOptionPane.OK_OPTION) {
-                //playerNameAccepted = isStringAlphaNumeric(txtPlayername.getText());
+                playerNameAccepted = StringUtil.isAlphaNumeric(txtPlayername.getText());
                  //Check if player name is accepted
                 if(playerNameAccepted){
                     playerName = txtPlayername.getText();
