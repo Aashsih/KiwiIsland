@@ -24,6 +24,7 @@ import nz.ac.aut.ense701.gamemodel.Game;
 import nz.ac.aut.ense701.gamemodel.Score;
 import nz.ac.aut.ense701.gamemodel.ScoreBoard;
 import nz.ac.aut.ense701.gamemodel.StringUtil;
+import nz.ac.aut.ense701.images.ImageFilePathConstants;
 
 /**
  *
@@ -31,7 +32,7 @@ import nz.ac.aut.ense701.gamemodel.StringUtil;
  */
 @SuppressWarnings("serial")
 public class WelcomePage extends javax.swing.JFrame {
-    private static final String WELCOME_PAGE_IMAGE_FILE_NAME = "src\\nz\\ac\\aut\\ense701\\images\\welcomeImage.png";
+    
     private transient BufferedImage image;
     
     private String playerName;
@@ -230,38 +231,12 @@ public class WelcomePage extends javax.swing.JFrame {
 
     
     /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WelcomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new WelcomePage().setVisible(true));
-    }
-    
-    /**
      * Reads the Image file for the island 
      */
     private void loadIslandMap(){
         try{
-            image = ImageIO.read(new File(WELCOME_PAGE_IMAGE_FILE_NAME));
+            image = ImageIO.read(WelcomePage.class.getResourceAsStream(ImageFilePathConstants.WELCOME_PAGE));
+            //image = ImageIO.read(new File(WelcomePage.class.getResource(ImageFilePathConstants.WELCOME_PAGE).getFile()));
         }catch(IOException e){
             Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, e);
         }

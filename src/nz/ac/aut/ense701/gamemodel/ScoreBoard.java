@@ -12,14 +12,15 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import nz.ac.aut.ense701.textfiles.TextFilePathConstants;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
  * @author aashi
  */
 public class ScoreBoard {
-    private static final String SCORE_BOARD_FILE_NAME = "PlayerScore.json";
     private static final String ENCODING = "UTF-8";
     
     private static List<Score> scoreList;
@@ -45,7 +46,8 @@ public class ScoreBoard {
     private static void readFromFile() throws IOException{
         if(scoreList == null){
             Type targetClassType = new TypeToken<ArrayList<Score>>() {}.getType();
-            scoreList = (List<Score>) new Gson().fromJson( FileUtils.readFileToString(new File(SCORE_BOARD_FILE_NAME), ENCODING), targetClassType);
+            scoreList = (List<Score>) new Gson().fromJson(IOUtils.toString(ScoreBoard.class.getResourceAsStream(TextFilePathConstants.PLAYER_SCORE), ENCODING), targetClassType);
+            //scoreList = (List<Score>) new Gson().fromJson( FileUtils.readFileToString(new File(ScoreBoard.class.getResource(TextFilePathConstants.PLAYER_SCORE).getFile()), ENCODING), targetClassType);
         }
     }
     
@@ -63,7 +65,7 @@ public class ScoreBoard {
             scoreList = new ArrayList<>();
         }
         scoreList.add(playerScore);
-        FileUtils.writeStringToFile(new File(SCORE_BOARD_FILE_NAME), new Gson().toJson(scoreList) , ENCODING);
+        FileUtils.writeStringToFile(new File(ScoreBoard.class.getResource(TextFilePathConstants.PLAYER_SCORE).getFile()), new Gson().toJson(scoreList) , ENCODING);
         scoreList = null;
     }
 }

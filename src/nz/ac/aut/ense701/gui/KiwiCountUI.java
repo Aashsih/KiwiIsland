@@ -27,6 +27,8 @@ import nz.ac.aut.ense701.gamemodel.MoveDirection;
 import nz.ac.aut.ense701.gamemodel.ScoreBoard;
 import nz.ac.aut.ense701.gamequiz.Quiz;
 import nz.ac.aut.ense701.gamequiz.QuizFileReader;
+import nz.ac.aut.ense701.images.ImageFilePathConstants;
+import nz.ac.aut.ense701.textfiles.TextFilePathConstants;
 
 /*
  * User interface form for Kiwi Island.
@@ -40,8 +42,6 @@ public class KiwiCountUI
     extends javax.swing.JFrame 
     implements GameEventListener, KeyListener
 {
-    private static final String ISLAND_MAP_FILE_NAME = "src\\nz\\ac\\aut\\ense701\\images\\finalIslandMap.png";
-    
     private final Game game;
     private final WelcomePage parentFrame;
     private transient BufferedImage image;
@@ -313,7 +313,9 @@ public class KiwiCountUI
      */
     private void loadIslandMap(){
         try{
-            image = ImageIO.read(new File(ISLAND_MAP_FILE_NAME));
+            
+            image = ImageIO.read(KiwiCountUI.class.getResourceAsStream(ImageFilePathConstants.ISLAND_MAP));
+            //image = ImageIO.read(new File(KiwiCountUI.class.getResource(ImageFilePathConstants.ISLAND_MAP).getFile()));
         }catch(IOException e){
             Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, e);
         }

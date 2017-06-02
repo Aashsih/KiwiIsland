@@ -7,7 +7,9 @@ package nz.ac.aut.ense701.gamemodel;
 
 import java.io.File;
 import java.io.IOException;
+import nz.ac.aut.ense701.textfiles.TextFilePathConstants;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -16,7 +18,6 @@ import org.apache.commons.io.FileUtils;
 public class GameHelp 
 {
     //Mostly contains static methods - Used in KiwiCountUI
-    private static final String FILE_LOCATION = "Help.txt";
     private static final String ENCODING = "UTF-8";
     private static StringBuilder gameHelpStringBuffer;
     
@@ -31,7 +32,8 @@ public class GameHelp
     private static void readGameHelpTextFromFile() throws IOException
     {
        gameHelpStringBuffer = new StringBuilder();
-       gameHelpStringBuffer.append(FileUtils.readFileToString(new File(FILE_LOCATION), ENCODING));
+       gameHelpStringBuffer.append(IOUtils.toString(ScoreBoard.class.getResourceAsStream(TextFilePathConstants.HELP), ENCODING));
+       //gameHelpStringBuffer.append(FileUtils.readFileToString(new File(GameHelp.class.getResource(TextFilePathConstants.HELP).getFile()), ENCODING));
     }
     
     /**

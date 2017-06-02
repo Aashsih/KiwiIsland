@@ -15,14 +15,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import nz.ac.aut.ense701.gamemodel.ScoreBoard;
+import nz.ac.aut.ense701.textfiles.TextFilePathConstants;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
  * @author aashi
  */
 public class QuizFileReader {
-    private static final String FILE_QUIZ_DATA = "QuizData.json";
+    
     private static final String ENCODING = "UTF-8";
 
     private static List<QuizData> quizData;
@@ -73,7 +76,8 @@ public class QuizFileReader {
     private static void readQuizDataFromFile() throws IOException{
         if(quizData == null){
             Type targetClassType = new TypeToken<ArrayList<QuizData>>() {}.getType();
-            quizData = (List<QuizData>) new Gson().fromJson( FileUtils.readFileToString(new File(FILE_QUIZ_DATA), ENCODING), targetClassType);
+            quizData = (List<QuizData>) new Gson().fromJson(IOUtils.toString(QuizFileReader.class.getResourceAsStream(TextFilePathConstants.QUIZ_DATA), ENCODING), targetClassType);
+            //quizData = (List<QuizData>) new Gson().fromJson( FileUtils.readFileToString(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), ENCODING), targetClassType);
             messageToQuizData = new HashMap<>();
             for(QuizData aQuizQuestion : quizData){
                 messageToQuizData.put(aQuizQuestion.getMessage(), aQuizQuestion);

@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 import nz.ac.aut.ense701.gamemodel.handlers.KiwiHandler;
 import nz.ac.aut.ense701.gamemodel.handlers.PredatorHandler;
 import nz.ac.aut.ense701.gamemodel.occupants.Bait;
+import nz.ac.aut.ense701.textfiles.TextFilePathConstants;
 
 /**
  * This is the class that knows the Kiwi Island game rules and state
@@ -101,7 +102,7 @@ public class Game
         totalKiwis = 0;
         predatorsTrapped = 0;
         kiwiCount = 0;
-        initialiseIslandFromFile("IslandData.txt");
+        initialiseIslandFromFile();
         drawIsland();
         state = GameState.PLAYING;
         winMessage = "";
@@ -835,10 +836,11 @@ public class Game
      * 
      * @param fileName file name of the data file
      */
-    private void initialiseIslandFromFile(String fileName) 
+    private void initialiseIslandFromFile() 
     {
-        try
-        (Scanner input = new Scanner(new File(fileName))) {
+        Scanner input = new Scanner(Game.class.getResourceAsStream(TextFilePathConstants.ISLAND_DATA));
+//        try
+//        {
             // make sure decimal numbers are read in the form "123.23"
             input.useLocale(Locale.US);
             input.useDelimiter("\\s*,\\s*");
@@ -858,12 +860,12 @@ public class Game
             // read and setup the occupants
             setUpOccupants(input);
 
-        }
-        catch(FileNotFoundException e)
-        {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, "Unable to find data file '" + fileName + "'");
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, e);
-        }
+//        }
+//        catch(FileNotFoundException e)
+//        {
+//            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, "Unable to find data file");
+//            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, e);
+//        }
     }
 
     /**
