@@ -129,10 +129,12 @@ public class WelcomePage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane1 = new javax.swing.JSplitPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        welcomePageSplitPane = new javax.swing.JSplitPane();
+        pnlScoreBoard = new javax.swing.JPanel();
+        lblScoreBoard = new javax.swing.JLabel();
+        jScrollPaneScoreBoard = new javax.swing.JScrollPane();
         scoreList = new javax.swing.JList<String>();
-        jPanel3 = new javax.swing.JPanel();
+        pnlWelcomePage = new javax.swing.JPanel();
         pnlButtons = new javax.swing.JPanel();
         btnNewGame = new javax.swing.JButton();
         btnSelectPlayerName = new javax.swing.JButton();
@@ -166,18 +168,26 @@ public class WelcomePage extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(235, 500));
         setPreferredSize(new java.awt.Dimension(833, 612));
 
-        jSplitPane1.setDividerLocation(0.5);
+        welcomePageSplitPane.setDividerLocation(0.5);
+
+        pnlScoreBoard.setLayout(new java.awt.BorderLayout());
+
+        lblScoreBoard.setText("Score Board");
+        pnlScoreBoard.add(lblScoreBoard, java.awt.BorderLayout.NORTH);
 
         scoreList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(scoreList);
+        jScrollPaneScoreBoard.setViewportView(scoreList);
 
-        jSplitPane1.setLeftComponent(jScrollPane2);
+        pnlScoreBoard.add(jScrollPaneScoreBoard, java.awt.BorderLayout.CENTER);
 
-        jPanel3.setLayout(new java.awt.BorderLayout());
+        welcomePageSplitPane.setLeftComponent(pnlScoreBoard);
+        pnlScoreBoard.getAccessibleContext().setAccessibleParent(welcomePageSplitPane);
+
+        pnlWelcomePage.setLayout(new java.awt.BorderLayout());
 
         pnlButtons.setLayout(new java.awt.BorderLayout());
 
@@ -197,7 +207,7 @@ public class WelcomePage extends javax.swing.JFrame {
         });
         pnlButtons.add(btnSelectPlayerName, java.awt.BorderLayout.EAST);
 
-        jPanel3.add(pnlButtons, java.awt.BorderLayout.PAGE_END);
+        pnlWelcomePage.add(pnlButtons, java.awt.BorderLayout.PAGE_END);
 
         pnlBackground.setRequestFocusEnabled(false);
 
@@ -205,18 +215,18 @@ public class WelcomePage extends javax.swing.JFrame {
         pnlBackground.setLayout(pnlBackgroundLayout);
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 616, Short.MAX_VALUE)
+            .addGap(0, 352, Short.MAX_VALUE)
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
+            .addGap(0, 273, Short.MAX_VALUE)
         );
 
-        jPanel3.add(pnlBackground, java.awt.BorderLayout.CENTER);
+        pnlWelcomePage.add(pnlBackground, java.awt.BorderLayout.CENTER);
 
-        jSplitPane1.setRightComponent(jPanel3);
+        welcomePageSplitPane.setRightComponent(pnlWelcomePage);
 
-        getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(welcomePageSplitPane, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -245,11 +255,13 @@ public class WelcomePage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNewGame;
     private javax.swing.JButton btnSelectPlayerName;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JScrollPane jScrollPaneScoreBoard;
+    private javax.swing.JLabel lblScoreBoard;
     private javax.swing.JPanel pnlBackground;
     private javax.swing.JPanel pnlButtons;
+    private javax.swing.JPanel pnlScoreBoard;
+    private javax.swing.JPanel pnlWelcomePage;
     private javax.swing.JList<String> scoreList;
+    private javax.swing.JSplitPane welcomePageSplitPane;
     // End of variables declaration//GEN-END:variables
 }

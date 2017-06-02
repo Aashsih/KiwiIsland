@@ -76,8 +76,8 @@ public class QuizPanel extends javax.swing.JPanel {
         optionList = new ArrayList<>();
         java.awt.GridBagConstraints gridBagConstraints;
         radioButtonGroup = new ButtonGroup();
-        int currentRowCount = ((GridBagLayout)(jPanel2.getLayout())).getLayoutDimensions().length;
-        if(jPanel2.getLayout() instanceof GridBagLayout){
+        int currentRowCount = ((GridBagLayout)(pnlQuestion.getLayout())).getLayoutDimensions().length;
+        if(pnlQuestion.getLayout() instanceof GridBagLayout){
             for(String option : options){
                 currentRowCount++;
                 JRadioButton radioButton = new JRadioButton(option);
@@ -89,7 +89,7 @@ public class QuizPanel extends javax.swing.JPanel {
                 gridBagConstraints.ipady = 20;
                 gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
                 gridBagConstraints.weightx = 1.0;
-                jPanel2.add(radioButton, gridBagConstraints);
+                pnlQuestion.add(radioButton, gridBagConstraints);
                 radioButtonGroup.add(radioButton);
                 optionList.add(radioButton);
             }
@@ -107,21 +107,21 @@ public class QuizPanel extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        pnlQuestion = new javax.swing.JPanel();
+        lblQuestion = new javax.swing.JLabel();
+        questionScrollPane = new javax.swing.JScrollPane();
         txtPaneQuestion = new javax.swing.JTextPane();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        lblOption = new javax.swing.JLabel();
+        pnlButton = new javax.swing.JPanel();
         btnNext = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(540, 592));
         setLayout(new java.awt.BorderLayout(20, 0));
 
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        pnlQuestion.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Question");
+        lblQuestion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblQuestion.setText("Question");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -129,9 +129,9 @@ public class QuizPanel extends javax.swing.JPanel {
         gridBagConstraints.ipady = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        jPanel2.add(jLabel1, gridBagConstraints);
+        pnlQuestion.add(lblQuestion, gridBagConstraints);
 
-        jScrollPane1.setViewportView(txtPaneQuestion);
+        questionScrollPane.setViewportView(txtPaneQuestion);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -141,10 +141,10 @@ public class QuizPanel extends javax.swing.JPanel {
         gridBagConstraints.ipady = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        jPanel2.add(jScrollPane1, gridBagConstraints);
+        pnlQuestion.add(questionScrollPane, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Option");
+        lblOption.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblOption.setText("Option");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -152,11 +152,11 @@ public class QuizPanel extends javax.swing.JPanel {
         gridBagConstraints.ipady = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        jPanel2.add(jLabel2, gridBagConstraints);
+        pnlQuestion.add(lblOption, gridBagConstraints);
 
-        add(jPanel2, java.awt.BorderLayout.PAGE_START);
+        add(pnlQuestion, java.awt.BorderLayout.PAGE_START);
 
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 15));
+        pnlButton.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 15));
 
         btnNext.setText("Next");
         btnNext.addActionListener(new java.awt.event.ActionListener() {
@@ -164,9 +164,9 @@ public class QuizPanel extends javax.swing.JPanel {
                 btnNextActionPerformed(evt);
             }
         });
-        jPanel1.add(btnNext);
+        pnlButton.add(btnNext);
 
-        add(jPanel1, java.awt.BorderLayout.PAGE_END);
+        add(pnlButton, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
@@ -209,11 +209,11 @@ public class QuizPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNext;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblOption;
+    private javax.swing.JLabel lblQuestion;
+    private javax.swing.JPanel pnlButton;
+    private javax.swing.JPanel pnlQuestion;
+    private javax.swing.JScrollPane questionScrollPane;
     private javax.swing.JTextPane txtPaneQuestion;
     // End of variables declaration//GEN-END:variables
     
