@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
+import nz.ac.aut.ense701.textfiles.TextFilePathConstants;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -43,7 +45,7 @@ public class ScoreBoardTest extends junit.framework.TestCase{
     {
         try {
             playerScoreStringBuffer = new StringBuffer();
-            playerScoreStringBuffer.append(FileUtils.readFileToString(new File(SCORE_BOARD_FILE_NAME), ENCODING));
+            playerScoreStringBuffer.append(IOUtils.toString(ScoreBoard.class.getResourceAsStream(TextFilePathConstants.PLAYER_SCORE), ENCODING));
             //Set Data to null to reset variables and make them read from the file again
             Field scoreBoardField = ScoreBoard.class.getDeclaredField("scoreList");
             scoreBoardField.setAccessible(true);
@@ -66,7 +68,7 @@ public class ScoreBoardTest extends junit.framework.TestCase{
     protected void tearDown()
     {
         try { 
-            FileUtils.writeStringToFile(new File(SCORE_BOARD_FILE_NAME), playerScoreStringBuffer.toString() , ENCODING);
+            FileUtils.writeStringToFile(new File(ScoreBoard.class.getResource(TextFilePathConstants.PLAYER_SCORE).getFile()), playerScoreStringBuffer.toString() , ENCODING);
         } catch (IOException ex) {
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,7 +80,7 @@ public class ScoreBoardTest extends junit.framework.TestCase{
         try 
         {
             String testData = getMockPlayerScoreData();
-            FileUtils.writeStringToFile(new File(SCORE_BOARD_FILE_NAME), testData , ENCODING);
+            FileUtils.writeStringToFile(new File(ScoreBoard.class.getResource(TextFilePathConstants.PLAYER_SCORE).getFile()), testData , ENCODING);
             List<Score> scoreBoard = ScoreBoard.getScoreBoard();
             assertEquals("Test Player 1", scoreBoard.get(0).getPlayerName());
             assertEquals(150, scoreBoard.get(0).getScore());

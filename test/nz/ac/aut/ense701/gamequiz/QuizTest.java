@@ -5,9 +5,6 @@
  */
 package nz.ac.aut.ense701.gamequiz;
 
-import nz.ac.aut.ense701.gamequiz.Question;
-import nz.ac.aut.ense701.gamequiz.QuizFileReader;
-import nz.ac.aut.ense701.gamequiz.Quiz;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -16,7 +13,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import nz.ac.aut.ense701.gamemodel.GameHelpTest;
+import nz.ac.aut.ense701.textfiles.TextFilePathConstants;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 /**
@@ -25,6 +24,7 @@ import org.junit.Test;
  */
 public class QuizTest extends junit.framework.TestCase 
 {
+    private static final String ENCODING = "UTF-8";
     private StringBuffer quizDataStringBuffer;
     
     private Quiz quiz;
@@ -45,7 +45,7 @@ public class QuizTest extends junit.framework.TestCase
     {
         try {
             quizDataStringBuffer = new StringBuffer();
-            quizDataStringBuffer.append(FileUtils.readFileToString(new File("QuizData.json"), "UTF-8"));
+            quizDataStringBuffer.append(IOUtils.toString(QuizFileReader.class.getResourceAsStream(TextFilePathConstants.QUIZ_DATA), ENCODING));
             //Set Data to null to reset variables and make them read from the file again
             Field quizDataField = QuizFileReader.class.getDeclaredField("quizData");
             quizDataField.setAccessible(true);
@@ -75,7 +75,7 @@ public class QuizTest extends junit.framework.TestCase
     protected void tearDown()
     {
         try { 
-            FileUtils.writeStringToFile(new File("QuizData.json"), quizDataStringBuffer.toString() , "UTF-8");
+            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), quizDataStringBuffer.toString() , "UTF-8");
         } catch (IOException ex) {
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -86,7 +86,7 @@ public class QuizTest extends junit.framework.TestCase
     public void testGetNextQuestionReturnsCorrectQuestion(){
         try {
             String testData = getMockQuizData();
-            FileUtils.writeStringToFile(new File("QuizData.json"), testData , "UTF-8");
+            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , "UTF-8");
             QuizFileReader.getQuizData();
             List<String> messages = new ArrayList<String>();
             messages.add("Test Message 1");
@@ -117,7 +117,7 @@ public class QuizTest extends junit.framework.TestCase
     public void testIsCorrectAnswerProposedAnswerIsCorrect(){
         try {
             String testData = getMockQuizData();
-            FileUtils.writeStringToFile(new File("QuizData.json"), testData , "UTF-8");
+            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , "UTF-8");
             QuizFileReader.getQuizData();
             List<String> messages = new ArrayList<String>();
             messages.add("Test Message 1");
@@ -133,7 +133,7 @@ public class QuizTest extends junit.framework.TestCase
     public void testIsCorrectAnswerProposedAnswerIsIncorrect(){
         try {
             String testData = getMockQuizData();
-            FileUtils.writeStringToFile(new File("QuizData.json"), testData , "UTF-8");
+            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , "UTF-8");
             QuizFileReader.getQuizData();
             List<String> messages = new ArrayList<String>();
             messages.add("Test Message 1");

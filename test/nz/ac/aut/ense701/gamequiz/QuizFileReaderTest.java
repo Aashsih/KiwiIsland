@@ -5,20 +5,19 @@
  */
 package nz.ac.aut.ense701.gamequiz;
 
-import nz.ac.aut.ense701.gamequiz.QuizFileReader;
-import nz.ac.aut.ense701.gamequiz.QuizData;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static junit.framework.TestCase.assertEquals;
-import nz.ac.aut.ense701.gamemodel.GameHelp;
 import nz.ac.aut.ense701.gamemodel.GameHelpTest;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
+import nz.ac.aut.ense701.gamemodel.ScoreBoard;
+import nz.ac.aut.ense701.textfiles.TextFilePathConstants;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -26,6 +25,7 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class QuizFileReaderTest extends junit.framework.TestCase 
 {
+    private static final String ENCODING = "UTF-8";
     private StringBuffer quizDataStringBuffer;
 
     /**
@@ -44,7 +44,7 @@ public class QuizFileReaderTest extends junit.framework.TestCase
     {
         try {
             quizDataStringBuffer = new StringBuffer();
-            quizDataStringBuffer.append(FileUtils.readFileToString(new File("QuizData.json"), "UTF-8"));
+            quizDataStringBuffer.append(IOUtils.toString(QuizFileReader.class.getResourceAsStream(TextFilePathConstants.QUIZ_DATA), ENCODING));
             //Set Data to null to reset variables and make them read from the file again
             Field quizDataField = QuizFileReader.class.getDeclaredField("quizData");
             quizDataField.setAccessible(true);
@@ -52,11 +52,11 @@ public class QuizFileReaderTest extends junit.framework.TestCase
             Field messageToQuizDataField = QuizFileReader.class.getDeclaredField("messageToQuizData");
             messageToQuizDataField.setAccessible(true);
             messageToQuizDataField.set(null, null);
-        } catch (IOException ex) {
-            Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchFieldException ex) {
             Logger.getLogger(QuizFileReaderTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SecurityException ex) {
+            Logger.getLogger(QuizFileReaderTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(QuizFileReaderTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -70,7 +70,7 @@ public class QuizFileReaderTest extends junit.framework.TestCase
     protected void tearDown()
     {
         try { 
-            FileUtils.writeStringToFile(new File("QuizData.json"), quizDataStringBuffer.toString() , "UTF-8");
+            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), quizDataStringBuffer.toString() , ENCODING);
         } catch (IOException ex) {
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -82,7 +82,7 @@ public class QuizFileReaderTest extends junit.framework.TestCase
         try 
         {
             String testData = getMockQuizData();
-            FileUtils.writeStringToFile(new File("QuizData.json"), testData , "UTF-8");
+            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , ENCODING);
             List<QuizData> quizData = QuizFileReader.getQuizData();
             assertEquals("Test Message 1", quizData.get(0).getMessage());
             assertEquals("Test Question 1", quizData.get(0).getQuestion().getQuestion());
@@ -100,7 +100,7 @@ public class QuizFileReaderTest extends junit.framework.TestCase
     public void testGetQuizDataForMessage(){
         String testData = getMockQuizData();
         try {
-            FileUtils.writeStringToFile(new File("QuizData.json"), testData , "UTF-8");
+            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , ENCODING);
             QuizFileReader.getQuizData();
             QuizData quizData = QuizFileReader.getQuizDataForMessage("Test Message 1");
             assertEquals("Test Message 1", quizData.getMessage());

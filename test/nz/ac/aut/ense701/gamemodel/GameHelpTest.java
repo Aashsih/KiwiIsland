@@ -15,7 +15,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import nz.ac.aut.ense701.textfiles.TextFilePathConstants;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 /**
@@ -24,6 +26,7 @@ import org.junit.Test;
  */
 public class GameHelpTest extends junit.framework.TestCase 
 {
+    private static final String ENCODING = "UTF-8";
     private StringBuffer gameHelpStringBuffer;
     /**
      * Default constructor for the class GameHelpTest
@@ -43,7 +46,7 @@ public class GameHelpTest extends junit.framework.TestCase
     {
         try {
             gameHelpStringBuffer = new StringBuffer();
-            gameHelpStringBuffer.append(FileUtils.readFileToString(new File("Help.txt"), "UTF-8"));
+            gameHelpStringBuffer.append(IOUtils.toString(ScoreBoard.class.getResourceAsStream(TextFilePathConstants.HELP), ENCODING));
         } catch (IOException ex) {
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -58,7 +61,7 @@ public class GameHelpTest extends junit.framework.TestCase
     protected void tearDown()
     {
         try { 
-            FileUtils.writeStringToFile(new File("Help.txt"), gameHelpStringBuffer.toString() , "UTF-8");
+            FileUtils.writeStringToFile(new File(GameHelp.class.getResource(TextFilePathConstants.HELP).getFile()), gameHelpStringBuffer.toString(), ENCODING);
         } catch (IOException ex) {
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,7 +73,7 @@ public class GameHelpTest extends junit.framework.TestCase
         try 
         {
             String testData = "TestData\nSome more test data\n And some more test data";
-            FileUtils.writeStringToFile(new File("Help.txt"), testData , "UTF-8");
+            FileUtils.writeStringToFile(new File(GameHelp.class.getResource(TextFilePathConstants.HELP).getFile()), testData , ENCODING);
             String result = GameHelp.getGameHelpInfo();
             assertEquals(testData, result);
         } catch (IOException ex) {
