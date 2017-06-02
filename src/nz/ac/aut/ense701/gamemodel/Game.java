@@ -554,7 +554,7 @@ public class Game
             if (tool.isTrap()&& !tool.isBroken())
             {
                  success = trapPredator(); 
-                 displayDialogueBox();
+                 addPlayerMessage();
             }
             else if(tool.isScrewdriver() && player.hasTrap())// Use screwdriver (to fix trap)
             {
@@ -575,14 +575,13 @@ public class Game
         return success;
     }
     
-    public void displayDialogueBox()
+    public void addPlayerMessage()
     {
         try {
             count++;
-            String message =  DOCMessages.getFact();
-            if(message != null){
-                JOptionPane.showMessageDialog(null,message, "Fact #" + count, JOptionPane.PLAIN_MESSAGE);
-                player.addMessage(message);   
+            playerMessage =  DOCMessages.getFact();
+            if(playerMessage != null){
+                player.addMessage(playerMessage);   
             }
         } catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -604,7 +603,7 @@ public class Game
                     kiwi.count();
                     kiwiCount++;
                     activeKiwisCounted.add(kiwi);
-                    displayDialogueBox();
+                    addPlayerMessage();
                 }
             }
         }
