@@ -69,6 +69,19 @@ public class GridSquarePanel extends javax.swing.JPanel
                 game.removeLastUpdatedPredatorPosition();
             }
         }
+        if(game.getLastUpdatedKiwiPosition() != null){
+            Position lastUpdatedKiwiPosition = game.getLastUpdatedKiwiPosition();
+            if(this.row == lastUpdatedKiwiPosition.getRow() && this.column == lastUpdatedKiwiPosition.getColumn()){
+                lblText.setOpaque(true);
+                if(game.getLastUpdatedKiwiAdded()){
+                    lblText.setBackground(Color.GREEN);
+                }
+                else{
+                    lblText.setBackground(Color.RED);
+                }
+                game.removeLastUpdatedKiwiPosition();
+            }
+        }
     }
     
     /** This method is called from within the constructor to

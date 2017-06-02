@@ -40,6 +40,7 @@ public class Game
 {
     private static final int NUMBER_OF_CONSECUTIVE_MOVES_TO_REMOVE_KIWI = 10;
     private static final int NUMBER_OF_CONSECUTIVE_MOVES_TO_ADD_KIWI = 12;
+    private static final int MINIMUM_KIWI_COUNT_REQUIRED = 10;
     private static final double MIN_REQUIRED_CATCH = 0.8;
     //Constants shared with UI to provide player data
     public static final int STAMINA_INDEX = 0;
@@ -62,11 +63,13 @@ public class Game
     private GameState state;
     private int kiwiCount;
     private int totalPredators;
-    private int totalKiwis;
+    //private int totalKiwis;
     private int predatorsTrapped;
     private final Set<GameEventListener> eventListeners;
     private List<Kiwi> activeKiwisCounted;
     private Position lastUpdatedPredatorPosition;
+    private Position lastUpdatedKiwiPosition;
+    private boolean lastUpdatedKiwiAdded;
     private String winMessage = "";
     private String loseMessage  = "";
     private String playerMessage  = "";   
@@ -99,7 +102,7 @@ public class Game
         activeKiwisCounted = new ArrayList<>();
         count = 0;
         totalPredators = 0;
-        totalKiwis = 0;
+        //totalKiwis = 0;
         predatorsTrapped = 0;
         kiwiCount = 0;
         initialiseIslandFromFile();
@@ -336,6 +339,32 @@ public class Game
      */
     public void removeLastUpdatedPredatorPosition(){
         this.lastUpdatedPredatorPosition = null;
+    }
+    
+    /**
+     * This method is used to get the last updated kiwi position
+     * @return last updated kiwi position
+     */
+    public Position getLastUpdatedKiwiPosition(){
+        return lastUpdatedKiwiPosition;
+    }
+    
+    /**
+     * This method is used to check whether the last updated kiwi was 
+     * added or removed from the island
+     * 
+     * @return true, if last updated kiwi was added
+     *          false, if last updated Kiwi was removed
+     */
+    public boolean getLastUpdatedKiwiAdded(){
+        return this.lastUpdatedKiwiAdded;
+    }
+    
+    /**
+     * This method is used to set the lastUpdatedKiwiPosition to null
+     */
+    public void removeLastUpdatedKiwiPosition(){
+        this.lastUpdatedKiwiPosition = null;
     }
     
     public void addFact(String fact)
@@ -696,7 +725,7 @@ public class Game
             message = "You win! You have done an excellent job and trapped all the predators.";
             this.setWinMessage(message);
         }
-        else if(kiwiCount == totalKiwis && (predatorsTrapped >= totalPredators * MIN_REQUIRED_CATCH))
+        else if(kiwiCount == MINIMUM_KIWI_COUNT_REQUIRED && (predatorsTrapped >= totalPredators * MIN_REQUIRED_CATCH))
         {
             state = GameState.WON;
             message = "You win! You have counted all the kiwi and trapped at least 80% of the predators.";
@@ -952,7 +981,7 @@ public class Game
             else if ( occType.equals(Occupants.KIWI.toString()) )
             {
                 occupant = new Kiwi(occPos, occName, occDesc);
-                totalKiwis++;
+                //totalKiwis++;
             }
             else if ( occType.equals(Occupants.PREDATOR.toString()) )
             {
@@ -1004,17 +1033,22 @@ public class Game
         if (!activeKiwisCounted.isEmpty())
         {       
             //This is the kiwi that was added last to the list of kiwi counted
-            Kiwi kiwiToRemove = activeKiwisCounted.get(activeKiwisCounted.size() - 1);
+            Kiwi lastKiwiCounted=  activeKiwisCounted.get(activeKiwisCounted.size() - 1);
             if(player.getNumberOfSteps()%NUMBER_OF_CONSECUTIVE_MOVES_TO_REMOVE_KIWI == 0)
             {
                //When the user takes 10 consecutive steps and has not counted a new kiwi
                //A kiwi is removed as an occupant and the population of kiwi decrements by 1
-               island.removeOccupant(kiwiToRemove.getPosition(), kiwiToRemove);
+               lastUpdatedKiwiPosition = lastKiwiCounted.getPosition();
+               lastUpdatedKiwiAdded = false;
+               if(!island.removeOccupant(lastKiwiCounted.getPosition(), lastKiwiCounted)){
+                    lastUpdatedKiwiPosition = null;
+                    lastUpdatedKiwiAdded = true; 
+               }
                result = -1;
             }
             else if(player.getNumberOfSteps()%NUMBER_OF_CONSECUTIVE_MOVES_TO_ADD_KIWI == 0)
             {
-               result = addKiwiToIslandAtARandomPosition(kiwiToRemove.getName(), kiwiToRemove.getDescription());     
+               result = addKiwiToIslandAtARandomPosition(lastKiwiCounted.getName(), lastKiwiCounted.getDescription());     
             }
         }
         return result;
@@ -1041,8 +1075,11 @@ public class Game
             } 
         }
         if(!availablePositionsToAddKiwi.isEmpty()){
-            Position positionToaddKiwi = availablePositionsToAddKiwi.get((new Random()).nextInt(availablePositionsToAddKiwi.size()));
-            island.addOccupant(positionToaddKiwi, new Kiwi( positionToaddKiwi, kiwiName, kiwiDescription));
+            Position positionToAddKiwi = availablePositionsToAddKiwi.get((new Random()).nextInt(availablePositionsToAddKiwi.size()));
+            if(island.addOccupant(positionToAddKiwi, new Kiwi( positionToAddKiwi, kiwiName, kiwiDescription))){
+                lastUpdatedKiwiPosition = positionToAddKiwi;
+                lastUpdatedKiwiAdded = true;
+            }
             return 1;
         }
         return 0;
