@@ -24,6 +24,7 @@ import org.apache.commons.io.IOUtils;
  */
 public class QuizFileReaderTest extends junit.framework.TestCase 
 {
+    private static final String TEST_MESSAGE = "Test Message 1";
     private static final String ENCODING = "UTF-8";
     private StringBuilder quizDataStringBuffer;
 
@@ -98,7 +99,7 @@ public class QuizFileReaderTest extends junit.framework.TestCase
         try {
             FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , ENCODING);
             QuizFileReader.getQuizData();
-            QuizData quizData = QuizFileReader.getQuizDataForMessage("Test Message 1");
+            QuizData quizData = QuizFileReader.getQuizDataForMessage(TEST_MESSAGE);
             assertEquals("Test Message 1", quizData.getMessage());
             assertEquals("Test Question 1", quizData.getQuestion().getQuestion());
             assertEquals("option 1", quizData.getQuestion().getOptions().get(0));

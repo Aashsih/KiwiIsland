@@ -13,6 +13,8 @@ import org.junit.Test;
  */
 public class PlayerTest extends junit.framework.TestCase
 {
+   private static final String PREDATOR_TRAP = "A predator trap"; 
+    
    private Player player;
    private Position playerPosition;
    private Island island;
@@ -216,7 +218,7 @@ public class PlayerTest extends junit.framework.TestCase
     @Test
     public void testHasTrapWithTrap()
     {
-        Tool trap = new Tool(playerPosition, "Trap", "A predator trap", 1.0, 1.0);
+        Tool trap = new Tool(playerPosition, "Trap", PREDATOR_TRAP, 1.0, 1.0);
         player.collect(trap);
         assertTrue(player.hasTrap());
     }
@@ -230,7 +232,7 @@ public class PlayerTest extends junit.framework.TestCase
     @Test
     public void testGetTrap()
     {
-        Tool trap = new Tool(playerPosition, "Trap", "A predator trap", 1.0, 1.0);
+        Tool trap = new Tool(playerPosition, "Trap", PREDATOR_TRAP, 1.0, 1.0);
         player.collect(trap);
         assertEquals(player.getTrap(), trap);
     }
@@ -238,7 +240,7 @@ public class PlayerTest extends junit.framework.TestCase
     @Test
     public void testGetInventory(){
         player.collect(sandwich);
-        Tool trap = new Tool(playerPosition, "Trap", "A predator trap", 1.0, 1.0);
+        Tool trap = new Tool(playerPosition, "Trap", PREDATOR_TRAP, 1.0, 1.0);
         player.collect(trap);
         player.addMessage("test");
        

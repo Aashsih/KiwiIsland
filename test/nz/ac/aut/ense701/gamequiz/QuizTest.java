@@ -24,6 +24,7 @@ import org.junit.Test;
  */
 public class QuizTest extends junit.framework.TestCase 
 {
+    private static final String TEST_MESSAGE = "Test Message 1";
     private static final String ENCODING = "UTF-8";
     private StringBuilder quizDataStringBuffer;
     
@@ -54,15 +55,7 @@ public class QuizTest extends junit.framework.TestCase
             Field messageToQuizDataField = QuizFileReader.class.getDeclaredField("messageToQuizData");
             messageToQuizDataField.setAccessible(true);
             messageToQuizDataField.set(null, null);
-        } catch (IOException ex) {
-            Logger.getLogger(QuizTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchFieldException ex) {
-            Logger.getLogger(QuizTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
-            Logger.getLogger(QuizTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(QuizTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IOException | NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
             Logger.getLogger(QuizTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -76,7 +69,7 @@ public class QuizTest extends junit.framework.TestCase
     protected void tearDown()
     {
         try { 
-            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), quizDataStringBuffer.toString() , "UTF-8");
+            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), quizDataStringBuffer.toString() , ENCODING);
         } catch (IOException ex) {
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -87,10 +80,10 @@ public class QuizTest extends junit.framework.TestCase
     public void testGetNextQuestionReturnsCorrectQuestion(){
         try {
             String testData = getMockQuizData();
-            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , "UTF-8");
+            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , ENCODING);
             QuizFileReader.getQuizData();
-            List<String> messages = new ArrayList<String>();
-            messages.add("Test Message 1");
+            List<String> messages = new ArrayList<>();
+            messages.add(TEST_MESSAGE);
             quiz = new Quiz(messages);
             Question question = quiz.getNextQuestion();
             assertEquals("Test Question 1", question.getQuestion());
@@ -118,10 +111,10 @@ public class QuizTest extends junit.framework.TestCase
     public void testIsCorrectAnswerProposedAnswerIsCorrect(){
         try {
             String testData = getMockQuizData();
-            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , "UTF-8");
+            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , ENCODING);
             QuizFileReader.getQuizData();
-            List<String> messages = new ArrayList<String>();
-            messages.add("Test Message 1");
+            List<String> messages = new ArrayList<>();
+            messages.add(TEST_MESSAGE);
             quiz = new Quiz(messages);
             Question question = quiz.getNextQuestion();
             assertTrue(quiz.isAnswerCorrect(question, 1));
@@ -134,10 +127,10 @@ public class QuizTest extends junit.framework.TestCase
     public void testIsCorrectAnswerProposedAnswerIsIncorrect(){
         try {
             String testData = getMockQuizData();
-            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , "UTF-8");
+            FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , ENCODING);
             QuizFileReader.getQuizData();
-            List<String> messages = new ArrayList<String>();
-            messages.add("Test Message 1");
+            List<String> messages = new ArrayList<>();
+            messages.add(TEST_MESSAGE);
             quiz = new Quiz(messages);
             Question question = quiz.getNextQuestion();
             assertFalse(quiz.isAnswerCorrect(question, 2));

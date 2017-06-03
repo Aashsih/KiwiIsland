@@ -48,11 +48,7 @@ public class ScoreBoardTest extends junit.framework.TestCase{
             Field scoreBoardField = ScoreBoard.class.getDeclaredField("scoreList");
             scoreBoardField.setAccessible(true);
             scoreBoardField.set(null, null);
-        } catch (IOException ex) {
-            Logger.getLogger(ScoreBoard.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchFieldException ex) {
-            Logger.getLogger(ScoreBoard.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
+        } catch (IOException | NoSuchFieldException | SecurityException ex) {
             Logger.getLogger(ScoreBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -101,11 +97,7 @@ public class ScoreBoardTest extends junit.framework.TestCase{
             assertEquals(++currentScoreListSize, scoreBoard.size());
             assertEquals("Test Player name", scoreBoard.get(scoreBoard.size()-1).getPlayerName());
             assertEquals(180, scoreBoard.get(scoreBoard.size()-1).getScore());
-        } catch (IOException ex) {
-            Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
+        } catch (IOException | IllegalArgumentException | SecurityException ex) {
             Logger.getLogger(ScoreBoardTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

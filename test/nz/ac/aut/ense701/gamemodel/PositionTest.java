@@ -12,6 +12,8 @@ import org.junit.Test;
  */
 public class PositionTest extends junit.framework.TestCase
 {
+    private static final String UNEXPECTED_EXCEPTION_MESSAGE = "Not expected exception message";
+    
     private Position onIsland;
     private Position notOnIsland;
     private Island island;
@@ -70,7 +72,7 @@ public class PositionTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException expected) 
         {
-            assertTrue("Not expected exception message", expected.getMessage().contains("Island"));
+            assertTrue(UNEXPECTED_EXCEPTION_MESSAGE, expected.getMessage().contains("Island"));
             Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         }
         
@@ -85,7 +87,7 @@ public class PositionTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException expected) 
         {
-            assertTrue("Not expected exception message", expected.getMessage().contains("Invalid (row"));
+            assertTrue(UNEXPECTED_EXCEPTION_MESSAGE, expected.getMessage().contains("Invalid (row"));
             Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         }
         
@@ -100,7 +102,7 @@ public class PositionTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException expected) 
         {
-            assertTrue("Not expected exception message", expected.getMessage().contains("Invalid (row"));
+            assertTrue(UNEXPECTED_EXCEPTION_MESSAGE, expected.getMessage().contains("Invalid (row"));
             Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         }
         
@@ -115,7 +117,7 @@ public class PositionTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException expected) 
         {
-            assertTrue("Not expected exception message", expected.getMessage().contains("Invalid (row,column"));
+            assertTrue(UNEXPECTED_EXCEPTION_MESSAGE, expected.getMessage().contains("Invalid (row,column"));
             Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         }
         
@@ -130,7 +132,7 @@ public class PositionTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException expected) 
         {
-            assertTrue("Not expected exception message", expected.getMessage().contains("Invalid (row,column"));
+            assertTrue(UNEXPECTED_EXCEPTION_MESSAGE, expected.getMessage().contains("Invalid (row,column"));
             Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         }
         
@@ -164,7 +166,7 @@ public class PositionTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException expected) 
         {
-            assertTrue("Not expected exception message", expected.getMessage().contains("Direction parameter"));
+            assertTrue(UNEXPECTED_EXCEPTION_MESSAGE, expected.getMessage().contains("Direction parameter"));
             Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         }    
     }
@@ -190,7 +192,7 @@ public class PositionTest extends junit.framework.TestCase
         }
         catch (IllegalArgumentException expected) 
         {
-            assertTrue("Not expected exception message", expected.getMessage().contains("Island parameter cannot be null"));
+            assertTrue(UNEXPECTED_EXCEPTION_MESSAGE, expected.getMessage().contains("Island parameter cannot be null"));
             Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         } 
     }

@@ -21,22 +21,6 @@ public class StringUtilTest extends junit.framework.TestCase{
         //Default constructor for the test class
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     @Test
     public void testIsAplhaNumericNonAlphaNumericString(){
         assertFalse(StringUtil.isAlphaNumeric("!"));
