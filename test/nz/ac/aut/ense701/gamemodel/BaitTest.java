@@ -5,8 +5,6 @@
  */
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
 import nz.ac.aut.ense701.gamemodel.occupants.Bait;
 import org.junit.Test;
 
@@ -15,16 +13,16 @@ import org.junit.Test;
  * @author aashi
  */
 public class BaitTest extends junit.framework.TestCase{
-    Bait bait;
-    Position position;
-    Island island;
+    private Bait bait;
+    private Position position;
+    private Island island;
     
     /**
      * Default constructor for the test class BaitTest
      */
     public BaitTest()
     {
-        
+        //Default constructor for the test class
     }
     
     /**

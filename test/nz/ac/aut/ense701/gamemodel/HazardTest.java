@@ -1,7 +1,5 @@
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
 import nz.ac.aut.ense701.gamemodel.occupants.Hazard;
 import org.junit.Test;
 
@@ -15,15 +13,16 @@ import org.junit.Test;
  */
 public class HazardTest extends junit.framework.TestCase
 {
-    Hazard fatal;
-    Hazard nonFatal;
-    Position position, position2;
-    Island island;
+    private Hazard fatal;
+    private Hazard nonFatal;
+    private Position position, position2;
+    private Island island;
     /**
      * Default constructor for test class AnimalTest
      */
     public HazardTest()
     {
+        //Default constructor for the test class
     }
 
      /**

@@ -1,10 +1,5 @@
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
-import nz.ac.aut.ense701.gamemodel.GridSquare;
-import nz.ac.aut.ense701.gamemodel.Terrain;
-import nz.ac.aut.ense701.gamemodel.Player;
 import nz.ac.aut.ense701.gamemodel.occupants.Predator;
 import nz.ac.aut.ense701.gamemodel.occupants.Food;
 import nz.ac.aut.ense701.gamemodel.occupants.Occupant;
@@ -23,17 +18,18 @@ import org.junit.Test;
  */
 public class GridSquareTest extends junit.framework.TestCase
 {
-    GridSquare emptySquare;
-    GridSquare occupiedSquare;
-    Island island;
-    Position position;
-    Food apple;
+    private GridSquare emptySquare;
+    private GridSquare occupiedSquare;
+    private Island island;
+    private Position position;
+    private Food apple;
 
     /**
      * Default constructor for test class GridSquareTest
      */
     public GridSquareTest()
     {
+        //Default constructor for the test class
     }
 
     /**

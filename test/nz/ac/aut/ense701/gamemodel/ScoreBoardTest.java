@@ -5,8 +5,6 @@
  */
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.Score;
-import nz.ac.aut.ense701.gamemodel.ScoreBoard;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -24,15 +22,15 @@ import org.apache.commons.io.IOUtils;
  * @author aashi
  */
 public class ScoreBoardTest extends junit.framework.TestCase{
-    private static final String SCORE_BOARD_FILE_NAME = "PlayerScore.json";
     private static final String ENCODING = "UTF-8";
     
-    private StringBuffer playerScoreStringBuffer;
+    private StringBuilder playerScoreStringBuffer;
 
     /**
      * Default constructor for the class QuizDataTest
      */
     public ScoreBoardTest() {
+        //Default constructor for the test class
     }
     
     /**
@@ -44,7 +42,7 @@ public class ScoreBoardTest extends junit.framework.TestCase{
     protected void setUp() throws IllegalAccessException
     {
         try {
-            playerScoreStringBuffer = new StringBuffer();
+            playerScoreStringBuffer = new StringBuilder();
             playerScoreStringBuffer.append(IOUtils.toString(ScoreBoard.class.getResourceAsStream(TextFilePathConstants.PLAYER_SCORE), ENCODING));
             //Set Data to null to reset variables and make them read from the file again
             Field scoreBoardField = ScoreBoard.class.getDeclaredField("scoreList");

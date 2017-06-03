@@ -1,7 +1,5 @@
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
 import nz.ac.aut.ense701.gamemodel.occupants.Food;
 import org.junit.Test;
 
@@ -21,6 +19,7 @@ public class FoodTest extends junit.framework.TestCase
      */
     public FoodTest()
     {
+        //Default constructor for the test class
     }
 
     /**

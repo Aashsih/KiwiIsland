@@ -1,7 +1,5 @@
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
 import nz.ac.aut.ense701.gamemodel.occupants.Tool;
 import org.junit.Test;
 
@@ -14,14 +12,15 @@ import org.junit.Test;
 
 public class ToolTest extends junit.framework.TestCase
 {
-    Tool trap;
-    Position position;
-    Island island;
+    private Tool trap;
+    private Position position;
+    private Island island;
 /**
      * Default constructor for test class ToolTest
      */
     public ToolTest()
     {
+        //Default constructor for the test class
     }
 
 

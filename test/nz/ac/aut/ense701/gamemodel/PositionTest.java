@@ -2,9 +2,6 @@ package nz.ac.aut.ense701.gamemodel;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
-import nz.ac.aut.ense701.gamemodel.MoveDirection;
 import org.junit.Test;
 
 /**
@@ -15,14 +12,15 @@ import org.junit.Test;
  */
 public class PositionTest extends junit.framework.TestCase
 {
-    Position onIsland;
-    Position notOnIsland;
-    Island island;
+    private Position onIsland;
+    private Position notOnIsland;
+    private Island island;
     /**
      * Default constructor for test class PositionTest
      */
     public PositionTest()
     {
+        //Default constructor for the test class
     }
 
     /**
@@ -127,12 +125,13 @@ public class PositionTest extends junit.framework.TestCase
     public void testIllegalArgumentColumnTooLarge() throws Exception {
         try 
         {
-            Position invalidPosition = new Position(island,0,5);
+            new Position(island,0,5);
             fail("No exception thrown when column too large.");
         }
         catch (IllegalArgumentException expected) 
         {
             assertTrue("Not expected exception message", expected.getMessage().contains("Invalid (row,column"));
+            Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         }
         
     }

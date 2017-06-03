@@ -27,7 +27,7 @@ public class GameHelpTest extends junit.framework.TestCase
      */
     public GameHelpTest()
     {
-        
+        //Default constructor for the test class
     }
     
     /**

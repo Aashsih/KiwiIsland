@@ -5,9 +5,6 @@
  */
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
-import nz.ac.aut.ense701.gamemodel.handlers.KiwiHandler;
 import nz.ac.aut.ense701.gamemodel.handlers.PredatorHandler;
 import nz.ac.aut.ense701.gamemodel.occupants.Predator;
 import org.junit.Test;
@@ -25,7 +22,7 @@ public class PredatorHandlerTest extends junit.framework.TestCase{
      */
     public PredatorHandlerTest()
     {
-        
+        //Default constructor for the test class   
     }
     
     /**

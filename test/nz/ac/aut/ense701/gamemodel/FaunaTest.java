@@ -1,7 +1,5 @@
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
 import nz.ac.aut.ense701.gamemodel.occupants.Fauna;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -14,6 +12,7 @@ import static org.junit.Assert.*;
 public class FaunaTest {
     
     public FaunaTest() {
+        //Default constructor for the test class
     }
 
     /**

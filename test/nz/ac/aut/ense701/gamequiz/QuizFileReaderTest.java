@@ -31,6 +31,7 @@ public class QuizFileReaderTest extends junit.framework.TestCase
      * Default constructor for the class QuizDataTest
      */
     public QuizFileReaderTest() {
+        //Default constructor for the test class
     }
     
     /**

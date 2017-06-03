@@ -14,19 +14,20 @@ import org.junit.Test;
  */
 public class IslandTest extends junit.framework.TestCase
 {
-    Island testIsland;
-    Position onIsland;
-    Position notOnIsland;
-    Predator cat; 
-    Game game;
-    Island island;
-    Kiwi kiwi;
+    private Island testIsland;
+    private Position onIsland;
+    private Position notOnIsland;
+    private Predator cat; 
+    private Game game;
+    private Island island;
+    private Kiwi kiwi;
  
     /**
      * Default constructor for test class IslandTest
      */
     public IslandTest()
     {
+        //Default constructor for the test class
     }
 
     /**

@@ -5,16 +5,11 @@
  */
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
-import java.util.ArrayList;
-import java.util.List;
 import nz.ac.aut.ense701.gamemodel.handlers.KiwiHandler;
 import nz.ac.aut.ense701.gamemodel.occupants.Fauna;
 import nz.ac.aut.ense701.gamemodel.occupants.Hazard;
 import nz.ac.aut.ense701.gamemodel.occupants.Kiwi;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 /**
  *
@@ -22,7 +17,6 @@ import org.junit.rules.ExpectedException;
  */
 public class KiwiHandlerTest extends junit.framework.TestCase{
     private KiwiHandler kiwiHandler;
-    private Position playerPosition;
     private Island island;
     
     /**
@@ -30,7 +24,7 @@ public class KiwiHandlerTest extends junit.framework.TestCase{
      */
     public KiwiHandlerTest()
     {
-        
+        //Default constructor for the test class   
     }
     
     /**

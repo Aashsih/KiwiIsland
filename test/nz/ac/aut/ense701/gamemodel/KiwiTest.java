@@ -1,7 +1,5 @@
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
 import nz.ac.aut.ense701.gamemodel.occupants.Kiwi;
 import org.junit.After;
 import org.junit.Before;
@@ -20,6 +18,7 @@ public class KiwiTest {
     private Island island;
     
     public KiwiTest() {
+        //Default constructor for the test class
     }
     
     @Before

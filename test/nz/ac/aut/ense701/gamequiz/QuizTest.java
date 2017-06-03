@@ -25,7 +25,7 @@ import org.junit.Test;
 public class QuizTest extends junit.framework.TestCase 
 {
     private static final String ENCODING = "UTF-8";
-    private StringBuffer quizDataStringBuffer;
+    private StringBuilder quizDataStringBuffer;
     
     private Quiz quiz;
     /**
@@ -33,6 +33,7 @@ public class QuizTest extends junit.framework.TestCase
      */
     public QuizTest() 
     {
+        //Default constructor for the test class
     }
     
     /**
@@ -44,7 +45,7 @@ public class QuizTest extends junit.framework.TestCase
     protected void setUp()
     {
         try {
-            quizDataStringBuffer = new StringBuffer();
+            quizDataStringBuffer = new StringBuilder();
             quizDataStringBuffer.append(IOUtils.toString(QuizFileReader.class.getResourceAsStream(TextFilePathConstants.QUIZ_DATA), ENCODING));
             //Set Data to null to reset variables and make them read from the file again
             Field quizDataField = QuizFileReader.class.getDeclaredField("quizData");

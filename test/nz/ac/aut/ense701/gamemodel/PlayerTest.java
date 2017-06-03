@@ -1,14 +1,8 @@
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
-import nz.ac.aut.ense701.gamemodel.Terrain;
-import nz.ac.aut.ense701.gamemodel.Player;
-import java.util.ArrayList;
 import nz.ac.aut.ense701.gamemodel.occupants.Food;
 import nz.ac.aut.ense701.gamemodel.occupants.Tool;
 import java.util.Collection;
-import java.util.List;
 import org.junit.Test;
 
 /**
@@ -19,16 +13,17 @@ import org.junit.Test;
  */
 public class PlayerTest extends junit.framework.TestCase
 {
-   Player player;
-   Position playerPosition;
-   Island island;
-   Food sandwich;
+   private Player player;
+   private Position playerPosition;
+   private Island island;
+   private Food sandwich;
    
      /**
      * Default constructor for test class PlayerTest
      */
     public PlayerTest()
     {
+        //Default constructor for the test class
     }
 
     /**

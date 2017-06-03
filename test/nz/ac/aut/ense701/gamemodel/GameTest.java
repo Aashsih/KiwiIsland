@@ -15,10 +15,10 @@ import org.junit.Test;
  */
 public class GameTest extends junit.framework.TestCase
 {
-    Game       game;
-    Player     player;
-    Position   playerPosition;
-    Island island ;
+    private Game       game;
+    private Player     player;
+    private Position   playerPosition;
+    private Island island ;
    
     
     /**
@@ -26,6 +26,7 @@ public class GameTest extends junit.framework.TestCase
      */
     public GameTest()
     {
+        //Default constructor for the test class
     }
 
     /**
