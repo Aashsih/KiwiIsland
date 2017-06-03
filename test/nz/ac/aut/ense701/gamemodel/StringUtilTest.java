@@ -39,7 +39,35 @@ public class StringUtilTest extends junit.framework.TestCase{
 
     @Test
     public void testIsAplhaNumericNonAlphaNumericString(){
-        assertFalse(StringUtil.isAlphaNumeric("*&^%$#?<>"));
+        assertFalse(StringUtil.isAlphaNumeric("!"));
+        assertFalse(StringUtil.isAlphaNumeric("@"));
+        assertFalse(StringUtil.isAlphaNumeric("#"));
+        assertFalse(StringUtil.isAlphaNumeric("$"));
+        assertFalse(StringUtil.isAlphaNumeric("%"));
+        assertFalse(StringUtil.isAlphaNumeric("^"));
+        assertFalse(StringUtil.isAlphaNumeric("&"));
+        assertFalse(StringUtil.isAlphaNumeric("*"));
+        assertFalse(StringUtil.isAlphaNumeric("("));
+        assertFalse(StringUtil.isAlphaNumeric(")"));
+        assertFalse(StringUtil.isAlphaNumeric("-"));
+        assertFalse(StringUtil.isAlphaNumeric("_"));
+        assertFalse(StringUtil.isAlphaNumeric("="));
+        assertFalse(StringUtil.isAlphaNumeric("+"));
+        assertFalse(StringUtil.isAlphaNumeric("]"));
+        assertFalse(StringUtil.isAlphaNumeric("}"));
+        assertFalse(StringUtil.isAlphaNumeric("["));
+        assertFalse(StringUtil.isAlphaNumeric("{"));
+        assertFalse(StringUtil.isAlphaNumeric("'"));
+        assertFalse(StringUtil.isAlphaNumeric("\""));
+        assertFalse(StringUtil.isAlphaNumeric(":"));
+        assertFalse(StringUtil.isAlphaNumeric(";"));
+        assertFalse(StringUtil.isAlphaNumeric("/"));
+        assertFalse(StringUtil.isAlphaNumeric("?"));
+        assertFalse(StringUtil.isAlphaNumeric("."));
+        assertFalse(StringUtil.isAlphaNumeric(">"));
+        assertFalse(StringUtil.isAlphaNumeric(","));
+        assertFalse(StringUtil.isAlphaNumeric("<"));
+        
     }
     
     @Test
