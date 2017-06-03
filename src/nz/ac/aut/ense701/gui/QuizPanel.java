@@ -20,6 +20,7 @@ import nz.ac.aut.ense701.gamequiz.Quiz;
  */
 @SuppressWarnings("serial")
 public class QuizPanel extends javax.swing.JPanel {
+    private static final String RADIO_BUTTON_FONT = "Tahoma";
     
     private Quiz quiz;
     private KiwiCountUI parentFrame;
@@ -81,7 +82,7 @@ public class QuizPanel extends javax.swing.JPanel {
             for(String option : options){
                 currentRowCount++;
                 JRadioButton radioButton = new JRadioButton(option);
-                radioButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+                radioButton.setFont(new java.awt.Font(RADIO_BUTTON_FONT, 0, 18)); // NOI18N
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 0;
                 gridBagConstraints.gridy =  currentRowCount;

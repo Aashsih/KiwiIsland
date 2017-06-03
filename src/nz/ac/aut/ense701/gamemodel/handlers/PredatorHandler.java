@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 import nz.ac.aut.ense701.gamemodel.Island;
 import nz.ac.aut.ense701.gamemodel.Position;
+import nz.ac.aut.ense701.gamemodel.occupants.Fauna;
 import nz.ac.aut.ense701.gamemodel.occupants.Predator;
 
 /**
@@ -32,7 +33,7 @@ public class PredatorHandler extends MovableFaunaHandler{
      * @param numberOfSteps number of steps taken by the plater
      * @return position to which the predator was moved.
      */
-    public Position movePredator(int numberOfSteps){
+    public Position movePredatorToRandomPosition(int numberOfSteps){
         if(numberOfSteps < 0){
             throw new IllegalArgumentException(
                     "Number of steps taken cannot be less than 0");
@@ -42,25 +43,12 @@ public class PredatorHandler extends MovableFaunaHandler{
         }
         Position newPredatorPosiion = null;
         if(numberOfSteps % 10 == 0){
-            List<Predator> predatorList = new ArrayList<>();
-            for(int i = 0; i < island.getNumRows(); i++){
-                for(int j = 0; j < island.getNumColumns(); j++){
-                    Position aPosition = new Position(island, i, j);
-                    if(island.hasPredator(aPosition)){
-                        predatorList.add(island.getPredator(aPosition));
-                    }
-                }
-            }
+            List<Predator> predatorList = getAllPredatorsOnIsland();
             if(!predatorList.isEmpty()){
                 Predator predatorToMove = predatorList.get((new Random()).nextInt(predatorList.size()));
-                newPredatorPosiion = movePredatorToAvailablePosition(predatorToMove);
+                newPredatorPosiion = moveAPredatorToAvailablePosition(predatorToMove);
                 if(newPredatorPosiion == null){
-                    for(Predator aPredator : predatorList){
-                        newPredatorPosiion = movePredatorToAvailablePosition(aPredator);
-                        if(newPredatorPosiion != null){
-                            break;
-                        }
-                    }
+                    movePredatorToAvailablePosition(predatorList);
                 }
             }
             
@@ -70,30 +58,72 @@ public class PredatorHandler extends MovableFaunaHandler{
     }
     
     /**
+     * Moves one predator from the provided list to an available position
+     * @param predatorList
+     * @param newPredatorPosiion 
+     */
+    private void movePredatorToAvailablePosition(List<Predator> predatorList){
+        Position newPredatorPosiion;
+        for(Predator aPredator : predatorList){
+            newPredatorPosiion = moveAPredatorToAvailablePosition(aPredator);
+            if(newPredatorPosiion != null){
+                break;
+            }
+        }
+    }
+    
+    /**
+     * This method is used to get a list of predators on the island
+     * @return list of predators on the island
+     */
+    private List<Predator> getAllPredatorsOnIsland(){
+        List<Predator> predatorList = new ArrayList<>();
+        for(int i = 0; i < island.getNumRows(); i++){
+            for(int j = 0; j < island.getNumColumns(); j++){
+                Position aPosition = new Position(island, i, j);
+                if(island.hasPredator(aPosition)){
+                    predatorList.add(island.getPredator(aPosition));
+                }
+            }
+        }
+        return predatorList;
+    }
+    
+    /**
      * Checks for all the possible positions where a Predator can be moved
      * in a one block radius and returns the position where the predator was moved to
      * 
      * @param predator predator that needs to be moved
      * @return the position to which the predator has been moved
      */
-    private Position movePredatorToAvailablePosition(Predator predator){
+    private Position moveAPredatorToAvailablePosition(Predator predator){
         if(predator == null){
             throw new IllegalArgumentException(
                         "Predator passed as a paramter cannot be null");
         }
-        Position newPredatorPosition;
         Position predatorPosition = predator.getPosition();
         for(int i = predatorPosition.getRow() - PREDATOR_MOVE_RADIUS; i < predatorPosition.getRow() + PREDATOR_MOVE_RADIUS; i++){
             for(int j = predatorPosition.getColumn() - PREDATOR_MOVE_RADIUS; j < predatorPosition.getColumn() + PREDATOR_MOVE_RADIUS; j++){
-                 if(Position.isValidPosition(island, i, j)){
-                    newPredatorPosition = new Position(island, i, j);
-                    if(moveFauna(predator, newPredatorPosition)){
-                        return newPredatorPosition;
-                    }
-                 }
+                return  moveFaunaToPosition(predator, i, j);
             }
         }
         return null;
     }
-    
+   
+    /**
+     * Moves the Fauna passed as a parameter to the specified row and column on the island
+     * @param fauna fauna to be moved
+     * @param row 
+     * @param column
+     * @return Position of where the fauna was moved
+     */
+    private Position moveFaunaToPosition(Fauna fauna, int row, int column){
+        if(Position.isValidPosition(island, row, column)){
+            Position newPredatorPosition = new Position(island, row, column);
+            if(moveFauna(fauna, newPredatorPosition)){
+                return newPredatorPosition;
+            }
+         }
+        return null;
+    }
 }

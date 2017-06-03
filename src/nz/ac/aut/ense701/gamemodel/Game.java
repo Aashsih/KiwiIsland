@@ -661,7 +661,7 @@ public class Game
             //Change kiwi Population
             player.incrementSteps();
             changeKiwiPopulation();
-            lastUpdatedPredatorPosition = predatorHandler.movePredator(player.getNumberOfSteps());
+            lastUpdatedPredatorPosition = predatorHandler.movePredatorToRandomPosition(player.getNumberOfSteps());
             player.changeScore(MOVING_SCORE);
             updateGameState();  
             

@@ -1,5 +1,7 @@
 package nz.ac.aut.ense701.gamemodel;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import nz.ac.aut.ense701.gamemodel.Position;
 import nz.ac.aut.ense701.gamemodel.Island;
 import nz.ac.aut.ense701.gamemodel.MoveDirection;
@@ -65,12 +67,13 @@ public class PositionTest extends junit.framework.TestCase
     public void testIllegalArgumentNoIsland() throws Exception {
         try 
         {
-            Position invalidPosition = new Position(null,0,0);
+            new Position(null,0,0);
             fail("No exception thrown when island null.");
         }
         catch (IllegalArgumentException expected) 
         {
             assertTrue("Not expected exception message", expected.getMessage().contains("Island"));
+            Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         }
         
     }
@@ -79,12 +82,13 @@ public class PositionTest extends junit.framework.TestCase
     public void testIllegalArgumentRowNegative() throws Exception {
         try 
         {
-            Position invalidPosition = new Position(island,-1,0);
+            new Position(island,-1,0);
             fail("No exception thrown when row negative.");
         }
         catch (IllegalArgumentException expected) 
         {
             assertTrue("Not expected exception message", expected.getMessage().contains("Invalid (row"));
+            Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         }
         
     }
@@ -93,12 +97,13 @@ public class PositionTest extends junit.framework.TestCase
     public void testIllegalArgumentRowTooLarge() throws Exception {
         try 
         {
-            Position invalidPosition = new Position(island,5,0);
+            new Position(island,5,0);
             fail("No exception thrown when row too large.");
         }
         catch (IllegalArgumentException expected) 
         {
             assertTrue("Not expected exception message", expected.getMessage().contains("Invalid (row"));
+            Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         }
         
     } 
@@ -107,12 +112,13 @@ public class PositionTest extends junit.framework.TestCase
     public void testIllegalArgumentColumnNegative() throws Exception {
         try 
         {
-            Position invalidPosition = new Position(island,1,-1);
+            new Position(island,1,-1);
             fail("No exception thrown when column negative.");
         }
         catch (IllegalArgumentException expected) 
         {
             assertTrue("Not expected exception message", expected.getMessage().contains("Invalid (row,column"));
+            Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         }
         
     }
@@ -154,12 +160,13 @@ public class PositionTest extends junit.framework.TestCase
     public void testGetNewPositionNull()throws Exception {
         try 
         {
-            Position newPosition = onIsland.getNewPosition(null);
+            onIsland.getNewPosition(null);
             fail("No exception thrown when direction null.");
         }
         catch (IllegalArgumentException expected) 
         {
             assertTrue("Not expected exception message", expected.getMessage().contains("Direction parameter"));
+            Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         }    
     }
     
@@ -185,6 +192,7 @@ public class PositionTest extends junit.framework.TestCase
         catch (IllegalArgumentException expected) 
         {
             assertTrue("Not expected exception message", expected.getMessage().contains("Island parameter cannot be null"));
+            Logger.getLogger(PositionTest.class.getName()).log(Level.FINE, null, expected);    
         } 
     }
     

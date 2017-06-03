@@ -1,12 +1,5 @@
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.GameState;
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Game;
-import nz.ac.aut.ense701.gamemodel.Island;
-import nz.ac.aut.ense701.gamemodel.Terrain;
-import nz.ac.aut.ense701.gamemodel.Player;
-import nz.ac.aut.ense701.gamemodel.MoveDirection;
 import nz.ac.aut.ense701.gamemodel.occupants.Predator;
 import nz.ac.aut.ense701.gamemodel.occupants.Food;
 import nz.ac.aut.ense701.gamemodel.occupants.Item;
@@ -535,64 +528,9 @@ public class GameTest extends junit.framework.TestCase
             moveOK = playerMoveEast(3);
         }
         if(moveOK){
-            moveOK = playerMoveSouth(4);
+            playerMoveSouth(4);
             game.useItem(trap);
         }
-        
-//        //Predator 1
-//        boolean moveOK = playerMoveEast(5);
-//        game.useItem(trap);
-//        //Predator 2
-//        if(moveOK){
-//            moveOK = playerMoveWest(1);
-//        }
-//        if(moveOK){
-//            moveOK = playerMoveSouth(2);
-//            game.useItem(trap);
-//        }
-//        //Predator 3
-//        if(moveOK){
-//            moveOK = playerMoveWest(2);
-//        }
-//        if(moveOK){
-//            moveOK = playerMoveSouth(1);
-//            game.useItem(trap);
-//        }
-//        //Predator 4
-//        if(moveOK){
-//            moveOK = playerMoveWest(3);
-//        }
-//        if(moveOK){
-//            moveOK = playerMoveSouth(1);
-//            game.useItem(trap);
-//        }
-//        //Predator 5
-//        if(moveOK){
-//            moveOK = playerMoveEast(1);
-//        }
-//        if(moveOK){
-//            moveOK = playerMoveSouth(1);
-//            game.useItem(trap);
-//        }
-//         //Predator 6
-//        if(moveOK){
-//            moveOK = playerMoveEast(2);
-//        }
-//        if(moveOK){
-//            moveOK = playerMoveSouth(1);
-//            game.useItem(trap);
-//        }
-//        //Predator 7
-//        if(moveOK){
-//            moveOK = playerMoveNorth(1);
-//        }
-//        if(moveOK){
-//            moveOK = playerMoveEast(3);
-//        }
-//        if(moveOK){
-//            moveOK = playerMoveSouth(4);
-//            game.useItem(trap);
-//        }
         return true;
     }
     

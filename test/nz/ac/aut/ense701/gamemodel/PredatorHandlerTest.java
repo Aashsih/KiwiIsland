@@ -60,7 +60,7 @@ public class PredatorHandlerTest extends junit.framework.TestCase{
     public void testMovePredatorPredatorMovePossible(){
         Position predatorPosition = new Position(island, 2, 2);
         island.addOccupant(predatorPosition, new Predator(predatorPosition, "", ""));
-        Position newPosition = predatorHandler.movePredator(10);
+        Position newPosition = predatorHandler.movePredatorToRandomPosition(10);
         assertTrue(island.hasPredator(newPosition));
     }
     
@@ -72,7 +72,7 @@ public class PredatorHandlerTest extends junit.framework.TestCase{
     public void testMovePredatorPositionLessThanTenSteps(){
         Position predatorPosition = new Position(island, 2, 2);
         island.addOccupant(predatorPosition, new Predator(predatorPosition, "", ""));
-        assertNull(predatorHandler.movePredator(5));
+        assertNull(predatorHandler.movePredatorToRandomPosition(5));
     }
     
     /**
@@ -84,7 +84,7 @@ public class PredatorHandlerTest extends junit.framework.TestCase{
     {
         try
         {
-            predatorHandler.movePredator(-5);
+            predatorHandler.movePredatorToRandomPosition(-5);
             fail("IllegalArgumentException did not occur");
         }
         catch(Exception e)

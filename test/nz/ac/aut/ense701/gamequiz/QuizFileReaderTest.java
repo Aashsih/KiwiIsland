@@ -15,7 +15,6 @@ import nz.ac.aut.ense701.gamemodel.GameHelpTest;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
-import nz.ac.aut.ense701.gamemodel.ScoreBoard;
 import nz.ac.aut.ense701.textfiles.TextFilePathConstants;
 import org.apache.commons.io.IOUtils;
 
@@ -26,7 +25,7 @@ import org.apache.commons.io.IOUtils;
 public class QuizFileReaderTest extends junit.framework.TestCase 
 {
     private static final String ENCODING = "UTF-8";
-    private StringBuffer quizDataStringBuffer;
+    private StringBuilder quizDataStringBuffer;
 
     /**
      * Default constructor for the class QuizDataTest
@@ -43,7 +42,7 @@ public class QuizFileReaderTest extends junit.framework.TestCase
     protected void setUp() throws IllegalAccessException
     {
         try {
-            quizDataStringBuffer = new StringBuffer();
+            quizDataStringBuffer = new StringBuilder();
             quizDataStringBuffer.append(IOUtils.toString(QuizFileReader.class.getResourceAsStream(TextFilePathConstants.QUIZ_DATA), ENCODING));
             //Set Data to null to reset variables and make them read from the file again
             Field quizDataField = QuizFileReader.class.getDeclaredField("quizData");
@@ -52,11 +51,7 @@ public class QuizFileReaderTest extends junit.framework.TestCase
             Field messageToQuizDataField = QuizFileReader.class.getDeclaredField("messageToQuizData");
             messageToQuizDataField.setAccessible(true);
             messageToQuizDataField.set(null, null);
-        } catch (NoSuchFieldException ex) {
-            Logger.getLogger(QuizFileReaderTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
-            Logger.getLogger(QuizFileReaderTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (NoSuchFieldException | SecurityException | IOException ex) {
             Logger.getLogger(QuizFileReaderTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

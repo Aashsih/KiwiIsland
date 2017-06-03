@@ -1,10 +1,7 @@
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.Game;
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
-import nz.ac.aut.ense701.gamemodel.Terrain;
-import nz.ac.aut.ense701.gamemodel.Player;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import nz.ac.aut.ense701.gamemodel.occupants.Predator;
 import nz.ac.aut.ense701.gamemodel.occupants.Kiwi;
 import org.junit.Test;
@@ -173,6 +170,7 @@ public class IslandTest extends junit.framework.TestCase
         catch (IllegalArgumentException expected) 
         {
             assertTrue("Not expected exception message", expected.getMessage().contains("The parameter \"occupant\" cannot be null"));
+            Logger.getLogger(IslandTest.class.getName()).log(Level.FINE, null, expected);
         } 
     }
     
@@ -186,6 +184,7 @@ public class IslandTest extends junit.framework.TestCase
         catch (IllegalArgumentException expected) 
         {
             assertTrue("Not expected exception message", expected.getMessage().contains("The parameter \"position\" cannot be null"));
+            Logger.getLogger(IslandTest.class.getName()).log(Level.FINE, null, expected);
         } 
     }
     

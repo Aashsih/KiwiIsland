@@ -5,13 +5,7 @@
  */
 package nz.ac.aut.ense701.gamemodel;
 
-import nz.ac.aut.ense701.gamemodel.GameHelp;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +21,7 @@ import org.junit.Test;
 public class GameHelpTest extends junit.framework.TestCase 
 {
     private static final String ENCODING = "UTF-8";
-    private StringBuffer gameHelpStringBuffer;
+    private StringBuilder gameHelpStringBuffer;
     /**
      * Default constructor for the class GameHelpTest
      */
@@ -45,7 +39,7 @@ public class GameHelpTest extends junit.framework.TestCase
     protected void setUp()
     {
         try {
-            gameHelpStringBuffer = new StringBuffer();
+            gameHelpStringBuffer = new StringBuilder();
             gameHelpStringBuffer.append(IOUtils.toString(ScoreBoard.class.getResourceAsStream(TextFilePathConstants.HELP), ENCODING));
         } catch (IOException ex) {
             Logger.getLogger(GameHelpTest.class.getName()).log(Level.SEVERE, null, ex);
