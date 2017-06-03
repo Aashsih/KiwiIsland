@@ -407,23 +407,29 @@ public class Island
      * One each square is iterated and there is a kiwi found, increment the kiwi population count. 
      * @return current kiwi population 
      */
-    
-    
     public int getCurrentKiwiPopulationOnIsland(){
 	int numberOfKiwisOnIsland = 0;
         for (GridSquare[] landGrid : this.islandGrid) {
             for (GridSquare landGrid1 : landGrid) {
-                Occupant[] gridSquareOccupants = landGrid1.getOccupants();
-                for(Occupant anOccupant : gridSquareOccupants){
-                    if(anOccupant instanceof Kiwi){
-                        numberOfKiwisOnIsland++;
-                    }
-                }
+                numberOfKiwisOnIsland += countNumberOfKiwiOnGridSquare(landGrid1.getOccupants());
             }
         }
 	return numberOfKiwisOnIsland;
     }
 
-    
+    /**
+     * Counts the number of Kiwis in a Occupant array
+     * @param gridSquareOccupants Occupants on a GridSquare
+     * @return number of Kiwis on a GridSqaure
+     */
+    private int countNumberOfKiwiOnGridSquare(Occupant[] gridSquareOccupants){
+        int numberOfKiwisOnIsland = 0;
+        for(Occupant anOccupant : gridSquareOccupants){
+            if(anOccupant instanceof Kiwi){
+                numberOfKiwisOnIsland++;
+            }
+        }
+        return numberOfKiwisOnIsland;
+    }
 
 }

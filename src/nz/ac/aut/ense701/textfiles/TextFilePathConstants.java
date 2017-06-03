@@ -17,4 +17,7 @@ public class TextFilePathConstants {
     public static final String PLAYER_SCORE = "/nz/ac/aut/ense701/textfiles/PlayerScore.json";
     public static final String QUIZ_DATA = "/nz/ac/aut/ense701/textfiles/QuizData.json";
     
+    private TextFilePathConstants(){
+        
+    }
 }

@@ -61,6 +61,15 @@ public class GridSquarePanel extends javax.swing.JPanel
             lblText.setText("");
             setBorder(NORMAL_BORDER);
         }
+        handlePredatorAndKiwiGridSquareChanges();
+    }
+    
+    /**
+     * If the predator position is updated then make the GridSqaure ORANGE
+     * If a Kiwi has been removed then make the GridSquare from where the Kiwi is removed RED
+     * If a Kiwi has been added then make the GridSquare where the Kiwi is added GREEN
+     */
+    private void handlePredatorAndKiwiGridSquareChanges(){
         if(game.getLastUpdatedPredatorPosition() != null){
             Position lastUpdatedPredatorPosition = game.getLastUpdatedPredatorPosition();
             if(this.row == lastUpdatedPredatorPosition.getRow() && this.column == lastUpdatedPredatorPosition.getColumn()){
