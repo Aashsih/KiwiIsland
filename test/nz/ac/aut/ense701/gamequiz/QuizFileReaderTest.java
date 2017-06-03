@@ -81,7 +81,7 @@ public class QuizFileReaderTest extends junit.framework.TestCase
             String testData = getMockQuizData();
             FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , ENCODING);
             List<QuizData> quizData = QuizFileReader.getQuizData();
-            assertEquals("Test Message 1", quizData.get(0).getMessage());
+            assertEquals(TEST_MESSAGE, quizData.get(0).getMessage());
             assertEquals("Test Question 1", quizData.get(0).getQuestion().getQuestion());
             assertEquals("option 1", quizData.get(0).getQuestion().getOptions().get(0));
             assertEquals("option 2", quizData.get(0).getQuestion().getOptions().get(1));
@@ -100,7 +100,7 @@ public class QuizFileReaderTest extends junit.framework.TestCase
             FileUtils.writeStringToFile(new File(QuizFileReader.class.getResource(TextFilePathConstants.QUIZ_DATA).getFile()), testData , ENCODING);
             QuizFileReader.getQuizData();
             QuizData quizData = QuizFileReader.getQuizDataForMessage(TEST_MESSAGE);
-            assertEquals("Test Message 1", quizData.getMessage());
+            assertEquals(TEST_MESSAGE, quizData.getMessage());
             assertEquals("Test Question 1", quizData.getQuestion().getQuestion());
             assertEquals("option 1", quizData.getQuestion().getOptions().get(0));
             assertEquals("option 2", quizData.getQuestion().getOptions().get(1));
