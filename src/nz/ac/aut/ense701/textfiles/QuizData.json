@@ -10,7 +10,7 @@
 {
 	"message":"The kiwi has an extremely unusual beak. Not only does it provide a keen sense of smell, it also has sensory pits at the tip which allow the kiwi to sense prey moving underground.",
 	"question":{
-		"question":"2. The kiwi is the only bird known to have nostrils at the end of its bill?",
+		"question":"The kiwi is the only bird known to have nostrils at the end of its bill?",
 		"options":["True", "False"]	
 	},
 	"answer":"1"
