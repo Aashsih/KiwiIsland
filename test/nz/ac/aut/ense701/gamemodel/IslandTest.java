@@ -14,13 +14,13 @@ import org.junit.Test;
  */
 public class IslandTest extends junit.framework.TestCase
 {
+    private static final String SHOULD_BE_VISIBLE = "Should be visible.";
+    
     private Island testIsland;
     private Position onIsland;
     private Position notOnIsland;
     private Predator cat; 
-    private Game game;
-    private Island island;
-    private Kiwi kiwi;
+    
  
     /**
      * Default constructor for test class IslandTest
@@ -140,19 +140,19 @@ public class IslandTest extends junit.framework.TestCase
         //Surrounding positions should be visible
         //North
         Position north = new Position(testIsland,1,3);
-        assertTrue("Should be visible.", testIsland.isVisible(north));
+        assertTrue(SHOULD_BE_VISIBLE, testIsland.isVisible(north));
         
         //South
         Position south = new Position(testIsland,3,3);
-        assertTrue("Should be visible.", testIsland.isVisible(south));
+        assertTrue(SHOULD_BE_VISIBLE, testIsland.isVisible(south));
 
         //East
         Position east = new Position(testIsland,2,2);
-        assertTrue("Should be visible.", testIsland.isVisible(east));
+        assertTrue(SHOULD_BE_VISIBLE, testIsland.isVisible(east));
         
         //West
         Position west = new Position(testIsland,2,4);
-        assertTrue("Should be visible.", testIsland.isVisible(west));
+        assertTrue(SHOULD_BE_VISIBLE, testIsland.isVisible(west));
     }
     
     @Test

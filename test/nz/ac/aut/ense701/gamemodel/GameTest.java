@@ -15,6 +15,22 @@ import org.junit.Test;
  */
 public class GameTest extends junit.framework.TestCase
 {
+    private static final String CLIFF = "Cliff";
+    private static final String SCREWDRIVER = "Screwdriver";
+    private static final String GOOD_TOOL_TO_FIX_TRAP = "A good tool to fix a trap";
+    private static final String SHOULD_NOT_BE_ABLE_TO_USE = "Should not be able to use";
+    private static final String SHOULD_BE_ABLE_TO_USE = "Should be able to use";
+    private static final String SANDWICH = "Sandwich";
+    private static final String YUMMY = "Yummy";
+    private static final String PREDATOR_TRAP = "A predator trap";
+    private static final String WRONG_STAMINA = "Wrong stamina";
+    private static final String MOVE_VALID = "Move valid";
+    private static final String PLAYER_SHOULD_HAVE_TRAP = "Player should have trap";
+    private static final String RAT_TRAP = "Rat trap";
+    private static final String EXTRA_OCCUPANT = "An extra occupant";
+    private static final String PLAYER_SHOULD_NOT_HAVE_FOOD = "Player should no longer have food";
+    private static final String PLAYER_SHOULD_HAVE_FOOD = "Player should have food";
+    
     private Game       game;
     private Player     player;
     private Position   playerPosition;
@@ -146,71 +162,71 @@ public class GameTest extends junit.framework.TestCase
     @Test
     public void testCanCollectCollectable(){
         //Items that are collectable and fit in backpack
-        Item valid = new Food(playerPosition,"Sandwich", "Yummy",1.0, 1.0,1.0);
+        Item valid = new Food(playerPosition,SANDWICH, YUMMY,1.0, 1.0,1.0);
         assertTrue("Should be able to collect", game.canCollect(valid));
     }
     
     @Test    
     public void testCanCollectNotCollectable(){
         //Items with size of '0' cannot be carried
-        Item notCollectable = new Food(playerPosition,"Sandwich", "Very Heavy Sandwich",10.0, 0.0,1.0);
+        Item notCollectable = new Food(playerPosition,SANDWICH, "Very Heavy Sandwich",10.0, 0.0,1.0);
         assertFalse("Should not be able to collect", game.canCollect(notCollectable));
     }
     
     @Test
     public void testCanUseFoodValid(){
         //Food can always be used
-        Item valid = new Food(playerPosition,"Sandwich", "Yummy",1.0, 1.0,1.0);
-        assertTrue("Should be able to use", game.canUse(valid));
+        Item valid = new Food(playerPosition,SANDWICH, YUMMY,1.0, 1.0,1.0);
+        assertTrue(SHOULD_BE_ABLE_TO_USE, game.canUse(valid));
     }
     
     @Test
     public void testCanUseTrapValid(){
         //Trap can be used if there is a predator here
-        Item valid = new Tool(playerPosition,"Trap", "A predator trap",1.0, 1.0);
+        Item valid = new Tool(playerPosition,"Trap", PREDATOR_TRAP,1.0, 1.0);
         //Add predator
         Predator rat = new Predator(playerPosition,"Rat", "A norway rat");
         island.addOccupant(playerPosition, rat);
-        assertTrue("Should be able to use", game.canUse(valid));
+        assertTrue(SHOULD_BE_ABLE_TO_USE, game.canUse(valid));
     }
     
     @Test
     public void testCanUseTrapNoPredator(){
         //Trap can be used if there is a predator here
-        Item tool = new Tool(playerPosition,"Trap", "A predator trap",1.0, 1.0);
+        Item tool = new Tool(playerPosition,"Trap", PREDATOR_TRAP,1.0, 1.0);
 
-        assertFalse("Should not be able to use", game.canUse(tool));
+        assertFalse(SHOULD_NOT_BE_ABLE_TO_USE, game.canUse(tool));
     }
     
     @Test
     public void testCanUseTool(){
         //Screwdriver can be used if player has a broken trap
-        Item tool = new Tool(playerPosition,"Screwdriver", "A good tool to fix a trap",1.0, 1.0);
-        Tool trap = new Tool(playerPosition,"Trap", "A predator trap",1.0, 1.0);
+        Item tool = new Tool(playerPosition,SCREWDRIVER, GOOD_TOOL_TO_FIX_TRAP,1.0, 1.0);
+        Tool trap = new Tool(playerPosition,"Trap", PREDATOR_TRAP,1.0, 1.0);
         trap.setBroken();
         player.collect(trap);
 
-        assertTrue("Should be able to use", game.canUse(tool));
+        assertTrue(SHOULD_BE_ABLE_TO_USE, game.canUse(tool));
     }
     
     @Test
     public void testCanUseToolNoTrap(){
         //Screwdriver can be used if player has a broken trap
-        Item tool = new Tool(playerPosition,"Screwdriver", "A good tool to fix a trap",1.0, 1.0);
-        Tool trap = new Tool(playerPosition,"Trap", "A predator trap",1.0, 1.0);
+        Item tool = new Tool(playerPosition,SCREWDRIVER, GOOD_TOOL_TO_FIX_TRAP,1.0, 1.0);
+        Tool trap = new Tool(playerPosition,"Trap", PREDATOR_TRAP,1.0, 1.0);
         trap.setBroken();
 
-        assertFalse("Should not be able to use", game.canUse(tool));
+        assertFalse(SHOULD_NOT_BE_ABLE_TO_USE, game.canUse(tool));
     }
     
     @Test
     public void testCanUseToolTrapNotBroken(){
         //Screwdriver can be used if player has a broken trap
-        Item tool = new Tool(playerPosition,"Screwdriver", "A good tool to fix a trap",1.0, 1.0);
-        Tool trap = new Tool(playerPosition,"Trap", "A predator trap",1.0, 1.0);
+        Item tool = new Tool(playerPosition,SCREWDRIVER, GOOD_TOOL_TO_FIX_TRAP,1.0, 1.0);
+        Tool trap = new Tool(playerPosition,"Trap", PREDATOR_TRAP,1.0, 1.0);
         player.collect(trap);
 
-        assertFalse("Should not be able to use", game.canUse(tool));
+        assertFalse(SHOULD_NOT_BE_ABLE_TO_USE, game.canUse(tool));
     }
     
     @Test
@@ -224,12 +240,12 @@ public class GameTest extends junit.framework.TestCase
     
     @Test
     public void testCollectValid(){
-        Item food = new Food(playerPosition,"Sandwich", "Yummy",1.0, 1.0,1.0);
+        Item food = new Food(playerPosition,SANDWICH, YUMMY,1.0, 1.0,1.0);
         island.addOccupant(playerPosition, food);
         assertTrue("Food now on island", island.hasOccupant(playerPosition, food));
         game.collectItem(food);
         
-        assertTrue("Player should have food",player.hasItem(food));
+        assertTrue(PLAYER_SHOULD_HAVE_FOOD,player.hasItem(food));
         assertFalse("Food should no longer be on island", island.hasOccupant(playerPosition, food));
     }
     
@@ -246,65 +262,65 @@ public class GameTest extends junit.framework.TestCase
     
     @Test    
     public void testDropValid(){
-        Item food = new Food(playerPosition,"Sandwich", "Yummy",1.0, 1.0,1.0);
+        Item food = new Food(playerPosition,SANDWICH, YUMMY,1.0, 1.0,1.0);
         island.addOccupant(playerPosition, food);
         game.collectItem(food);
-        assertTrue("Player should have food",player.hasItem(food));
+        assertTrue(PLAYER_SHOULD_HAVE_FOOD,player.hasItem(food));
         
         game.dropItem(food);
-        assertFalse("Player should no longer have food",player.hasItem(food));
+        assertFalse(PLAYER_SHOULD_NOT_HAVE_FOOD,player.hasItem(food));
         assertTrue("Food should be on island", island.hasOccupant(playerPosition, food));
     }
     
     @Test
     public void testDropNotValidPositionFull(){
-        Item food = new Food(playerPosition,"Sandwich", "Yummy",1.0, 1.0,1.0);
+        Item food = new Food(playerPosition,SANDWICH, YUMMY,1.0, 1.0,1.0);
         island.addOccupant(playerPosition, food);
         game.collectItem(food);
-        assertTrue("Player should have food",player.hasItem(food));
+        assertTrue(PLAYER_SHOULD_HAVE_FOOD,player.hasItem(food));
         
         //Positions can have at most three occupants
-        Item dummy = new Tool(playerPosition,"Trap", "An extra occupant", 1.0, 1.0);
-        Item dummy2 = new Tool(playerPosition,"Trap", "An extra occupant", 1.0, 1.0);
-        Item dummy3 = new Tool(playerPosition,"Trap", "An extra occupant", 1.0, 1.0);
+        Item dummy = new Tool(playerPosition,"Trap", EXTRA_OCCUPANT, 1.0, 1.0);
+        Item dummy2 = new Tool(playerPosition,"Trap", EXTRA_OCCUPANT, 1.0, 1.0);
+        Item dummy3 = new Tool(playerPosition,"Trap", EXTRA_OCCUPANT, 1.0, 1.0);
         island.addOccupant(playerPosition, dummy);
         island.addOccupant(playerPosition, dummy2);
         island.addOccupant(playerPosition, dummy3);
         
         game.dropItem(food);
-        assertTrue("Player should have food",player.hasItem(food));
+        assertTrue(PLAYER_SHOULD_HAVE_FOOD,player.hasItem(food));
         assertFalse("Food should not be on island", island.hasOccupant(playerPosition, food));
     }
     
     @Test
     public void testUseItemFoodCausesIncrease(){
-        Item food = new Food(playerPosition,"Sandwich", "Yummy",1.0, 1.0,1.3);
+        Item food = new Food(playerPosition,SANDWICH, YUMMY,1.0, 1.0,1.3);
         player.collect(food);
-        assertTrue("Player should have food",player.hasItem(food));
+        assertTrue(PLAYER_SHOULD_HAVE_FOOD,player.hasItem(food));
         
         // Will only get a stamina increase if player has less than max stamina
         player.reduceStamina(5.0);
         game.useItem(food);
-        assertFalse("Player should no longer have food",player.hasItem(food));
+        assertFalse(PLAYER_SHOULD_NOT_HAVE_FOOD,player.hasItem(food));
         assertEquals("Wrong stamina level", player.getStaminaLevel(), 96.3);
     }
  
     public void testUseItemFoodNoIncrease(){
-        Item food = new Food(playerPosition,"Sandwich", "Yummy",1.0, 1.0,1.3);
+        Item food = new Food(playerPosition,SANDWICH, "Yummy",1.0, 1.0,1.3);
         player.collect(food);
-        assertTrue("Player should have food",player.hasItem(food));
+        assertTrue(PLAYER_SHOULD_HAVE_FOOD,player.hasItem(food));
         
         // Will only get a stamina increase if player has less than max stamina
         game.useItem(food);
-        assertFalse("Player should no longer have food",player.hasItem(food));
+        assertFalse(PLAYER_SHOULD_NOT_HAVE_FOOD,player.hasItem(food));
         assertEquals("Wrong stamina level", player.getStaminaLevel(), 100.0);
     }  
     
     @Test
     public void testUseItemTrap(){
-        Item trap = new Tool(playerPosition,"Trap", "Rat trap",1.0, 1.0);
+        Item trap = new Tool(playerPosition,"Trap", RAT_TRAP,1.0, 1.0);
         player.collect(trap);
-        assertTrue("Player should have trap",player.hasItem(trap));
+        assertTrue(PLAYER_SHOULD_HAVE_TRAP,player.hasItem(trap));
         
         // Can only use trap if there is a predator.
         Predator predator = new Predator(playerPosition,"Rat", "Norway rat");
@@ -322,9 +338,9 @@ public class GameTest extends junit.framework.TestCase
     
     @Test
     public void testUseItemBrokenTrap(){
-        Tool trap = new Tool(playerPosition,"Trap", "Rat trap",1.0, 1.0);
+        Tool trap = new Tool(playerPosition,"Trap", RAT_TRAP,1.0, 1.0);
         player.collect(trap);
-        assertTrue("Player should have trap",player.hasItem(trap));
+        assertTrue(PLAYER_SHOULD_HAVE_TRAP,player.hasItem(trap));
         
         // Can only use trap if there is a predator.
         Predator predator = new Predator(playerPosition,"Rat", "Norway rat");
@@ -337,11 +353,11 @@ public class GameTest extends junit.framework.TestCase
     
     @Test
     public void testUseItemToolFixTrap(){
-        Tool trap = new Tool(playerPosition,"Trap", "Rat trap",1.0, 1.0);
+        Tool trap = new Tool(playerPosition,"Trap", RAT_TRAP,1.0, 1.0);
         trap.setBroken();
         player.collect(trap);
-        assertTrue("Player should have trap",player.hasItem(trap));
-        Tool screwdriver = new Tool(playerPosition,"Screwdriver", "Useful screwdriver",1.0, 1.0);
+        assertTrue(PLAYER_SHOULD_HAVE_TRAP,player.hasItem(trap));
+        Tool screwdriver = new Tool(playerPosition,SCREWDRIVER, "Useful screwdriver",1.0, 1.0);
         player.collect(screwdriver);
         assertTrue("Player should have screwdriver",player.hasItem(screwdriver));
         
@@ -359,9 +375,9 @@ public class GameTest extends junit.framework.TestCase
     public void testPlayerMoveValidNoHazards(){
         double stamina = player.getStaminaLevel();  
 
-        assertTrue("Move valid", game.playerMove(MoveDirection.SOUTH));
+        assertTrue(MOVE_VALID, game.playerMove(MoveDirection.SOUTH));
         //Stamina reduced by move
-        assertEquals("Wrong stamina", stamina - 3, player.getStaminaLevel());
+        assertEquals(WRONG_STAMINA, stamina - 3, player.getStaminaLevel());
         Position newPos = game.getPlayer().getPosition();
         assertEquals("Wrong position", newPos.getRow(), 1);
         assertFalse("Player should not be here", game.hasPlayer(playerPosition.getRow(), playerPosition.getColumn()));
@@ -370,10 +386,10 @@ public class GameTest extends junit.framework.TestCase
     @Test
     public void testPlayerMoveFatalHazard(){ 
         Position hazardPosition = new Position(island, playerPosition.getRow()+1, playerPosition.getColumn());
-        Hazard fatal = new Hazard(hazardPosition, "Cliff", "Steep cliff", 1.0);
+        Hazard fatal = new Hazard(hazardPosition, CLIFF, "Steep cliff", 1.0);
         island.addOccupant(hazardPosition, fatal);
         
-        assertTrue("Move valid", game.playerMove(MoveDirection.SOUTH));
+        assertTrue(MOVE_VALID, game.playerMove(MoveDirection.SOUTH));
         //Fatal Hazard should kill player
         assertTrue("Player should be dead.", !player.isAlive());
         assertTrue("Game should be over", game.getState()== GameState.LOST);
@@ -389,28 +405,28 @@ public class GameTest extends junit.framework.TestCase
     public void testPlayerMoveNonFatalHazardNotDead(){
         double stamina = player.getStaminaLevel(); 
         Position hazardPosition = new Position(island, playerPosition.getRow()+1, playerPosition.getColumn());
-        Hazard fatal = new Hazard(hazardPosition, "Cliff", "Not so steep cliff", 0.5);
+        Hazard fatal = new Hazard(hazardPosition, CLIFF, "Not so steep cliff", 0.5);
         island.addOccupant(hazardPosition, fatal);
         
-        assertTrue("Move valid", game.playerMove(MoveDirection.SOUTH));
+        assertTrue(MOVE_VALID, game.playerMove(MoveDirection.SOUTH));
         //Non-fatal Hazard should reduce player stamina
         assertTrue("Player should be alive.", player.isAlive());
         assertTrue("Game should not be over", game.getState()== GameState.PLAYING);
-        assertEquals("Wrong stamina", (stamina-53), player.getStaminaLevel());
+        assertEquals(WRONG_STAMINA, stamina-53, player.getStaminaLevel());
     }
     
     @Test
     public void testPlayerMoveNonFatalHazardDead(){
         Position hazardPosition = new Position(island, playerPosition.getRow()+1, playerPosition.getColumn());
-        Hazard fatal = new Hazard(hazardPosition, "Cliff", "Not so steep cliff", 0.5);
+        Hazard fatal = new Hazard(hazardPosition, CLIFF, "Not so steep cliff", 0.5);
         island.addOccupant(hazardPosition, fatal);
         player.reduceStamina(47.0);
         
-        assertTrue("Move valid", game.playerMove(MoveDirection.SOUTH));
+        assertTrue(MOVE_VALID, game.playerMove(MoveDirection.SOUTH));
         //Non-fatal Hazard should reduce player stamina to less than zero
         assertFalse("Player should not be alive.", player.isAlive());
         assertTrue("Game should be over", game.getState()== GameState.LOST);
-        assertEquals("Wrong stamina", 0.0, player.getStaminaLevel());
+        assertEquals(WRONG_STAMINA, 0.0, player.getStaminaLevel());
     }
     
     @Test
@@ -501,7 +517,7 @@ public class GameTest extends junit.framework.TestCase
     private boolean trapAllPredators()
     {
         //Firstly player needs a trap
-        Tool trap = new Tool(playerPosition,"Trap", "A predator trap",1.0, 1.0);
+        Tool trap = new Tool(playerPosition,"Trap", PREDATOR_TRAP,1.0, 1.0);
         game.collectItem(trap);
         
         //Now player needs to trap all predators
@@ -540,7 +556,8 @@ public class GameTest extends junit.framework.TestCase
         boolean success = false;
         for (int i = 0; i < numberOfMoves; i++) {
             success = game.playerMove(MoveDirection.NORTH);
-            if(!success)break;
+            if(!success)
+                break;
             
         }
         return success;
@@ -551,7 +568,8 @@ public class GameTest extends junit.framework.TestCase
         boolean success = false;
         for (int i = 0; i < numberOfMoves; i++) {
             success = game.playerMove(MoveDirection.SOUTH);
-            if(!success)break;
+            if(!success)
+                break;
             
         }
         return success;
@@ -562,7 +580,8 @@ public class GameTest extends junit.framework.TestCase
         boolean success = false;
         for (int i = 0; i < numberOfMoves; i++) {
             success = game.playerMove(MoveDirection.EAST);
-            if(!success)break;
+            if(!success)
+                break;
             
         }
         return success;
@@ -573,7 +592,8 @@ public class GameTest extends junit.framework.TestCase
         boolean success = false;
         for (int i = 0; i < numberOfMoves; i++) {
             success = game.playerMove(MoveDirection.WEST);
-            if(!success)break;
+            if(!success)
+                break;
             
         }
         return success;

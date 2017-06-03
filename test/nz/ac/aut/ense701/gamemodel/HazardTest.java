@@ -15,7 +15,8 @@ public class HazardTest extends junit.framework.TestCase
 {
     private Hazard fatal;
     private Hazard nonFatal;
-    private Position position, position2;
+    private Position position;
+    private Position position2;
     private Island island;
     /**
      * Default constructor for test class AnimalTest

@@ -16,6 +16,10 @@ import org.junit.Test;
  * @author aashi
  */
 public class KiwiHandlerTest extends junit.framework.TestCase{
+    private static final String TEST_KIWI = "Test Kiwi";
+    private static final String TEST_FAUNA = "Test Fauna";
+    private static final String KIWIS_CANNOT_MOVE = "The kiwis around you could not move.";
+    
     private KiwiHandler kiwiHandler;
     private Island island;
     
@@ -77,7 +81,7 @@ public class KiwiHandlerTest extends junit.framework.TestCase{
     public void testAtrractKiwisOutsideAttractRadius()
     {
         Position position = new Position(island, 2, 2); 
-        island.addOccupant(position, new Kiwi(position,"Kiwi", "Test Kiwi"));
+        island.addOccupant(position, new Kiwi(position,"Kiwi", TEST_KIWI));
         String result = kiwiHandler.attractKiwis(new Position(island, 5,5));
         assertEquals("No nearby kiwis.", result);
     }
@@ -86,49 +90,49 @@ public class KiwiHandlerTest extends junit.framework.TestCase{
     public void testAtrractKiwisNoMovableKiwisDueToHazards()
     {
         Position position = new Position(island, 4, 4); 
-        island.addOccupant(position, new Kiwi(position,"Kiwi", "Test Kiwi"));
+        island.addOccupant(position, new Kiwi(position,"Kiwi", TEST_KIWI));
         position = new Position(island, 4, 5); 
         island.addOccupant(position, new Hazard(position,"Hazard", "Test Hazard", 1));
         position = new Position(island, 5, 4); 
         island.addOccupant(position, new Hazard(position,"Hazard", "Test Hazard", 1));
         String result = kiwiHandler.attractKiwis(new Position(island, 5,5));
-        assertEquals("The kiwis around you could not move.", result);
+        assertEquals(KIWIS_CANNOT_MOVE, result);
     }
     
     @Test
     public void testAtrractKiwisNoMovableKiwisDueToNeighbouringKiwis()
     {
         Position position = new Position(island, 4, 4); 
-        island.addOccupant(position, new Kiwi(position,"Kiwi", "Test Kiwi"));
+        island.addOccupant(position, new Kiwi(position,"Kiwi", TEST_KIWI));
         position = new Position(island, 4, 5); 
-        island.addOccupant(position, new Kiwi(position,"Kiwi", "Test Kiwi"));
+        island.addOccupant(position, new Kiwi(position,"Kiwi", TEST_KIWI));
         position = new Position(island, 5, 4); 
-        island.addOccupant(position, new Kiwi(position,"Kiwi", "Test Kiwi"));
+        island.addOccupant(position, new Kiwi(position,"Kiwi", TEST_KIWI));
         position = new Position(island, 5, 5); 
-        island.addOccupant(position, new Kiwi(position,"Kiwi", "Test Kiwi"));
+        island.addOccupant(position, new Kiwi(position,"Kiwi", TEST_KIWI));
         String result = kiwiHandler.attractKiwis(new Position(island, 5,5));
-        assertEquals("The kiwis around you could not move.", result);
+        assertEquals(KIWIS_CANNOT_MOVE, result);
     }
     
     @Test
     public void testAtrractKiwisNoMovableKiwisDueToGridSqaureCapacity()
     {
         Position position = new Position(island, 4, 4); 
-        island.addOccupant(position, new Kiwi(position,"Kiwi", "Test Kiwi"));
+        island.addOccupant(position, new Kiwi(position,"Kiwi", TEST_KIWI));
         position = new Position(island, 4, 5); 
-        island.addOccupant(position, new Fauna(position,"Fauna1", "Test Fauna"));
+        island.addOccupant(position, new Fauna(position,"Fauna1", TEST_FAUNA));
         position = new Position(island, 4, 5); 
-        island.addOccupant(position, new Fauna(position,"Fauna2", "Test Fauna"));
+        island.addOccupant(position, new Fauna(position,"Fauna2", TEST_FAUNA));
         position = new Position(island, 4, 5); 
-        island.addOccupant(position, new Fauna(position,"Fauna3", "Test Fauna"));
+        island.addOccupant(position, new Fauna(position,"Fauna3", TEST_FAUNA));
         
         position = new Position(island, 5, 4); 
-        island.addOccupant(position, new Fauna(position,"Fauna1", "Test Fauna"));
+        island.addOccupant(position, new Fauna(position,"Fauna1", TEST_FAUNA));
         position = new Position(island, 5, 4); 
-        island.addOccupant(position, new Fauna(position,"Fauna2", "Test Fauna"));
+        island.addOccupant(position, new Fauna(position,"Fauna2", TEST_FAUNA));
         position = new Position(island, 5, 4); 
         island.addOccupant(position, new Fauna(position,"Fauna3", "Test Fauna"));
         String result = kiwiHandler.attractKiwis(new Position(island, 5,5));
-        assertEquals("The kiwis around you could not move.", result);
+        assertEquals(KIWIS_CANNOT_MOVE, result);
     }
 }
