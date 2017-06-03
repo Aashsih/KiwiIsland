@@ -97,18 +97,33 @@ public class KiwiHandler extends MovableFaunaHandler{
         {
             for(int j = currentYPosiion - ATTRACT_RADIUS; j <= currentYPosiion + ATTRACT_RADIUS; j++)
             {
-                if(Position.isValidPosition(island, i, j) && !(i == currentXPosiion && j == currentYPosiion))
-                //if position is valid and is not the same as the current Player position
+                nearbyKiwis.addAll(getKiwisOnAPositionOnIsland(i , j));
+            }
+        }
+        return nearbyKiwis;
+    }
+    
+    /**
+     * This method is used to get a List of kiwis on a given position on the island
+     * 
+     * @param row row number on island
+     * @param column column number on island
+     * @return list of kiwis on specified position on the island
+     */
+    private List<Kiwi> getKiwisOnAPositionOnIsland(int row, int column){
+        List<Kiwi> nearbyKiwis = new ArrayList<>();
+        int currentXPosiion = playerPosition.getRow();
+        int currentYPosiion = playerPosition.getColumn();
+        if(Position.isValidPosition(island, row, column) && !(row == currentXPosiion && column == currentYPosiion))
+        //if position is valid and is not the same as the current Player position
+        {
+            //get occupants for that position on the island
+            Occupant[] occupants = island.getOccupants(new Position(island, row, column));
+            for(Occupant occupant : occupants)
+            {
+                if(occupant instanceof Kiwi)
                 {
-                    //get occupants for that position on the island
-                    Occupant[] occupants = island.getOccupants(new Position(island, i, j));
-                    for(Occupant occupant : occupants)
-                    {
-                        if(occupant instanceof Kiwi)
-                        {
-                            nearbyKiwis.add((Kiwi) occupant);
-                        }
-                    }
+                    nearbyKiwis.add((Kiwi) occupant);
                 }
             }
         }
