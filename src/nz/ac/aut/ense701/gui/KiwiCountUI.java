@@ -346,7 +346,7 @@ public class KiwiCountUI
                         scaledImage = image.getScaledInstance(pnlGame.getWidth(), pnlGame.getHeight(), Image.SCALE_SMOOTH);
                     }
                     if(scaledImage == null){
-                        scaledImage = image;
+                        scaledImage = image.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
                     }
                     g.drawImage(scaledImage, 0, 0, null);
                 }
