@@ -43,7 +43,7 @@ public class WelcomePage extends javax.swing.JFrame {
     public WelcomePage() {
         initComponents();
         initializeScoreBoard();
-        pnlBackground.repaint();
+        pnlWelcomePage.repaint();
         loadIslandMap();
     }
 
@@ -134,11 +134,7 @@ public class WelcomePage extends javax.swing.JFrame {
         lblScoreBoard = new javax.swing.JLabel();
         jScrollPaneScoreBoard = new javax.swing.JScrollPane();
         scoreList = new javax.swing.JList<String>();
-        pnlWelcomePage = new javax.swing.JPanel();
-        pnlButtons = new javax.swing.JPanel();
-        btnNewGame = new javax.swing.JButton();
-        btnSelectPlayerName = new javax.swing.JButton();
-        pnlBackground = new javax.swing.JPanel(){
+        pnlWelcomePage = new javax.swing.JPanel(){
             private Integer pnlWidth;
             private Integer pnlHeight;
             private transient Image scaledImage;
@@ -146,23 +142,26 @@ public class WelcomePage extends javax.swing.JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 if(pnlWidth == null || pnlHeight == null){
-                    pnlWidth = pnlBackground.getWidth();
-                    pnlHeight = pnlBackground.getHeight();
+                    pnlWidth = this.getWidth();
+                    pnlHeight = this.getHeight();
                 }
                 if(image != null){
-                    if(pnlBackground.getWidth() != pnlWidth || pnlBackground.getHeight() != pnlHeight){
-                        pnlWidth = pnlBackground.getWidth();
-                        pnlHeight = pnlBackground.getHeight();
-                        scaledImage = image.getScaledInstance(pnlBackground.getWidth(), pnlBackground.getHeight(), Image.SCALE_SMOOTH);
+                    if(this.getWidth() != pnlWidth || this.getHeight() != pnlHeight){
+                        pnlWidth = this.getWidth();
+                        pnlHeight = this.getHeight();
+                        scaledImage = image.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
                     }
                     if(scaledImage == null){
-                        scaledImage = image.getScaledInstance(pnlBackground.getWidth(), pnlBackground.getHeight(), Image.SCALE_SMOOTH);
+                        scaledImage = image.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
                     }
                     g.drawImage(scaledImage, 0, 0, null);
                 }
             }
 
         };
+        pnlButtons = new javax.swing.JPanel();
+        btnNewGame = new javax.swing.JButton();
+        btnSelectPlayerName = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(235, 500));
@@ -189,40 +188,33 @@ public class WelcomePage extends javax.swing.JFrame {
 
         pnlWelcomePage.setLayout(new java.awt.BorderLayout());
 
-        pnlButtons.setLayout(new java.awt.BorderLayout());
+        pnlButtons.setOpaque(false);
 
+        btnNewGame.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnNewGame.setText("New Game");
+        btnNewGame.setBorderPainted(false);
+        btnNewGame.setContentAreaFilled(false);
+        btnNewGame.setOpaque(false);
         btnNewGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewGameActionPerformed(evt);
             }
         });
-        pnlButtons.add(btnNewGame, java.awt.BorderLayout.WEST);
+        pnlButtons.add(btnNewGame);
 
+        btnSelectPlayerName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnSelectPlayerName.setText("Select Player Name");
+        btnSelectPlayerName.setBorderPainted(false);
+        btnSelectPlayerName.setContentAreaFilled(false);
+        btnSelectPlayerName.setOpaque(false);
         btnSelectPlayerName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelectPlayerNameActionPerformed(evt);
             }
         });
-        pnlButtons.add(btnSelectPlayerName, java.awt.BorderLayout.EAST);
+        pnlButtons.add(btnSelectPlayerName);
 
         pnlWelcomePage.add(pnlButtons, java.awt.BorderLayout.PAGE_END);
-
-        pnlBackground.setRequestFocusEnabled(false);
-
-        javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
-        pnlBackground.setLayout(pnlBackgroundLayout);
-        pnlBackgroundLayout.setHorizontalGroup(
-            pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 352, Short.MAX_VALUE)
-        );
-        pnlBackgroundLayout.setVerticalGroup(
-            pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 273, Short.MAX_VALUE)
-        );
-
-        pnlWelcomePage.add(pnlBackground, java.awt.BorderLayout.CENTER);
 
         welcomePageSplitPane.setRightComponent(pnlWelcomePage);
 
@@ -257,7 +249,6 @@ public class WelcomePage extends javax.swing.JFrame {
     private javax.swing.JButton btnSelectPlayerName;
     private javax.swing.JScrollPane jScrollPaneScoreBoard;
     private javax.swing.JLabel lblScoreBoard;
-    private javax.swing.JPanel pnlBackground;
     private javax.swing.JPanel pnlButtons;
     private javax.swing.JPanel pnlScoreBoard;
     private javax.swing.JPanel pnlWelcomePage;
