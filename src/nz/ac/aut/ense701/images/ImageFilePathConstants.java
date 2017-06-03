@@ -11,5 +11,5 @@ package nz.ac.aut.ense701.images;
  */
 public class ImageFilePathConstants {
     public static final String ISLAND_MAP = "/nz/ac/aut/ense701/images/IslandMap.png";
-    public static final String WELCOME_PAGE = "/nz/ac/aut/ense701/images/WelcomePage2.png";
+    public static final String WELCOME_PAGE = "/nz/ac/aut/ense701/images/WelcomePage.png";
 }

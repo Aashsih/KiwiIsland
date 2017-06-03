@@ -45,7 +45,7 @@ public class Hazard extends Occupant {
      */
     public boolean isFatal()
     {
-        return impact == FATAL_IMPACT;
+        return (int) impact == (int)FATAL_IMPACT;
     }
     
     /**

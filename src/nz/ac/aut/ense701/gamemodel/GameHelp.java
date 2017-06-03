@@ -5,10 +5,8 @@
  */
 package nz.ac.aut.ense701.gamemodel;
 
-import java.io.File;
 import java.io.IOException;
 import nz.ac.aut.ense701.textfiles.TextFilePathConstants;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -32,8 +30,7 @@ public class GameHelp
     private static void readGameHelpTextFromFile() throws IOException
     {
        gameHelpStringBuffer = new StringBuilder();
-       gameHelpStringBuffer.append(IOUtils.toString(ScoreBoard.class.getResourceAsStream(TextFilePathConstants.HELP), ENCODING));
-       //gameHelpStringBuffer.append(FileUtils.readFileToString(new File(GameHelp.class.getResource(TextFilePathConstants.HELP).getFile()), ENCODING));
+       gameHelpStringBuffer.append(IOUtils.toString(ScoreBoard.class.getResourceAsStream(TextFilePathConstants.HELP), ENCODING));       
     }
     
     /**

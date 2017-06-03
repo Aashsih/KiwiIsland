@@ -100,7 +100,7 @@
         </Container>
         <Container class="javax.swing.JPanel" name="pnlWelcomePage">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    private Integer pnlWidth;&#xa;    private Integer pnlHeight;&#xa;    private transient Image scaledImage;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        super.paintComponent(g);&#xa;        if(pnlWidth == null || pnlHeight == null){&#xa;            pnlWidth = this.getWidth();&#xa;            pnlHeight = this.getHeight();&#xa;        }&#xa;        if(image != null){&#xa;            if(this.getWidth() != pnlWidth || this.getHeight() != pnlHeight){&#xa;                pnlWidth = this.getWidth();&#xa;                pnlHeight = this.getHeight();&#xa;                scaledImage = image.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);&#xa;            }&#xa;            if(scaledImage == null){&#xa;                scaledImage = image.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);&#xa;            }&#xa;            g.drawImage(scaledImage, 0, 0, null);&#xa;        }&#xa;    }&#xa;&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    private Integer pnlWidth;&#xa;    private Integer pnlHeight;&#xa;    private transient Image scaledImage;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        super.paintComponent(g);&#xa;        if(pnlWidth == null || pnlHeight == null){&#xa;            pnlWidth = this.getWidth();&#xa;            pnlHeight = this.getHeight();&#xa;        }&#xa;        if(image != null){&#xa;            if(this.getWidth() != pnlWidth || this.getHeight() != pnlHeight){&#xa;                pnlWidth = this.getWidth();&#xa;                pnlHeight = this.getHeight();&#xa;                scaledImage = image.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);&#xa;            }&#xa;            if(scaledImage == null){&#xa;                scaledImage = image.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);&#xa;            }&#xa;            g.drawImage(scaledImage, 0, 0, null);&#xa;        }&#xa;    }&#xa;}"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
@@ -130,7 +130,6 @@
                     <Property name="text" type="java.lang.String" value="New Game"/>
                     <Property name="borderPainted" type="boolean" value="false"/>
                     <Property name="contentAreaFilled" type="boolean" value="false"/>
-                    <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewGameActionPerformed"/>
@@ -144,7 +143,6 @@
                     <Property name="text" type="java.lang.String" value="Select Player Name"/>
                     <Property name="borderPainted" type="boolean" value="false"/>
                     <Property name="contentAreaFilled" type="boolean" value="false"/>
-                    <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSelectPlayerNameActionPerformed"/>

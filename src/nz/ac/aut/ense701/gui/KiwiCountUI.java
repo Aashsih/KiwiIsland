@@ -9,7 +9,6 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +27,6 @@ import nz.ac.aut.ense701.gamemodel.ScoreBoard;
 import nz.ac.aut.ense701.gamequiz.Quiz;
 import nz.ac.aut.ense701.gamequiz.QuizFileReader;
 import nz.ac.aut.ense701.images.ImageFilePathConstants;
-import nz.ac.aut.ense701.textfiles.TextFilePathConstants;
 
 /*
  * User interface form for Kiwi Island.
@@ -313,9 +311,7 @@ public class KiwiCountUI
      */
     private void loadIslandMap(){
         try{
-            
-            image = ImageIO.read(KiwiCountUI.class.getResourceAsStream(ImageFilePathConstants.ISLAND_MAP));
-            //image = ImageIO.read(new File(KiwiCountUI.class.getResource(ImageFilePathConstants.ISLAND_MAP).getFile()));
+            image = ImageIO.read(KiwiCountUI.class.getResourceAsStream(ImageFilePathConstants.ISLAND_MAP));            
         }catch(IOException e){
             Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, e);
         }

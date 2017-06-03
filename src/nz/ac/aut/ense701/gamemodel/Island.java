@@ -264,15 +264,17 @@ public class Island
     public boolean removeOccupant(Position position, Occupant occupant)
     {
         boolean success = false;
-        if( position.isOnIsland()&& occupant != null  )
-        {
-            GridSquare gridSquare = getGridSquare(position);
-            success = gridSquare.removeOccupant(occupant);
-        }
-        if ( success && occupant != null )
-        {
-            //update the occupants address to the "not on island position"
-            occupant.setPosition(Position.NOT_ON_ISLAND);
+        if(occupant != null){
+            if( position.isOnIsland())
+            {
+                GridSquare gridSquare = getGridSquare(position);
+                success = gridSquare.removeOccupant(occupant);
+            }
+            if ( success)
+            {
+                //update the occupants address to the "not on island position"
+                occupant.setPosition(Position.NOT_ON_ISLAND);
+            }
         }
         return success;
     }

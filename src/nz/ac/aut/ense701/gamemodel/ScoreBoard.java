@@ -47,7 +47,6 @@ public class ScoreBoard {
         if(scoreList == null){
             Type targetClassType = new TypeToken<ArrayList<Score>>() {}.getType();
             scoreList = (List<Score>) new Gson().fromJson(IOUtils.toString(ScoreBoard.class.getResourceAsStream(TextFilePathConstants.PLAYER_SCORE), ENCODING), targetClassType);
-            //scoreList = (List<Score>) new Gson().fromJson( FileUtils.readFileToString(new File(ScoreBoard.class.getResource(TextFilePathConstants.PLAYER_SCORE).getFile()), ENCODING), targetClassType);
         }
     }
     

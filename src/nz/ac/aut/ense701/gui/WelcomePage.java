@@ -8,7 +8,6 @@ package nz.ac.aut.ense701.gui;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -157,7 +156,6 @@ public class WelcomePage extends javax.swing.JFrame {
                     g.drawImage(scaledImage, 0, 0, null);
                 }
             }
-
         };
         pnlButtons = new javax.swing.JPanel();
         btnNewGame = new javax.swing.JButton();
@@ -194,7 +192,6 @@ public class WelcomePage extends javax.swing.JFrame {
         btnNewGame.setText("New Game");
         btnNewGame.setBorderPainted(false);
         btnNewGame.setContentAreaFilled(false);
-        btnNewGame.setOpaque(false);
         btnNewGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewGameActionPerformed(evt);
@@ -206,7 +203,6 @@ public class WelcomePage extends javax.swing.JFrame {
         btnSelectPlayerName.setText("Select Player Name");
         btnSelectPlayerName.setBorderPainted(false);
         btnSelectPlayerName.setContentAreaFilled(false);
-        btnSelectPlayerName.setOpaque(false);
         btnSelectPlayerName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelectPlayerNameActionPerformed(evt);

@@ -8,8 +8,6 @@ import nz.ac.aut.ense701.gamemodel.occupants.Kiwi;
 import nz.ac.aut.ense701.gamemodel.occupants.Food;
 import nz.ac.aut.ense701.gamemodel.occupants.Tool;
 import nz.ac.aut.ense701.gamemodel.occupants.Fauna;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -63,7 +61,6 @@ public class Game
     private GameState state;
     private int kiwiCount;
     private int totalPredators;
-    //private int totalKiwis;
     private int predatorsTrapped;
     private final Set<GameEventListener> eventListeners;
     private List<Kiwi> activeKiwisCounted;
@@ -102,7 +99,6 @@ public class Game
         activeKiwisCounted = new ArrayList<>();
         count = 0;
         totalPredators = 0;
-        //totalKiwis = 0;
         predatorsTrapped = 0;
         kiwiCount = 0;
         initialiseIslandFromFile();
@@ -867,33 +863,25 @@ public class Game
     private void initialiseIslandFromFile() 
     {
         Scanner input = new Scanner(Game.class.getResourceAsStream(TextFilePathConstants.ISLAND_DATA));
-//        try
-//        {
-            // make sure decimal numbers are read in the form "123.23"
-            input.useLocale(Locale.US);
-            input.useDelimiter("\\s*,\\s*");
 
-            // create the island
-            int numRows    = input.nextInt();
-            int numColumns = input.nextInt();
-            island = new Island(numRows, numColumns);
-            kiwiHandler = new KiwiHandler(island);
-            predatorHandler = new PredatorHandler(island);
-            // read and setup the terrain
-            setUpTerrain(input);
+        // make sure decimal numbers are read in the form "123.23"
+        input.useLocale(Locale.US);
+        input.useDelimiter("\\s*,\\s*");
 
-            // read and setup the player
-            setUpPlayer(input);
+        // create the island
+        int numRows    = input.nextInt();
+        int numColumns = input.nextInt();
+        island = new Island(numRows, numColumns);
+        kiwiHandler = new KiwiHandler(island);
+        predatorHandler = new PredatorHandler(island);
+        // read and setup the terrain
+        setUpTerrain(input);
 
-            // read and setup the occupants
-            setUpOccupants(input);
+        // read and setup the player
+        setUpPlayer(input);
 
-//        }
-//        catch(FileNotFoundException e)
-//        {
-//            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, "Unable to find data file");
-//            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, e);
-//        }
+        // read and setup the occupants
+        setUpOccupants(input);
     }
 
     /**
@@ -981,7 +969,6 @@ public class Game
             else if ( occType.equals(Occupants.KIWI.toString()) )
             {
                 occupant = new Kiwi(occPos, occName, occDesc);
-                //totalKiwis++;
             }
             else if ( occType.equals(Occupants.PREDATOR.toString()) )
             {

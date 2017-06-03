@@ -16,7 +16,7 @@ which then leads the user to a quiz at the end of the game.
 
 - How do I win the game?
 Accomplishing any of the following while alive will allow you to win the game:
-1. Count 10 kiwis along with capturing 80% of the total predators on the Kiwi-island.
+1. Count 10 kiwis along with at the least 80% of the total predators on the Kiwi-island.
 2. Capture all the predators.
 
 - When will I lose?
@@ -74,5 +74,10 @@ A screwdriver can be used to fix a trap. Screwdriver is one of the tools in the 
     BAIT "B" 
 
 - Other Tips
-You can hover your cursor over the items in your inventory or the objects in the "Objects" panel
+1.You can hover your cursor over the items in your inventory or the objects in the "Objects" panel
  to get a description of the item.
+
+2. The Island may show the colors Red, Green and Orange on the Map from time to time.
+ Red = Kiwi was removed from that position on the Island
+ Green = Kiwi was added to that position on the Island
+ Orange = A Predator changed its position to that position on the Island
