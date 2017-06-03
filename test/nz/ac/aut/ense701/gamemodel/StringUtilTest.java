@@ -67,6 +67,8 @@ public class StringUtilTest extends junit.framework.TestCase{
         assertFalse(StringUtil.isAlphaNumeric(">"));
         assertFalse(StringUtil.isAlphaNumeric(","));
         assertFalse(StringUtil.isAlphaNumeric("<"));
+        assertFalse(StringUtil.isAlphaNumeric("`"));
+        assertFalse(StringUtil.isAlphaNumeric("~"));
         
     }
     
