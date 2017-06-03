@@ -1,7 +1,6 @@
 package nz.ac.aut.ense701.main;
 
-import nz.ac.aut.ense701.gameModel.Game;
-import nz.ac.aut.ense701.gui.KiwiCountUI;
+import nz.ac.aut.ense701.gui.WelcomePage;
 
 /**
  * Kiwi Count Project
@@ -18,22 +17,10 @@ public class Main
      */
     public static void main(String[] args) 
     {
-        // create the game object
-        final Game game = new Game();
-        // create the GUI for the game
-        final KiwiCountUI  gui  = new KiwiCountUI(game); 
-        
-        // make the GUI visible
-        java.awt.EventQueue.invokeLater(new Runnable() 
-        {
-            @Override
-            public void run() 
-            {
-                gui.setVisible(true);
-                gui.setFocusable(true);
-                gui.requestFocus();
-            }
-        });
+        final WelcomePage welcomePage = new WelcomePage();
+        java.awt.EventQueue.invokeLater(() -> 
+            welcomePage.setVisible(true)
+        );
         
     }
 

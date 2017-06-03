@@ -3,24 +3,30 @@ package nz.ac.aut.ense701.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import nz.ac.aut.ense701.gameModel.DOCMessages;
-import nz.ac.aut.ense701.gameModel.Game;
-import nz.ac.aut.ense701.gameModel.GameEventListener;
-import nz.ac.aut.ense701.gameModel.GameHelp;
-import nz.ac.aut.ense701.gameModel.GameState;
-import nz.ac.aut.ense701.gameModel.MoveDirection;
-import nz.ac.aut.ense701.gameQuiz.Quiz;
-import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
+import nz.ac.aut.ense701.gamemodel.DOCMessages;
+import nz.ac.aut.ense701.gamemodel.Game;
+import nz.ac.aut.ense701.gamemodel.GameEventListener;
+import nz.ac.aut.ense701.gamemodel.GameHelp;
+import nz.ac.aut.ense701.gamemodel.GameState;
+import nz.ac.aut.ense701.gamemodel.MoveDirection;
+import nz.ac.aut.ense701.gamemodel.ScoreBoard;
+import nz.ac.aut.ense701.gamequiz.Quiz;
+import nz.ac.aut.ense701.gamequiz.QuizFileReader;
+import nz.ac.aut.ense701.images.ImageFilePathConstants;
 
 /*
  * User interface form for Kiwi Island.
@@ -29,24 +35,33 @@ import nz.ac.aut.ense701.gameQuiz.QuizFileReader;
  * @version July 2011
  */
 
+@SuppressWarnings("serial")
 public class KiwiCountUI 
     extends javax.swing.JFrame 
     implements GameEventListener, KeyListener
 {
+    private final Game game;
+    private final WelcomePage parentFrame;
+    private transient BufferedImage image;
+    private boolean lowStaminaMessageDisplayed;
 
     /**
      * Creates a GUI for the KiwiIsland game.
      * @param game the game object to represent with this GUI.
+     * @param parentFrame
      */
-    public KiwiCountUI(Game game) 
+    public KiwiCountUI(Game game, WelcomePage parentFrame) 
     {
         assert game != null : "Make sure game object is created before UI";
+        assert parentFrame != null : "Make sure parentFrame object is created before UI";
+        this.parentFrame = parentFrame;
         this.game = game;
         setAsGameListener();
         initComponents();
         initIslandGrid();
         addKeyListener(this);
         update();
+        loadIslandMap();
     }
     
     /**
@@ -58,10 +73,6 @@ public class KiwiCountUI
     {
         update();
         
-        //Check if kiwi population has changed
-        if(game.getState() == GameState.KIWI_POPULATION_CHANGED){
-            //Start a thread to change the colour of the GridSquare where the kiwi population changed
-        }
         // check for "game over" or "game won"
         if ( game.getState() == GameState.LOST )
         {
@@ -74,7 +85,7 @@ public class KiwiCountUI
                     startQuiz();
                 }
                 else{
-                    game.createNewGame();        
+                    disposeKiwiCountUIFrame();
                 }
             } catch (IOException ex) {
                 Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,12 +115,13 @@ public class KiwiCountUI
     
     /**
      * Initializes the Quiz game flow by adding the QuizPanel to the pnlGame
+     * @throws java.io.IOException
      */
     public void startQuiz() throws IOException{
         removeAllComponentsFromJPanel(pnlGame);
         disablePanelControl();
         pnlGame.setLayout(new BorderLayout());
-        quizPanel = new QuizPanel(this, new Quiz(this.game.getPlayerMessages()));
+        QuizPanel quizPanel = new QuizPanel(this, new Quiz(this.game.getPlayerMessages()));
         JScrollPane scrollPane = new JScrollPane(quizPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         pnlGame.add(scrollPane, BorderLayout.CENTER);
@@ -121,7 +133,7 @@ public class KiwiCountUI
      * Removes all the components in the pnlGame and starts a new game.
      * @return the current game being played in the KiwiCountUI
      */
-    public void createNewGame(){
+    private void createNewGame(){
         removeAllComponentsFromJPanel(pnlGame);
         resetQuiz();
         game.createNewGame();
@@ -131,6 +143,30 @@ public class KiwiCountUI
         pnlGame.repaint();
     }
     
+    public void addCorrectAnswerScore(){
+        
+        this.game.addCorrectAnswerScore();
+        txtPlayerScore.setText(Integer.toString(game.getPlayerScore()));
+    }
+
+    /**
+     * Makes the parent Frame visible and disposes itself
+     */
+    public void disposeKiwiCountUIFrame(){
+        try {
+            ScoreBoard.writeScoreToFile(this.game.getPlayer().getPlayerScore());
+        } catch (IOException ex) {
+            Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        parentFrame.initializeScoreBoard();
+        parentFrame.setVisible(true);
+        this.dispose();
+    }
+    
+    /**
+     * This method is used to disable the components of the Control Panel
+     */
+    @SuppressWarnings("unchecked")
     private void disablePanelControl(){
         btnCount.setEnabled(false);
         btnDrop.setEnabled(false);
@@ -164,6 +200,7 @@ public class KiwiCountUI
     /**
      * Updates the state of the UI based on the state of the game.
      */
+    @SuppressWarnings("unchecked")
     private void update()
     {
         // update the grid square panels
@@ -192,7 +229,7 @@ public class KiwiCountUI
         txtKiwisCounted.setText(Integer.toString(game.getKiwiCount()) );
         txtPredatorsLeft.setText(Integer.toString(game.getPredatorsRemaining()));
         txtKiwiPopulation.setText(Integer.toString(game.getCurrentKiwiPopulationOnIsland()));
-        
+        txtPlayerScore.setText(Integer.toString(game.getPlayerScore()));
         // update inventory list
         listInventory.setListData(game.getPlayerInventory());
         listInventory.clearSelection();
@@ -263,8 +300,20 @@ public class KiwiCountUI
         {
             for ( int col = 0 ; col < columns ; col++ )
             {
-                pnlGame.add(new GridSquarePanel(game, row, col));
+                GridSquarePanel gridPanel = new GridSquarePanel(game, row, col);
+                pnlGame.add(gridPanel);
             }
+        }
+    }
+    
+    /**
+     * Reads the Image file for the island 
+     */
+    private void loadIslandMap(){
+        try{
+            image = ImageIO.read(KiwiCountUI.class.getResourceAsStream(ImageFilePathConstants.ISLAND_MAP));            
+        }catch(IOException e){
+            Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, e);
         }
     }
     
@@ -279,7 +328,31 @@ public class KiwiCountUI
         java.awt.GridBagConstraints gridBagConstraints;
 
         javax.swing.JPanel pnlContent = new javax.swing.JPanel();
-        pnlGame = new javax.swing.JPanel();
+        pnlGame = new javax.swing.JPanel(){
+            private Integer pnlWidth;
+            private Integer pnlHeight;
+            private transient Image scaledImage;
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if(pnlWidth == null || pnlHeight == null){
+                    pnlWidth = pnlGame.getWidth();
+                    pnlHeight = pnlGame.getHeight();
+                }
+                if(image != null){
+                    if(pnlGame.getWidth() != pnlWidth || pnlGame.getHeight() != pnlHeight){
+                        pnlWidth = pnlGame.getWidth();
+                        pnlHeight = pnlGame.getHeight();
+                        scaledImage = image.getScaledInstance(pnlGame.getWidth(), pnlGame.getHeight(), Image.SCALE_SMOOTH);
+                    }
+                    if(scaledImage == null){
+                        scaledImage = image.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
+                    }
+                    g.drawImage(scaledImage, 0, 0, null);
+                }
+            }
+
+        };
         pnlControls = new javax.swing.JPanel();
         javax.swing.JPanel pnlPlayer = new javax.swing.JPanel();
         javax.swing.JPanel pnlPlayerData = new javax.swing.JPanel();
@@ -297,6 +370,8 @@ public class KiwiCountUI
         txtKiwisCounted = new javax.swing.JLabel();
         txtPredatorsLeft = new javax.swing.JLabel();
         txtKiwiPopulation = new javax.swing.JLabel();
+        lblPlayerScore = new javax.swing.JLabel();
+        txtPlayerScore = new javax.swing.JLabel();
         javax.swing.JPanel pnlMovement = new javax.swing.JPanel();
         btnMoveNorth = new javax.swing.JButton();
         btnMoveSouth = new javax.swing.JButton();
@@ -313,7 +388,8 @@ public class KiwiCountUI
         btnCollect = new javax.swing.JButton();
         btnCount = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        optionsMenu = new javax.swing.JMenu();
+        jMenuRestartItem = new javax.swing.JMenuItem();
         jMenuHelpItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -326,7 +402,7 @@ public class KiwiCountUI
         pnlGame.setLayout(pnlGameLayout);
         pnlGameLayout.setHorizontalGroup(
             pnlGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 524, Short.MAX_VALUE)
+            .addGap(0, 483, Short.MAX_VALUE)
         );
         pnlGameLayout.setVerticalGroup(
             pnlGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,10 +419,10 @@ public class KiwiCountUI
         pnlPlayerData.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         pnlPlayerData.setLayout(new java.awt.GridBagLayout());
 
-        lblKiwiPopulation.setText("Kiwi Population: ");
+        lblKiwiPopulation.setText("Current Kiwi Population: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(lblKiwiPopulation, gridBagConstraints);
 
@@ -424,37 +500,52 @@ public class KiwiCountUI
         lblPredators.setText("Predators Left:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(lblPredators, gridBagConstraints);
 
         lblKiwisCounted.setText("Kiwis Counted :");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(lblKiwisCounted, gridBagConstraints);
 
         txtKiwisCounted.setText("0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(txtKiwisCounted, gridBagConstraints);
 
         txtPredatorsLeft.setText("P");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(txtPredatorsLeft, gridBagConstraints);
 
         txtKiwiPopulation.setText("0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(txtKiwiPopulation, gridBagConstraints);
+
+        lblPlayerScore.setText("Player Score:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        pnlPlayerData.add(lblPlayerScore, gridBagConstraints);
+
+        txtPlayerScore.setText("S");
+        txtPlayerScore.setToolTipText("");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        pnlPlayerData.add(txtPlayerScore, gridBagConstraints);
 
         pnlPlayer.add(pnlPlayerData, java.awt.BorderLayout.WEST);
 
@@ -687,7 +778,15 @@ public class KiwiCountUI
 
         getContentPane().add(pnlContent, java.awt.BorderLayout.CENTER);
 
-        jMenu2.setText("Help");
+        optionsMenu.setText("Options");
+
+        jMenuRestartItem.setText("Restart");
+        jMenuRestartItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuRestartItemActionPerformed(evt);
+            }
+        });
+        optionsMenu.add(jMenuRestartItem);
 
         jMenuHelpItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
         jMenuHelpItem.setText("Help");
@@ -696,9 +795,9 @@ public class KiwiCountUI
                 jMenuHelpItemActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuHelpItem);
+        optionsMenu.add(jMenuHelpItem);
 
-        jMenuBar2.add(jMenu2);
+        jMenuBar2.add(optionsMenu);
 
         setJMenuBar(jMenuBar2);
 
@@ -754,7 +853,7 @@ public class KiwiCountUI
             btnUse.setEnabled(game.canUse(item));
             listInventory.setToolTipText(game.getOccupantDescription(item));
             
-            if(item.toString().equalsIgnoreCase("Messages"))
+            if("Messages".equalsIgnoreCase(item.toString()))
             {
                 btnUse.setEnabled(true);
                 btnDrop.setEnabled(false);
@@ -769,21 +868,23 @@ public class KiwiCountUI
 
     private void jMenuHelpItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHelpItemActionPerformed
         try {
-            // TODO add your handling code here:
             JTextArea helpLabel = new JTextArea(25, 50);
             helpLabel.setText(GameHelp.getGameHelpInfo());
             JScrollPane scrollpane = new JScrollPane(helpLabel);
             JOptionPane.showMessageDialog(this, scrollpane);
-            
-            //JOptionPane.showMessageDialog(this, GameHelp.getGameHelpInfo(), "Help", JOptionPane.PLAIN_MESSAGE);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "--No Help Content Found--", "Error", JOptionPane.PLAIN_MESSAGE);
+            Logger.getLogger(KiwiCountUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuHelpItemActionPerformed
+
+    private void jMenuRestartItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRestartItemActionPerformed
+        this.createNewGame();
+    }//GEN-LAST:event_jMenuRestartItemActionPerformed
     
     @Override
     public void keyTyped(KeyEvent e) {
-       
+        //This method is not required to be overriden 
     }
 
     @Override
@@ -805,13 +906,15 @@ public class KiwiCountUI
             case KeyEvent.VK_RIGHT:
                 game.playerMove(MoveDirection.EAST);
                 break;
+            default:
+                break;
         }
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-       
+       //This method is not required to be overriden 
     }
     
     
@@ -824,14 +927,16 @@ public class KiwiCountUI
     private javax.swing.JButton btnMoveSouth;
     private javax.swing.JButton btnMoveWest;
     private javax.swing.JButton btnUse;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuHelpItem;
+    private javax.swing.JMenuItem jMenuRestartItem;
     private javax.swing.JLabel lblKiwiPopulation;
     private javax.swing.JLabel lblKiwisCounted;
+    private javax.swing.JLabel lblPlayerScore;
     private javax.swing.JLabel lblPredators;
     private javax.swing.JList listInventory;
     private javax.swing.JList listObjects;
+    private javax.swing.JMenu optionsMenu;
     private javax.swing.JPanel pnlControls;
     private javax.swing.JPanel pnlGame;
     private javax.swing.JProgressBar progBackpackSize;
@@ -840,10 +945,8 @@ public class KiwiCountUI
     private javax.swing.JLabel txtKiwiPopulation;
     private javax.swing.JLabel txtKiwisCounted;
     private javax.swing.JLabel txtPlayerName;
+    private javax.swing.JLabel txtPlayerScore;
     private javax.swing.JLabel txtPredatorsLeft;
     // End of variables declaration//GEN-END:variables
 
-    private Game game;
-    private QuizPanel quizPanel;
-    private boolean lowStaminaMessageDisplayed;
 }
